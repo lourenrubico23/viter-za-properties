@@ -13,7 +13,7 @@ const FeaturedProperties = () => {
 
         <div className="flex flex-wrap gap-8 my-20 place-content-center">
           <div className="cards">
-            <div className="rounded-md group hover:scale-[1.01] hover:duration-200 w-[374px] h-[442px] hover:shadow-lg border">
+            <div className="rounded-md group hover:scale-[1.01] hover:duration-200 w-[374px] h-[442px] hover:shadow-xl border">
               <img
                 src={`${devBaseImgUrl}/cards.webp`}
                 alt=""
