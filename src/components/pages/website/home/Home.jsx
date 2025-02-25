@@ -9,18 +9,18 @@ const Home = () => {
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
-          <div className="w-[1660px] h-[420px] relative flex justify-center ">
+          <div className=" relative flex justify-center">
             <img
               src={`${devBaseImgUrl}/home-banner.webp`}
               alt=""
-              className="object-cover w-full h-full"
+              className="object-cover w-[1660px] h-[420px]"
             />
-            <h1 className="text-[clamp(20px,3vw,34px)] w-[592px] text-center font-hindBold absolute top-0 mt-[84px] ">
+            <h1 className=" text-[clamp(20px,3vw,34px)] w-[592px] text-center font-hindBold absolute top-0 mt-[84px] ">
               Turning Properties Into Opportunities, Turning Clients Into
               Partners.
             </h1>
 
-            <div className=" h-[143px] shadow-md bg-light absolute mt-[373px] place-content-center px-9">
+            <div className=" h-[143px] shadow-md bg-light absolute top-[350px] place-content-center place-items-center px-9">
               <div className="flex gap-5 items-center ">
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
@@ -66,7 +66,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <FeaturedProperties/>
+          <FeaturedProperties />
         </div>
       </div>
     </>
