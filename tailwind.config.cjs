@@ -7,6 +7,7 @@ export default {
         hindBold: "hindBold",
         hindRegular: "hindRegular",
         robotoBold: "robotoBold",
+        poppins: "poppins",
       },
       colors: {
         primary: "rgb(var(--primary-color) / <alpha-value>)",

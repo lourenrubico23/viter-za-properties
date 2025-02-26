@@ -20,6 +20,12 @@
   font-display: fallback;
 }
 
+@font-face {
+  font-family: "poppins";
+  src: url(/font/Poppins-Regular.ttf) format("truetype");
+  font-display: fallback;
+}
+
 @layer base {
   /* Reference color for website
     primary: #002B53  
@@ -154,19 +160,13 @@
     @apply relative max-w-[1660px] w-full mx-auto;
   }
   .customContainer {
-    @apply w-[1460px] mx-auto;
+    @apply w-[1240px] mx-auto;
   }
   .nav {
     @apply text-light font-hindRegular text-[16px];
   }
-  .cards_wrapper:last-child {
-    @apply justify-center;
-  }
   .container {
     @apply py-0 px-3 max-w-[90rem] md:max-w-[90rem] md:px-6 md:py-0 p-6 mx-auto;
-  }
-  .gmap_iframe {
-    @apply lg:h-[49rem] lg:w-[70rem] w-fit h-[25rem] md:w-[35rem] md:h-[30rem];
   }
 }
 
@@ -223,10 +223,10 @@
 
 @layer utilities {
   .btn {
-    @apply relative inline-block px-[40px] py-[10px] h-[46px] text-center text-[16px] tracking-wider text-light bg-accent cursor-pointer transition ease-out duration-500 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_140px_0_0_0_#007B80] active:scale-90;
+    @apply relative inline-block px-[40px] py-[10px] h-[46px] text-center text-[16px] tracking-wider text-light bg-accent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
   }
   .btn-transparent {
-    @apply bg-white hover:bg-secondary py-4 px-8 transition-all duration-300 rounded-md text-[16px] hover:text-light text-accent hover:border-secondary border-accent border-[2px];
+    @apply relative inline-block px-[40px] py-[10px] h-[46px] text-center text-[16px] tracking-wider text-light bg-transparent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
   }
   .search {
     @apply flex items-center justify-end w-full lg:w-[25rem] relative my-3;
@@ -319,6 +319,19 @@
   }
   .slickNav ul li.slick-active div {
     @apply !bg-accent !opacity-100;
+  }
+  .slick-slider {
+    width: 100% !important;
+  }
+  .slick-slider {
+    padding: 20px !important;
+  }
+}
+
+@media screen and (min-width: 370px) {
+  .slick-track {
+    display: flex !important;
+    align-items: center !important;
   }
 }
 
