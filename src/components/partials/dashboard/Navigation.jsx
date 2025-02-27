@@ -5,6 +5,7 @@ import { devBaseImgUrl, devNavUrl } from "../../helpers/functions-general";
 import { IoChevronDownSharp } from "react-icons/io5";
 import { StoreContext } from "../../../store/StoreContext";
 import { setIsUserOpen } from "../../../store/StoreAction";
+import ModalChangePassword from "../../pages/developer/account/modal/ModalChangePassword";
 
 const Navigation = ({ menu, submenu }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -15,6 +16,7 @@ const Navigation = ({ menu, submenu }) => {
   const [open, setOpen] = React.useState(false);
   const [isOpenUser, setIsOpenUser] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState("#header");
+  const [isChangePassword, setIsChangePassword] = React.useState(false);
 
   const ref = React.useRef();
 
@@ -129,7 +131,7 @@ const Navigation = ({ menu, submenu }) => {
                 <button
                   type="button"
                   className="text-black text-xs text-left hover:text-accent"
-                  // onClick={() => setIsChangePassword(true)}
+                  onClick={() => setIsChangePassword(true)}
                 >
                   Change Password
                 </button>
@@ -155,6 +157,10 @@ const Navigation = ({ menu, submenu }) => {
           </div>
         </div>
       </div>
+
+      {isChangePassword && (
+        <ModalChangePassword setIsChangeAccountData={setIsChangePassword} />
+      )}
     </>
   );
 };
