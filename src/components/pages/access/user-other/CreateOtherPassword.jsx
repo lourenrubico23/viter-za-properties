@@ -144,7 +144,7 @@ const CreateOtherPassword = () => {
             </div>
 
             <p className="mb-0 mt-2 font-bold text-center text-lg">
-              D' CONTAINER CAFE HUB
+              ZA PROPERTIES
             </p>
             <p className="mt-8 mb-5 text-[16px] font-semibold">
               CREATE PASSWORD

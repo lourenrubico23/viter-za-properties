@@ -15,6 +15,7 @@ import LoginFooter from "../../../partials/LoginFooter";
 import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
 import { setCredentials, setError, setIsLogin, setMessage } from "../../../../store/StoreAction";
 import { StoreContext } from "../../../../store/StoreContext";
+import TableSpinner from "../../../partials/spinners/TableSpinner";
 
 const OtherUserLogin = () => {
   const { store, dispatch } = React.useContext(StoreContext);

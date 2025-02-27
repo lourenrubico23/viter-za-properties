@@ -1,9 +1,14 @@
-
 import React from "react";
 import { FaCheck } from "react-icons/fa";
-import { devApiVersion, devBaseImgUrl, devNavUrl, getUrlParam } from "../../../helpers/functions-general";
+import {
+  devApiVersion,
+  devBaseImgUrl,
+  devNavUrl,
+  getUrlParam,
+} from "../../../helpers/functions-general";
 import TableSpinner from "../../../partials/spinners/TableSpinner";
 import PageNotFound from "../../../partials/PageNotFound";
+import useQueryData from "../../../custom-hooks/useQueryData";
 
 const UserVerifyEmail = () => {
   const key = getUrlParam().get("key");

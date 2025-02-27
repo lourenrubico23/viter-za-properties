@@ -10,6 +10,7 @@ import { setError, setMessage } from "../../../../store/StoreAction";
 import { InputText } from "../../../helpers/FormInputs";
 import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
 import ModalError from "../../../partials/modals/ModalError";
+import { StoreContext } from "../../../../store/StoreContext";
 
 const UserForgotPassword = () => {
   const { store, dispatch } = React.useContext(StoreContext);

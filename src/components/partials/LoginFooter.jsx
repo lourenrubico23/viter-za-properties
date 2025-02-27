@@ -7,7 +7,7 @@ const LoginFooter = () => {
     <>
       <div className="text-xs mt-12 grid place-items-center ">
         <p className="text-center ">
-          &copy; {copyrightYear()} D' Container Cafe Hub
+          &copy; {copyrightYear()} ZA Properties
           <br /> All rights reserved.
         </p>
       </div>

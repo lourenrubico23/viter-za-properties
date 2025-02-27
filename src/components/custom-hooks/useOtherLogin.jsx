@@ -5,6 +5,8 @@ import {
   checkLocalStorage,
   checkRoleToRedirect,
 } from "../helpers/login-functions";
+import { queryData } from "./queryData";
+import { setIsLogin } from "../../store/StoreAction";
 
 const useOtherLogin = (navigate) => {
   const { store, dispatch } = React.useContext(StoreContext);

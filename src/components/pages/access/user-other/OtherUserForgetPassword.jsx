@@ -1,5 +1,4 @@
-
-
+import React from "react";
 import * as Yup from "yup";
 import { devBaseImgUrl, devNavUrl } from "../../../helpers/functions-general";
 import { MdMarkEmailRead } from "react-icons/md";
@@ -8,6 +7,8 @@ import { InputText } from "../../../helpers/FormInputs";
 import { Link } from "react-router-dom";
 import LoginFooter from "../../../partials/LoginFooter";
 import ModalError from "../../../partials/modals/ModalError";
+import { useQueryClient } from "@tanstack/react-query";
+import { StoreContext } from "../../../../store/StoreContext";
 
 const OtherUserForgetPassword = () => {
   const queryClient = useQueryClient();
@@ -77,7 +78,7 @@ const OtherUserForgetPassword = () => {
           {/* ) : ( */}
           <>
             <p className="mb-0 mt-2 font-bold text-center text-lg">
-              D' CONTAINER CAFE HUB
+              ZA PROPERTIES
             </p>
             <p className="mt-8 mb-5 text-[16px] font-semibold">
               FORGOT PASSWORD
