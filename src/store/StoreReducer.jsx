@@ -56,6 +56,11 @@ export const StoreReducer = (state, action) => {
         ...state,
         isViewAdd: action.payload,
       };
+    case "IS_USER_OPEN":
+      return {
+        ...state,
+        isUserOpen: action.payload,
+      };
     case "IS_CREATE_PASS_SUCCCESS":
       return {
         ...state,

@@ -157,10 +157,10 @@
     @apply w-full relative;
   }
   .wrapper {
-    @apply relative max-w-[1660px] w-full mx-auto;
+    @apply relative lg:max-w-[1660px] w-full mx-auto;
   }
   .customContainer {
-    @apply w-[1240px] mx-auto;
+    @apply lg:max-w-[1240px] lg:mx-auto px-3 lg:px-0 ;
   }
   .nav {
     @apply text-light font-hindRegular text-[16px];
@@ -223,10 +223,10 @@
 
 @layer utilities {
   .btn {
-    @apply relative inline-block px-[40px] py-[10px] h-[46px] text-center text-[16px] tracking-wider text-light bg-accent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
+    @apply relative inline-block px-[20px] md:px-[40px] md:py-[10px] h-[46px] text-[16px] tracking-wider text-light bg-accent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
   }
   .btn-transparent {
-    @apply relative inline-block px-[40px] py-[10px] h-[46px] text-center text-[16px] tracking-wider text-light bg-transparent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
+    @apply relative inline-block px-[20px] md:px-[40px] md:py-[10px] h-[46px] text-[16px] tracking-wider text-light bg-transparent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
   }
   .search {
     @apply flex items-center justify-end w-full lg:w-[25rem] relative my-3;
@@ -329,6 +329,12 @@
 }
 
 @media screen and (min-width: 370px) {
+  .slick-track {
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+@media screen and (min-width: 250px) {
   .slick-track {
     display: flex !important;
     align-items: center !important;

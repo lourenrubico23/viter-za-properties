@@ -65,6 +65,13 @@ export const setIsViewTab = (val) => {
   };
 };
 
+export const setIsUserOpen = (val) => {
+  return {
+    type: "IS_USER_OPEN",
+    payload: val,
+  };
+};
+
 export const setCreatePassSuccess = (val) => {
   return {
     type: "IS_CREATE_PASS_SUCCCESS",

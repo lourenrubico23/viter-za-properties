@@ -6,7 +6,7 @@ const Footer = () => {
     <>
       <div className="bg-primary py-12">
         <div className="customContainer text-light">
-          <div className="flex justify-between border-b-2 pb-7">
+          <div className="flex flex-col md:flex md:flex-row gap-7 lg:gap-0 justify-between border-b-2 pb-7">
             <div className="">
               <img
                 src={`${devBaseImgUrl}/za-logo.png`}
@@ -15,7 +15,7 @@ const Footer = () => {
               />
               <img src={`${devBaseImgUrl}/qr-code.png`} alt="" />
             </div>
-            <div className="flex gap-24">
+            <div className="flex gap-10 md:gap-24">
               <div className="flex flex-col gap-4">
                 <p className="text-lg font-poppins font-bold uppercase">
                   Property List
@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
           </div>
           <p className="font-poppins text-xs pt-8">
-            &#169;{copyrightYear()}ZA PROPERTIES. All rights reserved
+            &#169;{copyrightYear()} ZA PROPERTIES. All rights reserved
           </p>
         </div>
       </div>

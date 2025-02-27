@@ -13,7 +13,7 @@ const Blog = () => {
   });
   return (
     <>
-      <div className="bg-light mt-[168px] customContainer w-[1240px] mb-32">
+      <div className="bg-light mt-20 md:mt-[168px] customContainer lg:w-[1240px] mb-32">
         <div className="title uppercase text-secondary text-[clamp(20px,3vw,34px)] font-hindBold text-center">
           Blog
         </div>
@@ -23,7 +23,7 @@ const Blog = () => {
             <a className="cursor-pointer">
               <div
                 key={index}
-                className=" group hover:border-secondary hover:scale-[1.01] hover:duration-200 w-[372px] min-h-[555px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
+                className=" group hover:border-secondary hover:scale-[1.01] hover:duration-200 max-w-[372px] min-h-[555px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
               >
                 <div className="overflow-hidden">
                   <img

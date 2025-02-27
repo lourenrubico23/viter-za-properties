@@ -36,30 +36,30 @@ const PropertyDescriptionPage = () => {
   return (
     <>
       <ModalWrapper
-        className={` bg-light h-[700px] place-self-center`}
+        className={` bg-light  h-[700px] place-self-center `}
         handleClose={handleClose}
       >
-        <div className="p-6 overflow-auto w-[1241px] h-[700px]">
+        <div className="p-6 overflow-auto max-w-[1241px] max-h-[700px]">
           <div className="flex justify-end">
             <TfiClose className="h-6 w-6 " onClick={handleClose} />
           </div>
           <div className="p-4">
-            <h1 className="text-[clamp(20px,3vw,34px)] w-[714px] font-hindBold mb-4 leading-10">
+            <h1 className="text-[clamp(20px,3vw,34px)] max-w-[714px] font-hindBold mb-4 leading-10">
               Prime Office Space at BPI-Philam Life Building, Madrigal Business
               Park, Alabang
             </h1>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex md:flex-row gap-4">
               {/* Preview */}
               <div>
                 <img
                   src={previewImg}
                   alt="Preview"
-                  className="w-[956px] h-[513px] object-cover"
+                  className="h-[200px] md:h-[480px] lg:w-[956px] lg:h-[513px] object-cover"
                 />
               </div>
               {/* Thumbnail Images */}
-              <div className="flex flex-col gap-[19px]">
+              <div className="flex flex-row md:flex md:flex-col gap-2 md:gap-2 lg:gap-[19px] overflow-auto ">
                 {[
                   "home-2.webp",
                   "home-3.webp",
@@ -70,7 +70,7 @@ const PropertyDescriptionPage = () => {
                     key={index}
                     src={`${devBaseImgUrl}/${img}`}
                     alt=""
-                    className="w-[149px] h-[114px] cursor-pointer object-cover"
+                    className="w-[100px] h-[100px] md:w-[149px] md:h-[114px] cursor-pointer object-cover"
                     onClick={() => handleImageClick(`${devBaseImgUrl}/${img}`)}
                   />
                 ))}
@@ -78,7 +78,7 @@ const PropertyDescriptionPage = () => {
             </div>
 
             <div className="flex flex-col gap-5 py-5">
-              <div className="flex gap-20">
+              <div className="flex flex-wrap gap-8 lg:gap-20">
                 <ul className="flex gap-2">
                   <li>
                     <Captions className="h-5 mt-1" />
@@ -96,7 +96,7 @@ const PropertyDescriptionPage = () => {
                     <span className="text-[16px]">6</span>
                   </li>
                   <span className="uppercase text-gray-400 text-xs font-hindBold">
-                    Property ID
+                    Bedrooms
                   </span>
                 </ul>
                 <ul className="flex flex-col items-center">
@@ -138,7 +138,7 @@ const PropertyDescriptionPage = () => {
               </div>
             </div>
 
-            <div className="flex gap-28 py-2">
+            <div className="md:flex md:flex-row space-y-4 md:gap-10 lg:gap-28  py-2">
               <div className="flex gap-5 items-center">
                 <MapPin className="h-5 " />
                 <p>Madrigal Business Park, Alabang</p>
@@ -149,12 +149,12 @@ const PropertyDescriptionPage = () => {
                   45,000,000
                 </p>
               </div>
-              <button className="btn !flex gap-2 ">
-                <Share2 className="h-6" /> Share this Property
+              <button className="btn !flex gap-2 items-center ">
+                <Share2 className="h-6 " /> Share this Property
               </button>
             </div>
 
-            <div className="flex gap-40 py-5">
+            <div className="flex flex-col gap-6 md:flex md:flex-row md:gap-40 py-5">
               <div className="flex flex-col gap-5">
                 <p className="title text-lg font-hindBold">
                   Bedrooms and Features:
@@ -206,7 +206,7 @@ const PropertyDescriptionPage = () => {
                 <p className="title text-lg font-hindBold">
                   Your next investment, contact us.
                 </p>
-                <p className="text-secondary text-[34px] font-hindBold">
+                <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
                   +63 917 653 1919
                 </p>
                 <div>

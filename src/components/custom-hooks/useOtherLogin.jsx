@@ -1,12 +1,10 @@
-import { StoreContext } from "@/store/StoreContext";
 import React from "react";
-import { queryData } from "../helpers/queryData";
+import { StoreContext } from "../../store/StoreContext";
 import { devApiVersion } from "../helpers/functions-general";
 import {
   checkLocalStorage,
   checkRoleToRedirect,
 } from "../helpers/login-functions";
-import { setIsLogin } from "@/store/StoreAction";
 
 const useOtherLogin = (navigate) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -20,7 +18,7 @@ const useOtherLogin = (navigate) => {
       });
 
       if (typeof login === "undefined" || !login.success) {
-        localStorage.removeItem("dcontainercafetoken");
+        localStorage.removeItem("zapropertiestoken");
         setLoading(false);
       } else {
         setLoading(false);
