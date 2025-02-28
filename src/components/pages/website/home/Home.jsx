@@ -17,19 +17,19 @@ const Home = () => {
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
-          <div className=" relative md:flex justify-center">
+          <div className=" relative flex justify-center">
             <img
               src={`${devBaseImgUrl}/home-banner.webp`}
               alt=""
-              className="object-cover h-[70dvh] lg:max-w-[1660px] lg:max-h-[420px]"
+              className="object-cover min-h-[375px] lg:w-[1660px] lg:max-h-[420px]"
             />
-            <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] text-center font-hindBold absolute top-0 mt-[170px] lg:mt-[84px] ">
+            <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
               Turning Properties Into Opportunities, Turning Clients Into
               Partners.
             </h1>
 
-            <div className=" md:h-[143px] shadow-md bg-light md:absolute md:top-[450px] lg:top-[350px] place-content-center place-items-center px-9  md:py-0 py-9">
-              <div className="flex flex-col md:flex md:flex-row gap-5 items-center ">
+            <div className=" lg:max-h-[143px] shadow-md bg-light w-[352px] md:w-[650px] lg:w-[1240px] place-self-center absolute top-[300px] lg:top-[350px] place-content-center place-items-center px-9  md:py-9 py-9">
+              <div className="flex flex-col lg:flex lg:flex-row gap-5 items-center ">
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Properties Status
@@ -37,7 +37,7 @@ const Home = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:max-w-[180px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[180px] "
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -47,7 +47,7 @@ const Home = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:w-[329px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px] "
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -57,7 +57,7 @@ const Home = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:w-[255px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[255px] "
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -67,7 +67,7 @@ const Home = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:w-[196px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[196px] "
                   />
                 </div>
                 <button className="btn mt-6">Search</button>
@@ -76,7 +76,7 @@ const Home = () => {
           </div>
           <FeaturedProperties />
 
-          <div className="flex flex-wrap gap-6 place-content-center my-48">
+          <div className="flex flex-wrap gap-6 place-content-center md:my-48 my-12">
             <div className="flex flex-col items-center gap-4  w-[362px] h-[362px] p-6 hover:outline-8 hover:shadow-xl group">
               <SellMyPropertySvg />
               <p className="font-hindBold text-[clamp(16px,3vw,18px)] uppercase">
@@ -92,7 +92,9 @@ const Home = () => {
             </div>
             <div className="flex flex-col items-center gap-4  w-[362px] h-[362px] p-6 hover:outline-8 hover:shadow-xl group relative">
               <BuyAPropertySvg />
-              <p className="font-hindBold text-[clamp(16px,3vw,18px)] uppercase">Buy a Property</p>
+              <p className="font-hindBold text-[clamp(16px,3vw,18px)] uppercase">
+                Buy a Property
+              </p>
               <p className="font-hindRegular text-[clamp(12px,3vw,16px)] text-center min-h-[60px]">
                 Find your dream home or investment with expert guidance. Explore
                 top listings today!
@@ -103,13 +105,13 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="bg-[#F9FFFF] h-[614px] w-[1233px] place-self-center relative my-20">
+          <div className="bg-[#F9FFFF] flex h-[614px] lg:max-w-[1233px] place-self-center relative md:my-20">
             <img
               src={`${devBaseImgUrl}/zac-alfanta.webp`}
               alt=""
-              className="w-[571px] h-[687px] absolute -top-20"
+              className="max-w-[571px] max-h-[687px]  -top-20 lg:block hidden"
             />
-            <div className="flex flex-col gap-6 w-[698px] place-self-end py-12 px-4">
+            <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4">
               <h1 className="text-[clamp(30px,3vw,71px)] font-hindBold">
                 Zac Alfanta
               </h1>
@@ -133,7 +135,7 @@ const Home = () => {
                 create long-term value.
               </p>
 
-              <div className="flex gap-2 place-self-end mt-24">
+              <div className="flex gap-2 place-self-end md:mt-24">
                 <img
                   src={`${devBaseImgUrl}/nar-logo.png`}
                   alt=""

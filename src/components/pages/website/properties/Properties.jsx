@@ -11,18 +11,18 @@ const Properties = () => {
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
-          <div className=" relative md:flex justify-center">
+          <div className=" relative flex justify-center">
             <img
               src={`${devBaseImgUrl}/properties-banner.webp`}
               alt=""
-              className="object-cover h-[70dvh] lg:max-w-[1660px] lg:max-h-[420px]"
+              className="object-cover min-h-[375px] lg:w-[1660px] lg:max-h-[420px]"
             />
-            <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[585px] text-center font-hindBold absolute top-0 mt-[170px] lg:mt-[84px] ">
+            <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
               Unlocking Property Potential. Creating Life-Long Partnerships.
             </h1>
-
-            <div className=" md:h-[143px] shadow-md bg-light md:absolute md:top-[450px] lg:top-[350px] place-content-center place-items-center px-9  md:py-0 py-9">
-              <div className="flex flex-col md:flex md:flex-row gap-5 items-center ">
+            s
+            <div className="lg:max-h-[143px] shadow-md bg-light w-[352px] md:w-[650px] lg:w-[1240px] place-self-center absolute top-[300px] lg:top-[350px] place-content-center place-items-center px-9  md:py-9 py-9">
+              <div className="flex flex-col lg:flex lg:flex-row gap-5 items-center ">
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Properties Status
@@ -30,7 +30,7 @@ const Properties = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:max-w-[180px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[180px]"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -40,7 +40,7 @@ const Properties = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:w-[329px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px] "
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -50,7 +50,7 @@ const Properties = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:w-[255px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[255px]"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -60,7 +60,7 @@ const Properties = () => {
                   <input
                     type="text"
                     placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[180px] lg:!h-[46px] lg:w-[196px] "
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[196px] "
                   />
                 </div>
                 <button className="btn mt-6">Search</button>

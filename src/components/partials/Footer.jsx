@@ -40,8 +40,8 @@ const Footer = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <button className="btn border-none">View Listing</button>
-              <button className="btn-transparent">List my Home</button>
+              <button className="btn border-none hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]">View Listing</button>
+              <button className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]">List my Home</button>
             </div>
           </div>
           <p className="font-poppins text-xs pt-8">

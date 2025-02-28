@@ -13,7 +13,7 @@ const Blog = () => {
   });
   return (
     <>
-      <div className="bg-light mt-20 md:mt-[168px] customContainer lg:w-[1240px] mb-32">
+      <div className="bg-light mt-20 md:mt-[168px] customContainer lg:max-w-[1240px] mb-32">
         <div className="title uppercase text-secondary text-[clamp(20px,3vw,34px)] font-hindBold text-center">
           Blog
         </div>
@@ -48,7 +48,10 @@ const Blog = () => {
           ))}
         </div>
 
-        <button className="btn !flex gap-2 items-center place-self-center"><MoveRight />Read more Blogs</button>
+        <button className="btn !flex gap-2 items-center place-self-center">
+          <MoveRight />
+          Read more Blogs
+        </button>
       </div>
     </>
   );
