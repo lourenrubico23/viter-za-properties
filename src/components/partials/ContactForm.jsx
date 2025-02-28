@@ -79,7 +79,7 @@ const ContactForm = ({ pageType }) => {
             </ul>
           </div>
 
-          <div className="bg-light border shadow-lg p-16">
+          <div className="bg-light border shadow-lg md:p-16 p-6 min-w-[300px] max-w-[622px] place-self-center">
             <p className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 md:w-[520px]">
               {pageType === "home" || pageType === "properties"
                 ? "Contact Us"

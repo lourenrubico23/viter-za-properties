@@ -63,7 +63,7 @@ const Navigation = () => {
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <FaTimes /> : <FaBars />}
-          </button> 
+          </button>
 
           {/* Backdrop */}
           {isOpen && (

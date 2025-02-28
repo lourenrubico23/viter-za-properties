@@ -14,9 +14,9 @@ const Sellers = () => {
             <img
               src={`${devBaseImgUrl}/sellers-banner.webp`}
               alt=""
-              className="object-cover h-[70dvh] lg:max-w-[1660px] lg:max-h-[420px]"
+              className="object-cover min-h-[375px] lg:w-[1660px] lg:max-h-[420px]"
             />
-            <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] text-center font-hindBold absolute top-0 mt-[170px] lg:mt-[84px] ">
+            <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px]  ">
               Maximizing Value in Every Property, Turning Sellers into Trusted
               Partners.
             </h1>
