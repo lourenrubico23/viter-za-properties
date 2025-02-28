@@ -1,0 +1,38 @@
+RewriteEngine On
+
+# use for authentication
+
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+Header set Access-Control-Allow-Origin *
+
+RewriteRule ^upload-photo$ core/upload-photo.php [L]
+RewriteRule ^upload-multiple-photo$ core/upload-multiple-photo.php [L]
+
+### Settings - Roles ###
+RewriteRule ^role$ controllers/developer/settings/role/role.php [L]
+RewriteRule ^role/([0-9]+)$ controllers/developer/settings/role/role.php?roleid=$1 [L]
+RewriteRule ^role/active/([0-9]+)$ controllers/developer/settings/role/active.php?roleid=$1 [L]
+RewriteRule ^role/search$ controllers/developer/settings/role/search.php [L]
+RewriteRule ^role/page/([0-9]+)$ controllers/developer/settings/role/page.php?start=$1 [L]
+
+### Settings - USER ###
+RewriteRule ^user$ controllers/developer/settings/user/user.php [L]
+RewriteRule ^user/([0-9]+)$ controllers/developer/settings/user/user.php?userid=$1 [L]
+RewriteRule ^user/page/([0-9]+)$ controllers/developer/settings/user/page.php?start=$1 [L]
+RewriteRule ^user/search$ controllers/developer/settings/user/search.php [L]
+RewriteRule ^user/active/([0-9]+)$ controllers/developer/settings/user/active.php?userid=$1 [L]
+RewriteRule ^user/verify-email/(.*)$ controllers/developer/settings/user/update-email.php?userkey=$1 [L]
+RewriteRule ^user/key/(.*)$ controllers/developer/settings/user/key.php?userkey=$1 [L]
+RewriteRule ^user/password$ controllers/developer/settings/user/set-password.php [L]
+RewriteRule ^user/login$ controllers/developer/settings/user/login.php [L]
+RewriteRule ^user/token$ controllers/developer/settings/user/token.php [L]
+RewriteRule ^user/reset$ controllers/developer/settings/user/reset-password.php [L]
+RewriteRule ^user/role$ controllers/developer/settings/user/role.php [L] 
+
+### ACCOUNT CHANGE PASSWORD ###
+RewriteRule ^account/other/update-password$ controllers/developer/account/other/account-change-password.php [L] 
+ 

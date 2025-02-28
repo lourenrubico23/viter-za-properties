@@ -3,16 +3,6 @@ import React from "react";
 import { FaEdit, FaKey, FaUserAltSlash } from "react-icons/fa";
 import { MdDelete, MdRestore } from "react-icons/md";
 import { useInView } from "react-intersection-observer";
-import { devApiVersion } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../partials/LoadMore";
-import SearchBar from "../../../../partials/SearchBar";
-import Status from "../../../../partials/Status";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-
-import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
 import {
   setIsAdd,
   setIsArchive,
@@ -20,8 +10,29 @@ import {
   setIsRestore,
 } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
+import { devApiVersion } from "../../../../helpers/functions-general";
+import LoadMore from "../../../../partials/LoadMore";
+import SearchBar from "../../../../partials/SearchBar";
+import Status from "../../../../partials/Status";
+import ModalDelete from "../../../../partials/modals/ModalDelete";
+import ModalRestore from "../../../../partials/modals/ModalRestore";
+import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
+import NoData from "../../../../partials/spinners/NoData";
+import ServerError from "../../../../partials/spinners/ServerError";
+import TableLoading from "../../../../partials/spinners/TableLoading";
+import ModalReset from "./modal/ModalReset";
+import ModalSendingEmailStatus from "./modal/ModalSendingEmailStatus";
+import ModalSentEmailSummary from "./modal/ModalSentEmailSummary";
+import ModalSuspend from "./modal/ModalSuspend";
 
-const OtherUserTable = ({ setItemEdit }) => {
+const OtherUserTable = ({
+  setItemEdit,
+  itemEdit,
+  setEmailCount,
+  setRecipientList,
+  recipientList,
+}) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
@@ -33,6 +44,13 @@ const OtherUserTable = ({ setItemEdit }) => {
   const search = React.useRef({ value: "" });
   const { ref, inView } = useInView();
 
+  const [isSendingLoading, setIsSendingLoading] = React.useState(false);
+  const [queryCount, setQueryCount] = React.useState(0);
+  const [confirmSend, setConfirmSend] = React.useState(false);
+  const [isSuccessSendingEmail, setIsSuccessSendingEmail] =
+    React.useState(false);
+  const [queryStatus, setQueryStatus] = React.useState(null);
+
   const {
     data: result,
     error,
@@ -42,11 +60,11 @@ const OtherUserTable = ({ setItemEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["user-other", onSearch, store.isSearch],
+    queryKey: ["user", onSearch, store.isSearch],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
-        `${devApiVersion}/user-other/search`, // search endpoint
-        `${devApiVersion}/user-other/page/${pageParam}`, // list endpoint
+        `${devApiVersion}/user/search`, // search endpoint
+        `${devApiVersion}/user/page/${pageParam}`, // list endpoint
         store.isSearch, // search boolean
         {
           searchValue: search.current.value,
@@ -73,30 +91,39 @@ const OtherUserTable = ({ setItemEdit }) => {
 
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
-    setIsData(item.user_other_email);
-    setIsId(item.user_other_aid);
+    setIsData(item.user_email);
+    setIsId(item.user_aid);
   };
 
   const handleArchive = (item) => {
     dispatch(setIsArchive(true));
-    setIsData(item.user_other_email);
-    setIsId(item.user_other_aid);
+    setIsData(item.user_email);
+    setIsId(item.user_aid);
     setIsArchiving(true);
     setIsRestore(false);
   };
 
   const handleRestore = (item) => {
     dispatch(setIsRestore(true));
-    setIsData(item.user_other_email);
-    setIsId(item.user_other_aid);
+    setIsData(item.user_email);
+    setIsId(item.user_aid);
     setIsArchiving(false);
     setIsRestore(true);
   };
 
   const handleReset = (item) => {
     setIsReset(true);
-    setIsId(item.user_other_aid);
+    setIsId(item.user_aid);
     setIsData(item);
+    // to get all the email
+    const recipientEmails = Array.isArray(item.user_email)
+      ? item.user_email
+      : item.user_email
+      ? [item.user_email]
+      : [];
+
+    setEmailCount(recipientEmails.length);
+    setRecipientList(recipientEmails);
   };
   React.useEffect(() => {
     if (inView) {
@@ -118,7 +145,7 @@ const OtherUserTable = ({ setItemEdit }) => {
           onSearch={onSearch}
         />
       </div>
-      <div className=" shadow-md rounded-md overflow-y-auto min-h-full md:min-h-[calc(100vh-30px)] lg:max-h-[calc(90vh-150px)] mb-10 lg:mb-0 lg:min-h-0 relative">
+      <div className=" shadow-md rounded-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mb-10 lg:mb-0  relative">
         {isFetching && !isFetchingNextPage && status !== "pending" && (
           <FetchingSpinner />
         )}
@@ -156,17 +183,19 @@ const OtherUserTable = ({ setItemEdit }) => {
                   <tr key={key} className="text-[14px]">
                     <td className="pl-2 ">{counter++}.</td>
                     <td>
-                      {item.user_other_is_active === 1 ? (
+                      {item.user_is_active === 1 ? (
                         <Status text="Active" />
                       ) : (
                         <Status text="Inactive" />
                       )}
                     </td>
-                    <td className="">{item.fullname}</td>
-                    <td className="">{item.user_other_email}</td>
+                    <td className="capitalize">
+                      {item.user_last_name}, {item.user_first_name}
+                    </td>
+                    <td className="">{item.user_email}</td>
                     <td className="">{item.role_name}</td>
-                    <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0 mr-2">
-                      {item.user_other_is_active ? (
+                    <td className="flex items-center gap-3 justify-end">
+                      {item.user_is_active ? (
                         <>
                           <button
                             className="tooltip-action-table"
@@ -228,48 +257,69 @@ const OtherUserTable = ({ setItemEdit }) => {
           />
         </div>
       </div>
-      {/* 
+
       {store.isDelete && (
         <ModalDelete
-          setIsDelete={setIsDelete}
-          queryKey={"user-other"}
-          mysqlEndpoint={`${apiVersion}/user-other/${id}`}
+          mysqlEndpoint={`${devApiVersion}/user/${id}`}
+          queryKey={"user"}
           item={isData}
         />
       )}
-
       {store.isArchive && (
         <ModalSuspend
-          mysqlApiArchive={`${apiVersion}/user-other/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/user/active/${id}`}
           msg={"Are you sure you want to suspend this user?"}
           successMsg={"Suspended succesfully."}
-          queryKey={"user-other"}
+          queryKey={"user"}
           email={isData}
         />
       )}
-
       {store.isRestore && (
         <ModalRestore
-          mysqlApiRestore={`${apiVersion}/user-other/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/user/active/${id}`}
           msg={"Are you sure you want to restore this user?"}
           successMsg={"Restored succesfully."}
-          queryKey={"user-other"}
+          queryKey={"user"}
           setIsRestore={setIsRestore}
         />
       )}
-
       {isReset && (
         <ModalReset
-          mysqlApiReset={`${apiVersion}/user-other/reset`}
+          mysqlApiReset={`${devApiVersion}/user/reset`}
           msg={"Are you sure you want to reset the password of this user?"}
           successMsg={
             "Reset succesfully. Please check your email to continue resetting password."
           }
-          queryKey={"user-other"}
+          queryKey={"user"}
           setIsReset={setIsReset}
           dataItem={isData}
+          recipientList={recipientList}
+          setConfirmSend={setConfirmSend}
+          setQueryCount={setQueryCount}
+          setIsSendingLoading={setIsSendingLoading}
+          setIsSuccessSendingEmail={setIsSuccessSendingEmail}
+          setQueryStatus={setQueryStatus}
         />
-      )} */}
+      )}
+
+      {confirmSend && (
+        <ModalSendingEmailStatus
+          recipientList={recipientList}
+          queryCount={queryCount}
+        />
+      )}
+      {isSuccessSendingEmail && (
+        <ModalSentEmailSummary
+          queryCount={queryCount}
+          recipientList={recipientList}
+          setIsSuccessSendingEmail={setIsSuccessSendingEmail}
+          setQueryCount={setQueryCount}
+          queryStatus={queryStatus}
+          message={
+            "The email has been sent successfully. Please check your inbox for your password reset instructions."
+          }
+        />
+      )}
     </>
   );
 };

@@ -1,17 +1,31 @@
 import React from "react";
-import Navigation from "../../../../partials/dashboard/Navigation";
-import DashboardNav from "../../../../partials/dashboard/DashboardNav";
-import ModalSuccess from "../../../../partials/modals/ModalSuccess";
-import ModalError from "../../../../partials/modals/ModalError";
-import { StoreContext } from "../../../../../store/StoreContext";
-import OtherUserTable from "./OtherUserTable";
 import { FaPlus } from "react-icons/fa";
 import { setIsAdd } from "../../../../../store/StoreAction";
-import ModalAddUser from "../modal/ModalAddUser";
+import { StoreContext } from "../../../../../store/StoreContext";
+import { devApiVersion } from "../../../../helpers/functions-general";
+import DashboardNav from "../../../../partials/dashboard/DashboardNav";
+import Navigation from "../../../../partials/dashboard/Navigation";
+import ModalError from "../../../../partials/modals/ModalError";
+import ModalSuccess from "../../../../partials/modals/ModalSuccess";
+import ModalAddOtherUser from "./modal/ModalAddOtherUser";
+import ModalSend from "./modal/ModalSend";
+import ModalSendingEmailStatus from "./modal/ModalSendingEmailStatus";
+import ModalSentEmailSummary from "./modal/ModalSentEmailSummary";
+import OtherUserTable from "./OtherUserTable";
 
 const OtherUser = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
+  const [isSend, setIsSend] = React.useState(false);
+  const [isSendingLoading, setIsSendingLoading] = React.useState(false);
+  const [queryCount, setQueryCount] = React.useState(0);
+  const [emailCount, setEmailCount] = React.useState(0);
+  const [confirmSend, setConfirmSend] = React.useState(false);
+  const [recipientList, setRecipientList] = React.useState([]);
+  const [isSuccessSendingEmail, setIsSuccessSendingEmail] =
+    React.useState(false);
+  const [queryStatus, setQueryStatus] = React.useState(null);
+  const [payloadData, setPayloadData] = React.useState(null); // Store form values
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
@@ -20,7 +34,7 @@ const OtherUser = () => {
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="user" submenu="other-user" />
+        <Navigation menu="user" submenu="user" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav menu="dashboard" />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -39,17 +53,65 @@ const OtherUser = () => {
                     Add
                   </button>
                 </div>
-                <OtherUserTable setItemEdit={setItemEdit} />
+                <OtherUserTable
+                  setItemEdit={setItemEdit}
+                  itemEdit={itemEdit}
+                  setEmailCount={setEmailCount}
+                  setRecipientList={setRecipientList}
+                  recipientList={recipientList}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {store.isAdd && <ModalAddUser itemEdit={itemEdit} />}
-
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
+      {!itemEdit && isSend && (
+        <ModalSend
+          recipientList={recipientList}
+          payloadData={payloadData}
+          setIsSend={setIsSend}
+          setConfirmSend={setConfirmSend}
+          setQueryCount={setQueryCount}
+          setIsSendingLoading={setIsSendingLoading}
+          isSendingLoading={isSendingLoading}
+          setIsSuccessSendingEmail={setIsSuccessSendingEmail}
+          setQueryStatus={setQueryStatus}
+          msg={`Are you sure you want to add this user and send a validation
+                email?`}
+          mysqlEndpoint={`${devApiVersion}/user`}
+          queryKey={`user`}
+        />
+      )}
+
+      {confirmSend && (
+        <ModalSendingEmailStatus
+          recipientList={recipientList}
+          queryCount={queryCount}
+        />
+      )}
+      {isSuccessSendingEmail && (
+        <ModalSentEmailSummary
+          queryCount={queryCount}
+          recipientList={recipientList}
+          setIsSuccessSendingEmail={setIsSuccessSendingEmail}
+          setQueryCount={setQueryCount}
+          queryStatus={queryStatus}
+          message={"The email has been sent successfully!"}
+        />
+      )}
+
+      {store.isAdd && (
+        <ModalAddOtherUser
+          itemEdit={itemEdit}
+          setIsSend={setIsSend}
+          setPayloadData={setPayloadData}
+          setEmailCount={setEmailCount}
+          setRecipientList={setRecipientList}
+        />
+      )}
     </>
   );
 };

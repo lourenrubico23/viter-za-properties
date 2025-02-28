@@ -5,6 +5,7 @@ import { StoreContext } from "@/store/StoreContext";
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { FaKey } from "react-icons/fa";
+
 const ModalReset = ({
   mysqlApiReset,
   msg,
@@ -34,8 +35,6 @@ const ModalReset = ({
     const queryResetPassword = await queryData(mysqlApiReset, "post", {
       email: dataItem.user_email,
     });
-
-    console.log("Query: ", queryResetPassword);
 
     if (queryResetPassword?.success) {
       // loop through the list of recipient email

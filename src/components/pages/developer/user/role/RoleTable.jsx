@@ -1,18 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
-import { FaEdit, FaKey, FaUserAltSlash } from "react-icons/fa";
+import { FaArchive, FaEdit } from "react-icons/fa";
 import { MdDelete, MdRestore } from "react-icons/md";
 import { useInView } from "react-intersection-observer";
-import { devApiVersion } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../partials/LoadMore";
-import SearchBar from "../../../../partials/SearchBar";
-import Status from "../../../../partials/Status";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-
-import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
 import {
   setIsAdd,
   setIsArchive,
@@ -20,6 +10,18 @@ import {
   setIsRestore,
 } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
+import { devApiVersion } from "../../../../helpers/functions-general";
+import LoadMore from "../../../../partials/LoadMore";
+import SearchBar from "../../../../partials/SearchBar";
+import Status from "../../../../partials/Status";
+import ModalArchive from "../../../../partials/modals/ModalArchive";
+import ModalDelete from "../../../../partials/modals/ModalDelete";
+import ModalRestore from "../../../../partials/modals/ModalRestore";
+import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
+import NoData from "../../../../partials/spinners/NoData";
+import ServerError from "../../../../partials/spinners/ServerError";
+import TableLoading from "../../../../partials/spinners/TableLoading";
 
 const RoleTable = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -118,7 +120,7 @@ const RoleTable = ({ setItemEdit }) => {
           onSearch={onSearch}
         />
       </div>
-      <div className=" shadow-md rounded-md overflow-y-auto min-h-full md:min-h-[calc(100vh-30px)] lg:max-h-[calc(90vh-150px)] mb-10 lg:mb-0 lg:min-h-0 relative">
+      <div className=" shadow-md rounded-md overflow-y-auto min-h-full md:min-h-[calc(100vh-300px)] lg:max-h-[calc(100vh-250px)] mb-10 lg:mb-0 lg:min-h-0 relative">
         {isFetching && !isFetchingNextPage && status !== "pending" && (
           <FetchingSpinner />
         )}
@@ -155,31 +157,31 @@ const RoleTable = ({ setItemEdit }) => {
                   <tr key={key} className="text-[14px]">
                     <td className="pl-2 ">{counter++}.</td>
                     <td>
-                      {item.user_other_is_active === 1 ? (
+                      {item.role_is_active === 1 ? (
                         <Status text="Active" />
                       ) : (
                         <Status text="Inactive" />
                       )}
                     </td>
-                    <td className="px-6">{item.role_name}</td>
-                    <td className="px-6">{item.role_description}</td>
+                    <td className="pr-6">{item.role_name}</td>
+                    <td className="pr-6">{item.role_description}</td>
                     <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0 mr-2">
-                      {item.user_other_is_active ? (
+                      {item.role_is_active ? (
                         <>
-                          <li
+                          <button
                             className="tooltip-action-table"
                             data-tooltip="Edit"
                             onClick={() => handleEdit(item)}
                           >
                             <FaEdit className="text-gray-600 text-[16px]" />
-                          </li>
-                          <li
+                          </button>
+                          <button
                             className="tooltip-action-table"
                             data-tooltip="Archive"
                             onClick={() => handleArchive(item)}
                           >
                             <FaArchive className=" text-gray-600 text-[14px]" />
-                          </li>
+                          </button>
                         </>
                       ) : (
                         <>
@@ -218,37 +220,31 @@ const RoleTable = ({ setItemEdit }) => {
           />
         </div>
       </div>
-      {/* 
+
       {store.isDelete && (
         <ModalDelete
-          setIsDelete={setIsDelete}
           queryKey={"role"}
-          mysqlEndpoint={`${apiVersion}/role/${id}`}
+          mysqlEndpoint={`${devApiVersion}/role/${id}`}
           item={isData}
         />
       )}
-
       {store.isArchive && (
-        <ModalSuspend
-          mysqlApiArchive={`${apiVersion}/role/active/${id}`}
+        <ModalArchive
+          mysqlApiArchive={`${devApiVersion}/role/active/${id}`}
           msg={"Are you sure you want to suspend this user?"}
           successMsg={"Suspended succesfully."}
           queryKey={"role"}
           email={isData}
         />
       )}
-
       {store.isRestore && (
         <ModalRestore
-          mysqlApiRestore={`${apiVersion}/role/active/${id}`}
+          mysqlApiRestore={`${devApiVersion}/role/active/${id}`}
           msg={"Are you sure you want to restore this user?"}
           successMsg={"Restored succesfully."}
           queryKey={"role"}
-          setIsRestore={setIsRestore}
         />
       )}
-
-       */}
     </>
   );
 };

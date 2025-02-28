@@ -28,7 +28,7 @@ const UserVerifyEmail = () => {
       ) : (
         <div
           className="w-full flex justify-center items-center"
-          style={{ transform: "translateY(clamp(5rem,12vw,8rem))" }}
+          style={{ transform: "translateY(clamp(3rem,12vw,6rem))" }}
         >
           <div className="max-w-[340px] w-full p-4 py-5 rounded-md">
             <div className="relative flex gap-2 justify-center mb-5">

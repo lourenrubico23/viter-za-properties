@@ -127,13 +127,6 @@ export const getGoogleMapEmbededUrl = (url) => {
   return null; // Return null if no coordinates are found
 };
 
-// storage after login
-export function setStorageRoute(jwt, isDev) {
-  localStorage.setItem(
-    "dcontainercafetoken",
-    JSON.stringify({ token: jwt, isDev })
-  );
-}
 
 // get the url id parameter
 export const getUrlParam = (id) => {

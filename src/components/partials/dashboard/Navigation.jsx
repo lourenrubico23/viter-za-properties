@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { devBaseImgUrl, devNavUrl } from "../../helpers/functions-general";
-
 import { IoChevronDownSharp } from "react-icons/io5";
-import { StoreContext } from "../../../store/StoreContext";
 import { setIsUserOpen } from "../../../store/StoreAction";
+import { StoreContext } from "../../../store/StoreContext";
+import { getUserType } from "../../helpers/login-functions";
 import ModalChangePassword from "../../pages/developer/account/modal/ModalChangePassword";
 
 const Navigation = ({ menu, submenu }) => {
@@ -17,10 +17,8 @@ const Navigation = ({ menu, submenu }) => {
   const [isOpenUser, setIsOpenUser] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState("#header");
   const [isChangePassword, setIsChangePassword] = React.useState(false);
-
+  const link = getUserType();
   const ref = React.useRef();
-
-  
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -65,7 +63,9 @@ const Navigation = ({ menu, submenu }) => {
                   onClick={() => handleUserOpen()}
                 >
                   <div className="nav flex items-center justify-between w-full">
-                    <span className=" text-[14px] uppercase text-dark">Users</span>
+                    <span className=" text-[14px] uppercase text-dark">
+                      Users
+                    </span>
                     <IoChevronDownSharp
                       className={`${
                         store.isUserOpen ? "" : "rotate-180"
@@ -79,10 +79,10 @@ const Navigation = ({ menu, submenu }) => {
                     store.isUserOpen ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
-                  <Link className="!p-0" to={`${devNavUrl}/other-user`}>
+                  <Link className="!p-0" to={`${devNavUrl}/${link}/users`}>
                     <li
                       className={`text-xs  border-transparent ${
-                        submenu === "other-user"
+                        submenu === "users"
                           ? "text-primary font-bold"
                           : "border-none text-dark"
                       }`}
@@ -90,10 +90,10 @@ const Navigation = ({ menu, submenu }) => {
                       User
                     </li>
                   </Link>
-                  <Link className="!p-0" to={`${devNavUrl}/user-role`}>
+                  <Link className="!p-0" to={`${devNavUrl}/${link}/roles`}>
                     <li
                       className={`text-xs my-2 border-transparent ${
-                        submenu === "user-role"
+                        submenu === "roles"
                           ? "text-primary font-bold"
                           : "border-none text-dark"
                       }`}

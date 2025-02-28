@@ -1,7 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Form, Formik } from "formik";
-import React from "react";
-import * as Yup from "yup";
+import useQueryData from "@/components/custom-hooks/useQueryData";
+import { InputSelect, InputText } from "@/components/helpers/FormInputs";
+import { devApiVersion } from "@/components/helpers/functions-general";
+import { queryData } from "@/components/helpers/queryData";
+import ButtonSpinner from "@/components/partials/spinners/ButtonSpinner";
 import {
   setError,
   setIsAccountUpdated,
@@ -10,16 +11,20 @@ import {
   setSuccess,
 } from "@/store/StoreAction";
 import { StoreContext } from "@/store/StoreContext";
-import { InputSelect, InputText } from "@/components/helpers/FormInputs";
-import { queryData } from "@/components/helpers/queryData";
-import ButtonSpinner from "@/components/partials/spinners/ButtonSpinner";
-import useQueryData from "@/components/custom-hooks/useQueryData";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Form, Formik } from "formik";
+import React from "react";
 import { GrFormClose } from "react-icons/gr";
-import { devApiVersion } from "../../../../helpers/functions-general";
-import ModalWrapper from "../../../../partials/modals/ModalWrapper";
-import ModalAddWrapper from "../../../../partials/modals/ModalAddWrapper";
+import * as Yup from "yup";
+import ModalAddWrapper from "../../../../../partials/modals/ModalAddWrapper";
 
-const ModalAddUser = ({ itemEdit, setIsSend }) => {
+const ModalAddOtherUser = ({
+  itemEdit,
+  setIsSend,
+  setPayloadData,
+  setEmailCount,
+  setRecipientList,
+}) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("translate-x-full");
 
@@ -104,19 +109,14 @@ const ModalAddUser = ({ itemEdit, setIsSend }) => {
       mutation.mutate(values);
     } else {
       setPayloadData(values); // Pass data to the next modal
-
       const recipientEmails = Array.isArray(values.user_email)
         ? values.user_email
         : values.user_email
         ? [values.user_email]
         : [];
-
       setEmailCount(recipientEmails.length);
       setIsSend(true);
       setRecipientList(recipientEmails);
-
-      console.log("Recipient: ", recipientEmails.length);
-
       dispatch(setIsAdd(false));
     }
   };
@@ -247,4 +247,4 @@ const ModalAddUser = ({ itemEdit, setIsSend }) => {
   );
 };
 
-export default ModalAddUser;
+export default ModalAddOtherUser;

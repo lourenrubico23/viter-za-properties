@@ -1,13 +1,18 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { FaTrashRestore } from "react-icons/fa";
 import { GrFormClose } from "react-icons/gr";
+import {
+  setError,
+  setIsRestore,
+  setMessage,
+  setSuccess,
+} from "../../../store/StoreAction";
+import { StoreContext } from "../../../store/StoreContext";
 import { queryData } from "../../helpers/queryData";
 import ButtonSpinner from "../spinners/ButtonSpinner";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { StoreContext } from "../../store/StoreContext";
-import { setError, setMessage, setSuccess } from "../../store/StoreAction";
 
-const ModalRestore = ({ setIsRestore, mysqlEndpoint, queryKey, item }) => {
+const ModalRestore = ({ mysqlEndpoint, queryKey, item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const handleClose = () => {
@@ -24,13 +29,11 @@ const ModalRestore = ({ setIsRestore, mysqlEndpoint, queryKey, item }) => {
       // dispatch(setIsDelete(false));
 
       if (!data.success) {
-        console.log("May error!");
         dispatch(setError(true));
         dispatch(setMessage(data.error));
         dispatch(setSuccess(false));
       } else {
         dispatch(setIsRestore(false));
-        console.log("Naysuu!");
         dispatch(setSuccess(true));
         dispatch(setMessage("Successfully Restored!"));
       }

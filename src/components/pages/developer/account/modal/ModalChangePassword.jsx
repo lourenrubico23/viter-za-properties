@@ -3,16 +3,19 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 import * as Yup from "yup";
-import { devApiVersion } from "../../../../helpers/functions-general";
-import { queryData } from "../../../../custom-hooks/queryData";
-import { StoreContext } from "../../../../../store/StoreContext";
 import {
   setError,
   setIsAccountUpdated,
   setMessage,
   setSuccess,
 } from "../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../store/StoreContext";
+import { queryData } from "../../../../custom-hooks/queryData";
 import { InputText } from "../../../../helpers/FormInputs";
+import {
+  devApiVersion,
+  HandleEscape,
+} from "../../../../helpers/functions-general";
 import ButtonSpinner from "../../../../partials/spinners/ButtonSpinner";
 
 const ModalChangePassword = ({ setIsChangeAccountData }) => {
@@ -77,23 +80,23 @@ const ModalChangePassword = ({ setIsChangeAccountData }) => {
       } else {
         setIsChangeAccountData(false);
         dispatch(setSuccess(true));
-        dispatch(setIsAccountUpdated(true));
         dispatch(
           setMessage(
             "You password has been successfully changed, you will automatically be logged out."
           )
         );
+        setTimeout(() => {
+          dispatch(setIsAccountUpdated(true));
+        }, 3000);
       }
     },
   });
 
   const handleClose = () => {
     if (mutation.isPending) return;
-    // set animation
-    setShow("");
-    // clear the modal
+    setShow(""); // set animation
     setTimeout(() => {
-      setIsChangeAccountData(false);
+      setIsChangeAccountData(false); // clear the modal
     }, 200);
   };
 
@@ -147,9 +150,9 @@ const ModalChangePassword = ({ setIsChangeAccountData }) => {
                       <div className="pb-3">
                         <ul className="grid grid-cols-[50px_1fr] text-left">
                           <li>Name: </li>
-                          <li>{fullname}</li>
+                          <li className="capitalize">{fullname}</li>
                           <li>Email: </li>
-                          <li>{email}</li>
+                          <li className="lowercase">{email}</li>
                         </ul>
                       </div>
                       <div className="input-wrapper text-left">

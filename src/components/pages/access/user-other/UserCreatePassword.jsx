@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import React from "react";
 import { BiMailSend } from "react-icons/bi";
@@ -5,21 +6,22 @@ import { FaCheck } from "react-icons/fa";
 import { HiEyeSlash } from "react-icons/hi2";
 import { RiEyeFill } from "react-icons/ri";
 import * as Yup from "yup";
+import { setError, setMessage } from "../../../../store/StoreAction";
+import { StoreContext } from "../../../../store/StoreContext";
+import { queryData } from "../../../custom-hooks/queryData";
+import useQueryData from "../../../custom-hooks/useQueryData";
+import { InputText } from "../../../helpers/FormInputs";
 import {
   devApiVersion,
   devBaseImgUrl,
   devNavUrl,
   getUrlParam,
 } from "../../../helpers/functions-general";
-import { StoreContext } from "../../../../store/StoreContext";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { queryData } from "../../../custom-hooks/queryData";
-import { setError, setMessage } from "../../../../store/StoreAction";
-import TableSpinner from "../../../partials/spinners/TableSpinner";
-import { InputText } from "../../../helpers/FormInputs";
-import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
 import ModalError from "../../../partials/modals/ModalError";
-import useQueryData from "../../../custom-hooks/useQueryData";
+import PageNotFound from "../../../partials/PageNotFound";
+import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
+import ServerError from "../../../partials/spinners/ServerError";
+import TableSpinner from "../../../partials/spinners/TableSpinner";
 
 const UserCreatePassword = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -120,10 +122,14 @@ const UserCreatePassword = () => {
     <>
       {isLoading ? (
         <TableSpinner />
+      ) : error ? (
+        <ServerError />
+      ) : userKey?.count === 0 ? (
+        <PageNotFound />
       ) : (
         <div
           className="w-full flex justify-center items-center"
-          style={{ transform: "translateY(clamp(5rem,12vw,8rem))" }}
+          style={{ transform: "translateY(clamp(3rem,12vw,6rem))" }}
         >
           <div className="max-w-[340px] w-full p-4 py-5 rounded-md">
             <div className="flex justify-center items-center mb-5">

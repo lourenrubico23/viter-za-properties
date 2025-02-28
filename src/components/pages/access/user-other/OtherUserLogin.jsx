@@ -1,20 +1,31 @@
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import useOtherLogin from "../../../custom-hooks/useOtherLogin";
-import { devApiVersion, devBaseImgUrl, devNavUrl, setStorageRoute } from "../../../helpers/functions-general";
-import { checkRoleToRedirect } from "../../../helpers/login-functions";
-import { InputText } from "../../../helpers/FormInputs";
-import { queryData } from "../../../custom-hooks/queryData";
-import ModalError from "../../../partials/modals/ModalError";
-import LoginFooter from "../../../partials/LoginFooter";
-import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
-import { setCredentials, setError, setIsLogin, setMessage } from "../../../../store/StoreAction";
+import {
+  setCredentials,
+  setError,
+  setIsLogin,
+  setMessage,
+} from "../../../../store/StoreAction";
 import { StoreContext } from "../../../../store/StoreContext";
+import { queryData } from "../../../custom-hooks/queryData";
+import useOtherLogin from "../../../custom-hooks/useOtherLogin";
+import { InputText } from "../../../helpers/FormInputs";
+import {
+  devApiVersion,
+  devBaseImgUrl,
+  devNavUrl,
+} from "../../../helpers/functions-general";
+import {
+  checkRoleToRedirect,
+  setStorageRoute,
+} from "../../../helpers/login-functions";
+import LoginFooter from "../../../partials/LoginFooter";
+import ModalError from "../../../partials/modals/ModalError";
+import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
 import TableSpinner from "../../../partials/spinners/TableSpinner";
 
 const OtherUserLogin = () => {
@@ -71,7 +82,7 @@ const OtherUserLogin = () => {
       ) : (
         <div
           className="flex justify-center items-center"
-          style={{ transform: "translateY(clamp(5rem,12vw,8rem))" }}
+          style={{ transform: "translateY(clamp(3rem,12vw,6rem))" }}
         >
           <div className="w-96 p-6">
             <div className="relative flex gap-2 justify-center ">

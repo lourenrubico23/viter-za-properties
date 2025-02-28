@@ -1,6 +1,6 @@
-import ModalAddWrapper from "@/components/partials/modal/ModalAddWrapper";
-import ButtonSpinner from "@/components/partials/spinners/ButtonSpinner";
 import React from "react";
+import ModalWrapperMenu from "../../../../../partials/modals/ModalWrapperMenu";
+import ButtonSpinner from "../../../../../partials/spinners/ButtonSpinner";
 
 const ModalSendingEmailStatus = ({ queryCount, recipientList }) => {
   let sucessCount = queryCount;
@@ -8,7 +8,7 @@ const ModalSendingEmailStatus = ({ queryCount, recipientList }) => {
   let percentageValue = (sucessCount / totalCount) * 100;
 
   return (
-    <ModalAddWrapper className={"max-w-[20rem] h-fit p-5 place-self-center"}>
+    <ModalWrapperMenu className={"max-w-[20rem] h-fit p-5 place-self-center"}>
       <div className="">
         <div className="flex flex-col items-center gap-7 my-6">
           <div className="flex items-center gap-5">
@@ -28,7 +28,7 @@ const ModalSendingEmailStatus = ({ queryCount, recipientList }) => {
           </div>
         </div>
       </div>
-    </ModalAddWrapper>
+    </ModalWrapperMenu>
   );
 };
 

@@ -37,24 +37,4 @@ export const RoutesDeveloper = [
     path: `${devNavUrl}/banner`,
     element: <Banner />,
   },
-  {
-    path: `${devNavUrl}/other-user`,
-    element: <OtherUser />,
-  },
-  {
-    path: `${devNavUrl}/user-role`,
-    element: <Role />,
-  },
-  {
-    path: `${devNavUrl}/create-pass`,
-    element: <CreateOtherPassword />,
-  },
-  {
-    path: `${devNavUrl}/forgot-password`,
-    element: <OtherUserForgetPassword />,
-  },
-  {
-    path: `${devNavUrl}/login`,
-    element: <OtherUserLogin />,
-  },
 ];

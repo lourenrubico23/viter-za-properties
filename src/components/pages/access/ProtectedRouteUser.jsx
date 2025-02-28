@@ -1,11 +1,11 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { queryData } from "../../custom-hooks/queryData";
 import { setCredentials } from "../../../store/StoreAction";
+import { StoreContext } from "../../../store/StoreContext";
+import { queryData } from "../../custom-hooks/queryData";
+import { devApiVersion, devNavUrl } from "../../helpers/functions-general";
 import PageNotFound from "../../partials/PageNotFound";
 import FetchingSpinner from "../../partials/spinners/FetchingSpinner";
-import { devNavUrl } from "../../helpers/functions-general";
-import { StoreContext } from "../../../store/StoreContext";
 
 const ProtectedRouteUser = ({ children }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -18,18 +18,15 @@ const ProtectedRouteUser = ({ children }) => {
 
   React.useEffect(() => {
     const fetchLogin = async () => {
-      const login = await queryData(`/v1/user/token`, "post", {
+      const login = await queryData(`${devApiVersion}/user/token`, "post", {
         token: zapropertiestoken.token,
       });
-
-      const isUserKeyMatched =
-        login.success && login.data.user_key === login.data.user_other_password;
 
       // check if the password from database is matched
       // to the password used to login
       // if not, logout the user
 
-      if (isUserKeyMatched === false) {
+      if (!login?.success || !login?.data?.user_access) {
         setLoading(false);
         setIsAuth("456");
         localStorage.removeItem("zapropertiestoken");
@@ -71,7 +68,7 @@ const ProtectedRouteUser = ({ children }) => {
       localStorage.removeItem("zapropertiestoken");
       setIsAuth("456");
     }
-  }, [dispatch]);
+  }, [dispatch, store.isAccountUpdated]);
 
   if (pageStatus) {
     return <PageNotFound />;

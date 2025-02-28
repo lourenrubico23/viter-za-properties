@@ -1,13 +1,18 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { FaArchive } from "react-icons/fa";
 import { GrFormClose } from "react-icons/gr";
-import { queryData } from "../../helpers/queryData";
+import {
+  setError,
+  setMessage,
+  setSuccess,
+  setIsArchive,
+} from "../../../store/StoreAction";
 import { StoreContext } from "../../../store/StoreContext";
-import { setError, setMessage, setSuccess } from "../../../store/StoreAction";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { queryData } from "../../helpers/queryData";
 import ButtonSpinner from "../spinners/ButtonSpinner";
 
-const ModalArchive = ({ setIsArchive, mysqlEndpoint, queryKey, item }) => {
+const ModalArchive = ({ mysqlEndpoint, queryKey, item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const handleClose = () => {
@@ -24,13 +29,11 @@ const ModalArchive = ({ setIsArchive, mysqlEndpoint, queryKey, item }) => {
       // dispatch(setIsDelete(false));
 
       if (!data.success) {
-        console.log("May error!");
         dispatch(setError(true));
         dispatch(setMessage(data.error));
         dispatch(setSuccess(false));
       } else {
         dispatch(setIsArchive(false));
-        console.log("Naysuu!");
         dispatch(setSuccess(true));
         dispatch(setMessage("Successfully Archived!"));
       }

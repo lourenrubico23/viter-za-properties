@@ -13,19 +13,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { FaUserAltSlash } from "react-icons/fa";
 
-const ModalSuspend = ({
-  mysqlApiArchive,
-  msg,
-  successMsg,
-  queryKey,
-  email,
-}) => {
+const ModalSuspend = ({ mysqlEndpoint, msg, successMsg, queryKey, email }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const isOwnAccount = store.credentials.data?.user_email === email;
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (values) => queryData(mysqlApiArchive, "put", values),
+    mutationFn: (values) => queryData(mysqlEndpoint, "put", values),
     onSuccess: (data) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: [queryKey] });

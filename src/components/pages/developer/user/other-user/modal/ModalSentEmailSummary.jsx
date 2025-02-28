@@ -1,6 +1,6 @@
-import ModalAddWrapper from "@/components/partials/modal/ModalAddWrapper";
 import React from "react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import ModalWrapperMenu from "../../../../../partials/modals/ModalWrapperMenu";
 
 const ModalSentEmailSummary = ({
   queryCount,
@@ -22,7 +22,7 @@ const ModalSentEmailSummary = ({
   };
 
   return (
-    <ModalAddWrapper className={"max-w-[20rem] h-fit p-5 place-self-center"}>
+    <ModalWrapperMenu className={"max-w-[20rem] h-fit p-5 place-self-center"}>
       <div className="">
         <div className="flex flex-col items-center gap-7 my-6">
           <div className="inline-flex items-center justify-center flex-shrink-0">
@@ -46,7 +46,7 @@ const ModalSentEmailSummary = ({
           </button>
         </div>
       </div>
-    </ModalAddWrapper>
+    </ModalWrapperMenu>
   );
 };
 

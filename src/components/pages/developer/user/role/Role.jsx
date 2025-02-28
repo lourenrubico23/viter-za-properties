@@ -20,7 +20,7 @@ const Role = () => {
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="user" submenu="user-role" />
+        <Navigation menu="user" submenu="role" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav menu="dashboard" />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -46,10 +46,9 @@ const Role = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddRole itemEdit={itemEdit} />}
-
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
+      {store.isAdd && <ModalAddRole itemEdit={itemEdit} />}
     </>
   );
 };
