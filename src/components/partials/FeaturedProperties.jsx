@@ -65,7 +65,7 @@ const FeaturedProperties = () => {
 
   return (
     <>
-      <div className="bg-light mt-[450px] md:mt-[468px] lg:mt-[150px] customContainer lg:max-w-[1240px] ">
+      <div className="bg-light mt-[450px] md:mt-[468px] lg:mt-[180px] customContainer lg:max-w-[1240px] ">
         <div className="title uppercase text-secondary text-[clamp(20px,3vw,34px)] font-hindBold text-center">
           Featured properties
         </div>

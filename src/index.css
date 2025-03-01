@@ -157,7 +157,7 @@
     @apply w-full relative;
   }
   .wrapper {
-    @apply relative lg:max-w-[1660px] w-full mx-auto;
+    @apply relative lg:max-w-[2560px] w-full mx-auto;
   }
   .customContainer {
     @apply lg:max-w-[1240px] lg:mx-auto px-3 lg:px-0 ;

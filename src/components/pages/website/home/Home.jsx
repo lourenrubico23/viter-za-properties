@@ -21,7 +21,7 @@ const Home = () => {
             <img
               src={`${devBaseImgUrl}/home-banner.webp`}
               alt=""
-              className="object-cover min-h-[375px] lg:w-[1660px] lg:max-h-[420px]"
+              className="object-cover min-h-[375px] lg:w-full lg:max-h-[420px]"
             />
             <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
               Turning Properties Into Opportunities, Turning Clients Into
