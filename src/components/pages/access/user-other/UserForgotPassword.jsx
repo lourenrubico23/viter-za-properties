@@ -1,11 +1,14 @@
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import React from "react";
 import { BiMailSend } from "react-icons/bi";
 import * as Yup from "yup";
 import { queryData } from "../../../custom-hooks/queryData";
-import { devApiVersion, devBaseImgUrl, devNavUrl } from "../../../helpers/functions-general";
+import {
+  devApiVersion,
+  devBaseImgUrl,
+  devNavUrl,
+} from "../../../helpers/functions-general";
 import { setError, setMessage } from "../../../../store/StoreAction";
 import { InputText } from "../../../helpers/FormInputs";
 import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
@@ -51,12 +54,7 @@ const UserForgotPassword = () => {
           <div className="flex justify-center items-center mb-5">
             <div className="relative flex gap-2 justify-center ">
               <img
-                src={`${devBaseImgUrl}/d-container-logo.webp `}
-                alt=""
-                className="w-[100px] h-[100px]"
-              />
-              <img
-                src={`${devBaseImgUrl}/spa-logo.png `}
+                src={`${devBaseImgUrl}/za-logo-black.png `}
                 alt=""
                 className="w-[100px] h-[100px]"
               />

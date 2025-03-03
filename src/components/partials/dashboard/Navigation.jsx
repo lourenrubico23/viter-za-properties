@@ -43,7 +43,7 @@ const Navigation = ({ menu, submenu }) => {
       <div className="theNav bg-[#f5f5f3] w-[211px] h-screen fixed top-0 pl-4 z-50  border-customGray flex flex-col justify-between">
         <div className="theLogo mt-2 mb-14">
           <img
-            src={`${devBaseImgUrl}/cards.webp`}
+            src={`${devBaseImgUrl}/za-logo-black.png`}
             alt=""
             className="w-[55px]"
           />
@@ -56,7 +56,7 @@ const Navigation = ({ menu, submenu }) => {
                   className={` flex justify-between items-center p-1 cursor-pointer
                   ${
                     menu === "user"
-                      ? "text-primary underline underline-offset-4 "
+                      ? "text-secondary underline underline-offset-4 "
                       : "text-dark "
                   }
                 `}
@@ -68,8 +68,8 @@ const Navigation = ({ menu, submenu }) => {
                     </span>
                     <IoChevronDownSharp
                       className={`${
-                        store.isUserOpen ? "" : "rotate-180"
-                      } transition-all text-dark`}
+                        store.isUserOpen ? "" : "text-secondary rotate-180"
+                      } transition-all `}
                     />
                   </div>
                 </li>
@@ -83,7 +83,7 @@ const Navigation = ({ menu, submenu }) => {
                     <li
                       className={`text-xs  border-transparent ${
                         submenu === "users"
-                          ? "text-primary font-bold"
+                          ? "text-secondary font-bold"
                           : "border-none text-dark"
                       }`}
                     >
@@ -94,7 +94,7 @@ const Navigation = ({ menu, submenu }) => {
                     <li
                       className={`text-xs my-2 border-transparent ${
                         submenu === "roles"
-                          ? "text-primary font-bold"
+                          ? "text-secondary font-bold"
                           : "border-none text-dark"
                       }`}
                     >

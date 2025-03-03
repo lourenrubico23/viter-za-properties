@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "../Navigation";
-import { devBaseImgUrl } from "../../../helpers/functions-general";
+import { devBaseImgUrl, devNavUrl } from "../../../helpers/functions-general";
 import FeaturedProperties from "../../../partials/FeaturedProperties";
 import SellMyProperty from "../../../partials/svg/SellMyPropertySvg";
 import BuyAProperty from "../../../partials/svg/BuyAPropertySvg";
@@ -10,6 +10,7 @@ import BuyAPropertySvg from "../../../partials/svg/BuyAPropertySvg";
 import Testimonials from "./Testimonials";
 import ContactForm from "../../../partials/ContactForm";
 import Footer from "../../../partials/Footer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -86,9 +87,12 @@ const Home = () => {
                 Get the best value for your property with expert guidance. List
                 with confidence and sell faster!
               </p>
-              <button className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0">
+              <a
+                className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0"
+                href={`${devNavUrl}/Sellers`}
+              >
                 List my Home
-              </button>
+              </a>
             </div>
             <div className="flex flex-col items-center gap-4  w-[362px] h-[362px] p-6 hover:outline-8 hover:shadow-xl group relative">
               <BuyAPropertySvg />
@@ -99,9 +103,12 @@ const Home = () => {
                 Find your dream home or investment with expert guidance. Explore
                 top listings today!
               </p>
-              <button className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0">
+              <a
+                className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0"
+                href={`${devNavUrl}/Properties`}
+              >
                 See Listing
-              </button>
+              </a>
             </div>
           </div>
 
@@ -155,7 +162,7 @@ const Home = () => {
             </div>
           </div>
 
-          <Blog />
+          {/* <Blog /> */}
 
           <Testimonials />
           <ContactForm pageType="home" />

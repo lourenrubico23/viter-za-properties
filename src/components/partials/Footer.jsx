@@ -1,5 +1,9 @@
 import React from "react";
-import { copyrightYear, devBaseImgUrl } from "../helpers/functions-general";
+import {
+  copyrightYear,
+  devBaseImgUrl,
+  devNavUrl,
+} from "../helpers/functions-general";
 
 const Footer = () => {
   return (
@@ -40,8 +44,18 @@ const Footer = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <button className="btn border-none hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]">View Listing</button>
-              <button className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]">List my Home</button>
+              <a
+                className="btn border-none hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]"
+                href={`${devNavUrl}/Properties`}
+              >
+                View Listing
+              </a>
+              <a
+                className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]"
+                href={`${devNavUrl}/Sellers`}
+              >
+                List my Home
+              </a>
             </div>
           </div>
           <p className="font-poppins text-xs pt-8">

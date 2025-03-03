@@ -1,8 +1,4 @@
-
-
-import {
-  setCreatePassSuccess
-} from "@/store/StoreAction";
+import { setCreatePassSuccess } from "@/store/StoreAction";
 import { StoreContext } from "@/store/StoreContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
@@ -132,12 +128,7 @@ const CreateOtherPassword = () => {
           <div className="w-96">
             <div className="relative flex gap-2 justify-center ">
               <img
-                src={`${devBaseImgUrl}/d-container-logo.webp `}
-                alt=""
-                className="w-[100px] h-[100px]"
-              />
-              <img
-                src={`${devBaseImgUrl}/spa-logo.png `}
+                src={`${devBaseImgUrl}/za-logo-black.png `}
                 alt=""
                 className="w-[100px] h-[100px]"
               />

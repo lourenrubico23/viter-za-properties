@@ -135,12 +135,7 @@ const UserCreatePassword = () => {
             <div className="flex justify-center items-center mb-5">
               <div className="relative flex gap-2 justify-center ">
                 <img
-                  src={`${devBaseImgUrl}/d-container-logo.webp `}
-                  alt=""
-                  className="w-[100px] h-[100px]"
-                />
-                <img
-                  src={`${devBaseImgUrl}/spa-logo.png `}
+                  src={`${devBaseImgUrl}/za-logo-black.png `}
                   alt=""
                   className="w-[100px] h-[100px]"
                 />
