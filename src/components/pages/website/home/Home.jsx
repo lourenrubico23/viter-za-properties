@@ -1,6 +1,12 @@
 import React from "react";
 import Navigation from "../Navigation";
-import { devBaseImgUrl, devNavUrl } from "../../../helpers/functions-general";
+import {
+  devApiVersion,
+  devBaseImgUrl,
+  devNavUrl,
+  getConvertStringToJSONparseData,
+  googleHDViewLink,
+} from "../../../helpers/functions-general";
 import FeaturedProperties from "../../../partials/FeaturedProperties";
 import SellMyProperty from "../../../partials/svg/SellMyPropertySvg";
 import BuyAProperty from "../../../partials/svg/BuyAPropertySvg";
@@ -11,23 +17,45 @@ import Testimonials from "./Testimonials";
 import ContactForm from "../../../partials/ContactForm";
 import Footer from "../../../partials/Footer";
 import { Link } from "react-router-dom";
+import useQueryData from "../../../custom-hooks/useQueryData";
+import LoadImages from "../../../partials/LoadImages";
 
 const Home = () => {
+  const { data: bannerData } = useQueryData(
+    `${devApiVersion}/banner`, // endpoint
+    "get", // method
+    "banner" // key
+  );
   return (
     <>
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
           <div className=" relative flex justify-center">
-            <img
-              src={`${devBaseImgUrl}/home-banner.webp`}
-              alt=""
-              className="object-cover min-h-[375px] lg:w-full lg:max-h-[420px]"
-            />
-            <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
-              Turning Properties Into Opportunities, Turning Clients Into
-              Partners.
-            </h1>
+            {bannerData?.data.map((item, key) => {
+              if (item.banner_page === "Home") {
+                const bannerImage =
+                  getConvertStringToJSONparseData(item.banner_image) || [];
+                return (
+                  <div
+                    className=" relative flex justify-center w-full"
+                    key={key}
+                  >
+                    {bannerImage.map((image, index) => (
+                      <LoadImages
+                        url={`${googleHDViewLink}${image?.id}`}
+                        alt={`${item.banner_title}`}
+                        className="object-cover min-h-[375px] lg:w-full lg:max-h-[420px]"
+                        key={index}
+                      />
+                    ))}
+                    <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[592px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
+                      {item.banner_title}
+                    </h1>
+                  </div>
+                );
+              }
+            })}
 
             <div className=" lg:max-h-[143px] shadow-md bg-light w-[352px] md:w-[650px] lg:w-[1240px] place-self-center absolute top-[300px] lg:top-[350px] place-content-center place-items-center px-9  md:py-9 py-9">
               <div className="flex flex-col lg:flex lg:flex-row gap-5 items-center ">

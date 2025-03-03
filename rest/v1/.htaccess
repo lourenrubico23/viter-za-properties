@@ -12,6 +12,22 @@ Header set Access-Control-Allow-Origin *
 RewriteRule ^upload-photo$ core/upload-photo.php [L]
 RewriteRule ^upload-multiple-photo$ core/upload-multiple-photo.php [L]
 
+# LINKS
+RewriteRule ^links$ controllers/developer/links/links.php [L]
+RewriteRule ^links/([0-9]+)$ controllers/developer/links/links.php?linksid=$1 [L]
+
+# CONTACT NO
+RewriteRule ^contactno$ controllers/developer/contact-no/contactNo.php [L]
+RewriteRule ^contactno/([0-9]+)$ controllers/developer/contact-no/contactNo.php?contactnoid=$1 [L]
+
+# LOGO
+RewriteRule ^logo$ controllers/developer/logo/logo.php [L]
+RewriteRule ^logo/([0-9]+)$ controllers/developer/logo/logo.php?logoid=$1 [L]
+
+# LOGO
+RewriteRule ^banner$ controllers/developer/banner/banner.php [L]
+RewriteRule ^banner/([0-9]+)$ controllers/developer/banner/banner.php?bannerid=$1 [L]
+
 ### Settings - Roles ###
 RewriteRule ^role$ controllers/developer/settings/role/role.php [L]
 RewriteRule ^role/([0-9]+)$ controllers/developer/settings/role/role.php?roleid=$1 [L]

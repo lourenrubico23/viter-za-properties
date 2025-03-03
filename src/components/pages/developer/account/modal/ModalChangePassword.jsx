@@ -85,9 +85,7 @@ const ModalChangePassword = ({ setIsChangeAccountData }) => {
             "You password has been successfully changed, you will automatically be logged out."
           )
         );
-        setTimeout(() => {
-          dispatch(setIsAccountUpdated(true));
-        }, 3000);
+        dispatch(setIsAccountUpdated(true));
       }
     },
   });

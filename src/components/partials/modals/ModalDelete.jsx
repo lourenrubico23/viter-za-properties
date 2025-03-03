@@ -12,7 +12,12 @@ import { StoreContext } from "../../../store/StoreContext";
 import { queryData } from "../../custom-hooks/queryData";
 import ButtonSpinner from "../spinners/ButtonSpinner";
 
-const ModalDelete = ({ mysqlEndpoint, queryKey, item }) => {
+const ModalDelete = ({
+  mysqlEndpoint,
+  queryKey,
+  item,
+  filesToDelete = null,
+}) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const handleClose = () => {
@@ -43,6 +48,7 @@ const ModalDelete = ({ mysqlEndpoint, queryKey, item }) => {
   const handleYes = () => {
     mutation.mutate({
       item: item,
+      filesToDelete,
     });
   };
 

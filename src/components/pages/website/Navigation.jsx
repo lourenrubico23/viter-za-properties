@@ -1,17 +1,52 @@
 import React from "react";
-import {
-  FaBars,
-  FaFacebookF,
-  FaInstagram,
-  FaRegEnvelope,
-  FaTimes,
-} from "react-icons/fa";
-import { devBaseImgUrl, devNavUrl } from "../../helpers/functions-general";
+import * as AiIcons from "react-icons/ai";
+import * as FaIcons from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
+import * as IoIcons from "react-icons/io";
+import * as LuIcons from "react-icons/lu";
+import * as PiIcons from "react-icons/pi";
+import * as TiIcons from "react-icons/ti";
 import { Link } from "react-router-dom";
+import useQueryData from "../../custom-hooks/useQueryData";
+import {
+  devApiVersion,
+  devBaseImgUrl,
+  devNavUrl,
+  getConvertStringToJSONparseData,
+  googleHDViewLink,
+} from "../../helpers/functions-general";
+import LoadImages from "../../partials/LoadImages";
+
+const icons = {
+  ...FaIcons,
+  ...AiIcons,
+  ...IoIcons,
+  ...TiIcons,
+  ...LuIcons,
+  ...PiIcons,
+};
 
 const Navigation = () => {
   const [active, setActive] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const { data: linksData } = useQueryData(
+    `${devApiVersion}/links`, // endpoint
+    "get", // method
+    "links" // key
+  );
+
+  const { data: contactNoData } = useQueryData(
+    `${devApiVersion}/contactno`, // endpoint
+    "get", // method
+    "contactno" // key
+  );
+
+  const { data: logoData } = useQueryData(
+    `${devApiVersion}/logo`, // endpoint
+    "get", // method
+    "logo" // key
+  );
 
   React.useEffect(() => {
     // Get the current path and set it as active when the component mounts
@@ -24,37 +59,58 @@ const Navigation = () => {
       <div className="hidden lg:block bg-secondary h-[81px] place-content-center">
         <div className="customContainer text-light flex justify-between ">
           <ul className="flex items-center gap-8 ">
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <FaFacebookF className="text-lg" /> Like us on Facebook
-              </a>
-            </li>
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <FaInstagram className="text-lg" /> Follow us on Instagram
-              </a>
-            </li>
-            <li>
-              <a href="" className="flex items-center gap-2">
-                <FaRegEnvelope className="text-lg" /> Message Us
-              </a>
-            </li>
+            {linksData?.data.map((item, key) => {
+              const SelectedIcon = item.links_icons
+                ? icons[item.links_icons]
+                : null;
+              return (
+                <Link
+                  key={key}
+                  to={`${devNavUrl}${item.links_link}`}
+                  target="_blank"
+                >
+                  <div className="flex gap-2">
+                    <span className="flex items-center gap-2 text-lg">
+                      {SelectedIcon ? <SelectedIcon /> : "No icon selected"}{" "}
+                    </span>
+                    <li>{item.links_title}</li>
+                  </div>
+                </Link>
+              );
+            })}
           </ul>
-          <h3 className="text-2xl">+63 917 653 1919</h3>
+          {contactNoData?.data.map((item, key) => (
+            <h3 className="text-2xl" key={key}>
+              {item.contact_no_contact}
+            </h3>
+          ))}
         </div>
       </div>
       <div className="bg-primary h-[80px] place-content-center sticky top-0 z-50">
         <div className="customContainer text-light flex justify-between items-center">
-          <div className="flex gap-4 items-center">
-            <img
-              src={`${devBaseImgUrl}/za-logo.png`}
-              alt="Logo"
-              className="h-10"
-            />
-            <div>
-              <p className="text-lg font-hindBold">Zac Alfanta</p>
-              <p className="text-xs font-hindRegular">Real Estate Broker</p>
-            </div>
+          <div className="">
+            {logoData?.data.map((item, key) => {
+              const logoImage =
+                getConvertStringToJSONparseData(item.logo_image) || [];
+              return (
+                <div key={key} className="flex gap-4 items-center">
+                  {logoImage.map((image, index) => (
+                    <LoadImages
+                      url={`${googleHDViewLink}${image?.id}`}
+                      alt="Logo"
+                      className="h-12 md:h-[60px] object-cover"
+                      key={index}
+                    />
+                  ))}
+                  <div>
+                    <p className="text-lg font-hindBold">{item.logo_name}</p>
+                    <p className="text-xs font-hindRegular">
+                      {item.logo_position}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Mobile Toggle Button */}
@@ -117,22 +173,31 @@ const Navigation = () => {
 
             <div className="lg:hidden block text-xs justify-between bottom-0 my-28">
               <ul className="flex flex-col items-center gap-4 ">
-                <li>
-                  <a href="" className="flex items-center gap-2">
-                    <FaFacebookF className="text-sm" /> Like us on Facebook
-                  </a>
-                </li>
-                <li>
-                  <a href="" className="flex items-center gap-2">
-                    <FaInstagram className="text-sm" /> Follow us on Instagram
-                  </a>
-                </li>
-                <li>
-                  <a href="" className="flex items-center gap-2">
-                    <FaRegEnvelope className="text-sm" /> Message Us
-                  </a>
-                </li>
-                <h3 className="text-lg">+63 917 653 1919</h3>
+                {linksData?.data.map((item, key) => {
+                  const SelectedIcon = item.links_icons
+                    ? icons[item.links_icons]
+                    : null;
+                  return (
+                    <Link
+                      key={key}
+                      to={`${devNavUrl}${item.links_link}`}
+                      target="_blank"
+                    >
+                      <div className="flex gap-2">
+                        <span className="flex items-center gap-2 text-sm">
+                          {SelectedIcon ? <SelectedIcon /> : "No icon selected"}
+                        </span>
+                        <li>{item.links_title}</li>
+                      </div>
+                    </Link>
+                  );
+                })}
+
+                {contactNoData?.data.map((item, key) => (
+                  <h3 className="text-lg" key={key}>
+                    {item.contact_no_contact}
+                  </h3>
+                ))}
               </ul>
             </div>
           </nav>

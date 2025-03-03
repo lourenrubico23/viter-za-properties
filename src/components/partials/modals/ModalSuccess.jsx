@@ -1,6 +1,7 @@
 import React from "react";
+import { setIsAccountUpdated, setSuccess } from "../../../store/StoreAction";
 import { StoreContext } from "../../../store/StoreContext";
-import { setSuccess } from "../../../store/StoreAction";
+import { devNavUrl } from "../../helpers/functions-general";
 
 const ModalSuccess = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -10,6 +11,15 @@ const ModalSuccess = () => {
     setAnimate("-translate-y-60");
     setTimeout(() => {
       dispatch(setSuccess(false));
+      // logout when there's a change in your own account
+      if (store.isAccountUpdated) {
+        localStorage.removeItem("zapropertiestoken");
+        dispatch(setIsAccountUpdated(false));
+        store.credentials.data.role_is_developer == 1
+          ? window.location.replace(`${devNavUrl}/developer/login`)
+          : window.location.replace(`${devNavUrl}/`);
+        return;
+      }
     }, 200);
   };
 
