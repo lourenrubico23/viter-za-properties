@@ -3,7 +3,7 @@ import React from "react";
 const TableSpinner = () => {
   return (
     <>
-      <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center flex-col text-center bg-[white] z-40 opacity-50">
+      <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center flex-col text-center bg-[white] z-[51] opacity-50">
         <svg
           aria-hidden="true"
           className="w-6 h-6 text-[black] animate-spin dark:text-[black] fill-dashPrimary"

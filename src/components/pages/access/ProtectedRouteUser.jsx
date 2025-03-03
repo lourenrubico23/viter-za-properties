@@ -68,7 +68,7 @@ const ProtectedRouteUser = ({ children }) => {
       localStorage.removeItem("zapropertiestoken");
       setIsAuth("456");
     }
-  }, [dispatch, store.isAccountUpdated]);
+  }, [dispatch]);
 
   if (pageStatus) {
     return <PageNotFound />;

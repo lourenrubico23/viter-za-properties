@@ -1,17 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { devBaseImgUrl, devNavUrl } from "../../helpers/functions-general";
 import { IoChevronDownSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import { setIsUserOpen } from "../../../store/StoreAction";
 import { StoreContext } from "../../../store/StoreContext";
+import { devBaseImgUrl, devNavUrl } from "../../helpers/functions-general";
 import { getUserType } from "../../helpers/login-functions";
 import ModalChangePassword from "../../pages/developer/account/modal/ModalChangePassword";
+import TableSpinner from "../spinners/TableSpinner";
 
 const Navigation = ({ menu, submenu }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
   const [isArchiving, setIsArchiving] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [isOpenUser, setIsOpenUser] = React.useState(false);
@@ -19,6 +21,17 @@ const Navigation = ({ menu, submenu }) => {
   const [isChangePassword, setIsChangePassword] = React.useState(false);
   const link = getUserType();
   const ref = React.useRef();
+
+  const isRoleDeveloper = store.credentials.data.role_is_developer == 1;
+  const email = isRoleDeveloper
+    ? store.credentials.data.developer_email
+    : store.credentials.data.user_email;
+  const fullname = isRoleDeveloper
+    ? `${store.credentials.data.developer_lname}, ${store.credentials.data.developer_fname}`
+    : `${store.credentials.data.user_last_name}, ${store.credentials.data.user_first_name}`;
+
+  const { user_first_name, user_last_name } = store.credentials.data;
+  const initials = `${user_last_name[0]}${user_first_name[0]}`;
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -33,6 +46,18 @@ const Navigation = ({ menu, submenu }) => {
       setOpen(false);
     }
   };
+
+  const handleLogout = () => {
+    setIsLoading(true);
+    localStorage.removeItem("zapropertiestoken");
+    // roleIsDeveloper
+    //   ? window.location.replace(`${devNavUrl}/developer/login`)
+    //   :
+    setTimeout(() => {
+      window.location.replace(`${devNavUrl}/`);
+    }, 2000);
+  };
+
   React.useEffect(() => {
     document.addEventListener("click", clickOutsideRef);
     return () => document.addEventListener("click", clickOutsideRef);
@@ -40,6 +65,8 @@ const Navigation = ({ menu, submenu }) => {
 
   return (
     <>
+      {(isLoading || store.isAccountUpdated) && <TableSpinner />}
+
       <div className="theNav bg-[#f5f5f3] w-[211px] h-screen fixed top-0 pl-4 z-50  border-customGray flex flex-col justify-between">
         <div className="theLogo mt-2 mb-14">
           <img
@@ -115,18 +142,16 @@ const Navigation = ({ menu, submenu }) => {
             {/* <span className="w-[40px] h-[40px]">
                 <img src={`${devBaseImgUrl}/user.webp`} alt="" />
               </span> */}
-            <div className="bg-primary rounded-full w-10 h-10 flex items-center justify-center text-white text-sm font-semibold cursor-pointer">
-              LR
+            <div className="bg-primary rounded-full w-10 h-10 flex items-center justify-center text-white text-sm font-semibold cursor-pointer uppercase">
+              {initials}
             </div>
             {isOpen && (
               <div className="absolute top-8 ml-[50px] bg-dashSecondary shadow-lg flex flex-col gap-1 p-4 min-w-[180px] rounded-md">
-                <p className="text-black font-rubikRegular text-sm font-semibold tracking-wide">
-                  Louren Rubico
+                <p className="text-black font-rubikRegular text-sm font-semibold tracking-wide uppercase">
+                  {fullname}
                 </p>
                 <a>
-                  <span className="text-black text-xs">
-                    louren.rubico@frontlinebusiness.com.ph
-                  </span>
+                  <span className="text-black text-xs lowercase">{email}</span>
                 </a>
                 <button
                   type="button"
@@ -138,7 +163,7 @@ const Navigation = ({ menu, submenu }) => {
                 <button
                   type="button"
                   className="text-black text-xs text-left hover:text-accent"
-                  // onClick={() => handleLogout()}
+                  onClick={() => handleLogout()}
                 >
                   Logout
                 </button>
