@@ -15,6 +15,7 @@ const Banner = () => {
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
+    setItemEdit(null);
   };
   return (
     <>

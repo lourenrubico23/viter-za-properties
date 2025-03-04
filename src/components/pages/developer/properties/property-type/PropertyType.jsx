@@ -7,6 +7,7 @@ import Navigation from "../../../../partials/dashboard/Navigation";
 import ModalError from "../../../../partials/modals/ModalError";
 import ModalSuccess from "../../../../partials/modals/ModalSuccess";
 import PropertyTypeTable from "./PropertyTypeTable";
+import ModalAddPropertyType from "./ModalAddPropertyType";
 
 const PropertyType = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -14,6 +15,7 @@ const PropertyType = () => {
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
+    setItemEdit(null);
   };
   return (
     <>
@@ -44,7 +46,9 @@ const PropertyType = () => {
         </div>
       </div>
 
-      {/* {store.isAdd && <ModalAddBanner itemEdit={itemEdit} />} */}
+      {store.isAdd && (
+        <ModalAddPropertyType itemEdit={itemEdit} />
+      )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

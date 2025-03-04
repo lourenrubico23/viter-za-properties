@@ -24,9 +24,24 @@ RewriteRule ^contactno/([0-9]+)$ controllers/developer/contact-no/contactNo.php?
 RewriteRule ^logo$ controllers/developer/logo/logo.php [L]
 RewriteRule ^logo/([0-9]+)$ controllers/developer/logo/logo.php?logoid=$1 [L]
 
-# LOGO
+# BANNER
 RewriteRule ^banner$ controllers/developer/banner/banner.php [L]
 RewriteRule ^banner/([0-9]+)$ controllers/developer/banner/banner.php?bannerid=$1 [L]
+
+# PROPERTY TYPE
+RewriteRule ^property-type$ controllers/developer/property-type/propertyType.php [L]
+RewriteRule ^property-type/([0-9]+)$ controllers/developer/property-type/propertyType.php?property_typeid=$1 [L]
+RewriteRule ^property-type/active/([0-9]+)$ controllers/developer/property-type/active.php?property_typeid=$1 [L]
+RewriteRule ^property-type/page/([0-9]+)$ controllers/developer/property-type/page.php?start=$1 [L]
+RewriteRule ^property-type/search$ controllers/developer/property-type/search.php [L]
+
+# PROPERTY LIST
+RewriteRule ^property-list$ controllers/developer/property-list/propertyList.php [L]
+RewriteRule ^property-list/([0-9]+)$ controllers/developer/property-list/propertyList.php?listid=$1 [L]
+RewriteRule ^property-list/active/([0-9]+)$ controllers/developer/property-list/active.php?listid=$1 [L]
+RewriteRule ^property-list/page/([0-9]+)$ controllers/developer/property-list/page.php?start=$1 [L]
+RewriteRule ^property-list/search$ controllers/developer/property-list/search.php [L]
+RewriteRule ^property-list/property-type-search$ controllers/developer/property-list/search-property-type.php [L]
 
 ### Settings - Roles ###
 RewriteRule ^role$ controllers/developer/settings/role/role.php [L]

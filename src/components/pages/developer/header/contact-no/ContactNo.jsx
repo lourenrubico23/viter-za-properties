@@ -15,6 +15,7 @@ const ContactNo = () => {
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
+    setItemEdit(null);
   };
   return (
     <>

@@ -7,6 +7,7 @@ import Navigation from "../../../../partials/dashboard/Navigation";
 import ModalError from "../../../../partials/modals/ModalError";
 import ModalSuccess from "../../../../partials/modals/ModalSuccess";
 import PropertyListTable from "./PropertyListTable";
+import ModalAddPropertyList from "./ModalAddPropertyList";
 
 const PropertyList = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -14,6 +15,7 @@ const PropertyList = () => {
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
+    setItemEdit(null);
   };
   return (
     <>
@@ -44,7 +46,7 @@ const PropertyList = () => {
         </div>
       </div>
 
-      {/* {store.isAdd && <ModalAddBanner itemEdit={itemEdit} />} */}
+      {store.isAdd && <ModalAddPropertyList itemEdit={itemEdit} />}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

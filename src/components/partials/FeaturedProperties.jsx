@@ -1,16 +1,33 @@
 import React from "react";
-import { devBaseImgUrl } from "../helpers/functions-general";
+import {
+  devApiVersion,
+  devBaseImgUrl,
+  getConvertStringToJSONparseData,
+  googleHDViewLink,
+} from "../helpers/functions-general";
 import { CiCreditCard1 } from "react-icons/ci";
 import { Captions, Grid2x2, LandPlot } from "lucide-react";
 import { StoreContext } from "../../store/StoreContext";
 import { setIsAdd } from "../../store/StoreAction";
 import PropertyDescriptionPage from "./PropertyDescriptionPage";
+import useQueryData from "../custom-hooks/useQueryData";
+import LoadImages from "./LoadImages";
 
 const FeaturedProperties = () => {
   const { store, dispatch } = React.useContext(StoreContext);
+  const [itemEdit, setItemEdit] = React.useState(null);
+  const [selectedPropertyId, setSelectedPropertyId] = React.useState(null);
 
-  const handleOpenDescription = () => {
+  const { data: propertyListData } = useQueryData(
+    `${devApiVersion}/property-list`, // endpoint
+    "get", // method
+    "property-list" // key
+  );
+
+  const handleOpenDescription = (item) => {
     dispatch(setIsAdd(true));
+    setItemEdit(item);
+    setSelectedPropertyId(item.list_aid);
     document.body.classList.toggle("overflow-hidden");
   };
 
@@ -71,62 +88,77 @@ const FeaturedProperties = () => {
         </div>
 
         <div className="flex flex-wrap gap-8 my-20 place-content-center">
-          {cardData.map((card, index) => (
-            <a
-              className="cursor-pointer"
-              onClick={handleOpenDescription}
-              key={index}
-            >
-              <div className="rounded-md group hover:scale-[1.01] hover:duration-200 max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform">
-                <div className="overflow-hidden">
-                  <img
-                    src={card.imgSrc}
-                    alt="Property Image"
-                    className="w-full h-[200px] object-cover transition-transform duration-200 group-hover:scale-105"
-                  />
-                </div>
+          {propertyListData?.data.map((item, index) => {
+            const propertyImages =
+              getConvertStringToJSONparseData(item.list_img) || [];
+            const firstImage =
+              propertyImages.length > 0 ? propertyImages[0] : null;
+            return (
+              <a
+                className="cursor-pointer"
+                onClick={() => handleOpenDescription(item)}
+                key={index}
+              >
+                <div className="rounded-md group hover:scale-[1.01] hover:duration-200 max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform">
+                  <div className="overflow-hidden">
+                    {firstImage && (
+                      <LoadImages
+                        url={`${googleHDViewLink}${firstImage?.id}`}
+                        alt="Property Image"
+                        className="w-full h-[200px] object-cover transition-transform duration-200 group-hover:scale-105"
+                        key={index}
+                      />
+                    )}
+                  </div>
 
-                <div className="p-5 flex flex-col gap-5">
-                  <p className="text-[clamp(20px,3vw,28px)] font-robotoBold">
-                    <span className="text-lg">&#8369;</span> {card.price}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <p className="text-[16px] font-hindRegular">
-                      {card.propertyType}
+                  <div className="p-5 flex flex-col gap-5">
+                    <p className="text-[clamp(20px,3vw,28px)] font-robotoBold">
+                      <span className="text-lg">&#8369;</span> {item.list_price}
                     </p>
-                    <span className="flex items-center justify-center gap-1">
-                      <Captions className="h-4" /> {card.id}
-                    </span>
-                  </div>
-                  <p className="text-[clamp(16px,3vw,18px)] font-hindBold leading-5">
-                    {card.description}
-                  </p>
-                  <div className="flex justify-around">
-                    <div className="flex flex-col gap-2">
-                      <p className="flex gap-2 items-center">
-                        <LandPlot /> {card.lotArea}
+                    <div className="flex items-center justify-between">
+                      <p className="text-[16px] font-hindRegular">
+                        {item.list_property_type_id}
                       </p>
-                      <p className="text-gray-400 text-[16px] font-hindBold text-center">
-                        Lot Area
-                      </p>
+                      <span className="flex items-center justify-center gap-1">
+                        <Captions className="h-4" /> {item.list_id}
+                      </span>
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <p className="flex gap-2 items-center">
-                        <Grid2x2 /> {card.floorArea}
-                      </p>
-                      <p className="text-gray-400 text-[16px] font-hindBold text-center">
-                        Floor Area
-                      </p>
+                    <p className="text-[clamp(16px,3vw,18px)] font-hindBold leading-5">
+                      {item.list_name}
+                    </p>
+                    <div className="flex justify-around">
+                      <div className="flex flex-col gap-2">
+                        <p className="flex gap-2 items-center">
+                          <LandPlot /> {item.list_lot_area}
+                        </p>
+                        <p className="text-gray-400 text-[16px] font-hindBold text-center">
+                          Lot Area
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <p className="flex gap-2 items-center">
+                          <Grid2x2 /> {item.list_floor_area}
+                        </p>
+                        <p className="text-gray-400 text-[16px] font-hindBold text-center">
+                          Floor Area
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
       </div>
 
-      {store.isAdd && <PropertyDescriptionPage />}
+      {store.isAdd && (
+        <PropertyDescriptionPage
+          setSelectedPropertyId={setSelectedPropertyId}
+          propertyListData={propertyListData}
+          selectedPropertyId={selectedPropertyId}
+        />
+      )}
     </>
   );
 };

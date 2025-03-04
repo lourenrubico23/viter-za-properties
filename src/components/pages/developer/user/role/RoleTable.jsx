@@ -230,7 +230,7 @@ const RoleTable = ({ setItemEdit }) => {
       )}
       {store.isArchive && (
         <ModalArchive
-          mysqlApiArchive={`${devApiVersion}/role/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/role/active/${id}`}
           msg={"Are you sure you want to suspend this user?"}
           successMsg={"Suspended succesfully."}
           queryKey={"role"}
@@ -239,7 +239,7 @@ const RoleTable = ({ setItemEdit }) => {
       )}
       {store.isRestore && (
         <ModalRestore
-          mysqlApiRestore={`${devApiVersion}/role/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/role/active/${id}`}
           msg={"Are you sure you want to restore this user?"}
           successMsg={"Restored succesfully."}
           queryKey={"role"}

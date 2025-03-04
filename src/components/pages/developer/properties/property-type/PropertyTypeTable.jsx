@@ -1,25 +1,37 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { FaArchive, FaEdit } from "react-icons/fa";
+import { MdDelete, MdRestore } from "react-icons/md";
 import { useInView } from "react-intersection-observer";
 
 import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
-import { setIsAdd, setIsDelete } from "../../../../../store/StoreAction";
+import {
+  setIsAdd,
+  setIsArchive,
+  setIsDelete,
+  setIsRestore,
+} from "../../../../../store/StoreAction";
 import SearchBar from "../../../../partials/SearchBar";
 import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
 import TableLoading from "../../../../partials/spinners/TableLoading";
 import NoData from "../../../../partials/spinners/NoData";
 import ServerError from "../../../../partials/spinners/ServerError";
-import { getConvertStringToJSONparseData } from "../../../../helpers/functions-general";
+import {
+  devApiVersion,
+  getConvertStringToJSONparseData,
+} from "../../../../helpers/functions-general";
 import LoadMore from "../../../../partials/LoadMore";
 import ModalDelete from "../../../../partials/modals/ModalDelete";
 import { StoreContext } from "../../../../../store/StoreContext";
+import ModalArchive from "../../../../partials/modals/ModalArchive";
+import ModalRestore from "../../../../partials/modals/ModalRestore";
+import Status from "../../../../partials/Status";
 
 const PropertyTypeTable = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
+  const [isArchiving, setIsArchiving] = React.useState(false);
 
   const [onSearch, setOnSearch] = React.useState(false);
   const [page, setPage] = React.useState(1);
@@ -35,11 +47,11 @@ const PropertyTypeTable = ({ setItemEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["lcssBatches", onSearch, store.isSearch],
+    queryKey: ["property-type", onSearch, store.isSearch],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
-        `/v1/lcssBatches/search`, // search endpoint
-        `/v1/lcssBatches/page/${pageParam}`, // list endpoint
+        `${devApiVersion}/property-type/search`, // search endpoint
+        `${devApiVersion}/property-type/page/${pageParam}`, // list endpoint
         store.isSearch, // search boolean
         { searchValue: search.current.value, id: "" } // search value
       ),
@@ -61,8 +73,24 @@ const PropertyTypeTable = ({ setItemEdit }) => {
 
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
-    setIsData(item.lcss_batch_name);
-    setIsId(item.lcss_batch_aid);
+    setIsData(item.property_type_name);
+    setIsId(item.property_type_aid);
+  };
+
+  const handleArchive = (item) => {
+    dispatch(setIsArchive(true));
+    setIsData(item.property_type_name);
+    setIsId(item.property_type_aid);
+    setIsArchiving(true);
+    setIsRestore(false);
+  };
+
+  const handleRestore = (item) => {
+    dispatch(setIsRestore(true));
+    setIsData(item.property_type_name);
+    setIsId(item.property_type_aid);
+    setIsArchiving(false);
+    setIsRestore(true);
   };
 
   React.useEffect(() => {
@@ -94,11 +122,9 @@ const PropertyTypeTable = ({ setItemEdit }) => {
           <thead>
             <tr className="text-[black]">
               <th className="pl-2 w-[1rem]">#</th>
-              <th>Batch</th>
-              <th>Category</th>
-              <th>School</th>
-              <th>Course</th>
-              <th className="w-[30rem]">Image</th>
+              <th>Status</th>
+              <th>Name</th>
+              <th>Description</th>
               <th className="text-right">Actions</th>
             </tr>
           </thead>
@@ -122,45 +148,58 @@ const PropertyTypeTable = ({ setItemEdit }) => {
             {result?.pages.map((page, key) => (
               <React.Fragment key={key}>
                 {page?.data.map((item, key) => {
-                  const batchImages =
-                    getConvertStringToJSONparseData(item.lcss_batch_img) || [];
                   return (
                     <tr key={key} className="place-content-start text-[14px]">
                       <td className="pl-2 place-content-start">{counter++}</td>
-                      <td className="place-content-start">
-                        {item.lcss_batch_name}
+                      <td>
+                        {item.property_type_is_active === 1 ? (
+                          <Status text="Active" />
+                        ) : (
+                          <Status text="Inactive" />
+                        )}
                       </td>
                       <td className="place-content-start">
-                        {item.lcss_batch_category}
+                        {item.property_type_name}
                       </td>
                       <td className="place-content-start">
-                        {item.lcss_batch_school}
-                      </td>
-                      <td className="place-content-start">
-                        {item.lcss_batch_course}
-                      </td>
-                      <td className="place-content-start">
-                        <p className="line-clamp-5">
-                          {batchImages.map((img, index) => (
-                            <p key={index}>{img.name}</p>
-                          ))}
-                        </p>
+                        {item.property_type_description}
                       </td>
                       <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
-                        <button
-                          className="tooltip-action-table"
-                          data-tooltip="Edit"
-                          onClick={() => handleEdit(item)}
-                        >
-                          <FaEdit className="text-gray-600 text-[16px]" />
-                        </button>
-                        <button
-                          className="tooltip-action-table"
-                          data-tooltip="Delete"
-                          onClick={() => handleDelete(item)}
-                        >
-                          <MdDelete className="text-gray-600 text-[18px]" />
-                        </button>
+                        {item.property_type_is_active ? (
+                          <>
+                            <button
+                              className="tooltip-action-table"
+                              data-tooltip="Edit"
+                              onClick={() => handleEdit(item)}
+                            >
+                              <FaEdit className="text-gray-600 text-[16px]" />
+                            </button>
+                            <button
+                              className="tooltip-action-table"
+                              data-tooltip="Archive"
+                              onClick={() => handleArchive(item)}
+                            >
+                              <FaArchive className=" text-gray-600 text-[14px]" />
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              className="tooltip-action-table"
+                              data-tooltip="Restore"
+                              onClick={() => handleRestore(item)}
+                            >
+                              <MdRestore className="text-gray-600 text-[18px]" />
+                            </button>
+                            <button
+                              className="tooltip-action-table"
+                              data-tooltip="Delete"
+                              onClick={() => handleDelete(item)}
+                            >
+                              <MdDelete className="text-gray-600 text-[18px]" />
+                            </button>
+                          </>
+                        )}
                       </td>
                     </tr>
                   );
@@ -185,8 +224,28 @@ const PropertyTypeTable = ({ setItemEdit }) => {
       {store.isDelete && (
         <ModalDelete
           setIsDelete={setIsDelete}
-          queryKey={"lcssBatches"}
-          mysqlEndpoint={`/v1/lcssBatches/${id}`}
+          queryKey={"property-type"}
+          mysqlEndpoint={`${devApiVersion}/property-type/${id}`}
+          item={isData}
+        />
+      )}
+      {store.isArchive && (
+        <ModalArchive
+          setIsArchive={setIsArchive}
+          mysqlEndpoint={`${devApiVersion}/property-type/active/${id}`}
+          // msg={"Are you sure you want to archive this property type?"}
+          successMsg={"Archived succesfully."}
+          queryKey={"property-type"}
+          item={isData}
+        />
+      )}
+      {store.isRestore && (
+        <ModalRestore
+          setIsRestore={setIsRestore}
+          mysqlEndpoint={`${devApiVersion}/property-type/active/${id}`}
+          // msg={"Are you sure you want to restore this property type?"}
+          successMsg={"Restored succesfully."}
+          queryKey={"property-type"}
           item={isData}
         />
       )}

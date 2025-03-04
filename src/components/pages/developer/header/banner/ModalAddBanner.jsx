@@ -144,7 +144,7 @@ const ModalAddBanner = ({ itemEdit }) => {
         className={`transition-all ease-linear transform duration-200 ${animate}`}
       >
         <div className="modal-title">
-          <h2 className="text-sm">{itemEdit ? "Edit" : "Add"} banner</h2>
+          <h2 className="text-sm">{itemEdit ? "Edit" : "Add"} Banner</h2>
           <button onClick={handleCloseModal}>
             <GrFormClose className="text-[25px]" />
           </button>
