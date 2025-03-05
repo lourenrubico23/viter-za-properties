@@ -48,6 +48,14 @@ const Navigation = () => {
     "logo" // key
   );
 
+  const navItems = [
+    { path: "/", label: "Home" },
+    { path: "/properties", label: "Properties" },
+    { path: "/buyers", label: "Buyers" },
+    { path: "/sellers", label: "Sellers" },
+    { path: "/contact", label: "Contact" },
+  ];
+
   React.useEffect(() => {
     // Get the current path and set it as active when the component mounts
     const currentPath = window.location.pathname;
@@ -145,30 +153,24 @@ const Navigation = () => {
               {isOpen && <FaTimes />}
             </button>
             <ul className="flex flex-col lg:flex-row lg:justify-center space-y-6 lg:space-y-0 lg:space-x-8 p-6 lg:p-0">
-              {["/", "/Properties", "/Buyers", "/Sellers", "/Contact"].map(
-                (path, index) => (
-                  <li key={index}>
-                    <Link
-                      to={`${devNavUrl}${path}`}
-                      onClick={() => {
-                        setActive(path);
-                        setIsOpen(false);
-                      }}
-                      className={`relative pb-1 transition duration-300 
-                    before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 
-                    before:bg-secondary before:transition-transform before:duration-300 
-                    ${
-                      active === path
-                        ? "before:scale-x-100"
-                        : "before:scale-x-0"
-                    } 
-                    hover:before:scale-x-100`}
-                    >
-                      {path.replace("/", "") || "Home"}
-                    </Link>
-                  </li>
-                )
-              )}
+              {navItems.map(({ path, label }, index) => (
+                <li key={index}>
+                  <Link
+                    to={`${devNavUrl}${path}`}
+                    onClick={() => {
+                      setActive(path);
+                      setIsOpen(false);
+                    }}
+                    className={`relative pb-1 transition duration-300 
+          before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 
+          before:bg-secondary before:transition-transform before:duration-300 
+          ${active === path ? "before:scale-x-100" : "before:scale-x-0"} 
+          hover:before:scale-x-100`}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
 
             <div className="lg:hidden block text-xs justify-between bottom-0 my-28">

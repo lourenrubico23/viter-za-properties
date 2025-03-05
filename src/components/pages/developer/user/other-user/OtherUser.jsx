@@ -36,7 +36,7 @@ const OtherUser = () => {
       <div className=" bg-[#f5f5f3] ">
         <Navigation menu="user" submenu="users" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
-          <DashboardNav menu="dashboard" />
+          <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
             <div className="headerCover fixed top-0 left-[200px] w-full h-[60px] bg-dashPrimary z-[9]"></div>
             <div className="addShadowDash bg-[#f5f5f3] h-[90dvh]">

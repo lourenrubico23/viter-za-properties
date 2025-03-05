@@ -1,12 +1,14 @@
 import { devNavUrl, urlAdmin } from "../components/helpers/functions-general";
 import ProtectedRouteUser from "../components/pages/access/ProtectedRouteUser";
 import UserVerifyEmail from "../components/pages/access/user-other/UserVerifyEmail";
+import About from "../components/pages/developer/about/About.jsx";
 import Banner from "../components/pages/developer/header/banner/Banner";
 import ContactNo from "../components/pages/developer/header/contact-no/ContactNo";
 import Links from "../components/pages/developer/header/links/Links";
 import Logo from "../components/pages/developer/header/logo/Logo";
 import PropertyList from "../components/pages/developer/properties/property-list/PropertyList";
 import PropertyType from "../components/pages/developer/properties/property-type/PropertyType";
+import Testimonial from "../components/pages/developer/testimonial/Testimonial.jsx";
 import OtherUser from "../components/pages/developer/user/other-user/OtherUser";
 import Role from "../components/pages/developer/user/role/Role";
 import Home from "../components/pages/website/home/Home";
@@ -16,7 +18,7 @@ export const RoutesAdmin = [
     path: `${devNavUrl}/${urlAdmin}/`,
     element: (
       <ProtectedRouteUser>
-        <OtherUser />
+        <About />
       </ProtectedRouteUser>
     ),
   },
@@ -81,6 +83,22 @@ export const RoutesAdmin = [
     element: (
       <ProtectedRouteUser>
         <PropertyList />
+      </ProtectedRouteUser>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlAdmin}/about`,
+    element: (
+      <ProtectedRouteUser>
+        <About />
+      </ProtectedRouteUser>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlAdmin}/testimonials`,
+    element: (
+      <ProtectedRouteUser>
+        <Testimonial />
       </ProtectedRouteUser>
     ),
   },

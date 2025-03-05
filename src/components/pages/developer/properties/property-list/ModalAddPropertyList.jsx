@@ -211,6 +211,7 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     list_price: itemEdit ? itemEdit.list_price : "",
     list_location: itemEdit ? itemEdit.list_location : "",
     list_property_type_id: itemEdit ? itemEdit.list_property_type_id : "",
+    list_property_type_name: itemEdit ? itemEdit.list_property_type_name : "",
     list_id: itemEdit ? itemEdit.list_id : "",
     list_floor_area: itemEdit ? itemEdit.list_floor_area : "",
     list_lot_area: itemEdit ? itemEdit.list_lot_area : "",
@@ -261,6 +262,7 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                   })
                 ),
                 list_property_type_id: propertyTypeId,
+                list_property_type_name: propertyType,
               };
               const photoUpload = await uploadMultiplePhoto();
               if (photoUpload?.success || !photoUpload?.success) {

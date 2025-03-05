@@ -8,6 +8,7 @@ const LoadImages = ({
   isTableSpinner = false,
   isErrorUserImage = false,
   child = false,
+  onClick,
 }) => {
   if (!url || url === "") return;
   const [isLoading, setIsLoading] = React.useState(true);
@@ -40,6 +41,7 @@ const LoadImages = ({
         alt=""
         className={className}
         referrerPolicy="no-referrer"
+        onClick={onClick}
       />
       <div className="absolute top-0 bottom-0 left-0 right-0 -z-20">
         <div className="flex flex-col gap-4 justify-center items-center h-full">

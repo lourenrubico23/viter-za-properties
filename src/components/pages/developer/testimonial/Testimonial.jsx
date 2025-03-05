@@ -1,15 +1,15 @@
 import React from "react";
+import { StoreContext } from "../../../../store/StoreContext";
+import { setIsAdd } from "../../../../store/StoreAction";
+import Navigation from "../../../partials/dashboard/Navigation";
+import DashboardNav from "../../../partials/dashboard/DashboardNav";
 import { FaPlus } from "react-icons/fa";
-import { setIsAdd } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
-import DashboardNav from "../../../../partials/dashboard/DashboardNav";
-import Navigation from "../../../../partials/dashboard/Navigation";
-import ModalError from "../../../../partials/modals/ModalError";
-import ModalSuccess from "../../../../partials/modals/ModalSuccess";
-import LogoTable from "./LogoTable";
-import ModalAddLogo from "./ModalAddLogo";
+import ModalSuccess from "../../../partials/modals/ModalSuccess";
+import ModalError from "../../../partials/modals/ModalError";
+import TestimonialTable from "./TestimonialTable";
+import ModalAddTestimonial from "./ModalAddTestimonial";
 
-const Logo = () => {
+const Testimonial = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
 
@@ -20,7 +20,7 @@ const Logo = () => {
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="header" submenu="logo" />
+        <Navigation menu="testimonials" submenu="" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -29,7 +29,7 @@ const Logo = () => {
               <div className="p-7">
                 <div className=" flex justify-between ">
                   <div className="text-sm text-[black] font-semibold">
-                    <p>Logo</p>
+                    <p>Testimonials</p>
                   </div>
                   <button
                     className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm"
@@ -39,18 +39,18 @@ const Logo = () => {
                     Add
                   </button>
                 </div>
-                <LogoTable setItemEdit={setItemEdit} />
+                <TestimonialTable setItemEdit={setItemEdit} />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {store.isAdd && <ModalAddLogo itemEdit={itemEdit} />}
+      {store.isAdd && <ModalAddTestimonial itemEdit={itemEdit} />}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>
   );
 };
 
-export default Logo;
+export default Testimonial;

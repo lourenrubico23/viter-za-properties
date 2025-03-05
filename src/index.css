@@ -160,10 +160,10 @@
     @apply relative lg:max-w-[2560px] w-full mx-auto;
   }
   .customContainer {
-    @apply lg:max-w-[1240px] lg:mx-auto px-3 lg:px-0 ;
+    @apply lg:max-w-[1240px] lg:mx-auto px-3 lg:px-0;
   }
   .nav {
-    @apply text-light font-hindRegular text-[16px];
+    @apply font-hindRegular text-[16px];
   }
   .container {
     @apply py-0 px-3 max-w-[90rem] md:max-w-[90rem] md:px-6 md:py-0 p-6 mx-auto;

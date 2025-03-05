@@ -3,6 +3,8 @@ import React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoStarSharp } from "react-icons/io5";
 import Slider from "react-slick";
+import useQueryData from "../../../custom-hooks/useQueryData";
+import { devApiVersion } from "../../../helpers/functions-general";
 
 function SampleNextArrow({ onClick }) {
   return (
@@ -61,42 +63,28 @@ const Testimonials = () => {
         }}
       ></div>
     ),
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2,
-          },
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
         },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-          },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
         },
-      ],
+      },
+    ],
   };
 
-  const testimonialsData = [
-    {
-      name: "Jade D.",
-      testimony:
-        "Zac was a great agent that helped me navigate a difficult sale as I was based in London and a completely different time zone. He was readily available at all times. ",
-      position: "London Based Seller",
-    },
-    {
-      name: "Alyanna B.",
-      testimony:
-        "Transparent with transactons, nothing hidden. He also made an effort to lst down each and every transaction for our reference. Overall, I highly recommended Sir Zac as broker/agent. He negotiates excellently with both buyer and seller, in such a ways that it's in favor of both parties. If you're a beginner to real property, he'll make it easy for you.",
-      position: "Commercial Pilot",
-    },
-    {
-      name: "Angelina C.",
-      testimony:
-        "I am very grateful that Zac was my Broker in selling my properties! He deals professionally and protects both the seller and the buyer's interest. Everything is in order, especially in document preparation, which leads to a very smooth turn-over! Zac, you are a blessing to us! God bless you with more clients and sales in Jesus name Amen!",
-      position: "Seller",
-    },
-  ];
+  const { data: testimonialData } = useQueryData(
+    `${devApiVersion}/testimonial`, // endpoint
+    "get", // method
+    "testimonial" // key
+  );
+
   return (
     <>
       <div className="bg-dark min-h-[499px] relative  mb-9">
@@ -115,14 +103,20 @@ const Testimonials = () => {
           </div>
 
           <Slider {...settings}>
-            {testimonialsData.map((item, key) => (
+            {testimonialData?.data.map((item, key) => (
               <div className=" text-light mt-20 flex flex-col gap-5" key={key}>
                 <div className="flex flex-col gap-5 max-w-[527px] px-7 lg:px-4">
-                  <p className="text-[clamp(16px,3vw,24px)] font-hindBold">{item.name}</p>
-                  <p className="text-[clamp(12px,3vw,16px)]">{item.testimony}</p>
+                  <p className="text-[clamp(16px,3vw,24px)] font-hindBold">
+                    {item.testimonial_name}
+                  </p>
+                  <p className="text-[clamp(12px,3vw,16px)]">
+                    {item.testimonial_feedback}
+                  </p>
                   <div className="flex gap-5">
                     <p className="bg-secondary rounded-full p-2 h-0.5 w-0.5"></p>
-                    <p className="text-[clamp(12px,3vw,16px)]"> {item.position}</p>
+                    <p className="text-[clamp(12px,3vw,16px)]">
+                      {item.testimonial_occupation}
+                    </p>
                   </div>
                 </div>
               </div>

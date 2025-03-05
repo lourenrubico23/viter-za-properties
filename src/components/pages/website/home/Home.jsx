@@ -26,6 +26,11 @@ const Home = () => {
     "get", // method
     "banner" // key
   );
+  const { data: aboutData } = useQueryData(
+    `${devApiVersion}/about`, // endpoint
+    "get", // method
+    "about" // key
+  );
   return (
     <>
       <div className="outer-wrapper">
@@ -141,56 +146,46 @@ const Home = () => {
           </div>
 
           <div className="bg-[#F9FFFF] flex h-[614px] lg:max-w-[1233px] place-self-center relative md:my-20">
-            <img
-              src={`${devBaseImgUrl}/zac-alfanta.webp`}
-              alt=""
-              className="max-w-[571px] max-h-[687px]  -top-20 lg:block hidden"
-            />
-            <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4">
-              <h1 className="text-[clamp(30px,3vw,71px)] font-hindBold">
-                Zac Alfanta
-              </h1>
-              <p>
-                I am a Licensed Real Estate Broker (PRC 33585) and an Associate
-                Broker with RE/MAX PREMIER BGC, recognized as a 2023 Real Estate
-                Board Topnotcher (Top 10) for my commitment to excellence.
-              </p>
-              <p>
-                As an International Realtor Member of CREBA-NAR and a proud
-                REBAP LMP Chapter member, I bring deep industry expertise.
-                Before real estate, I built a strong banking career as a former
-                Bank Officer at a top Philippine bank, equipping me with
-                financial acumen to provide strategic real estate advice. I also
-                serve as an Independent Director for a fintech company driving
-                innovation in financial technology.
-              </p>
-              <p>
-                My work is driven by integrity, meaningful relationships. and a
-                passion for delivering tailored real estate solutions that
-                create long-term value.
-              </p>
+            {aboutData?.data.map((item, key) => {
+              const aboutImage =
+                getConvertStringToJSONparseData(item.about_img) || [];
+              const logoImage =
+                getConvertStringToJSONparseData(item.about_logo_img) || [];
+              return (
+                <>
+                  {aboutImage.map((image, index) => (
+                    <LoadImages
+                      url={`${googleHDViewLink}${image?.id}`}
+                      alt={`${item.about_name}`}
+                      className="max-w-[571px] max-h-[687px]  -top-20 lg:block hidden"
+                      key={index}
+                    />
+                  ))}
+                  <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4">
+                    <h1 className="text-[clamp(30px,3vw,71px)] font-hindBold">
+                      {item.about_name}
+                    </h1>
+                    <p>{item.about_paragraph_a}</p>
+                    <p>{item.about_paragraph_b}</p>
+                    <p>{item.about_paragraph_c}</p>
 
-              <div className="flex gap-2 place-self-end md:mt-24">
-                <img
-                  src={`${devBaseImgUrl}/nar-logo.png`}
-                  alt=""
-                  className=" w-[70px] h-[85px]"
-                />
-                <img
-                  src={`${devBaseImgUrl}/remax-logo.png`}
-                  alt=""
-                  className="w-[86px] h-[85px]"
-                />
-                <img
-                  src={`${devBaseImgUrl}/rebap-logo.png`}
-                  alt=""
-                  className="w-[140px] h-[85px]"
-                />
-              </div>
-            </div>
+                    <div className="flex gap-2 place-self-end md:mt-24">
+                      {logoImage.map((image, index) => (
+                        <LoadImages
+                          url={`${googleHDViewLink}${image?.id}`}
+                          alt={`${item.about_name}`}
+                          className=" w-[70px] h-[85px] object-cover"
+                          key={index}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              );
+            })}
           </div>
 
-          {/* <Blog /> */}
+          <Blog />
 
           <Testimonials />
           <ContactForm pageType="home" />

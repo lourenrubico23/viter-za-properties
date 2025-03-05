@@ -43,6 +43,14 @@ RewriteRule ^property-list/page/([0-9]+)$ controllers/developer/property-list/pa
 RewriteRule ^property-list/search$ controllers/developer/property-list/search.php [L]
 RewriteRule ^property-list/property-type-search$ controllers/developer/property-list/search-property-type.php [L]
 
+# ABOUT
+RewriteRule ^about$ controllers/developer/about/about.php [L]
+RewriteRule ^about/([0-9]+)$ controllers/developer/about/about.php?aboutid=$1 [L]
+
+# ABOUT
+RewriteRule ^testimonial$ controllers/developer/testimonial/testimonial.php [L]
+RewriteRule ^testimonial/([0-9]+)$ controllers/developer/testimonial/testimonial.php?testimonialid=$1 [L]
+
 ### Settings - Roles ###
 RewriteRule ^role$ controllers/developer/settings/role/role.php [L]
 RewriteRule ^role/([0-9]+)$ controllers/developer/settings/role/role.php?roleid=$1 [L]

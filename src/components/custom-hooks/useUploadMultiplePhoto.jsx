@@ -43,7 +43,7 @@ const useUploadMultiplePhoto = (url, dispatch) => {
 
   const handleChangeMultiplePhoto = (
     e, // onchange file input
-    fileLimit = 1, // limit of file
+    fileLimit = 10, // limit of file
     isAcceptImagesOnly = true // isAccept images only
   ) => {
     // let allImageSizes = 0;

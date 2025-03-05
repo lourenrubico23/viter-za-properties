@@ -82,7 +82,7 @@ const BannerTable = ({ setItemEdit }) => {
                   <td className="pl-2 ">{counter++}.</td>
                   <td className="">
                     {bannerImage.map((img, index) => (
-                      <p key={index}>{img.name}</p>
+                      <p key={index} className="text-xs">{img.name}</p>
                     ))}
                   </td>
                   <td className="">{item.banner_page}</td>

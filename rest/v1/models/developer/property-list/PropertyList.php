@@ -4,6 +4,7 @@ class PropertyList
     public $list_aid;
     public $list_is_active;
     public $list_property_type_id;
+    public $list_property_type_name;
     public $list_name;
     public $list_price;
     public $list_location;
@@ -42,6 +43,7 @@ class PropertyList
             $sql = "insert into {$this->tblPropertyList} ";
             $sql .= "( list_name, ";
             $sql .= "list_property_type_id, ";
+            $sql .= "list_property_type_name, ";
             $sql .= "list_price, ";
             $sql .= "list_location, ";
             $sql .= "list_is_active, ";
@@ -58,6 +60,7 @@ class PropertyList
             $sql .= "list_datetime ) values ( ";
             $sql .= ":list_name, ";
             $sql .= ":list_property_type_id, ";
+            $sql .= ":list_property_type_name, ";
             $sql .= ":list_price, ";
             $sql .= ":list_location, ";
             $sql .= ":list_is_active, ";
@@ -76,6 +79,7 @@ class PropertyList
             $query->execute([
                 "list_name" => $this->list_name,
                 "list_property_type_id" => $this->list_property_type_id,
+                "list_property_type_name" => $this->list_property_type_name,
                 "list_price" => $this->list_price,
                 "list_location" => $this->list_location,
                 "list_is_active" => $this->list_is_active,
@@ -187,6 +191,7 @@ class PropertyList
             $sql = "update {$this->tblPropertyList} set ";
             $sql .= "list_name = :list_name, ";
             $sql .= "list_property_type_id = :list_property_type_id, ";
+            $sql .= "list_property_type_name = :list_property_type_name, ";
             $sql .= "list_price = :list_price, ";
             $sql .= "list_location = :list_location, ";
             $sql .= "list_id = :list_id, ";
@@ -204,6 +209,7 @@ class PropertyList
             $query->execute([
                 "list_name" => $this->list_name,
                 "list_property_type_id" => $this->list_property_type_id,
+                "list_property_type_name" => $this->list_property_type_name,
                 "list_price" => $this->list_price,
                 "list_location" => $this->list_location,
                 "list_id" => $this->list_id,

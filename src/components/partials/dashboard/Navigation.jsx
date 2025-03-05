@@ -80,8 +80,31 @@ const Navigation = ({ menu, submenu }) => {
         </div>
         <div className="flex flex-col justify-between h-full overflow-y-auto overflow-x-hidden">
           <nav>
-            <ul className="flex-col [&>li]:text-left [&>li]:text-[16px] font-semibold [&>li]:mb-[15px]  ">
+            <ul className="flex-col [&>li]:text-left [&>li]:text-[16px] font-semibold  ">
               <>
+                <Link className="" to={`${devNavUrl}/${link}/about`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "about"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    about
+                  </li>
+                </Link>
+                <Link className="" to={`${devNavUrl}/${link}/testimonials`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "testimonials"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    testimonials
+                  </li>
+                </Link>
+
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "header"

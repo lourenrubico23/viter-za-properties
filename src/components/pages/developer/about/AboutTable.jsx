@@ -1,21 +1,20 @@
 import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { setIsAdd, setIsDelete } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
+import useQueryData from "../../../custom-hooks/useQueryData";
 import {
   devApiVersion,
   getConvertStringToJSONparseData,
-} from "../../../../helpers/functions-general";
-import SearchBar from "../../../../partials/SearchBar";
-import ModalDelete from "../../../../partials/modals/ModalDelete";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import useQueryData from "../../../../custom-hooks/useQueryData";
+} from "../../../helpers/functions-general";
+import { setIsAdd, setIsDelete } from "../../../../store/StoreAction";
+import TableLoading from "../../../partials/spinners/TableLoading";
+import NoData from "../../../partials/spinners/NoData";
+import ServerError from "../../../partials/spinners/ServerError";
+import ModalDelete from "../../../partials/modals/ModalDelete";
+import FetchingSpinner from "../../../partials/spinners/FetchingSpinner";
+import { StoreContext } from "../../../../store/StoreContext";
 
-const LogoTable = ({ setItemEdit }) => {
+const AboutTable = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
@@ -24,11 +23,11 @@ const LogoTable = ({ setItemEdit }) => {
     isFetching,
     error,
     isLoading,
-    data: logoData,
+    data: aboutData,
   } = useQueryData(
-    `${devApiVersion}/logo`, // endpoint
+    `${devApiVersion}/about`, // endpoint
     "get", // method
-    "logo" // key
+    "about" // key
   );
 
   let counter = 1;
@@ -40,8 +39,8 @@ const LogoTable = ({ setItemEdit }) => {
 
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
-    setIsData(item.logo_name);
-    setIsId(item.logo_aid);
+    setIsData(item.about_name);
+    setIsId(item.about_aid);
   };
 
   return (
@@ -52,14 +51,17 @@ const LogoTable = ({ setItemEdit }) => {
           <thead>
             <tr className="text-[black]">
               <th className="pl-2 w-[1rem]">#</th>
-              <th>Image</th>
               <th>Name</th>
-              <th>Position</th>
+              <th>Image</th>
+              <th>Logo</th>
+              <th>Paragraph 1</th>
+              <th>Paragraph 2</th>
+              <th>Paragraph 3</th>
               <th className="text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="relative">
-            {(isLoading || logoData?.data.length === 0) && (
+            {(isLoading || aboutData?.data.length === 0) && (
               <tr className="text-center">
                 <td colSpan="100%" className="p-10">
                   {isLoading ? <TableLoading /> : <NoData />}
@@ -74,19 +76,28 @@ const LogoTable = ({ setItemEdit }) => {
                 </td>
               </tr>
             )}
-            {logoData?.data.map((item, key) => {
+            {aboutData?.data.map((item, key) => {
+              const aboutImage =
+                getConvertStringToJSONparseData(item.about_img) || [];
               const logoImage =
-                getConvertStringToJSONparseData(item.logo_image) || [];
+                getConvertStringToJSONparseData(item.about_logo_img) || [];
               return (
                 <tr key={key} className="text-[14px]">
                   <td className="pl-2 ">{counter++}.</td>
+                  <td className="">{item.about_name}</td>
+                  <td className="">
+                    {aboutImage.map((img, index) => (
+                      <p key={index} className="text-xs">{img.name}</p>
+                    ))}
+                  </td>
                   <td className="">
                     {logoImage.map((img, index) => (
                       <p key={index} className="text-xs">{img.name}</p>
                     ))}
                   </td>
-                  <td className="">{item.logo_name}</td>
-                  <td className="">{item.logo_position}</td>
+                  <td className="">{item.about_paragraph_a}</td>
+                  <td className="">{item.about_paragraph_b}</td>
+                  <td className="">{item.about_paragraph_c}</td>
 
                   <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
                     <button
@@ -113,8 +124,8 @@ const LogoTable = ({ setItemEdit }) => {
 
       {store.isDelete && (
         <ModalDelete
-          mysqlEndpoint={`${devApiVersion}/logo/${id}`}
-          queryKey={"logo"}
+          mysqlEndpoint={`${devApiVersion}/about/${id}`}
+          queryKey={"about"}
           item={isData}
         />
       )}
@@ -122,4 +133,4 @@ const LogoTable = ({ setItemEdit }) => {
   );
 };
 
-export default LogoTable;
+export default AboutTable;

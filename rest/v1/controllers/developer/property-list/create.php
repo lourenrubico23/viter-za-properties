@@ -10,6 +10,7 @@ checkPayload($data);
 
 $list->list_name = checkIndex($data, "list_name");
 $list->list_property_type_id = checkIndex($data, "list_property_type_id");
+$list->list_property_type_name = checkIndex($data, "list_property_type_name");
 $list->list_price = checkIndex($data, "list_price");
 $list->list_location = $data["list_location"];
 $list->list_id = $data["list_id"];

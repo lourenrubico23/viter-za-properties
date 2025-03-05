@@ -17,6 +17,7 @@ const PropertyList = () => {
     dispatch(setIsAdd(true));
     setItemEdit(null);
   };
+
   return (
     <>
       <div className=" bg-[#f5f5f3] ">

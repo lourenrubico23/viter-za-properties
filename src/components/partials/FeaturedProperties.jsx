@@ -1,22 +1,22 @@
+import { Captions, Grid2x2, LandPlot } from "lucide-react";
 import React from "react";
+import { useSearchParams } from "react-router-dom";
+import { setIsAdd } from "../../store/StoreAction";
+import { StoreContext } from "../../store/StoreContext";
+import useQueryData from "../custom-hooks/useQueryData";
 import {
   devApiVersion,
-  devBaseImgUrl,
   getConvertStringToJSONparseData,
-  googleHDViewLink,
+  googleHDViewLink
 } from "../helpers/functions-general";
-import { CiCreditCard1 } from "react-icons/ci";
-import { Captions, Grid2x2, LandPlot } from "lucide-react";
-import { StoreContext } from "../../store/StoreContext";
-import { setIsAdd } from "../../store/StoreAction";
-import PropertyDescriptionPage from "./PropertyDescriptionPage";
-import useQueryData from "../custom-hooks/useQueryData";
 import LoadImages from "./LoadImages";
+import PropertyDescriptionPage from "./PropertyDescriptionPage";
 
 const FeaturedProperties = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
   const [selectedPropertyId, setSelectedPropertyId] = React.useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { data: propertyListData } = useQueryData(
     `${devApiVersion}/property-list`, // endpoint
@@ -28,57 +28,33 @@ const FeaturedProperties = () => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
     setSelectedPropertyId(item.list_aid);
+
+    // Format list_name for the URL
+    const formattedName = item.list_name.replace(/\s+/g, "-").toLowerCase();
+    setSearchParams({ property: formattedName });
+
     document.body.classList.toggle("overflow-hidden");
   };
 
-  const cardData = [
-    {
-      price: "400M (Negotiable)",
-      propertyType: "Luxurious House and Lot",
-      id: "ABC-12345678",
-      description:
-        "4 Bedroom House for sale in New Alabang Village, Metro Manila",
-      lotArea: "558 sqm",
-      floorArea: "1,043.63 sqm",
-      imgSrc: `${devBaseImgUrl}/20221125-DSC_5382.jpg`,
-    },
-    {
-      price: "203,200,000 (VAT Inclusive)",
-      propertyType: "3-Storey Building with Basement & Elevator",
-      id: "ABC-12345678",
-      description: "Prime Mixed-Use Property in Dasmariñas Technopark",
-      lotArea: "3,000 sqm",
-      floorArea: "",
-      imgSrc: `${devBaseImgUrl}/Frontage.jpg`,
-    },
-    {
-      price: "80,000,000 (P100,000/sqm)",
-      propertyType: "Commercial Lot",
-      id: "ABC-12345678",
-      description: "Prime Southwoods Commercial Lot in San Francisco, Laguna",
-      lotArea: "800 sqm",
-      floorArea: "",
-      imgSrc: `${devBaseImgUrl}/property-3.png`,
-    },
-    {
-      price: "165,000,000",
-      propertyType: "Wack-Wack Greenhills, Metro Manila near MRT-3 Ortigas",
-      id: "ABC-12345678",
-      description: "Premium Fully Furnished Office Floor in Ortigas Center",
-      lotArea: "1,110.38 sqm",
-      floorArea: "",
-      imgSrc: `${devBaseImgUrl}/property-4.png`,
-    },
-    {
-      price: "22,230,000 (₱39,000/sqm)",
-      propertyType: "Land for sale in Don Bosco, Metro Manila",
-      id: "ABC-12345678",
-      description: "Prime Lot in Better Living, Parañaque",
-      lotArea: "570 sqm",
-      floorArea: "",
-      imgSrc: `${devBaseImgUrl}/property-5.png`,
-    },
-  ];
+
+  // Check URL on page load & open modal 
+  React.useEffect(() => {
+    const propertySlug = searchParams.get("property"); // Get property name from URL
+
+    if (propertySlug && propertyListData?.data) {
+      // Find the matching property by slug
+      const selectedProperty = propertyListData.data.find(
+        (item) =>
+          item.list_name.replace(/\s+/g, "-").toLowerCase() === propertySlug
+      );
+
+      if (selectedProperty) {
+        setItemEdit(selectedProperty);
+        setSelectedPropertyId(selectedProperty.list_aid);
+        dispatch(setIsAdd(true)); 
+      }
+    }
+  }, [searchParams, propertyListData]); // Re-run when URL or property data changes
 
   return (
     <>
@@ -112,37 +88,50 @@ const FeaturedProperties = () => {
                   </div>
 
                   <div className="p-5 flex flex-col gap-5">
-                    <p className="text-[clamp(20px,3vw,28px)] font-robotoBold">
-                      <span className="text-lg">&#8369;</span> {item.list_price}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <p className="text-[16px] font-hindRegular">
-                        {item.list_property_type_id}
+                    {item.list_price && (
+                      <p className="text-[clamp(20px,3vw,28px)] font-robotoBold">
+                        <span className="text-lg">&#8369;</span>{" "}
+                        {item.list_price}
                       </p>
-                      <span className="flex items-center justify-center gap-1">
-                        <Captions className="h-4" /> {item.list_id}
-                      </span>
+                    )}
+                    <div className="flex items-center justify-between">
+                      {item.list_property_type_name && (
+                        <p className="text-[16px] font-hindRegular">
+                          {item.list_property_type_name}
+                        </p>
+                      )}
+                      {item.list_id && (
+                        <span className="flex items-center justify-center gap-1">
+                          <Captions className="h-4" /> {item.list_id}
+                        </span>
+                      )}
                     </div>
-                    <p className="text-[clamp(16px,3vw,18px)] font-hindBold leading-5">
-                      {item.list_name}
-                    </p>
+                    {item.list_name && (
+                      <p className="text-[clamp(16px,3vw,18px)] font-hindBold leading-5">
+                        {item.list_name}
+                      </p>
+                    )}
                     <div className="flex justify-around">
-                      <div className="flex flex-col gap-2">
-                        <p className="flex gap-2 items-center">
-                          <LandPlot /> {item.list_lot_area}
-                        </p>
-                        <p className="text-gray-400 text-[16px] font-hindBold text-center">
-                          Lot Area
-                        </p>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <p className="flex gap-2 items-center">
-                          <Grid2x2 /> {item.list_floor_area}
-                        </p>
-                        <p className="text-gray-400 text-[16px] font-hindBold text-center">
-                          Floor Area
-                        </p>
-                      </div>
+                      {item.list_lot_area && (
+                        <div className="flex flex-col gap-2">
+                          <p className="flex gap-2 items-center">
+                            <LandPlot /> {item.list_lot_area}
+                          </p>
+                          <p className="text-gray-400 text-[16px] font-hindBold text-center">
+                            Lot Area
+                          </p>
+                        </div>
+                      )}
+                      {item.list_floor_area && (
+                        <div className="flex flex-col gap-2">
+                          <p className="flex gap-2 items-center">
+                            <Grid2x2 /> {item.list_floor_area}
+                          </p>
+                          <p className="text-gray-400 text-[16px] font-hindBold text-center">
+                            Floor Area
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -157,6 +146,8 @@ const FeaturedProperties = () => {
           setSelectedPropertyId={setSelectedPropertyId}
           propertyListData={propertyListData}
           selectedPropertyId={selectedPropertyId}
+          setSearchParams={setSearchParams}
+          searchParams={searchParams}
         />
       )}
     </>

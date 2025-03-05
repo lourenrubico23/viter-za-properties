@@ -164,7 +164,7 @@ const PropertyListTable = ({ setItemEdit }) => {
                   return (
                     <tr key={key} className="place-content-start text-[14px]">
                       <td className="pl-2 place-content-start">{counter++}</td>
-                      <td>
+                      <td className="place-content-start">
                         {item.list_is_active === 1 ? (
                           <Status text="Active" />
                         ) : (
@@ -177,7 +177,7 @@ const PropertyListTable = ({ setItemEdit }) => {
                         {item.list_location}
                       </td>
                       <td className="place-content-start">
-                        {item.property_type_name}
+                        {item.list_property_type_name}
                       </td>
                       <td className="place-content-start">{item.list_id}</td>
                       <td className="place-content-start">
