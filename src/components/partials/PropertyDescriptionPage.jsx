@@ -19,7 +19,7 @@ import {
   devApiVersion,
   devNavUrl,
   getConvertStringToJSONparseData,
-  googleHDViewLink
+  googleHDViewLink,
 } from "../helpers/functions-general";
 import LoadImages from "./LoadImages";
 import ModalWrapper from "./modals/ModalWrapper";
@@ -122,12 +122,12 @@ const PropertyDescriptionPage = ({
 
                   <div className="flex flex-col md:flex md:flex-row gap-4">
                     {/* Preview Image */}
-                    <div>
+                    <div className="h-[200px] max-w-[570px] md:h-[480px] md:w-[800px] lg:max-w-[956px] lg:h-[513px]">
                       {previewImg && (
                         <LoadImages
                           url={previewImg}
                           alt="Preview"
-                          className="h-[200px] w-[320px] md:h-[480px] md:w-[800px] lg:w-[956px] lg:h-[513px] object-cover"
+                          className=" object-cover w-full h-full"
                         />
                       )}
                     </div>

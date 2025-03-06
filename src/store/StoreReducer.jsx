@@ -61,6 +61,16 @@ export const StoreReducer = (state, action) => {
         ...state,
         isUserOpen: action.payload,
       };
+    case "IS_OPEN_HEADER":
+      return {
+        ...state,
+        isOpenHeader: action.payload,
+      };
+    case "IS_OPEN_PROPERTIES":
+      return {
+        ...state,
+        isOpenProperties: action.payload,
+      };
     case "IS_CREATE_PASS_SUCCCESS":
       return {
         ...state,

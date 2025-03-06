@@ -103,8 +103,8 @@ const Navigation = () => {
               return (
                 <div key={key} className="flex gap-4 items-center">
                   {logoImage.map((image, index) => (
-                    <LoadImages
-                      url={`${googleHDViewLink}${image?.id}`}
+                    <img
+                      src={`${googleHDViewLink}${image?.id}`}
                       alt="Logo"
                       className="h-12 md:h-[60px] object-cover"
                       key={index}

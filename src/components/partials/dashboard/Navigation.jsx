@@ -1,7 +1,11 @@
 import React from "react";
 import { IoChevronDownSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { setIsUserOpen } from "../../../store/StoreAction";
+import {
+  setIsOpenHeader,
+  setIsOpenProperties,
+  setIsUserOpen,
+} from "../../../store/StoreAction";
 import { StoreContext } from "../../../store/StoreContext";
 import { devBaseImgUrl, devNavUrl } from "../../helpers/functions-general";
 import { getUserType } from "../../helpers/login-functions";
@@ -13,8 +17,6 @@ const Navigation = ({ menu, submenu }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [isOpenHeader, setIsOpenHeader] = React.useState(false);
-  const [isOpenProperties, setIsOpenProperties] = React.useState(false);
   const [isChangePassword, setIsChangePassword] = React.useState(false);
   const link = getUserType();
   const ref = React.useRef();
@@ -37,11 +39,12 @@ const Navigation = ({ menu, submenu }) => {
   const handleUserOpen = () => {
     dispatch(setIsUserOpen(!store.isUserOpen));
   };
+
   const handleHeaderOpen = () => {
-    setIsOpenHeader(!isOpenHeader);
+    dispatch(setIsOpenHeader(!store.isOpenHeader));
   };
   const handlePropertiesOpen = () => {
-    setIsOpenProperties(!isOpenProperties);
+    dispatch(setIsOpenProperties(!store.isOpenProperties));
   };
 
   const clickOutsideRef = (e) => {
@@ -123,7 +126,9 @@ const Navigation = ({ menu, submenu }) => {
                     </span>
                     <IoChevronDownSharp
                       className={`${
-                        isOpenHeader ? "text-dark" : "text-secondary rotate-180"
+                        store.isOpenHeader
+                          ? "text-dark"
+                          : "text-secondary rotate-180"
                       } text-dark transition-all`}
                     />
                   </div>
@@ -131,7 +136,7 @@ const Navigation = ({ menu, submenu }) => {
 
                 <ul
                   className={`${
-                    isOpenHeader ? "h-0 overflow-hidden" : "my-2"
+                    store.isOpenHeader ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
                   <Link className="!p-0" to={`${devNavUrl}/${link}/links`}>
@@ -198,7 +203,7 @@ const Navigation = ({ menu, submenu }) => {
                     </span>
                     <IoChevronDownSharp
                       className={`${
-                        isOpenProperties
+                        store.isOpenProperties
                           ? "text-dark"
                           : "text-secondary rotate-180"
                       } text-dark transition-all`}
@@ -208,7 +213,7 @@ const Navigation = ({ menu, submenu }) => {
 
                 <ul
                   className={`${
-                    isOpenProperties ? "h-0 overflow-hidden" : "my-2"
+                    store.isOpenProperties ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
                   <Link

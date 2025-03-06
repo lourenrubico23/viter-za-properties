@@ -13,6 +13,8 @@ const initVal = {
   isSearch: false,
   isViewTab: false,
   isUserOpen: false,
+  isOpenHeader: false,
+  isOpenProperties: false,
   isAccountUpdated: false,
   isCreatePassSuccess: false,
   isForgotPassSuccess: false,

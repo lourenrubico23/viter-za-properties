@@ -10,6 +10,7 @@ import Footer from "../../../partials/Footer";
 import Navigation from "../Navigation";
 import useQueryData from "../../../custom-hooks/useQueryData";
 import LoadImages from "../../../partials/LoadImages";
+import { CiImageOn } from "react-icons/ci";
 
 const Contact = () => {
   const { data: bannerData } = useQueryData(
@@ -23,24 +24,36 @@ const Contact = () => {
         <div className="wrapper">
           <Navigation />
           <div className=" relative md:flex justify-center">
-          {bannerData?.data.map((item, key) => {
+            {bannerData?.data.map((item, key) => {
               if (item.banner_page === "Contact") {
                 const bannerImage =
                   getConvertStringToJSONparseData(item.banner_image) || [];
+
                 return (
                   <div
-                    className=" relative flex justify-center w-full"
+                    className="relative flex justify-center w-full"
                     key={key}
                   >
-                    {bannerImage.map((image, index) => (
-                      <LoadImages
-                        url={`${googleHDViewLink}${image?.id}`}
-                        alt={`${item.banner_title}`}
-                        className="object-cover min-h-[375px] lg:w-full lg:max-h-[420px]"
-                        key={index}
-                      />
-                    ))}
-                    <h1 className=" text-[clamp(20px,3vw,34px)] md:w-[850px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
+                    {bannerImage.length > 0 ? (
+                      bannerImage.map((image, index) => (
+                        <div
+                          className="relative w-full min-h-[375px] lg:max-h-[420px]"
+                          key={index}
+                        >
+                          <img
+                            src={`${googleHDViewLink}${image?.id}`}
+                            alt={`${item.banner_title}`}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <div className="bg-gray-300 inset-0 w-full h-[420px] object-cover">
+                        <CiImageOn className="text-[10rem] place-self-center mt-20 text-gray-400" />
+                      </div>
+                    )}
+
+                    <h1 className="text-[clamp(20px,3vw,34px)] md:w-[850px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
                       {item.banner_title}
                     </h1>
                   </div>

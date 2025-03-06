@@ -72,6 +72,20 @@ export const setIsUserOpen = (val) => {
   };
 };
 
+export const setIsOpenHeader = (val) => {
+  return {
+    type: "IS_OPEN_HEADER",
+    payload: val,
+  };
+};
+
+export const setIsOpenProperties = (val) => {
+  return {
+    type: "IS_OPEN_PROPERTIES",
+    payload: val,
+  };
+};
+
 export const setCreatePassSuccess = (val) => {
   return {
     type: "IS_CREATE_PASS_SUCCCESS",
