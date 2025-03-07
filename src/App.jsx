@@ -5,6 +5,8 @@ import { RoutesAccess } from "./routes/RoutesAccess";
 import { RoutesAdmin } from "./routes/RoutesAdmin";
 import { RoutesDeveloper } from "./routes/RoutesDeveloper";
 import { StoreProvider } from "./store/StoreContext";
+import { devNavUrl } from "./components/helpers/functions-general";
+import BlogsDescriptionPage from "./components/partials/BlogsDescriptionPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -42,6 +44,10 @@ function App() {
               {RoutesAdmin.map(({ ...routeProps }, key) => {
                 return <Route key={key} {...routeProps} />;
               })}
+              <Route
+                path={`${devNavUrl}/blogs/:slug`}
+                element={<BlogsDescriptionPage />}
+              />
             </Routes>
           </Router>
         </StoreProvider>

@@ -89,8 +89,8 @@ const FeaturedProperties = ({ pageType }) => {
                   <div className="rounded-md group hover:scale-[1.01] hover:duration-200 max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform">
                     <div className="overflow-hidden">
                       {firstImage && (
-                        <LoadImages
-                          url={`${googleHDViewLink}${firstImage?.id}`}
+                        <img
+                          src={`${googleHDViewLink}${firstImage?.id}`}
                           alt="Property Image"
                           className="w-full h-[200px] object-cover transition-transform duration-200 group-hover:scale-105"
                           key={index}

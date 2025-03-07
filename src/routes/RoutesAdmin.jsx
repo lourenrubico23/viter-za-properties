@@ -2,6 +2,7 @@ import { devNavUrl, urlAdmin } from "../components/helpers/functions-general";
 import ProtectedRouteUser from "../components/pages/access/ProtectedRouteUser";
 import UserVerifyEmail from "../components/pages/access/user-other/UserVerifyEmail";
 import About from "../components/pages/developer/about/About.jsx";
+import Blogs from "../components/pages/developer/blogs/Blogs.jsx";
 import Banner from "../components/pages/developer/header/banner/Banner";
 import ContactNo from "../components/pages/developer/header/contact-no/ContactNo";
 import Links from "../components/pages/developer/header/links/Links";
@@ -99,6 +100,14 @@ export const RoutesAdmin = [
     element: (
       <ProtectedRouteUser>
         <Testimonial />
+      </ProtectedRouteUser>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlAdmin}/blogs`,
+    element: (
+      <ProtectedRouteUser>
+        <Blogs />
       </ProtectedRouteUser>
     ),
   },

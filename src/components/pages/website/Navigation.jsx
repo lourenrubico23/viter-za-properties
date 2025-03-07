@@ -53,6 +53,7 @@ const Navigation = () => {
     { path: "/properties", label: "Properties" },
     { path: "/buyers", label: "Buyers" },
     { path: "/sellers", label: "Sellers" },
+    { path: "/blogs", label: "Blogs" },
     { path: "/contact", label: "Contact" },
   ];
 

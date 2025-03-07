@@ -1,18 +1,18 @@
 import React from "react";
+import { CiImageOn } from "react-icons/ci";
+import useQueryData from "../../../custom-hooks/useQueryData";
 import {
   devApiVersion,
-  devBaseImgUrl,
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../../../helpers/functions-general";
+import BlogList from "../../../partials/BlogList";
 import ContactForm from "../../../partials/ContactForm";
 import Footer from "../../../partials/Footer";
 import Navigation from "../Navigation";
-import useQueryData from "../../../custom-hooks/useQueryData";
 import LoadImages from "../../../partials/LoadImages";
-import { CiImageOn } from "react-icons/ci";
 
-const Sellers = () => {
+const Blogs = () => {
   const { data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
@@ -28,7 +28,7 @@ const Sellers = () => {
           <Navigation />
           <div className=" relative md:flex justify-center">
             {bannerData?.data.map((item, key) => {
-              if (item.banner_page === "Sellers") {
+              if (item.banner_page === "Blogs") {
                 const bannerImage =
                   getConvertStringToJSONparseData(item.banner_image) || [];
 
@@ -56,7 +56,7 @@ const Sellers = () => {
                       </div>
                     )}
 
-                    <h1 className="text-[clamp(20px,3vw,34px)] md:w-[592px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
+                    <h1 className="text-[clamp(20px,3vw,34px)] md:w-[687px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
                       {item.banner_title}
                     </h1>
                   </div>
@@ -64,8 +64,9 @@ const Sellers = () => {
               }
             })}
           </div>
+          <BlogList pageType={"Blogs"} />
 
-          <ContactForm pageType="sellers" />
+          <ContactForm pageType="Home" />
           <Footer />
         </div>
       </div>
@@ -73,4 +74,4 @@ const Sellers = () => {
   );
 };
 
-export default Sellers;
+export default Blogs;

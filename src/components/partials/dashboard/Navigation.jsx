@@ -107,6 +107,17 @@ const Navigation = ({ menu, submenu }) => {
                     testimonials
                   </li>
                 </Link>
+                <Link className="" to={`${devNavUrl}/${link}/blogs`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "blogs"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    Blogs
+                  </li>
+                </Link>
 
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${

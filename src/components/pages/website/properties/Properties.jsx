@@ -19,6 +19,9 @@ const Properties = () => {
     "get", // method
     "banner" // key
   );
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className="outer-wrapper">
@@ -41,8 +44,8 @@ const Properties = () => {
                           className="relative w-full min-h-[375px] lg:max-h-[420px]"
                           key={index}
                         >
-                          <img
-                            src={`${googleHDViewLink}${image?.id}`}
+                          <LoadImages
+                            url={`${googleHDViewLink}${image?.id}`}
                             alt={`${item.banner_title}`}
                             className="object-cover w-full h-full"
                           />

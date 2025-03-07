@@ -301,6 +301,7 @@ const ModalAddBanner = ({ itemEdit }) => {
                         <option value="Properties">Properties</option>
                         <option value="Buyers">Buyers</option>
                         <option value="Sellers">Sellers</option>
+                        <option value="Blogs">Blogs</option>
                         <option value="Contact">Contact</option>
                       </InputSelect>
                     </div>

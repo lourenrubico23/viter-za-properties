@@ -8,6 +8,7 @@ class PropertyType
     public $property_type_created;
     public $property_type_datetime;
 
+
     public $property_type_start;
     public $property_type_total;
     public $property_type_search;
@@ -16,13 +17,14 @@ class PropertyType
     public $lastInsertedId;
 
     public $tblPropertyType;
-    public $tblUser;
+    public $tblPropertyList;
+
 
     public function __construct($db)
     {
         $this->connection = $db;
         $this->tblPropertyType = "zapv1_property_type";
-        $this->tblUser = "zapv1_settings_users";
+        $this->tblPropertyList = "zapv1_property_list";
     }
 
     // create
@@ -184,46 +186,6 @@ class PropertyType
         return $query;
     }
 
-    // public function checkUserOtherAssociation()
-    // {
-    //     try {
-    //         $sql = "select user_role_id from {$this->tblUser} ";
-    //         $sql .= "where user_role_id = :property_type_aid ";
-    //         $query = $this->connection->prepare($sql);
-    //         $query->execute([
-    //             "property_type_aid" => "{$this->property_type_aid}",
-    //         ]);
-    //     } catch (PDOException $ex) {
-    //         $query = false;
-    //     }
-    //     return $query;
-    // }
-
-
-    // public function filterIsActive()
-    // {
-    //     try {
-    //         $sql = "select ";
-    //         $sql .= "property_type_aid, ";
-    //         $sql .= "property_type_is_active, ";
-    //         $sql .= "property_type_name ";
-    //         $sql .= "from {$this->tblPropertyType} ";
-    //         $sql .= "where ";
-    //         $sql .= "property_type_is_active = :property_type_is_active ";
-    //         $sql .= "order by ";
-    //         $sql .= "property_type_is_active desc ";
-    //         $query = $this->connection->prepare($sql);
-    //         $query->execute([
-    //             'property_type_is_active' => $this->property_type_is_active,
-
-    //         ]);
-    //     } catch (PDOException $ex) {
-    //         $query = false;
-    //     }
-    //     return $query;
-    // }
-
-
     public function search()
     {
         try {
@@ -239,6 +201,22 @@ class PropertyType
             $query = $this->connection->prepare($sql);
             $query->execute([
                 'property_type_name' => "%{$this->property_type_search}%",
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // check association validation
+    public function checkMenuAssociation()
+    {
+        try {
+            $sql = "select list_property_type_id from {$this->tblPropertyList} ";
+            $sql .= "where list_property_type_id = :property_type_aid ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "property_type_aid" => "{$this->property_type_aid}",
             ]);
         } catch (PDOException $ex) {
             $query = false;

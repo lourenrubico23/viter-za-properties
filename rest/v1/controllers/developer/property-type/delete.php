@@ -11,7 +11,7 @@ if (array_key_exists("property_typeid", $_GET)) {
     $property_type->property_type_aid = $_GET['property_typeid'];
     checkId($property_type->property_type_aid);
     // delete 
-    // isUserOtherAssociated($property_type);
+    isAssociatedCheckMenuAssociation($property_type);
     $query = checkDelete($property_type);
 
     returnSuccess($property_type, "property_type", $query);

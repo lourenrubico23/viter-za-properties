@@ -47,9 +47,16 @@ RewriteRule ^property-list/property-type-search$ controllers/developer/property-
 RewriteRule ^about$ controllers/developer/about/about.php [L]
 RewriteRule ^about/([0-9]+)$ controllers/developer/about/about.php?aboutid=$1 [L]
 
-# ABOUT
+# TESTIMONIAL
 RewriteRule ^testimonial$ controllers/developer/testimonial/testimonial.php [L]
 RewriteRule ^testimonial/([0-9]+)$ controllers/developer/testimonial/testimonial.php?testimonialid=$1 [L]
+
+# BLOGS
+RewriteRule ^blogs$ controllers/developer/blogs/blogs.php [L]
+RewriteRule ^blogs/([0-9]+)$ controllers/developer/blogs/blogs.php?blogsid=$1 [L]
+RewriteRule ^blogs/active/([0-9]+)$ controllers/developer/blogs/active.php?blogsid=$1 [L]
+RewriteRule ^blogs/page/([0-9]+)$ controllers/developer/blogs/page.php?start=$1 [L]
+RewriteRule ^blogs/search$ controllers/developer/blogs/search.php [L]
 
 ### Settings - Roles ###
 RewriteRule ^role$ controllers/developer/settings/role/role.php [L]

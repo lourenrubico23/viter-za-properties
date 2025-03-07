@@ -1,25 +1,21 @@
 import React from "react";
-import Navigation from "../Navigation";
+import { CiImageOn } from "react-icons/ci";
+import useQueryData from "../../../custom-hooks/useQueryData";
 import {
   devApiVersion,
-  devBaseImgUrl,
   devNavUrl,
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../../../helpers/functions-general";
-import FeaturedProperties from "../../../partials/FeaturedProperties";
-import SellMyProperty from "../../../partials/svg/SellMyPropertySvg";
-import BuyAProperty from "../../../partials/svg/BuyAPropertySvg";
-import Blog from "../../../partials/Blog";
-import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
-import BuyAPropertySvg from "../../../partials/svg/BuyAPropertySvg";
-import Testimonials from "./Testimonials";
+import BlogList from "../../../partials/BlogList";
 import ContactForm from "../../../partials/ContactForm";
+import FeaturedProperties from "../../../partials/FeaturedProperties";
 import Footer from "../../../partials/Footer";
-import { Link } from "react-router-dom";
-import useQueryData from "../../../custom-hooks/useQueryData";
 import LoadImages from "../../../partials/LoadImages";
-import { CiImageOn } from "react-icons/ci";
+import BuyAPropertySvg from "../../../partials/svg/BuyAPropertySvg";
+import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
+import Navigation from "../Navigation";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
   const { data: bannerData } = useQueryData(
@@ -32,6 +28,9 @@ const Home = () => {
     "get", // method
     "about" // key
   );
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className="outer-wrapper">
@@ -54,8 +53,8 @@ const Home = () => {
                           className="relative w-full min-h-[375px] lg:max-h-[420px]"
                           key={index}
                         >
-                          <img
-                            src={`${googleHDViewLink}${image?.id}`}
+                          <LoadImages
+                            url={`${googleHDViewLink}${image?.id}`}
                             alt={`${item.banner_title}`}
                             className="object-cover w-full h-full"
                           />
@@ -135,7 +134,7 @@ const Home = () => {
               </p>
               <a
                 className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0"
-                href={`${devNavUrl}/Sellers`}
+                href={`${devNavUrl}/sellers`}
               >
                 List my Home
               </a>
@@ -151,7 +150,7 @@ const Home = () => {
               </p>
               <a
                 className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0"
-                href={`${devNavUrl}/Properties`}
+                href={`${devNavUrl}/properties`}
               >
                 See Listing
               </a>
@@ -198,7 +197,7 @@ const Home = () => {
             })}
           </div>
 
-          <Blog />
+          <BlogList pageType="home" />
 
           <Testimonials />
           <ContactForm pageType="home" />

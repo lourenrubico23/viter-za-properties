@@ -1,33 +1,33 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
-import { FaArchive, FaEdit } from "react-icons/fa";
-import { MdDelete, MdRestore } from "react-icons/md";
+import { StoreContext } from "../../../../store/StoreContext";
 import { useInView } from "react-intersection-observer";
-
-import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
 import {
   setIsAdd,
   setIsArchive,
   setIsDelete,
   setIsRestore,
-} from "../../../../../store/StoreAction";
-import SearchBar from "../../../../partials/SearchBar";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
+} from "../../../../store/StoreAction";
+import SearchBar from "../../../partials/SearchBar";
+import FetchingSpinner from "../../../partials/spinners/FetchingSpinner";
+import TableLoading from "../../../partials/spinners/TableLoading";
+import NoData from "../../../partials/spinners/NoData";
+import ServerError from "../../../partials/spinners/ServerError";
+import Status from "../../../partials/Status";
+import { FaArchive, FaEdit } from "react-icons/fa";
+import { MdDelete, MdRestore } from "react-icons/md";
+import LoadMore from "../../../partials/LoadMore";
+import ModalDelete from "../../../partials/modals/ModalDelete";
+import ModalArchive from "../../../partials/modals/ModalArchive";
+import ModalRestore from "../../../partials/modals/ModalRestore";
 import {
   devApiVersion,
+  formatDate,
   getConvertStringToJSONparseData,
-} from "../../../../helpers/functions-general";
-import LoadMore from "../../../../partials/LoadMore";
-import ModalDelete from "../../../../partials/modals/ModalDelete";
-import { StoreContext } from "../../../../../store/StoreContext";
-import Status from "../../../../partials/Status";
-import ModalArchive from "../../../../partials/modals/ModalArchive";
-import ModalRestore from "../../../../partials/modals/ModalRestore";
+} from "../../../helpers/functions-general";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { queryDataInfinite } from "../../../custom-hooks/queryDataInfinite";
 
-const PropertyListTable = ({ setItemEdit }) => {
+const BlogsTable = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
@@ -47,11 +47,11 @@ const PropertyListTable = ({ setItemEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["property-list", onSearch, store.isSearch],
+    queryKey: ["blogs", onSearch, store.isSearch],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
-        `/v1/property-list/search`, // search endpoint
-        `/v1/property-list/page/${pageParam}`, // list endpoint
+        `/v1/blogs/search`, // search endpoint
+        `/v1/blogs/page/${pageParam}`, // list endpoint
         store.isSearch, // search boolean
         { searchValue: search.current.value, id: "" } // search value
       ),
@@ -73,22 +73,22 @@ const PropertyListTable = ({ setItemEdit }) => {
 
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
-    setIsData(item.list_name);
-    setIsId(item.list_aid);
+    setIsData(item.blogs_title);
+    setIsId(item.blogs_aid);
   };
 
   const handleArchive = (item) => {
     dispatch(setIsArchive(true));
-    setIsData(item.list_name);
-    setIsId(item.list_aid);
+    setIsData(item.blogs_title);
+    setIsId(item.blogs_aid);
     setIsArchiving(true);
     setIsRestore(false);
   };
 
   const handleRestore = (item) => {
     dispatch(setIsRestore(true));
-    setIsData(item.list_name);
-    setIsId(item.list_aid);
+    setIsData(item.blogs_title);
+    setIsId(item.blogs_aid);
     setIsArchiving(false);
     setIsRestore(true);
   };
@@ -123,18 +123,13 @@ const PropertyListTable = ({ setItemEdit }) => {
             <tr className="text-[black]">
               <th className="pl-2 w-[1rem]">#</th>
               <th>Status</th>
-              <th className="w-[15rem]">Name</th>
-              <th>Price</th>
-              <th className="w-[10rem]">Location</th>
-              <th className="w-[6rem]">Property Type</th>
-              <th className="w-[6rem]">Property ID</th>
-              <th className="w-[6rem]">Floor Area</th>
-              <th className="w-[6rem]">Lot Area</th>
-              <th>Bedrooms</th>
-              <th>Bathrooms</th>
-              <th>Carport</th>
-              <th className="w-[10rem]">Key Features</th>
-              <th className="w-[15rem]">Why This Property is a Best Buy</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Published Date</th>
+              <th className="w-[10rem]">Brief Description</th>
+              <th className="w-[10rem]">Body Section A</th>
+              <th className="w-[10rem]">Body Section B</th>
+              <th className="w-[10rem]">Body Section C</th>
               <th>Images</th>
               <th className="text-right">Actions</th>
             </tr>
@@ -159,57 +154,48 @@ const PropertyListTable = ({ setItemEdit }) => {
             {result?.pages.map((page, key) => (
               <React.Fragment key={key}>
                 {page?.data.map((item, key) => {
-                  const propertyImages =
-                    getConvertStringToJSONparseData(item.list_img) || [];
+                  const blogsImages =
+                    getConvertStringToJSONparseData(item.blogs_img) || [];
                   return (
                     <tr key={key} className="place-content-start text-[14px]">
                       <td className="pl-2 place-content-start">{counter++}</td>
                       <td className="place-content-start">
-                        {item.list_is_active === 1 ? (
+                        {item.blogs_is_active === 1 ? (
                           <Status text="Active" />
                         ) : (
                           <Status text="Inactive" />
                         )}
                       </td>
-                      <td className="place-content-start">{item.list_name}</td>
-                      <td className="place-content-start">{item.list_price}</td>
                       <td className="place-content-start">
-                        {item.list_location}
+                        {item.blogs_title}
                       </td>
                       <td className="place-content-start">
-                        {item.list_property_type_name}
-                      </td>
-                      <td className="place-content-start">{item.list_id}</td>
-                      <td className="place-content-start">
-                        {item.list_floor_area}
+                        {item.blogs_author}
                       </td>
                       <td className="place-content-start">
-                        {item.list_lot_area}
+                        {`${formatDate(item.blogs_published_date)}`}
                       </td>
                       <td className="place-content-start">
-                        {item.list_bedrooms}
+                        {item.blogs_brief_description}
                       </td>
                       <td className="place-content-start">
-                        {item.list_bathrooms}
+                        {item.blogs_contents_a}
                       </td>
                       <td className="place-content-start">
-                        {item.list_carport}
+                        {item.blogs_contents_b}
                       </td>
                       <td className="place-content-start">
-                        {item.list_key_features}
+                        {item.blogs_contents_c}
                       </td>
                       <td className="place-content-start">
-                        {item.list_best_buy}
-                      </td>
-                      <td className="place-content-start">
-                        {propertyImages.map((img, index) => (
+                        {blogsImages.map((img, index) => (
                           <p key={index} className="text-[12px]">
                             {img.name}
                           </p>
                         ))}
                       </td>
                       <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
-                        {item.list_is_active ? (
+                        {item.blogs_is_active ? (
                           <>
                             <button
                               className="tooltip-action-table"
@@ -268,28 +254,28 @@ const PropertyListTable = ({ setItemEdit }) => {
       {store.isDelete && (
         <ModalDelete
           setIsDelete={setIsDelete}
-          queryKey={"property-list"}
-          mysqlEndpoint={`${devApiVersion}/property-list/${id}`}
+          queryKey={"blogs"}
+          mysqlEndpoint={`${devApiVersion}/blogs/${id}`}
           item={isData}
         />
       )}
       {store.isArchive && (
         <ModalArchive
           setIsArchive={setIsArchive}
-          mysqlEndpoint={`${devApiVersion}/property-list/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/blogs/active/${id}`}
           // msg={"Are you sure you want to archive this property type?"}
           successMsg={"Archived succesfully."}
-          queryKey={"property-list"}
+          queryKey={"blogs"}
           item={isData}
         />
       )}
       {store.isRestore && (
         <ModalRestore
           setIsRestore={setIsRestore}
-          mysqlEndpoint={`${devApiVersion}/property-list/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/blogs/active/${id}`}
           // msg={"Are you sure you want to restore this property type?"}
           successMsg={"Restored succesfully."}
-          queryKey={"property-list"}
+          queryKey={"blogs"}
           item={isData}
         />
       )}
@@ -297,4 +283,4 @@ const PropertyListTable = ({ setItemEdit }) => {
   );
 };
 
-export default PropertyListTable;
+export default BlogsTable;

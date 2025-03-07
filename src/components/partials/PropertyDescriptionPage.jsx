@@ -122,7 +122,7 @@ const PropertyDescriptionPage = ({
 
                   <div className="flex flex-col md:flex md:flex-row gap-4">
                     {/* Preview Image */}
-                    <div className="h-[200px] max-w-[570px] md:h-[480px] md:w-[800px] lg:max-w-[956px] lg:h-[513px]">
+                    <div className="h-[200px] max-w-[570px] md:h-[480px] md:w-[800px] lg:min-w-[956px] lg:h-[513px]">
                       {previewImg && (
                         <LoadImages
                           url={previewImg}

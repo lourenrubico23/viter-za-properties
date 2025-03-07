@@ -5,6 +5,7 @@ import Home from "../components/pages/website/home/Home";
 import Properties from "../components/pages/website/properties/Properties";
 import Sellers from "../components/pages/website/sellers/Sellers";
 import PropertyDescriptionPage from "../components/partials/PropertyDescriptionPage.jsx";
+import Blogs from "../components/pages/website/blogs/Blogs.jsx";
 
 export const RoutesDeveloper = [
   {
@@ -24,11 +25,15 @@ export const RoutesDeveloper = [
     element: <Sellers />,
   },
   {
+    path: `${devNavUrl}/blogs`,
+    element: <Blogs />,
+  },
+  {
     path: `${devNavUrl}/contact`,
     element: <Contact />,
   },
-  {
-    path: `${devNavUrl}/property/listing/:propertyName`,
-    element: <PropertyDescriptionPage />,
-  },
+  // {
+  //   path: `${devNavUrl}/property/listing/:propertyName`,
+  //   element: <PropertyDescriptionPage />,
+  // },
 ];
