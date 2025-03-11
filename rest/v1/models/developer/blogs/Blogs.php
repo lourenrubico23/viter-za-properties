@@ -82,7 +82,7 @@ class Blogs
         try {
             $sql = "select * from {$this->tblBlogs} ";
             $sql .= "order by blogs_is_active desc, ";
-            $sql .= "blogs_published_date asc ";
+            $sql .= "blogs_published_date desc ";
             $query = $this->connection->query($sql);
         } catch (PDOException $ex) {
             $query = false;
@@ -98,7 +98,7 @@ class Blogs
             $sql .= "from ";
             $sql .= "{$this->tblBlogs} ";
             $sql .= "order by blogs_is_active desc, ";
-            $sql .= "blogs_published_date asc ";
+            $sql .= "blogs_published_date desc ";
             $sql .= "limit :start, ";
             $sql .= ":total ";
             $query = $this->connection->prepare($sql);
@@ -118,7 +118,7 @@ class Blogs
         try {
             $sql = "select * from {$this->tblBlogs} ";
             $sql .= "where blogs_aid = :blogs_aid ";
-            $sql .= "order by blogs_published_date asc ";
+            $sql .= "order by blogs_published_date desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "blogs_aid" => $this->blogs_aid,
@@ -140,7 +140,7 @@ class Blogs
             $sql .= "and blogs_author like :blogs_author ";
             $sql .= "order by ";
             $sql .= "blogs_is_active desc, ";
-            $sql .= "blogs_published_date asc ";
+            $sql .= "blogs_published_date desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 'blogs_title' => "%{$this->blogs_search}%",

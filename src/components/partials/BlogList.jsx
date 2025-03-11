@@ -1,21 +1,21 @@
+import { MoveRight } from "lucide-react";
 import React from "react";
+import { Link, useParams } from "react-router-dom";
+import { setIsAdd } from "../../store/StoreAction";
+import { StoreContext } from "../../store/StoreContext";
+import useQueryData from "../custom-hooks/useQueryData";
 import {
   devApiVersion,
-  devBaseImgUrl,
   devNavUrl,
+  generateSlug,
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../helpers/functions-general";
-import { MoveRight } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
-import useQueryData from "../custom-hooks/useQueryData";
-import BlogsDescriptionPage from "./BlogsDescriptionPage";
-import { StoreContext } from "../../store/StoreContext";
-import { setIsAdd } from "../../store/StoreAction";
 
-const BlogList = ({ pageType }) => {
+const BlogList = ({ pageType, currentBlogSlug }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
+  const { slug: blogsSlug } = useParams(); // Get property slug from URL
 
   const { data: blogsData } = useQueryData(
     `${devApiVersion}/blogs`, // endpoint
@@ -24,9 +24,9 @@ const BlogList = ({ pageType }) => {
   );
 
   const [selectedPropertyId, setSelectedPropertyId] = React.useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const initialVisibleProperties = pageType === "home" ? 3 : 6;
+  const initialVisibleProperties =
+    pageType === "home" ? 3 : pageType === "blogSinglePage" ? 3 : 6;
   const [visibleProperties, setVisibleProperties] = React.useState(
     initialVisibleProperties
   );
@@ -34,42 +34,33 @@ const BlogList = ({ pageType }) => {
   const totalProperties = blogsData?.data.length || 0;
   const hasMoreProperties = visibleProperties < totalProperties;
 
-  console.log("blog number: ", visibleProperties);
-
   const handleLoadMore = () => {
     setVisibleProperties((prev) => prev + 6);
   };
 
-  const handleOpenDescription = (item) => {
-    dispatch(setIsAdd(true));
-    setItemEdit(item);
-    setSelectedPropertyId(item.blogs_aid);
+  // Exclude the current blog post
+  const filteredBlogs =
+    blogsData?.data.filter(
+      (item) =>
+        `${generateSlug(item.blogs_title)}` !==
+        `${generateSlug(currentBlogSlug)}`
+    ) || [];
 
-    // Format blogs_title for the URL
-    const formattedName = item.blogs_title.replace(/\s+/g, "-").toLowerCase();
-    setSearchParams({ property: formattedName });
-
-    document.body.classList.toggle("overflow-hidden");
-  };
-
-  // Check URL on page load & open modal
   React.useEffect(() => {
-    const propertySlug = searchParams.get("property"); // Get property name from URL
+    if (blogsSlug && blogsData?.data) {
+      const formattedSlug = `${generateSlug(blogsSlug)}`; // Ensure consistency
 
-    if (propertySlug && blogsData?.data) {
-      // Find the matching property by slug
+      // Find the matching blog
       const selectedProperty = blogsData.data.find(
-        (item) =>
-          item.blogs_title.replace(/\s+/g, "-").toLowerCase() === propertySlug
+        (item) => `${generateSlug(item.blogs_title)}` === formattedSlug
       );
 
       if (selectedProperty) {
         setItemEdit(selectedProperty);
         setSelectedPropertyId(selectedProperty.blogs_aid);
-        dispatch(setIsAdd(true));
       }
     }
-  }, [searchParams, blogsData]); // Re-run when URL or property data changes
+  }, [blogsSlug, blogsData]);
 
   return (
     <>
@@ -81,7 +72,7 @@ const BlogList = ({ pageType }) => {
         )}
 
         <div className="flex flex-wrap gap-8 my-20 place-content-center">
-          {blogsData?.data.slice(0, visibleProperties).map((item, index) => {
+          {filteredBlogs.slice(0, visibleProperties).map((item, index) => {
             const blogsImages =
               getConvertStringToJSONparseData(item.blogs_img) || [];
             const firstImage = blogsImages.length > 0 ? blogsImages[0] : null;
@@ -89,7 +80,7 @@ const BlogList = ({ pageType }) => {
             return (
               <div
                 key={index}
-                className=" group hover:border-secondary hover:scale-[1.01] hover:duration-200 max-w-[372px] min-h-[555px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
+                className="group hover:border-secondary hover:scale-[1.01] hover:duration-200 max-w-[372px] min-h-[555px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
               >
                 <div className="overflow-hidden">
                   {firstImage && (
@@ -109,7 +100,7 @@ const BlogList = ({ pageType }) => {
                 </div>
                 <Link
                   className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0 mb-5"
-                  to={`${devNavUrl}/blogs/${item.blogs_title}`}
+                  to={`${devNavUrl}/blogs/${generateSlug(item.blogs_title)}`}
                 >
                   Read More
                 </Link>

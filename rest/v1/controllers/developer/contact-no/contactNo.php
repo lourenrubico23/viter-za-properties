@@ -3,6 +3,7 @@
 require '../../../core/header.php';
 // use needed functions
 require '../../../core/functions.php';
+require '../../../core/google-api.php';
 // require 'functions.php';
 // use needed classes
 require '../../../models/developer/contact-no/ContactNo.php';

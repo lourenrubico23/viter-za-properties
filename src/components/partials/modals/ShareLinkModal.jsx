@@ -24,7 +24,7 @@ const ShareLinkModal = ({
         .writeText(propertyLink)
         .then(() => {
           setCopied(true);
-          setTimeout(() => setCopied(false), 2000); 
+          setTimeout(() => setCopied(false), 2000);
         })
         .catch((err) => console.error("Failed to copy: ", err));
     }
@@ -46,10 +46,10 @@ const ShareLinkModal = ({
   return (
     <>
       <ModalWrapper
-        className={` bg-light  h-[250px] place-self-center `}
+        className={` bg-light md:h-[250px] place-self-center `}
         handleClose={handleClose}
       >
-        <div className="p-6 overflow-auto w-[550px] h-fit">
+        <div className="p-6 overflow-auto md:w-[550px] h-fit">
           <div className="flex justify-end">
             <TfiClose
               className="h-4 w-6 cursor-pointer "
@@ -65,7 +65,7 @@ const ShareLinkModal = ({
               <p>{propertyLink}</p>
             </div>
             <button
-              className="btn w-[140px] !py-0 !text-sm !h-[35px] !px-[20px] place-self-center"
+              className="btn  !py-0 !text-sm !h-[35px] !px-[20px] "
               onClick={handleCopyLink}
             >
               {copied ? "Copied!" : "Copy Link"}

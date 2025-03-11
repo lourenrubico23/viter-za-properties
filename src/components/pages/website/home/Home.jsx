@@ -173,7 +173,10 @@ const Home = () => {
                       key={index}
                     />
                   ))}
-                  <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4">
+                  <div
+                    className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4"
+                    key={key}
+                  >
                     <h1 className="text-[clamp(30px,3vw,71px)] font-hindBold">
                       {item.about_name}
                     </h1>

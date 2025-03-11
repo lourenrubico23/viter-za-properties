@@ -223,10 +223,10 @@
 
 @layer utilities {
   .btn {
-    @apply relative inline-block px-[20px] md:px-[40px] md:py-[10px] h-[46px] text-[16px] tracking-wider text-light bg-accent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
+    @apply relative px-[20px] md:px-[40px] md:py-[10px] h-[46px] text-[16px] tracking-wider text-light bg-accent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90 place-self-center flex items-center;
   }
   .btn-transparent {
-    @apply relative inline-block px-[20px] md:px-[40px] md:py-[10px] h-[46px] text-[16px] tracking-wider text-light bg-transparent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90;
+    @apply relative px-[20px] md:px-[40px] md:py-[10px] h-[46px] text-[16px] tracking-wider text-light bg-transparent cursor-pointer transition ease-out duration-1000 border-2 rounded-none shadow-[inset_0_0_0_0_#007B80] hover:text-white hover:shadow-[inset_300px_0_0_0_#007B80] active:scale-90 flex items-center place-self-center;
   }
   .search {
     @apply flex items-center justify-end w-full lg:w-[25rem] relative my-3;

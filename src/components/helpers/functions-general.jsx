@@ -127,7 +127,6 @@ export const getGoogleMapEmbededUrl = (url) => {
   return null; // Return null if no coordinates are found
 };
 
-
 // get the url id parameter
 export const getUrlParam = (id) => {
   const queryString = window.location.search;
@@ -217,4 +216,16 @@ export const getDateNow = () => {
 // Copyright year
 export const copyrightYear = () => {
   return getDateNow().split("-")[0];
+};
+
+// Slug conversion to lower case and remove special characters
+export const generateSlug = (title) => {
+  if (!title) return "untitled-blog"; // Default slug
+
+  return title
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+    .replace(/\s+/g, "-") // Replace spaces with dashes
+    .replace(/-+/g, "-"); // Remove multiple dashes
 };

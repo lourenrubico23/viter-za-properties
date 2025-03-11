@@ -1,23 +1,71 @@
 import React from "react";
 import {
   copyrightYear,
+  devApiVersion,
   devBaseImgUrl,
   devNavUrl,
+  getConvertStringToJSONparseData,
+  googleHDViewLink,
 } from "../helpers/functions-general";
+import useQueryData from "../custom-hooks/useQueryData";
 
 const Footer = () => {
+  const { data: logoData } = useQueryData(
+    `${devApiVersion}/logo`, // endpoint
+    "get", // method
+    "logo" // key
+  );
+
+  const { data: contactNoData } = useQueryData(
+    `${devApiVersion}/contactno`, // endpoint
+    "get", // method
+    "contactno" // key
+  );
+
+  const { data: propertyTypeData } = useQueryData(
+    `${devApiVersion}/property-type`, // endpoint
+    "get", // method
+    "property-type" // key
+  );
   return (
     <>
       <div className="bg-primary py-12">
         <div className="customContainer text-light">
           <div className="flex flex-col md:flex md:flex-row gap-7 lg:gap-0 justify-between border-b-2 pb-7">
             <div className="">
-              <img
-                src={`${devBaseImgUrl}/za-logo.png`}
-                alt=""
-                className="mb-2"
-              />
-              <img src={`${devBaseImgUrl}/qr-code.png`} alt="" />
+              {logoData?.data.map((item, key) => {
+                const logoImage =
+                  getConvertStringToJSONparseData(item.logo_image) || [];
+
+                return (
+                  <div key={key}>
+                    {logoImage.map((image, index) => (
+                      <img
+                        src={`${googleHDViewLink}${image?.id}`}
+                        alt="ZA Properties"
+                        className="mb-2"
+                        key={index}
+                      />
+                    ))}
+                  </div>
+                );
+              })}
+              {contactNoData?.data.map((item, key) => {
+                const qrCodeImage =
+                  getConvertStringToJSONparseData(item.contact_no_qr_code) ||
+                  [];
+                return (
+                  <div key={key}>
+                    {qrCodeImage.map((image, index) => (
+                      <img
+                        src={`${googleHDViewLink}${image?.id}`}
+                        alt=""
+                        key={index}
+                      />
+                    ))}
+                  </div>
+                );
+              })}
             </div>
             <div className="flex gap-10 md:gap-24">
               <div className="flex flex-col gap-4">
@@ -25,22 +73,29 @@ const Footer = () => {
                   Property List
                 </p>
                 <ul className="[&>li]:font-poppins [&>li]:text-xs flex flex-col gap-2">
-                  <li>Commercial</li>
-                  <li>Residential</li>
+                  {propertyTypeData?.data.map((item, key) => (
+                    <li key={key}>{item.property_type_name}</li>
+                  ))}
+                  {/* <li>Residential</li>
                   <li>Building</li>
                   <li>Condominium</li>
                   <li>Foreclosed</li>
-                  <li>Industrial</li>
+                  <li>Industrial</li> */}
                 </ul>
               </div>
               <div className="flex flex-col gap-4">
                 <p className="text-lg font-poppins font-bold uppercase">
                   Contact
                 </p>
-                <ul className="[&>li]:font-poppins [&>li]:text-xs flex flex-col gap-2">
-                  <li>properties@zacalfanta.com</li>
-                  <li>+63 917 653 1919</li>
-                </ul>
+                {contactNoData?.data.map((item, key) => (
+                  <ul
+                    className="[&>li]:font-poppins [&>li]:text-xs flex flex-col gap-2"
+                    key={key}
+                  >
+                    <li>{item.contact_no_email}</li>
+                    <li>{item.contact_no_contact}</li>
+                  </ul>
+                ))}
               </div>
             </div>
             <div className="flex flex-col gap-4">

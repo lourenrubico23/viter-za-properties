@@ -8,6 +8,7 @@ import {
   devApiVersion,
   devBaseImgUrl,
   formatDate,
+  generateSlug,
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../helpers/functions-general";
@@ -16,9 +17,12 @@ import BlogList from "./BlogList";
 import LoadImages from "./LoadImages";
 import ContactForm from "./ContactForm";
 import Footer from "./Footer";
+import ShareLinkModal from "./modals/ShareLinkModal";
 
-const BlogsDescriptionPage = () => {
+const BlogsDescriptionPage = ({ setSearchParams }) => {
   const { store, dispatch } = React.useContext(StoreContext);
+  const [isPropertyLinkOpen, setIsPropertyLinkOpen] = React.useState(false);
+  const [propertyLink, setPropertyLink] = React.useState("");
   const { slug } = useParams();
 
   const { data: blogsData } = useQueryData(
@@ -37,8 +41,7 @@ const BlogsDescriptionPage = () => {
       return undefined;
     }
     return blogsData.data.find(
-      (item) =>
-        item.blogs_title?.trim().toLowerCase() === slug?.trim().toLowerCase()
+      (item) => `${generateSlug(item.blogs_title)}` === slug
     );
   };
 
@@ -51,12 +54,22 @@ const BlogsDescriptionPage = () => {
   const blogsImages = getConvertStringToJSONparseData(post.blogs_img) || [];
   const firstImage = blogsImages.length > 0 ? blogsImages[0] : null;
 
+  const handleCopyLink = (post) => {
+    const link = `${window.location.origin}/blogs/${post.blogs_title
+      .replace(/\s+/g, "-")
+      .toLowerCase()}`;
+
+    setPropertyLink(link);
+    setIsPropertyLinkOpen(true);
+    navigator.clipboard.writeText(link);
+  };
+
   return (
     <>
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
-          <div className="customContainer my-16">
+          <div className="customContainer my-20">
             <p className="text-lg font-hindBold text-secondary">
               Blogs and Insights
             </p>
@@ -66,7 +79,7 @@ const BlogsDescriptionPage = () => {
                 {post.blogs_title}
               </h1>
             </div>
-            <div className="flex justify-between py-16 border-b-2">
+            <div className="space-y-10 md:flex md:justify-between md:items-center py-16 border-b-2">
               <div className="flex gap-10">
                 <div>
                   <span>WRITTEN BY</span>
@@ -81,12 +94,17 @@ const BlogsDescriptionPage = () => {
                   )}`}</p>
                 </div>
               </div>
-              <button className="btn !flex gap-2 items-center">
+              <button
+                className="btn gap-2 md:!mt-0"
+                onClick={() => {
+                  handleCopyLink(post);
+                }}
+              >
                 <Share2 className="h-6 " /> Share this Post
               </button>
             </div>
 
-            <div className="mx-[190px] py-[52px] flex flex-col gap-10 ">
+            <div className="md:mx-[10%] lg:mx-[190px] py-[52px] flex flex-col gap-8 ">
               {post.blogs_contents_a
                 .split("\n") // Split by new lines
                 .filter((content_a) => content_a.trim() !== "") // Remove empty lines
@@ -96,7 +114,8 @@ const BlogsDescriptionPage = () => {
               {firstImage && (
                 <LoadImages
                   url={`${googleHDViewLink}${firstImage?.id}`}
-                  alt=""
+                  alt={`${post.blogs_title}`}
+                  className="my-10"
                 />
               )}
               {post.blogs_contents_b
@@ -105,12 +124,13 @@ const BlogsDescriptionPage = () => {
                 .map((content_b, index) => (
                   <p key={index}>{content_b}</p>
                 ))}
-              <div className="flex flex-wrap gap-4 w-[850px] place-content-center">
-                {blogsImages.map((image, index) => (
+              <div className="flex flex-wrap gap-4 md:max-w-[850px] place-content-center">
+                {blogsImages.slice(1).map((image, index) => (
                   <LoadImages
                     url={`${googleHDViewLink}${image?.id}`}
-                    alt=""
-                    className="h-[400px] w-[400px] object-cover"
+                    alt={`${post.blogs_title}`}
+                    className="md:max-h-[400px] md:max-w-[400px] object-cover my-10"
+                    key={index}
                   />
                 ))}
               </div>
@@ -120,18 +140,23 @@ const BlogsDescriptionPage = () => {
                 .map((content_c, index) => (
                   <p key={index}>{content_c}</p>
                 ))}
-              <div>
-                <button className="btn !flex gap-2 items-center">
+              <div className="my-7 place-self-start">
+                <button
+                  className="btn gap-2"
+                  onClick={() => {
+                    handleCopyLink(post);
+                  }}
+                >
                   <Share2 className="h-6 " /> Share this Post
                 </button>
               </div>
             </div>
 
-            <div>
-              <h1 className="text-[clamp(20px,3vw,34px)] font-hindBold pt-10 border-t-2">
+            <div className="pt-16 border-t-2">
+              <h1 className="text-[clamp(20px,3vw,34px)] font-hindBold ">
                 Related Insights
               </h1>
-              <BlogList />
+              <BlogList pageType="blogSinglePage" currentBlogSlug={slug} />
             </div>
 
             <ContactForm pageType={"home"} />
@@ -139,6 +164,15 @@ const BlogsDescriptionPage = () => {
           <Footer />
         </div>
       </div>
+
+      {isPropertyLinkOpen && (
+        <ShareLinkModal
+          propertyLink={propertyLink}
+          setSearchParams={setSearchParams}
+          setIsPropertyLinkOpen={setIsPropertyLinkOpen}
+          setPropertyLink={setPropertyLink}
+        />
+      )}
     </>
   );
 };

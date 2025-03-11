@@ -4,9 +4,8 @@ class ContactNo
 {
     public $contact_no_aid;
     public $contact_no_contact;
-    public $links_title;
-    public $special_offers_price;
-    public $links_link;
+    public $contact_no_email;
+    public $contact_no_qr_code;
     public $contact_no_created;
     public $contact_no_datetime;
 
@@ -40,14 +39,20 @@ class ContactNo
         try {
             $sql = "insert into {$this->tblContactNo}";
             $sql .= "(contact_no_contact, ";
+            $sql .= "contact_no_email, ";
+            $sql .= "contact_no_qr_code, ";
             $sql .= "contact_no_created, ";
             $sql .= "contact_no_datetime ) values ( ";
             $sql .= ":contact_no_contact, ";
+            $sql .= ":contact_no_email, ";
+            $sql .= ":contact_no_qr_code, ";
             $sql .= ":contact_no_created, ";
             $sql .= ":contact_no_datetime )";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "contact_no_contact" => $this->contact_no_contact,
+                "contact_no_email" => $this->contact_no_email,
+                "contact_no_qr_code" => $this->contact_no_qr_code,
                 "contact_no_created" => $this->contact_no_created,
                 "contact_no_datetime" => $this->contact_no_datetime,
             ]);
@@ -63,11 +68,15 @@ class ContactNo
         try {
             $sql = "update {$this->tblContactNo} set ";
             $sql .= "contact_no_contact = :contact_no_contact, ";
+            $sql .= "contact_no_email = :contact_no_email, ";
+            $sql .= "contact_no_qr_code = :contact_no_qr_code, ";
             $sql .= "contact_no_datetime = :contact_no_datetime ";
             $sql .= "where contact_no_aid = :contact_no_aid ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "contact_no_contact" => $this->contact_no_contact,
+                "contact_no_email" => $this->contact_no_email,
+                "contact_no_qr_code" => $this->contact_no_qr_code,
                 "contact_no_datetime" => $this->contact_no_datetime,
                 "contact_no_aid" => $this->contact_no_aid,
             ]);

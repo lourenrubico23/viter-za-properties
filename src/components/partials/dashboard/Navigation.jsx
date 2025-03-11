@@ -118,7 +118,17 @@ const Navigation = ({ menu, submenu }) => {
                     Blogs
                   </li>
                 </Link>
-
+                <Link className="" to={`${devNavUrl}/${link}/contact-form`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "contact-form"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    Contact Form
+                  </li>
+                </Link>
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "header"
@@ -169,7 +179,7 @@ const Navigation = ({ menu, submenu }) => {
                           : "border-none text-dark"
                       }`}
                     >
-                      Contact No.
+                      Contact Info
                     </li>
                   </Link>
                   <Link className="!p-0" to={`${devNavUrl}/${link}/logo`}>

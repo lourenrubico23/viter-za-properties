@@ -120,7 +120,7 @@ const ContactForm = ({ pageType }) => {
               />
             </div>
 
-            <button className="btn my-6">Send Message</button>
+            <button className="btn my-6 !place-self-start">Send Message</button>
           </div>
         </div>
       </div>

@@ -308,10 +308,7 @@ const PropertyDescriptionPage = ({
                             LICENSED REAL STATE BROKER 0033585
                           </p>
                         </div>
-                        <button
-                          className="btn w-[180px]"
-                          onClick={handleGoToPage}
-                        >
+                        <button className="btn " onClick={handleGoToPage}>
                           Message Us
                         </button>
                       </div>
