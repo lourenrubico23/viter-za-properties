@@ -54,6 +54,18 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     itemEdit ? itemEdit.list_property_type_id : ""
   );
 
+  const [onFocusPropertyStatus, setOnFocusPropertyStatus] =
+    React.useState(false);
+  const [propertyStatusValue, setPropertyStatusValue] = React.useState(
+    itemEdit ? `${itemEdit.property_status_name}` : ""
+  ); // to get the data from table when update
+  const [propertyStatus, setPropertyStatus] = React.useState(
+    itemEdit ? itemEdit.property_status_name : ""
+  );
+  const [propertyStatusId, setPropertyStatusId] = React.useState(
+    itemEdit ? itemEdit.list_property_status_id : ""
+  );
+
   // multiple files
   const {
     uploadMultiplePhoto,
@@ -121,11 +133,35 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     true // refetchOnWindowFocus
   );
 
+  const {
+    isFetching: propertyStatusDataIsFetching,
+    error: propertyStatusDataError,
+    data: propertyStatusData,
+  } = useQueryData(
+    `${devApiVersion}/property-list/property-status-search`, // endpoint
+    "post", // method
+    "property-list/property-status-search", // key
+    {
+      searchValue: propertyStatus, // payload
+    },
+    {
+      searchValue: propertyStatus, // id
+    },
+    true // refetchOnWindowFocus
+  );
+
   const handleClickPropertyType = (item) => {
     setPropertyType(item.property_type_name);
     setPropertyTypeValue(`${item.property_type_name}`);
     setPropertyTypeId(item.property_type_aid);
     setOnFocusPropertyType(false);
+  };
+
+  const handleClickPropertyStatus = (item) => {
+    setPropertyStatus(item.property_status_name);
+    setPropertyStatusValue(`${item.property_status_name}`);
+    setPropertyStatusId(item.property_status_aid);
+    setOnFocusPropertyStatus(false);
   };
 
   const handleOnChangePropertyType = (e) => {
@@ -150,7 +186,29 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     }, 500); // debounce seconds to fetch
   };
 
-  // to close the modal when clicking outside for Subscriber
+  const handleOnChangePropertyStatus = (e) => {
+    setPropertyStatusValue(e.target.value);
+    setLoading(true);
+    setPropertyStatusId("");
+    if (e.target.value === "") {
+      setLoading(false);
+    }
+
+    let timeOut;
+
+    timeOut = setTimeout(() => {
+      clearTimeout(timeOut);
+      let val = e.target.value;
+      if (val === "") {
+        setPropertyStatus(val);
+        return;
+      }
+      setPropertyStatus(val);
+      setLoading(false);
+    }, 500); // debounce seconds to fetch
+  };
+
+  // to close the modal when clicking outside for Property type
   const refPropertyType = React.useRef();
 
   const clickOutsideRefPropertyType = (e) => {
@@ -167,6 +225,25 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     document.addEventListener("click", clickOutsideRefPropertyType);
     return () =>
       document.addEventListener("click", clickOutsideRefPropertyType);
+  }, []);
+
+  // to close the modal when clicking outside for Property type
+  const refPropertyStatus = React.useRef();
+
+  const clickOutsideRefPropertyStatus = (e) => {
+    if (
+      refPropertyStatus.current !== undefined &&
+      refPropertyStatus.current !== null &&
+      !refPropertyStatus.current?.contains(e.target)
+    ) {
+      setOnFocusPropertyStatus(false);
+    }
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("click", clickOutsideRefPropertyStatus);
+    return () =>
+      document.addEventListener("click", clickOutsideRefPropertyStatus);
   }, []);
 
   const queryClient = useQueryClient();
@@ -212,6 +289,10 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     list_location: itemEdit ? itemEdit.list_location : "",
     list_property_type_id: itemEdit ? itemEdit.list_property_type_id : "",
     list_property_type_name: itemEdit ? itemEdit.list_property_type_name : "",
+    list_property_status_id: itemEdit ? itemEdit.list_property_status_id : "",
+    list_property_status_name: itemEdit
+      ? itemEdit.list_property_status_name
+      : "",
     list_id: itemEdit ? itemEdit.list_id : "",
     list_floor_area: itemEdit ? itemEdit.list_floor_area : "",
     list_lot_area: itemEdit ? itemEdit.list_lot_area : "",
@@ -253,6 +334,11 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                 dispatch(setMessage("Property Type is Required."));
                 return;
               }
+              if (propertyStatusId === "" || !propertyStatusId) {
+                dispatch(setError(true));
+                dispatch(setMessage("Property Status is Required."));
+                return;
+              }
               const data = {
                 ...values,
                 list_img: Array.from(photoArrayList).map((item) =>
@@ -263,6 +349,8 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                 ),
                 list_property_type_id: propertyTypeId,
                 list_property_type_name: propertyType,
+                list_property_status_id: propertyStatusId,
+                list_property_status_name: propertyStatus,
               };
               const photoUpload = await uploadMultiplePhoto();
               if (photoUpload?.success || !photoUpload?.success) {
@@ -278,9 +366,9 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                   <div className="modal-form mb-[50px]">
                     <div className="modal_container h-[100dvh] flex gap-7 mb-[200px]">
                       <div className="w-[50%] ">
-                        <div className="relative input-wrapper">
+                        <div className=" input-wrapper">
                           <InputText
-                            label="Property Type"
+                            label="*Property Type"
                             type="text"
                             value={propertyTypeValue}
                             name="list_property_type_id"
@@ -308,6 +396,46 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                                     }
                                   >
                                     {item.property_type_name}
+                                  </div>
+                                ))
+                              ) : (
+                                <div className="my-7">
+                                  <NoData />
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                        <div className="input-wrapper">
+                          <InputText
+                            label="*Property Status"
+                            type="text"
+                            value={propertyStatusValue}
+                            name="list_property_status_id"
+                            disabled={mutation.isPending}
+                            onFocus={() => setOnFocusPropertyStatus(true)}
+                            onChange={handleOnChangePropertyStatus}
+                            refVal={refPropertyStatus}
+                          />
+                          {onFocusPropertyStatus && (
+                            <div className="w-full h-40 max-h-40 overflow-y-auto absolute top-[33px] bg-white shadow-md z-50 rounded-sm border border-gray-200 pt-1">
+                              {loading || propertyStatusDataIsFetching ? (
+                                <TableSpinner />
+                              ) : propertyStatusDataError ? (
+                                <div className="my-7">
+                                  <ServerError />
+                                </div>
+                              ) : propertyStatusData?.count > 0 ? (
+                                propertyStatusData?.data.map((item, key) => (
+                                  <div
+                                    className="cursor-pointer hover:bg-gray-100 px-2"
+                                    value={item.property_status_aid}
+                                    key={key}
+                                    onClick={() =>
+                                      handleClickPropertyStatus(item)
+                                    }
+                                  >
+                                    {item.property_status_name}
                                   </div>
                                 ))
                               ) : (

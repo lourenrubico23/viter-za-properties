@@ -12,6 +12,8 @@ if (array_key_exists("listid", $_GET)) {
     $list->list_name = checkIndex($data, "list_name");
     $list->list_property_type_id = $data["list_property_type_id"];
     $list->list_property_type_name = $data["list_property_type_name"];
+    $list->list_property_status_id = $data["list_property_status_id"];
+    $list->list_property_status_name = $data["list_property_status_name"];
     $list->list_price = checkIndex($data, "list_price");
     $list->list_location = $data["list_location"];
     $list->list_id = $data["list_id"];

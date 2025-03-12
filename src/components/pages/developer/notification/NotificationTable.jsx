@@ -3,31 +3,27 @@ import React from "react";
 import { FaArchive, FaEdit } from "react-icons/fa";
 import { MdDelete, MdRestore } from "react-icons/md";
 import { useInView } from "react-intersection-observer";
-
-import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
 import {
   setIsAdd,
   setIsArchive,
   setIsDelete,
   setIsRestore,
-} from "../../../../../store/StoreAction";
-import SearchBar from "../../../../partials/SearchBar";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
-import {
-  devApiVersion,
-  getConvertStringToJSONparseData,
-} from "../../../../helpers/functions-general";
-import LoadMore from "../../../../partials/LoadMore";
-import ModalDelete from "../../../../partials/modals/ModalDelete";
-import { StoreContext } from "../../../../../store/StoreContext";
-import Status from "../../../../partials/Status";
-import ModalArchive from "../../../../partials/modals/ModalArchive";
-import ModalRestore from "../../../../partials/modals/ModalRestore";
+} from "../../../../store/StoreAction";
+import { StoreContext } from "../../../../store/StoreContext";
+import { queryDataInfinite } from "../../../custom-hooks/queryDataInfinite";
+import { devApiVersion } from "../../../helpers/functions-general";
+import LoadMore from "../../../partials/LoadMore";
+import ModalArchive from "../../../partials/modals/ModalArchive";
+import ModalDelete from "../../../partials/modals/ModalDelete";
+import ModalRestore from "../../../partials/modals/ModalRestore";
+import SearchBar from "../../../partials/SearchBar";
+import FetchingSpinner from "../../../partials/spinners/FetchingSpinner";
+import NoData from "../../../partials/spinners/NoData";
+import ServerError from "../../../partials/spinners/ServerError";
+import TableLoading from "../../../partials/spinners/TableLoading";
+import Status from "../../../partials/Status";
 
-const PropertyListTable = ({ setItemEdit }) => {
+const NotificationTable = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
@@ -47,11 +43,11 @@ const PropertyListTable = ({ setItemEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["property-list", onSearch, store.isSearch],
+    queryKey: ["receiver", onSearch, store.isSearch],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
-        `/v1/property-list/search`, // search endpoint
-        `/v1/property-list/page/${pageParam}`, // list endpoint
+        `${devApiVersion}/receiver/search`, // search endpoint
+        `${devApiVersion}/receiver/page/${pageParam}`, // list endpoint
         store.isSearch, // search boolean
         { searchValue: search.current.value, id: "" } // search value
       ),
@@ -73,22 +69,22 @@ const PropertyListTable = ({ setItemEdit }) => {
 
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
-    setIsData(item.list_name);
-    setIsId(item.list_aid);
+    setIsData(item.notification_name);
+    setIsId(item.notification_aid);
   };
 
   const handleArchive = (item) => {
     dispatch(setIsArchive(true));
-    setIsData(item.list_name);
-    setIsId(item.list_aid);
+    setIsData(item.notification_name);
+    setIsId(item.notification_aid);
     setIsArchiving(true);
     setIsRestore(false);
   };
 
   const handleRestore = (item) => {
     dispatch(setIsRestore(true));
-    setIsData(item.list_name);
-    setIsId(item.list_aid);
+    setIsData(item.notification_name);
+    setIsId(item.notification_aid);
     setIsArchiving(false);
     setIsRestore(true);
   };
@@ -114,29 +110,18 @@ const PropertyListTable = ({ setItemEdit }) => {
         />
       </div>
 
-      <div className=" shadow-md rounded-md overflow-y-auto overflow-x-auto min-h-full md:min-h-[calc(100vh-30px)] lg:max-h-[calc(90vh-150px)] mb-10 lg:mb-0 lg:min-h-0 relative">
+      <div className=" shadow-md rounded-md overflow-y-auto min-h-full md:min-h-[calc(100vh-30px)] lg:max-h-[calc(90vh-150px)] mb-10 lg:mb-0 lg:min-h-0 relative">
         {isFetching && !isFetchingNextPage && status !== "pending" && (
           <FetchingSpinner />
         )}
-        <table className="overflow-x-auto">
+        <table>
           <thead>
             <tr className="text-[black]">
               <th className="pl-2 w-[1rem]">#</th>
               <th>Status</th>
-              <th className="w-[15rem]">Name</th>
-              <th>Price</th>
-              <th className="w-[10rem]">Location</th>
-              <th className="w-[6rem]">Property Type</th>
-              <th className="w-[6rem]">Property Status</th>
-              <th className="w-[6rem]">Property ID</th>
-              <th className="w-[6rem]">Floor Area</th>
-              <th className="w-[6rem]">Lot Area</th>
-              <th>Bedrooms</th>
-              <th>Bathrooms</th>
-              <th>Carport</th>
-              <th className="w-[10rem]">Key Features</th>
-              <th className="w-[15rem]">Why This Property is a Best Buy</th>
-              <th>Images</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone No.</th>
               <th className="text-right">Actions</th>
             </tr>
           </thead>
@@ -160,60 +145,27 @@ const PropertyListTable = ({ setItemEdit }) => {
             {result?.pages.map((page, key) => (
               <React.Fragment key={key}>
                 {page?.data.map((item, key) => {
-                  const propertyImages =
-                    getConvertStringToJSONparseData(item.list_img) || [];
                   return (
                     <tr key={key} className="place-content-start text-[14px]">
                       <td className="pl-2 place-content-start">{counter++}</td>
-                      <td className="place-content-start">
-                        {item.list_is_active === 1 ? (
+                      <td>
+                        {item.notification_is_active === 1 ? (
                           <Status text="Active" />
                         ) : (
                           <Status text="Inactive" />
                         )}
                       </td>
-                      <td className="place-content-start">{item.list_name}</td>
-                      <td className="place-content-start">{item.list_price}</td>
                       <td className="place-content-start">
-                        {item.list_location}
+                        {item.notification_name}
                       </td>
                       <td className="place-content-start">
-                        {item.list_property_type_name}
+                        {item.notification_email}
                       </td>
                       <td className="place-content-start">
-                        {item.list_property_status_name}
-                      </td>
-                      <td className="place-content-start">{item.list_id}</td>
-                      <td className="place-content-start">
-                        {item.list_floor_area}
-                      </td>
-                      <td className="place-content-start">
-                        {item.list_lot_area}
-                      </td>
-                      <td className="place-content-start">
-                        {item.list_bedrooms}
-                      </td>
-                      <td className="place-content-start">
-                        {item.list_bathrooms}
-                      </td>
-                      <td className="place-content-start">
-                        {item.list_carport}
-                      </td>
-                      <td className="place-content-start">
-                        {item.list_key_features}
-                      </td>
-                      <td className="place-content-start">
-                        {item.list_best_buy}
-                      </td>
-                      <td className="place-content-start">
-                        {propertyImages.map((img, index) => (
-                          <p key={index} className="text-[12px]">
-                            {img.name}
-                          </p>
-                        ))}
+                        {item.notification_phone}
                       </td>
                       <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
-                        {item.list_is_active ? (
+                        {item.notification_is_active ? (
                           <>
                             <button
                               className="tooltip-action-table"
@@ -272,28 +224,28 @@ const PropertyListTable = ({ setItemEdit }) => {
       {store.isDelete && (
         <ModalDelete
           setIsDelete={setIsDelete}
-          queryKey={"property-list"}
-          mysqlEndpoint={`${devApiVersion}/property-list/${id}`}
+          queryKey={"notification"}
+          mysqlEndpoint={`${devApiVersion}/notification/${id}`}
           item={isData}
         />
       )}
       {store.isArchive && (
         <ModalArchive
           setIsArchive={setIsArchive}
-          mysqlEndpoint={`${devApiVersion}/property-list/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/notification/active/${id}`}
           // msg={"Are you sure you want to archive this property type?"}
           successMsg={"Archived succesfully."}
-          queryKey={"property-list"}
+          queryKey={"notification"}
           item={isData}
         />
       )}
       {store.isRestore && (
         <ModalRestore
           setIsRestore={setIsRestore}
-          mysqlEndpoint={`${devApiVersion}/property-list/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/notification/active/${id}`}
           // msg={"Are you sure you want to restore this property type?"}
           successMsg={"Restored succesfully."}
-          queryKey={"property-list"}
+          queryKey={"notification"}
           item={isData}
         />
       )}
@@ -301,4 +253,4 @@ const PropertyListTable = ({ setItemEdit }) => {
   );
 };
 
-export default PropertyListTable;
+export default NotificationTable;

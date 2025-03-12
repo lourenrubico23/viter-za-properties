@@ -6,90 +6,447 @@ import {
   Smartphone,
 } from "lucide-react";
 import React from "react";
+import useQueryData from "../custom-hooks/useQueryData";
+import { devApiVersion } from "../helpers/functions-general";
 
 const ContactForm = ({ pageType }) => {
+  const { data: contactFormData } = useQueryData(
+    `${devApiVersion}/contact-form`, // endpoint
+    "get", // method
+    "contact-form" // key
+  );
+  const { data: contactNoData } = useQueryData(
+    `${devApiVersion}/contactno`, // endpoint
+    "get", // method
+    "contactno" // key
+  );
   return (
     <div className="bg-light py-24">
       <div className="customContainer">
         <div className="lg:flex  items-center justify-between">
           <div className="flex flex-col gap-7">
-            {pageType === "buyers" && (
-              <div className="flex flex-col gap-12 mb-9">
-                <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
-                  Buyers
-                </p>
-                <p className="text-[16px] font-hindRegular max-w-[556px]">
-                  Finding the perfect property is more than just a
-                  transaction—it's about securing your future. Whether you're
-                  searching for your dream home, a smart investment, or a prime
-                  commercial space, I am committed to guiding you every step of
-                  the way. With expert market insights, personalized service,
-                  and a passion for real estate, I help buyers make confident,
-                  well-informed decisions. Let's turn your vision into
-                  reality—because the right property changes everything.
-                </p>
-              </div>
-            )}
-            {pageType === "sellers" && (
-              <div className="flex flex-col gap-12 mb-9">
-                <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
-                  Sellers
-                </p>
-                <p className="text-[16px] font-hindRegular max-w-[556px]">
-                  Selling your property is a major decision, and I'm here to
-                  make the process smooth, strategic, and successful. With
-                  expert market analysis, targeted marketing, and a vast network
-                  of qualified buyers, I ensure your property gets the exposure
-                  and value it deserves. From pricing to closing, I handle every
-                  detail with professionalism and care. Let's maximize your
-                  propertys potential and achieve the best possible deal.
-                </p>
-              </div>
-            )}
-
-            <h1 className="text-[clamp(30px,3vw,72px)] font-hindBold">
-              ZA Properties
-            </h1>
-
-            <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
-              <li>
-                <Smartphone className="fill-beige" />
-                <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
-                  +63 917 653 1919
-                </p>
-              </li>
-              <li>
-                <MapPin className="fill-beige" />
-                <p className="text-[16px] font-hindRegular">
-                  24th Floor PSE Tower 5th Avenue BGC Taguig
-                </p>
-              </li>
-              <li>
-                <Facebook className="fill-beige" />
-                <p className="text-[16px] font-hindRegular">ZAPropertiesPh</p>
-              </li>
-              <li>
-                <Instagram className="fill-beige" />
-                <p className="text-[16px] font-hindRegular">ZAPropertiesPh</p>
-              </li>
-              <li>
-                <Linkedin className="fill-beige" />
-                <p className="text-[16px] font-hindRegular">ZacAlfantaJr</p>
-              </li>
-            </ul>
+            {contactFormData?.data.map((item, key) => {
+              if (item.form_page === "Home" && pageType === "home") {
+                return (
+                  <div className="flex flex-col gap-5" key={key}>
+                    <div className="flex flex-col gap-12 mb-9">
+                      {item.form_label && (
+                        <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                          {item.form_label}
+                        </p>
+                      )}
+                      {item.form_description && (
+                        <p className="text-[16px] font-hindRegular max-w-[556px]">
+                          {item.form_description}
+                        </p>
+                      )}
+                    </div>
+                    <h1 className="text-[clamp(30px,3vw,72px)] font-hindBold">
+                      {item.form_title}
+                    </h1>
+                    <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
+                      <li>
+                        <Smartphone className="fill-beige" />
+                        {contactNoData?.data.map((item, key) => (
+                          <p
+                            className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
+                            key={key}
+                          >
+                            {item.contact_no_contact}
+                          </p>
+                        ))}
+                      </li>
+                      <li>
+                        <MapPin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_address}
+                        </p>
+                      </li>
+                      <li>
+                        <Facebook className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_facebook}
+                        </p>
+                      </li>
+                      <li>
+                        <Instagram className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_instagram}
+                        </p>
+                      </li>
+                      <li>
+                        <Linkedin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_linkedIn}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              }
+              if (
+                item.form_page === "Properties" &&
+                pageType === "properties"
+              ) {
+                return (
+                  <div className="flex flex-col gap-5" key={key}>
+                    <div className="flex flex-col gap-12 mb-9">
+                      {item.form_label && (
+                        <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                          {item.form_label}
+                        </p>
+                      )}
+                      {item.form_description && (
+                        <p className="text-[16px] font-hindRegular max-w-[556px]">
+                          {item.form_description}
+                        </p>
+                      )}
+                    </div>
+                    <h1 className="text-[clamp(30px,3vw,72px)] font-hindBold">
+                      {item.form_title}
+                    </h1>
+                    <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
+                      <li>
+                        <Smartphone className="fill-beige" />
+                        {contactNoData?.data.map((item, key) => (
+                          <p
+                            className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
+                            key={key}
+                          >
+                            {item.contact_no_contact}
+                          </p>
+                        ))}
+                      </li>
+                      <li>
+                        <MapPin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_address}
+                        </p>
+                      </li>
+                      <li>
+                        <Facebook className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_facebook}
+                        </p>
+                      </li>
+                      <li>
+                        <Instagram className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_instagram}
+                        </p>
+                      </li>
+                      <li>
+                        <Linkedin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_linkedIn}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              }
+              if (item.form_page === "Buyers" && pageType === "buyers") {
+                return (
+                  <div className="flex flex-col gap-5" key={key}>
+                    <div className="flex flex-col gap-12 mb-9">
+                      {item.form_label && (
+                        <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                          {item.form_label}
+                        </p>
+                      )}
+                      {item.form_description && (
+                        <p className="text-[16px] font-hindRegular max-w-[556px]">
+                          {item.form_description}
+                        </p>
+                      )}
+                    </div>
+                    <h1 className="text-[clamp(30px,3vw,72px)] font-hindBold">
+                      {item.form_title}
+                    </h1>
+                    <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
+                      <li>
+                        <Smartphone className="fill-beige" />
+                        {contactNoData?.data.map((item, key) => (
+                          <p
+                            className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
+                            key={key}
+                          >
+                            {item.contact_no_contact}
+                          </p>
+                        ))}
+                      </li>
+                      <li>
+                        <MapPin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_address}
+                        </p>
+                      </li>
+                      <li>
+                        <Facebook className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_facebook}
+                        </p>
+                      </li>
+                      <li>
+                        <Instagram className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_instagram}
+                        </p>
+                      </li>
+                      <li>
+                        <Linkedin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_linkedIn}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              }
+              if (item.form_page === "Sellers" && pageType === "sellers") {
+                return (
+                  <div className="flex flex-col gap-5" key={key}>
+                    <div className="flex flex-col gap-12 mb-9">
+                      {item.form_label && (
+                        <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                          {item.form_label}
+                        </p>
+                      )}
+                      {item.form_description && (
+                        <p className="text-[16px] font-hindRegular max-w-[556px]">
+                          {item.form_description}
+                        </p>
+                      )}
+                    </div>
+                    <h1 className="text-[clamp(30px,3vw,72px)] font-hindBold">
+                      {item.form_title}
+                    </h1>
+                    <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
+                      <li>
+                        <Smartphone className="fill-beige" />
+                        {contactNoData?.data.map((item, key) => (
+                          <p
+                            className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
+                            key={key}
+                          >
+                            {item.contact_no_contact}
+                          </p>
+                        ))}
+                      </li>
+                      <li>
+                        <MapPin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_address}
+                        </p>
+                      </li>
+                      <li>
+                        <Facebook className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_facebook}
+                        </p>
+                      </li>
+                      <li>
+                        <Instagram className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_instagram}
+                        </p>
+                      </li>
+                      <li>
+                        <Linkedin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_linkedIn}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              }
+              if (item.form_page === "Blogs" && pageType === "blogs") {
+                return (
+                  <div className="flex flex-col gap-5" key={key}>
+                    <div className="flex flex-col gap-12 mb-9">
+                      {item.form_label && (
+                        <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                          {item.form_label}
+                        </p>
+                      )}
+                      {item.form_description && (
+                        <p className="text-[16px] font-hindRegular max-w-[556px]">
+                          {item.form_description}
+                        </p>
+                      )}
+                    </div>
+                    <h1 className="text-[clamp(30px,3vw,72px)] font-hindBold">
+                      {item.form_title}
+                    </h1>
+                    <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
+                      <li>
+                        <Smartphone className="fill-beige" />
+                        {contactNoData?.data.map((item, key) => (
+                          <p
+                            className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
+                            key={key}
+                          >
+                            {item.contact_no_contact}
+                          </p>
+                        ))}
+                      </li>
+                      <li>
+                        <MapPin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_address}
+                        </p>
+                      </li>
+                      <li>
+                        <Facebook className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_facebook}
+                        </p>
+                      </li>
+                      <li>
+                        <Instagram className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_instagram}
+                        </p>
+                      </li>
+                      <li>
+                        <Linkedin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_linkedIn}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              }
+              if (item.form_page === "Contact" && pageType === "contact") {
+                return (
+                  <div className="flex flex-col gap-5" key={key}>
+                    <div className="flex flex-col gap-12 mb-9">
+                      {item.form_label && (
+                        <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                          {item.form_label}
+                        </p>
+                      )}
+                      {item.form_description && (
+                        <p className="text-[16px] font-hindRegular max-w-[556px]">
+                          {item.form_description}
+                        </p>
+                      )}
+                    </div>
+                    <h1 className="text-[clamp(30px,3vw,72px)] font-hindBold">
+                      {item.form_title}
+                    </h1>
+                    <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
+                      <li>
+                        <Smartphone className="fill-beige" />
+                        {contactNoData?.data.map((item, key) => (
+                          <p
+                            className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
+                            key={key}
+                          >
+                            {item.contact_no_contact}
+                          </p>
+                        ))}
+                      </li>
+                      <li>
+                        <MapPin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_address}
+                        </p>
+                      </li>
+                      <li>
+                        <Facebook className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_facebook}
+                        </p>
+                      </li>
+                      <li>
+                        <Instagram className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_instagram}
+                        </p>
+                      </li>
+                      <li>
+                        <Linkedin className="fill-beige" />
+                        <p className="text-[16px] font-hindRegular">
+                          {item.form_linkedIn}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              }
+            })}
           </div>
 
           <div className="bg-light border shadow-lg md:p-16 p-6 min-w-[300px] max-w-[622px] place-self-center">
-            <p className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 md:w-[520px]">
-              {pageType === "home" || pageType === "properties"
-                ? "Contact Us"
-                : ""}
-              {pageType === "buyers" &&
-                "Your Ideal Property Awaits—Let’s Connect!"}
-              {pageType === "sellers" &&
-                "Let's Get Your Property Sold—Contact Me Now!"}
-              {pageType === "contact" &&
-                "Contact us today for a complimentary, no-pressure home appraisal!"}
+            <p className=" md:w-[520px]">
+              {contactFormData?.data.map((item, key) => {
+                if (item.form_page === "Home" && pageType === "home") {
+                  return (
+                    <p
+                      key={key}
+                      className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 leading-7"
+                    >
+                      {item.form_contact_description}
+                    </p>
+                  );
+                }
+                if (
+                  item.form_page === "Properties" &&
+                  pageType === "properties"
+                ) {
+                  return (
+                    <p
+                      key={key}
+                      className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 leading-7"
+                    >
+                      {item.form_contact_description}
+                    </p>
+                  );
+                }
+                if (item.form_page === "Buyers" && pageType === "buyers") {
+                  return (
+                    <p
+                      key={key}
+                      className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 leading-7"
+                    >
+                      {item.form_contact_description}
+                    </p>
+                  );
+                }
+                if (item.form_page === "Sellers" && pageType === "sellers") {
+                  return (
+                    <p
+                      key={key}
+                      className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 leading-7"
+                    >
+                      {item.form_contact_description}
+                    </p>
+                  );
+                }
+                if (item.form_page === "Blogs" && pageType === "blogs") {
+                  return (
+                    <p
+                      key={key}
+                      className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 leading-7"
+                    >
+                      {item.form_contact_description}
+                    </p>
+                  );
+                }
+                if (item.form_page === "Contact" && pageType === "contact") {
+                  return (
+                    <p
+                      key={key}
+                      className="text-[clamp(16px,3vw,24px)] font-hindBold mb-6 leading-7"
+                    >
+                      {item.form_contact_description}
+                    </p>
+                  );
+                }
+              })}
             </p>
 
             <div className="flex flex-col gap-7">

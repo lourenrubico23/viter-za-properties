@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2025 at 08:58 AM
+-- Generation Time: Mar 12, 2025 at 09:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,6 +34,9 @@ CREATE TABLE `zapv1_property_list` (
   `list_price` varchar(100) NOT NULL,
   `list_location` text NOT NULL,
   `list_property_type_id` varchar(50) NOT NULL,
+  `list_property_type_name` text NOT NULL,
+  `list_property_status_id` varchar(20) NOT NULL,
+  `list_property_status_name` varchar(200) NOT NULL,
   `list_id` varchar(100) NOT NULL,
   `list_floor_area` varchar(100) NOT NULL,
   `list_lot_area` varchar(100) NOT NULL,
@@ -51,9 +54,8 @@ CREATE TABLE `zapv1_property_list` (
 -- Dumping data for table `zapv1_property_list`
 --
 
-INSERT INTO `zapv1_property_list` (`list_aid`, `list_is_active`, `list_name`, `list_price`, `list_location`, `list_property_type_id`, `list_id`, `list_floor_area`, `list_lot_area`, `list_bedrooms`, `list_bathrooms`, `list_carport`, `list_key_features`, `list_best_buy`, `list_img`, `list_created`, `list_datetime`) VALUES
-(1, 1, 'Prime Office Space at BPI-Philam Life Building, Madrigal Business Park, Alabang', '400 M', 'Alabang', '1', 'abcde123', '1043.63 sqm', '558 sqm', '4', '5', '6', 'Separate dressing room (3rd floor)\nServer room (3rd floor)\nGround Floor:\nGym area, lanai area, main kitchen, dining area\nBasement:\nSauna, storage, kitchen, maid\'s and driver\'s rooms, laundry\n', 'Fully furnished with Roche Bobois furniture.\n', '[{\"name\":\"buyers-banner.webp\",\"id\":\"1dY_QIkA8nkC7epkoq0cTQPzd3oNh0hQE\",\"datetime\":\"2025-03-04 13:12:32\"},{\"name\":\"20221125-DSC_5382.jpg\",\"id\":\"1E8BZuPnWaDVUvnpCbjeEnQsz-_9MjA2h\",\"datetime\":\"2025-03-04 14:52:48\"},{\"name\":\"home-1.webp\",\"id\":\"1TuEjgzti3s_4VKIiHh91CUBGuFt4i9U1\",\"datetime\":\"2025-03-04 14:52:52\"},{\"name\":\"home-2.webp\",\"id\":\"1ZQAXrtvA_K0AsoApXgd_Qif9mlMsQGj1\",\"datetime\":\"2025-03-04 14:52:56\"},{\"name\":\"home-3.webp\",\"id\":\"1h2EMD5FZXsfFZI8YX-SZ-wGbbfAw6KEI\",\"datetime\":\"2025-03-04 14:52:59\"},{\"name\":\"home-4.webp\",\"id\":\"177fNULZrTCUZa1f5SuWZnjwKdPYs2rIM\",\"datetime\":\"2025-03-04 14:53:04\"},{\"name\":\"home-5.webp\",\"id\":\"1zE4BrE1LwKUUjiYLBGpWhxahgxMXz128\",\"datetime\":\"2025-03-04 14:53:08\"}]', '2025-03-04 13:12:20', '2025-03-04 15:20:05'),
-(2, 1, 'Prime Mixed-Use Property in Dasmariñas Technopark', '203,200,000 (VAT Inclusive)', 'Dasmariñas Technopark, Dasmariñas City, Cavite', '2', 'xxxx12345', '', '3,000 sqm', '', '', ' 26 Slots', '✅ Multi-Functional Space – Includes two warehouse buildings with a dock bay, office spaces, commercial areas, and residential options.\n✅ Fully Equipped – Comes with a generator set for a reliable power supply.\n✅ Modern Infrastructure – Designed for mixed-use purposes, ensuring versatility.\n✅ Ample Parking – 26 dedicated parking slots for convenience.\n✅ Elevator Access – Enhancing accessibility across floors.\n', '???? Prime Location – Situated in Dasmariñas Technopark, a premier business hub.\n???? Great Investment Opportunity – Generates steady rental income from existing tenants.\n???? Versatile & High-Value – Ideal for businesses, warehouses, and commercial operations.\n???? Strategic Accessibility – Designed to accommodate diverse business needs efficiently.\n', '[{\"name\":\"Frontage.jpg\",\"id\":\"14yjnlp5tu1JKDK4rmyH5jIRk5rBMfI66\",\"datetime\":\"2025-03-04 15:01:50\"}]', '2025-03-04 15:00:59', '2025-03-04 15:00:59');
+INSERT INTO `zapv1_property_list` (`list_aid`, `list_is_active`, `list_name`, `list_price`, `list_location`, `list_property_type_id`, `list_property_type_name`, `list_property_status_id`, `list_property_status_name`, `list_id`, `list_floor_area`, `list_lot_area`, `list_bedrooms`, `list_bathrooms`, `list_carport`, `list_key_features`, `list_best_buy`, `list_img`, `list_created`, `list_datetime`) VALUES
+(8, 1, 'Luxurious House and Lot in Ayala Alabang Village', '400M (Negotiable)', 'New Alabang Village, Metro Manila', '1', 'House', '2', 'Available', '565abc', '1,043.63 sqm', '558 sqm', '4', '3 on the 2nd floor, 1 on the 3rd floor', '4-6', 'Separate dressing room (3rd floor)\nServer room (3rd floor)\nGround Floor:\nGym area, lanai area, main kitchen, dining area\nBasement:\nSauna, storage, kitchen, maid\'s and driver\'s rooms, laundry\n', 'Private pool\nFully furnished with Roche Bobois furniture\n', '[{\"name\":\"20221125-DSC_5382.jpg\",\"id\":\"14LRntchjng1yb5pEDSjboKu8GRXBKn8c\",\"datetime\":\"2025-03-12 14:56:07\"},{\"name\":\"home-1.webp\",\"id\":\"1SIo0gbkNJee1jCMzaA_yIYbhvdb56P0J\",\"datetime\":\"2025-03-12 14:56:12\"},{\"name\":\"home-2.webp\",\"id\":\"1iQR_sOHIzSgfM5Gagux7bggUPnkMngaV\",\"datetime\":\"2025-03-12 14:56:16\"},{\"name\":\"home-3.webp\",\"id\":\"11YTwYU2EO4EYMZdQ8ikwPnU8-AVXOzE7\",\"datetime\":\"2025-03-12 14:56:19\"},{\"name\":\"home-4.webp\",\"id\":\"1kQWLw4gyu2XxbOrckyPkbn0Mx166SKsL\",\"datetime\":\"2025-03-12 14:56:22\"},{\"name\":\"home-5.webp\",\"id\":\"1ZObvPJ3J4Qx6T7U-cBmlOH6xiN_mtmjT\",\"datetime\":\"2025-03-12 14:56:26\"}]', '2025-03-12 14:56:02', '2025-03-12 14:56:02');
 
 --
 -- Indexes for dumped tables
@@ -73,7 +75,7 @@ ALTER TABLE `zapv1_property_list`
 -- AUTO_INCREMENT for table `zapv1_property_list`
 --
 ALTER TABLE `zapv1_property_list`
-  MODIFY `list_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `list_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

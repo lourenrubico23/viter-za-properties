@@ -308,7 +308,10 @@ const PropertyDescriptionPage = ({
                             LICENSED REAL STATE BROKER 0033585
                           </p>
                         </div>
-                        <button className="btn " onClick={handleGoToPage}>
+                        <button
+                          className="btn !place-self-start"
+                          onClick={handleGoToPage}
+                        >
                           Message Us
                         </button>
                       </div>

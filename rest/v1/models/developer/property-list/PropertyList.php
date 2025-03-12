@@ -5,6 +5,8 @@ class PropertyList
     public $list_is_active;
     public $list_property_type_id;
     public $list_property_type_name;
+    public $list_property_status_id;
+    public $list_property_status_name;
     public $list_name;
     public $list_price;
     public $list_location;
@@ -28,12 +30,14 @@ class PropertyList
 
     public $tblPropertyList;
     public $tblPropertyType;
+    public $tblPropertyStatus;
 
     public function __construct($db)
     {
         $this->connection = $db;
         $this->tblPropertyList = "zapv1_property_list";
         $this->tblPropertyType = "zapv1_property_type";
+        $this->tblPropertyStatus = "zapv1_property_status";
     }
 
     // create
@@ -44,6 +48,8 @@ class PropertyList
             $sql .= "( list_name, ";
             $sql .= "list_property_type_id, ";
             $sql .= "list_property_type_name, ";
+            $sql .= "list_property_status_id, ";
+            $sql .= "list_property_status_name, ";
             $sql .= "list_price, ";
             $sql .= "list_location, ";
             $sql .= "list_is_active, ";
@@ -61,6 +67,8 @@ class PropertyList
             $sql .= ":list_name, ";
             $sql .= ":list_property_type_id, ";
             $sql .= ":list_property_type_name, ";
+            $sql .= ":list_property_status_id, ";
+            $sql .= ":list_property_status_name, ";
             $sql .= ":list_price, ";
             $sql .= ":list_location, ";
             $sql .= ":list_is_active, ";
@@ -80,6 +88,8 @@ class PropertyList
                 "list_name" => $this->list_name,
                 "list_property_type_id" => $this->list_property_type_id,
                 "list_property_type_name" => $this->list_property_type_name,
+                "list_property_status_id" => $this->list_property_status_id,
+                "list_property_status_name" => $this->list_property_status_name,
                 "list_price" => $this->list_price,
                 "list_location" => $this->list_location,
                 "list_is_active" => $this->list_is_active,
@@ -123,8 +133,10 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} as list, ";
-            $sql .= "{$this->tblPropertyType} as type ";
+            $sql .= "{$this->tblPropertyType} as type, ";
+            $sql .= "{$this->tblPropertyStatus} as status ";
             $sql .= "where list.list_property_type_id = type.property_type_aid ";
+            $sql .= "and list.list_property_status_id = status.property_status_aid ";
             $sql .= "order by list.list_is_active desc, ";
             $sql .= "list.list_name asc ";
             $sql .= "limit :start, ";
@@ -164,12 +176,15 @@ class PropertyList
             $sql = "select ";
             $sql .= "* ";
             $sql .= "from {$this->tblPropertyList} as list, ";
-            $sql .= " {$this->tblPropertyType} as type ";
+            $sql .= " {$this->tblPropertyType} as type, ";
+            $sql .= " {$this->tblPropertyStatus} as status, ";
             $sql .= "where ";
             $sql .= "list.list_property_type_id = type.property_type_aid ";
+            $sql .= "and list.list_property_status_id = status.property_status_aid ";
             $sql .= "and (list.list_name like :list_name ";
             $sql .= "or list.list_price like :list_price ";
-            $sql .= "or type.property_type_name like :property_type_name) ";
+            $sql .= "or type.property_type_name like :property_type_name ";
+            $sql .= "or status.property_status_name like :property_status_name) ";
             $sql .= "order by list.list_is_active desc, ";
             $sql .= "list.list_name asc ";
             $query = $this->connection->prepare($sql);
@@ -177,6 +192,7 @@ class PropertyList
                 "list_name" => "%{$this->list_search}%",
                 "list_price" => "%{$this->list_search}%",
                 "property_type_name" => "%{$this->list_search}%",
+                "property_status_name" => "%{$this->list_search}%",
             ]);
         } catch (PDOException $ex) {
             $query = false;
@@ -192,6 +208,8 @@ class PropertyList
             $sql .= "list_name = :list_name, ";
             $sql .= "list_property_type_id = :list_property_type_id, ";
             $sql .= "list_property_type_name = :list_property_type_name, ";
+            $sql .= "list_property_status_id = :list_property_status_id, ";
+            $sql .= "list_property_status_name = :list_property_status_name, ";
             $sql .= "list_price = :list_price, ";
             $sql .= "list_location = :list_location, ";
             $sql .= "list_id = :list_id, ";
@@ -210,6 +228,8 @@ class PropertyList
                 "list_name" => $this->list_name,
                 "list_property_type_id" => $this->list_property_type_id,
                 "list_property_type_name" => $this->list_property_type_name,
+                "list_property_status_id" => $this->list_property_status_id,
+                "list_property_status_name" => $this->list_property_status_name,
                 "list_price" => $this->list_price,
                 "list_location" => $this->list_location,
                 "list_id" => $this->list_id,
@@ -297,6 +317,26 @@ class PropertyList
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "property_type_name" => "%{$this->list_search}%",
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    //  search for property type
+    public function searchPropertyStatus()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from {$this->tblPropertyStatus} ";
+            $sql .= "where property_status_name like :property_status_name ";
+            $sql .= "and property_status_is_active = 1 ";
+            $sql .= "order by ";
+            $sql .= "property_status_name asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "property_status_name" => "%{$this->list_search}%",
             ]);
         } catch (PDOException $ex) {
             $query = false;

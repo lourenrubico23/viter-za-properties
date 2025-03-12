@@ -129,6 +129,17 @@ const Navigation = ({ menu, submenu }) => {
                     Contact Form
                   </li>
                 </Link>
+                <Link className="" to={`${devNavUrl}/${link}/notification`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "notification"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    Notification
+                  </li>
+                </Link>
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "header"
@@ -239,20 +250,6 @@ const Navigation = ({ menu, submenu }) => {
                 >
                   <Link
                     className="!p-0"
-                    to={`${devNavUrl}/${link}/property-type`}
-                  >
-                    <li
-                      className={`text-xs  border-transparent ${
-                        submenu === "property-type"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Property Type
-                    </li>
-                  </Link>
-                  <Link
-                    className="!p-0"
                     to={`${devNavUrl}/${link}/property-list`}
                   >
                     <li
@@ -263,6 +260,34 @@ const Navigation = ({ menu, submenu }) => {
                       }`}
                     >
                       Property List
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/property-type`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "property-type"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Property Type
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/property-status`}
+                  >
+                    <li
+                      className={`text-xs  border-transparent ${
+                        submenu === "property-status"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Property Status
                     </li>
                   </Link>
                 </ul>

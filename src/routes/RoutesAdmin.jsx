@@ -8,7 +8,9 @@ import Banner from "../components/pages/developer/header/banner/Banner";
 import ContactNo from "../components/pages/developer/header/contact-no/ContactNo";
 import Links from "../components/pages/developer/header/links/Links";
 import Logo from "../components/pages/developer/header/logo/Logo";
+import Notification from "../components/pages/developer/notification/Notification.jsx";
 import PropertyList from "../components/pages/developer/properties/property-list/PropertyList";
+import PropertyStatus from "../components/pages/developer/properties/property-status/PropertyStatus.jsx";
 import PropertyType from "../components/pages/developer/properties/property-type/PropertyType";
 import Testimonial from "../components/pages/developer/testimonial/Testimonial.jsx";
 import OtherUser from "../components/pages/developer/user/other-user/OtherUser";
@@ -89,6 +91,14 @@ export const RoutesAdmin = [
     ),
   },
   {
+    path: `${devNavUrl}/${urlAdmin}/property-status`,
+    element: (
+      <ProtectedRouteUser>
+        <PropertyStatus />
+      </ProtectedRouteUser>
+    ),
+  },
+  {
     path: `${devNavUrl}/${urlAdmin}/about`,
     element: (
       <ProtectedRouteUser>
@@ -117,6 +127,14 @@ export const RoutesAdmin = [
     element: (
       <ProtectedRouteUser>
         <ContactForm />
+      </ProtectedRouteUser>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlAdmin}/notification`,
+    element: (
+      <ProtectedRouteUser>
+        <Notification />
       </ProtectedRouteUser>
     ),
   },

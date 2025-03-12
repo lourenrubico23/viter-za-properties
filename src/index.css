@@ -196,7 +196,7 @@
     @apply translate-y-0;
   }
   .modal-wrapper {
-    @apply bg-white h-full flex flex-col max-w-[400px] w-full p-5;
+    @apply bg-white h-full flex flex-col max-w-[400px] w-full p-5 ;
   }
   .modal-wrapper-menu {
     @apply bg-[white] h-full flex flex-col max-w-[506px] w-full p-5;

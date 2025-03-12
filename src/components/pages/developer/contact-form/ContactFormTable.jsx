@@ -36,8 +36,8 @@ const ContactFormTable = ({ setItemEdit }) => {
 
   const handleDelete = (item) => {
     dispatch(setIsDelete(true));
-    setIsData(item.about_name);
-    setIsId(item.about_aid);
+    setIsData(item.Page);
+    setIsId(item.form_aid);
   };
   return (
     <>
@@ -48,14 +48,15 @@ const ContactFormTable = ({ setItemEdit }) => {
             <tr className="text-[black]">
               <th className="pl-2 w-[1rem]">#</th>
               <th>Page</th>
+              <th>Label</th>
               <th>Title</th>
-              <th>Description</th>
-              <th>Form Description</th>
-              <th>Name</th>
-              <th>Address</th>
               <th>Facebook</th>
               <th>Instagram</th>
               <th>LinkedIn</th>
+              <th>Address</th>
+              <th>Description</th>
+              <th>Form Description</th>
+
               <th className="text-right">Actions</th>
             </tr>
           </thead>
@@ -79,18 +80,15 @@ const ContactFormTable = ({ setItemEdit }) => {
               return (
                 <tr key={key} className="text-[14px]">
                   <td className="pl-2 ">{counter++}.</td>
-                  <td className="">{item.about_name}</td>
-                  <td className="">
-                    {aboutImage.map((img, index) => (
-                      <p key={index} className="text-xs">
-                        {img.name}
-                      </p>
-                    ))}
-                  </td>
-
-                  <td className="">{item.about_paragraph_a}</td>
-                  <td className="">{item.about_paragraph_b}</td>
-                  <td className="">{item.about_paragraph_c}</td>
+                  <td className="">{item.form_page}</td>
+                  <td className="">{item.form_label}</td>
+                  <td className="">{item.form_title}</td>
+                  <td className="">{item.form_facebook}</td>
+                  <td className="">{item.form_instagram}</td>
+                  <td className="">{item.form_linkedIn}</td>
+                  <td className="">{item.form_address}</td>
+                  <td className="">{item.form_description}</td>
+                  <td className="">{item.form_contact_description}</td>
 
                   <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
                     <button

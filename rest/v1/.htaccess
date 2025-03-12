@@ -16,7 +16,7 @@ RewriteRule ^upload-multiple-photo$ core/upload-multiple-photo.php [L]
 RewriteRule ^links$ controllers/developer/links/links.php [L]
 RewriteRule ^links/([0-9]+)$ controllers/developer/links/links.php?linksid=$1 [L]
 
-# CONTACT NO
+# CONTACT INFO
 RewriteRule ^contactno$ controllers/developer/contact-no/contactNo.php [L]
 RewriteRule ^contactno/([0-9]+)$ controllers/developer/contact-no/contactNo.php?contactnoid=$1 [L]
 
@@ -27,6 +27,13 @@ RewriteRule ^logo/([0-9]+)$ controllers/developer/logo/logo.php?logoid=$1 [L]
 # BANNER
 RewriteRule ^banner$ controllers/developer/banner/banner.php [L]
 RewriteRule ^banner/([0-9]+)$ controllers/developer/banner/banner.php?bannerid=$1 [L]
+
+# PROPERTY STATUS
+RewriteRule ^property-status$ controllers/developer/property-status/propertyStatus.php [L]
+RewriteRule ^property-status/([0-9]+)$ controllers/developer/property-status/propertyStatus.php?property_statusid=$1 [L]
+RewriteRule ^property-status/active/([0-9]+)$ controllers/developer/property-status/active.php?property_statusid=$1 [L]
+RewriteRule ^property-status/page/([0-9]+)$ controllers/developer/property-status/page.php?start=$1 [L]
+RewriteRule ^property-status/search$ controllers/developer/property-status/search.php [L]
 
 # PROPERTY TYPE
 RewriteRule ^property-type$ controllers/developer/property-type/propertyType.php [L]
@@ -42,6 +49,7 @@ RewriteRule ^property-list/active/([0-9]+)$ controllers/developer/property-list/
 RewriteRule ^property-list/page/([0-9]+)$ controllers/developer/property-list/page.php?start=$1 [L]
 RewriteRule ^property-list/search$ controllers/developer/property-list/search.php [L]
 RewriteRule ^property-list/property-type-search$ controllers/developer/property-list/search-property-type.php [L]
+RewriteRule ^property-list/property-status-search$ controllers/developer/property-list/search-property-status.php [L]
 
 # ABOUT
 RewriteRule ^about$ controllers/developer/about/about.php [L]
@@ -57,6 +65,17 @@ RewriteRule ^blogs/([0-9]+)$ controllers/developer/blogs/blogs.php?blogsid=$1 [L
 RewriteRule ^blogs/active/([0-9]+)$ controllers/developer/blogs/active.php?blogsid=$1 [L]
 RewriteRule ^blogs/page/([0-9]+)$ controllers/developer/blogs/page.php?start=$1 [L]
 RewriteRule ^blogs/search$ controllers/developer/blogs/search.php [L]
+
+# CONTACT FORM
+RewriteRule ^contact-form$ controllers/developer/contact-form/contactForm.php [L]
+RewriteRule ^contact-form/([0-9]+)$ controllers/developer/contact-form/contactForm.php?contactformid=$1 [L]
+
+# NOTIFICATION
+RewriteRule ^receiver$ controllers/developer/notification/receiver/notification.php [L]
+RewriteRule ^receiver/([0-9]+)$ controllers/developer/notification/receiver/notification.php?notificationid=$1 [L]
+RewriteRule ^receiver/active/([0-9]+)$ controllers/developer/notification/receiver/active.php?notificationid=$1 [L]
+RewriteRule ^receiver/page/([0-9]+)$ controllers/developer/notification/receiver/page.php?start=$1 [L]
+RewriteRule ^receiver/search$ controllers/developer/notification/receiver/search.php [L]
 
 ### Settings - Roles ###
 RewriteRule ^role$ controllers/developer/settings/role/role.php [L]

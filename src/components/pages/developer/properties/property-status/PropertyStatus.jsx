@@ -1,15 +1,15 @@
 import React from "react";
-import { FaPlus } from "react-icons/fa";
-import { setIsAdd } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
-import DashboardNav from "../../../../partials/dashboard/DashboardNav";
+import { setIsAdd } from "../../../../../store/StoreAction";
 import Navigation from "../../../../partials/dashboard/Navigation";
-import ModalError from "../../../../partials/modals/ModalError";
+import DashboardNav from "../../../../partials/dashboard/DashboardNav";
+import { FaPlus } from "react-icons/fa";
 import ModalSuccess from "../../../../partials/modals/ModalSuccess";
-import RoleTable from "./RoleTable";
-import ModalAddRole from "./ModalAddRole";
+import ModalError from "../../../../partials/modals/ModalError";
+import PropertyStatusTable from "./PropertyStatusTable";
+import ModalAddPropertyStatus from "./ModalAddPropertyStatus";
 
-const Role = () => {
+const PropertyStatus = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
 
@@ -20,7 +20,7 @@ const Role = () => {
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="user" submenu="roles" />
+        <Navigation menu="properties" submenu="property-status" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav menu="dashboard" />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -29,28 +29,28 @@ const Role = () => {
               <div className="p-7">
                 <div className=" flex justify-between ">
                   <div className="text-sm text-[black] font-semibold">
-                    <p>Role</p>
+                    <p>Property Status</p>
                   </div>
-                  {/* <button
+                  <button
                     className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm"
                     onClick={handleAdd}
                   >
                     <FaPlus />
                     Add
-                  </button> */}
+                  </button>
                 </div>
-                <RoleTable setItemEdit={setItemEdit} />
+                <PropertyStatusTable setItemEdit={setItemEdit} />
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      {store.isAdd && <ModalAddPropertyStatus itemEdit={itemEdit} />}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
-      {store.isAdd && <ModalAddRole itemEdit={itemEdit} />}
     </>
   );
 };
 
-export default Role;
+export default PropertyStatus;
