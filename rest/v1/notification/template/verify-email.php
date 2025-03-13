@@ -83,7 +83,7 @@ function getHtmlVerifyEmail(
           href="' . $ROOT_DOMAIN . '' . $link . '?key=' . $key . '"
           style="
             padding: 0 25px;
-            background-color: #9f1658;
+            background-color: #002B53;
             color: #fff;
             display: inline-block;
             text-decoration: none;

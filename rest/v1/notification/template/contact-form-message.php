@@ -5,6 +5,7 @@ function getHtmlSendMessage(
   $email,
   $mobileNumber,
   $message,
+  $timeToCall
 ) {
 
 
@@ -35,6 +36,7 @@ function getHtmlSendMessage(
         <p style="margin-bottom: 5px; margin-top: 5px"><b>From: </b>' . $name . '</p> 
         <p style="margin-bottom: 5px; margin-top: 5px"><b>Email:  </b>' . $email . '</p>
         <p style="margin-bottom: 5px; margin-top: 5px"><b>Mobile Number:  </b>' . $mobileNumber . '</p>
+        <p style="margin-bottom: 5px; margin-top: 5px"><b>Best Time To Call:  </b>' . $timeToCall . '</p>
         <div style="margin-bottom: 20px">
           <p style="margin-top: 5px"><b>Message: </b></p>
           <p>

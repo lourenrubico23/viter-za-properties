@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "../../../partials/Footer";
-import ContactForm from "../../../partials/ContactForm";
 import FeaturedProperties from "../../../partials/FeaturedProperties";
 import {
   devApiVersion,
@@ -12,6 +11,7 @@ import Navigation from "../Navigation";
 import useQueryData from "../../../custom-hooks/useQueryData";
 import LoadImages from "../../../partials/LoadImages";
 import { CiImageOn } from "react-icons/ci";
+import ContactForm from "../../../partials/contact-form/ContactForm";
 
 const Properties = () => {
   const { data: bannerData } = useQueryData(
@@ -113,7 +113,7 @@ const Properties = () => {
           </div>
           <FeaturedProperties pageType="properties" />
 
-          <ContactForm pageType={"properties"} />
+          <ContactForm pageType={"Properties"} />
           <Footer />
         </div>
       </div>

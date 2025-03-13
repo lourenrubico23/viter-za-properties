@@ -100,6 +100,31 @@ export const InputTextArea = ({
   );
 };
 
+export const InputTextAreaContactForm = ({
+  label,
+  required = true,
+  className = "focus:border-primary text-[12px]",
+  ...props
+}) => {
+  const [field, meta] = useField(props);
+
+  return (
+    <>
+      <textarea
+        className={
+          meta.touched && meta.error ? `error-show ${className}` : className
+        }
+        {...field}
+        {...props}
+        autoComplete="off"
+      ></textarea>
+      {meta.touched && meta.error ? (
+        <span className="error-show">{meta.error}</span>
+      ) : null}
+    </>
+  );
+};
+
 //upload photo
 export const InputPhotoUpload = ({ label, ...props }) => {
   const [field, meta] = useField(props);

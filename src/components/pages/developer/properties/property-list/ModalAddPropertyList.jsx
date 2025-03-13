@@ -84,7 +84,7 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     setPhotoArrayList,
     fieldValue = ""
   ) => {
-    handleChangeMultiplePhoto(e, 50);
+    handleChangeMultiplePhoto(e, 20);
     const files = e.target.files;
     if (files.length > 3) return e;
     let myFiles = Array.from(files);

@@ -8,7 +8,6 @@ import {
   googleHDViewLink,
 } from "../../../helpers/functions-general";
 import BlogList from "../../../partials/BlogList";
-import ContactForm from "../../../partials/ContactForm";
 import FeaturedProperties from "../../../partials/FeaturedProperties";
 import Footer from "../../../partials/Footer";
 import LoadImages from "../../../partials/LoadImages";
@@ -16,6 +15,7 @@ import BuyAPropertySvg from "../../../partials/svg/BuyAPropertySvg";
 import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
 import Navigation from "../Navigation";
 import Testimonials from "./Testimonials";
+import ContactForm from "../../../partials/contact-form/ContactForm";
 
 const Home = () => {
   const { data: bannerData } = useQueryData(
@@ -203,7 +203,7 @@ const Home = () => {
           <BlogList pageType="home" />
 
           <Testimonials />
-          <ContactForm pageType="home" />
+          <ContactForm pageType="Home" />
           <Footer />
         </div>
       </div>

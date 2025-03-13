@@ -15,9 +15,9 @@ import {
 import Navigation from "../pages/website/Navigation";
 import BlogList from "./BlogList";
 import LoadImages from "./LoadImages";
-import ContactForm from "./ContactForm";
 import Footer from "./Footer";
 import ShareLinkModal from "./modals/ShareLinkModal";
+import ContactForm from "./contact-form/ContactForm";
 
 const BlogsDescriptionPage = ({ setSearchParams }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -95,7 +95,7 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
                 </div>
               </div>
               <button
-                className="btn gap-2 md:!mt-0"
+                className="btn gap-2 md:!mt-0 !place-self-start"
                 onClick={() => {
                   handleCopyLink(post);
                 }}
@@ -159,7 +159,7 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
               <BlogList pageType="blogSinglePage" currentBlogSlug={slug} />
             </div>
 
-            <ContactForm pageType={"home"} />
+            <ContactForm pageType={"Blogs"} />
           </div>
           <Footer />
         </div>

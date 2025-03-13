@@ -14,8 +14,10 @@ include_once("template/contact-form-message.php");
 function sendEmail(
 	$name,
 	$email,
+	$emailSubject,
 	$mobileNumber,
 	$message,
+	$timeToCall,
 	$newEmailReceiver
 ) {
 	//trigger exception in a "try" block
@@ -32,14 +34,15 @@ function sendEmail(
 		$mail->SMTPAuth = true;
 		$mail->Username = USERNAME; // if gmail use your gmail email
 		$mail->Password = PASSWORD; // if gmail use your email password
-		$mail->Subject = "You Have a New Inquiry from D' Container Cafe Hub";
+		$mail->Subject = "{$emailSubject}";
 		$mail->setFrom(USERNAME, FROM);
 		$mail->isHTML(true);
 		$mail->Body = getHtmlSendMessage(
 			$name,
 			$email,
 			$mobileNumber,
-			$message
+			$message,
+			$timeToCall
 		);
 
 		// If email list is not empty

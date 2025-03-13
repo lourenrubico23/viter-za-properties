@@ -5,12 +5,12 @@ import {
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../../../helpers/functions-general";
-import ContactForm from "../../../partials/ContactForm";
 import Footer from "../../../partials/Footer";
 import Navigation from "../Navigation";
 import useQueryData from "../../../custom-hooks/useQueryData";
 import LoadImages from "../../../partials/LoadImages";
 import { CiImageOn } from "react-icons/ci";
+import ContactForm from "../../../partials/contact-form/ContactForm";
 
 const Buyers = () => {
   const { data: bannerData } = useQueryData(
@@ -65,7 +65,7 @@ const Buyers = () => {
             })}
           </div>
 
-          <ContactForm pageType="buyers" />
+          <ContactForm pageType="Buyers" />
           <Footer />
         </div>
       </div>

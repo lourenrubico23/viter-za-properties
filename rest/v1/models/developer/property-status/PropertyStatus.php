@@ -212,8 +212,8 @@ class PropertyStatus
     public function checkMenuAssociation()
     {
         try {
-            $sql = "select list_property_type_id from {$this->tblPropertyList} ";
-            $sql .= "where list_property_type_id = :property_status_aid ";
+            $sql = "select list_property_status_id from {$this->tblPropertyList} ";
+            $sql .= "where list_property_status_id = :property_status_aid ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "property_status_aid" => "{$this->property_status_aid}",

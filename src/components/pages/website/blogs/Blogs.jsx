@@ -7,10 +7,10 @@ import {
   googleHDViewLink,
 } from "../../../helpers/functions-general";
 import BlogList from "../../../partials/BlogList";
-import ContactForm from "../../../partials/ContactForm";
 import Footer from "../../../partials/Footer";
 import Navigation from "../Navigation";
 import LoadImages from "../../../partials/LoadImages";
+import ContactForm from "../../../partials/contact-form/ContactForm";
 
 const Blogs = () => {
   const { data: bannerData } = useQueryData(
@@ -66,7 +66,7 @@ const Blogs = () => {
           </div>
           <BlogList pageType={"Blogs"} />
 
-          <ContactForm pageType="blogs" />
+          <ContactForm pageType="Blogs" />
           <Footer />
         </div>
       </div>
