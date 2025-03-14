@@ -8,6 +8,7 @@ import {
   googleHDViewLink,
 } from "../helpers/functions-general";
 import useQueryData from "../custom-hooks/useQueryData";
+import LoadImages from "./LoadImages";
 
 const Footer = () => {
   const { data: logoData } = useQueryData(
@@ -40,8 +41,8 @@ const Footer = () => {
                 return (
                   <div key={key}>
                     {logoImage.map((image, index) => (
-                      <img
-                        src={`${googleHDViewLink}${image?.id}`}
+                      <LoadImages
+                        url={`${googleHDViewLink}${image?.id}`}
                         alt="ZA Properties"
                         className="mb-2"
                         key={index}
@@ -57,8 +58,8 @@ const Footer = () => {
                 return (
                   <div key={key}>
                     {qrCodeImage.map((image, index) => (
-                      <img
-                        src={`${googleHDViewLink}${image?.id}`}
+                      <LoadImages
+                        url={`${googleHDViewLink}${image?.id}`}
                         alt=""
                         key={index}
                       />

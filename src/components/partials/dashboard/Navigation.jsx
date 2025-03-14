@@ -7,10 +7,16 @@ import {
   setIsUserOpen,
 } from "../../../store/StoreAction";
 import { StoreContext } from "../../../store/StoreContext";
-import { devBaseImgUrl, devNavUrl } from "../../helpers/functions-general";
+import {
+  devApiVersion,
+  devBaseImgUrl,
+  devNavUrl,
+  hexToRgb,
+} from "../../helpers/functions-general";
 import { getUserType } from "../../helpers/login-functions";
 import ModalChangePassword from "../../pages/developer/account/modal/ModalChangePassword";
 import TableSpinner from "../spinners/TableSpinner";
+import useQueryData from "../../custom-hooks/useQueryData";
 
 const Navigation = ({ menu, submenu }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -31,6 +37,47 @@ const Navigation = ({ menu, submenu }) => {
 
   const { user_first_name, user_last_name } = store.credentials.data;
   const initials = `${user_last_name[0]}${user_first_name[0]}`;
+
+  const {
+    isFetching,
+    error,
+    data: colorsData,
+  } = useQueryData(
+    `${devApiVersion}/colors`, // endpoint
+    "get", // method
+    "colors" // key
+  );
+
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--primary-color",
+      hexToRgb(colorsData?.data[0]?.colors_primary || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--secondary-color",
+      hexToRgb(colorsData?.data[0]?.colors_secondary || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--accent-color",
+      hexToRgb(colorsData?.data[0]?.colors_accent || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--light-color",
+      hexToRgb(colorsData?.data[0]?.colors_light || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--dark-color",
+      hexToRgb(colorsData?.data[0]?.colors_dark || "#000000")
+    );
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -158,10 +205,8 @@ const Navigation = ({ menu, submenu }) => {
                     </span>
                     <IoChevronDownSharp
                       className={`${
-                        store.isOpenHeader
-                          ? "text-dark"
-                          : "text-secondary rotate-180"
-                      } text-dark transition-all`}
+                        store.isOpenHeader ? "text-dark" : " rotate-180"
+                      }  transition-all`}
                     />
                   </div>
                 </li>
@@ -235,10 +280,8 @@ const Navigation = ({ menu, submenu }) => {
                     </span>
                     <IoChevronDownSharp
                       className={`${
-                        store.isOpenProperties
-                          ? "text-dark"
-                          : "text-secondary rotate-180"
-                      } text-dark transition-all`}
+                        store.isOpenProperties ? "text-dark" : "rotate-180"
+                      } transition-all`}
                     />
                   </div>
                 </li>
@@ -310,9 +353,7 @@ const Navigation = ({ menu, submenu }) => {
                     </span>
                     <IoChevronDownSharp
                       className={`${
-                        store.isUserOpen
-                          ? "text-dark"
-                          : "text-secondary rotate-180"
+                        store.isUserOpen ? "text-dark" : "rotate-180"
                       } transition-all`}
                     />
                   </div>

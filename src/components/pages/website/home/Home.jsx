@@ -157,14 +157,17 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="bg-[#F9FFFF] flex h-[614px] lg:max-w-[1233px] place-self-center relative md:my-20">
+          <div>
             {aboutData?.data.map((item, key) => {
               const aboutImage =
                 getConvertStringToJSONparseData(item.about_img) || [];
               const logoImage =
                 getConvertStringToJSONparseData(item.about_logo_img) || [];
               return (
-                <>
+                <div
+                  className="bg-[#F9FFFF] flex h-[614px] lg:max-w-[1233px] place-self-center relative md:my-20"
+                  key={key}
+                >
                   {aboutImage.map((image, index) => (
                     <LoadImages
                       url={`${googleHDViewLink}${image?.id}`}
@@ -173,10 +176,7 @@ const Home = () => {
                       key={index}
                     />
                   ))}
-                  <div
-                    className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4"
-                    key={key}
-                  >
+                  <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4">
                     <h1 className="text-[clamp(30px,3vw,71px)] font-hindBold">
                       {item.about_name}
                     </h1>
@@ -189,13 +189,13 @@ const Home = () => {
                         <LoadImages
                           url={`${googleHDViewLink}${image?.id}`}
                           alt={`${item.about_name}`}
-                          className=" w-[70px] h-[85px] object-cover"
+                          className="w-[60px] md:w-[70px] md:h-[85px] object-cover"
                           key={index}
                         />
                       ))}
                     </div>
                   </div>
-                </>
+                </div>
               );
             })}
           </div>

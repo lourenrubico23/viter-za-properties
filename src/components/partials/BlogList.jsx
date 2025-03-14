@@ -11,6 +11,7 @@ import {
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../helpers/functions-general";
+import LoadImages from "./LoadImages";
 
 const BlogList = ({ pageType, currentBlogSlug }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -66,7 +67,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
     <>
       <div className="bg-light mt-20  customContainer lg:max-w-[1240px] mb-32">
         {pageType === "home" && (
-          <div className="title uppercase text-secondary text-[clamp(20px,3vw,34px)] font-hindBold text-center md:mt-[168px]">
+          <div className="title uppercase text-secondary text-[clamp(25px,3vw,34px)] font-hindBold text-center md:mt-[168px]">
             Blog
           </div>
         )}
@@ -84,8 +85,8 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
               >
                 <div className="overflow-hidden">
                   {firstImage && (
-                    <img
-                      src={`${googleHDViewLink}${firstImage?.id}`}
+                    <LoadImages
+                      url={`${googleHDViewLink}${firstImage?.id}`}
                       alt="Property Image"
                       className="w-full h-[246px] object-cover transition-transform duration-200 group-hover:scale-105"
                     />

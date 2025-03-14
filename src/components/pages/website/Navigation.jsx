@@ -14,6 +14,7 @@ import {
   devNavUrl,
   getConvertStringToJSONparseData,
   googleHDViewLink,
+  hexToRgb,
 } from "../../helpers/functions-general";
 import LoadImages from "../../partials/LoadImages";
 
@@ -48,6 +49,12 @@ const Navigation = () => {
     "logo" // key
   );
 
+  const { data: colorsData } = useQueryData(
+    `${devApiVersion}/colors`, // endpoint
+    "get", // method
+    "colors" // key
+  );
+
   const navItems = [
     { path: "/", label: "Home" },
     { path: "/properties", label: "Properties" },
@@ -56,6 +63,37 @@ const Navigation = () => {
     { path: "/blogs", label: "Blogs" },
     { path: "/contact", label: "Contact" },
   ];
+
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--primary-color",
+      hexToRgb(colorsData?.data[0]?.colors_primary || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--secondary-color",
+      hexToRgb(colorsData?.data[0]?.colors_secondary || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--accent-color",
+      hexToRgb(colorsData?.data[0]?.colors_accent || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--light-color",
+      hexToRgb(colorsData?.data[0]?.colors_light || "#000000")
+    );
+  document
+    .querySelector(":root")
+    .style.setProperty(
+      "--dark-color",
+      hexToRgb(colorsData?.data[0]?.colors_dark || "#000000")
+    );
 
   React.useEffect(() => {
     // Get the current path and set it as active when the component mounts
@@ -104,8 +142,8 @@ const Navigation = () => {
               return (
                 <div key={key} className="flex gap-4 items-center">
                   {logoImage.map((image, index) => (
-                    <img
-                      src={`${googleHDViewLink}${image?.id}`}
+                    <LoadImages
+                      url={`${googleHDViewLink}${image?.id}`}
                       alt="Logo"
                       className="h-12 md:h-[60px] object-cover"
                       key={index}

@@ -68,7 +68,7 @@ const FeaturedProperties = ({ pageType }) => {
   return (
     <>
       <div className="bg-light mt-[450px] md:mt-[468px] lg:mt-[180px] customContainer lg:max-w-[1240px] ">
-        <div className="title uppercase text-secondary text-[clamp(20px,3vw,34px)] font-hindBold text-center">
+        <div className="title uppercase text-secondary text-[clamp(25px,3vw,34px)] font-hindBold text-center">
           Featured properties
         </div>
         <div className="flex flex-wrap gap-8 my-20 place-content-center">
@@ -86,7 +86,7 @@ const FeaturedProperties = ({ pageType }) => {
                   onClick={() => handleOpenDescription(item)}
                   key={index}
                 >
-                  <div className="rounded-md group hover:scale-[1.01] hover:duration-200 max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform">
+                  <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform">
                     <div className="overflow-hidden">
                       {firstImage && (
                         <LoadImages

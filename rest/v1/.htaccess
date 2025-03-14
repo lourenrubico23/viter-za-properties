@@ -15,6 +15,10 @@ RewriteRule ^upload-multiple-photo$ core/upload-multiple-photo.php [L]
 # SENDING EMAIL
 RewriteRule ^sending-email$ controllers/developer/sending-email/sending-email.php [L]
 
+# COLORS
+RewriteRule ^colors$ controllers/developer/colors/colors.php [L]
+RewriteRule ^colors/([0-9]+)$ controllers/developer/colors/colors.php?colorsid=$1 [L]
+
 # LINKS
 RewriteRule ^links$ controllers/developer/links/links.php [L]
 RewriteRule ^links/([0-9]+)$ controllers/developer/links/links.php?linksid=$1 [L]

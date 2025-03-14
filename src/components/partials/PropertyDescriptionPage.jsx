@@ -95,10 +95,10 @@ const PropertyDescriptionPage = ({
   return (
     <>
       <ModalWrapper
-        className={` bg-light  h-[700px] place-self-center `}
+        className={` bg-light  h-[700px] place-self-center`}
         handleClose={handleClose}
       >
-        <div className="p-6 overflow-auto max-w-[1241px] max-h-[700px]">
+        <div className="p-6 overflow-auto max-w-[360px] md:max-w-[1241px] max-h-[700px]">
           <div className="flex justify-end">
             <TfiClose
               className="h-6 w-6 cursor-pointer "
@@ -122,7 +122,7 @@ const PropertyDescriptionPage = ({
 
                   <div className="flex flex-col md:flex md:flex-row gap-4">
                     {/* Preview Image */}
-                    <div className="h-[200px] max-w-[570px] md:h-[480px] md:w-[800px] lg:min-w-[956px] lg:h-[513px]">
+                    <div className="h-[200px] min-w-[265px] md:h-[480px] md:min-w-[650px] md:max-w-[700px] lg:min-w-[956px] lg:h-[513px]">
                       {previewImg && (
                         <LoadImages
                           url={previewImg}
@@ -244,14 +244,16 @@ const PropertyDescriptionPage = ({
                         {item.list_price}
                       </p>
                     </div>
-                    <button
-                      className="btn !flex gap-2 items-center "
-                      onClick={() => {
-                        handleCopyLink(item);
-                      }}
-                    >
-                      <Share2 className="h-6 " /> Share this Property
-                    </button>
+                    <div className="md:w-[400px]">
+                      <button
+                        className="btn !flex gap-2 items-center !place-self-start"
+                        onClick={() => {
+                          handleCopyLink(item);
+                        }}
+                      >
+                        <Share2 className="h-6 " /> Share this Property
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex flex-col gap-6 md:flex md:flex-row md:gap-40 py-5">
