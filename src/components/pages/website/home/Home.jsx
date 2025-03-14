@@ -16,8 +16,27 @@ import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
 import Navigation from "../Navigation";
 import Testimonials from "./Testimonials";
 import ContactForm from "../../../partials/contact-form/ContactForm";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { queryDataInfinite } from "../../../custom-hooks/queryDataInfinite";
+import { useInView } from "react-intersection-observer";
+import { setIsSearch } from "../../../../store/StoreAction";
+import { StoreContext } from "../../../../store/StoreContext";
+import TableLoading from "../../../partials/spinners/TableLoading";
+import NoData from "../../../partials/spinners/NoData";
+import ServerError from "../../../partials/spinners/ServerError";
 
 const Home = () => {
+  const { store, dispatch } = React.useContext(StoreContext);
+  const [isFilter, setIsFilter] = React.useState(false);
+  const [propertyStatusData, setPropertyStatusData] = React.useState("all");
+  const [location, setLocation] = React.useState("all");
+  const [propertyType, setPropertyTypeData] = React.useState("all");
+
+  const [onSearch, setOnSearch] = React.useState(false);
+  const [page, setPage] = React.useState(1);
+  const search = React.useRef({ value: "" });
+  const { ref, inView } = useInView();
+
   const { data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
@@ -28,6 +47,125 @@ const Home = () => {
     "get", // method
     "about" // key
   );
+  const { data: propertyStatus } = useQueryData(
+    `${devApiVersion}/property-status`, // endpoint
+    "get", // method
+    "property-status" // key
+  );
+  const { data: propertyListData } = useQueryData(
+    `${devApiVersion}/property-list`, // endpoint
+    "get", // method
+    "property-list" // key
+  );
+  const { data: propertyTypeData } = useQueryData(
+    `${devApiVersion}/property-type`, // endpoint
+    "get", // method
+    "property-type" // key
+  );
+
+  const {
+    data: result,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: [
+      "property-list",
+      onSearch,
+      store.isSearch,
+      isFilter,
+      propertyStatusData,
+      location,
+      propertyType,
+    ],
+    queryFn: async ({ pageParam = 1 }) =>
+      await queryDataInfinite(
+        `${devApiVersion}/property-list/search`, // search endpoint
+        `${devApiVersion}/property-list/page/${pageParam}`, // list endpoint
+        store.isSearch || isFilter,
+        // search boolean
+        {
+          searchValue: search.current.value,
+          id: "",
+          isFilter,
+          property_status_name:
+            propertyStatusData === "all" ? "" : propertyStatusData,
+          list_location: location === "all" ? "" : location,
+          property_type_name: propertyType === "all" ? "" : propertyType,
+        }, // search value
+        "post"
+      ),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total) {
+        return lastPage.page + lastPage.count;
+      }
+      return;
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  const handleChange = (e) => {
+    console.log(e.value);
+    if (e.target.value === "") {
+      setOnSearch(!onSearch);
+      dispatch(setIsSearch(false));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let val = search.current.value;
+
+    if (val === " " || val === "") {
+      setOnSearch(!onSearch);
+      dispatch(setIsSearch(false));
+      dispatch(setError(true));
+      dispatch(setMessage("Search keyword cannot be space only or blank."));
+    } else {
+      setOnSearch(!onSearch);
+      dispatch(setIsSearch(true));
+    }
+  };
+
+  const handleChangePropertyStatus = (e) => {
+    setPropertyStatusData(e.target.value);
+    setIsFilter(false);
+    dispatch(setIsSearch(false));
+    search.current.value = "";
+    if (e.target.value !== "all") {
+      setIsFilter(true);
+    }
+    setPage(1);
+    console.log(propertyStatusData);
+  };
+
+  const handleChangePropertyLocation = (e) => {
+    setLocation(e.target.value);
+    setIsFilter(false);
+    dispatch(setIsSearch(false));
+    search.current.value = "";
+    if (e.target.value !== "all") {
+      setIsFilter(true);
+    }
+    setPage(1);
+    console.log(location);
+  };
+
+  const handleChangePropertyType = (e) => {
+    setPropertyTypeData(e.target.value);
+    setIsFilter(false);
+    dispatch(setIsSearch(false));
+    search.current.value = "";
+    if (e.target.value !== "all") {
+      setIsFilter(true);
+    }
+    setPage(1);
+    console.log(location);
+  };
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -80,46 +218,90 @@ const Home = () => {
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Properties Status
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
+                  <select
+                    name="status"
+                    value={propertyStatusData}
+                    onChange={(e) => handleChangePropertyStatus(e)}
                     className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[180px] "
-                  />
+                    disabled={isFetching || status === "pending"}
+                  >
+                    <option value="all">Any</option>
+
+                    {propertyStatus?.data.map((item, key) => (
+                      <option key={key} value={item.property_status_aid}>
+                        {item.property_status_name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Location
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
+                  <select
+                    name="location"
+                    value={location}
+                    onChange={(e) => handleChangePropertyLocation(e)}
                     className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px] "
-                  />
+                    disabled={isFetching || status === "pending"}
+                  >
+                    <option value="all">Any</option>
+
+                    {propertyListData?.data.map((item, key) => (
+                      <option key={key} value={item.list_aid}>
+                        {item.list_location}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Property Type
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
+                  <select
+                    name="type"
+                    value={propertyType}
+                    onChange={(e) => handleChangePropertyType(e)}
                     className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[255px] "
-                  />
+                    disabled={isFetching || status === "pending"}
+                  >
+                    <option value="all">Any</option>
+
+                    {propertyTypeData?.data.map((item, key) => (
+                      <option key={key} value={item.property_type_aid}>
+                        {item.property_type_name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Keyword
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[196px] "
-                  />
+                  <form className="search-box">
+                    <div>
+                      <input
+                        type="search"
+                        placeholder="Search here..."
+                        ref={search}
+                        onChange={(e) => handleChange(e)}
+                        className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[196px] "
+                      />
+                    </div>
+                  </form>
                 </div>
-                <button className="btn mt-6">Search</button>
+                <button
+                  className="btn mt-6"
+                  onSubmit={(e) => {
+                    handleSubmit(e);
+                  }}
+                >
+                  Search
+                </button>
               </div>
             </div>
           </div>
+          
           <FeaturedProperties pageType="home" />
 
           <div className="flex flex-wrap gap-6 place-content-center md:my-48 my-12">
