@@ -177,7 +177,7 @@ class PropertyList
             $sql .= "* ";
             $sql .= "from {$this->tblPropertyList} as list, ";
             $sql .= " {$this->tblPropertyType} as type, ";
-            $sql .= " {$this->tblPropertyStatus} as status, ";
+            $sql .= " {$this->tblPropertyStatus} as status ";
             $sql .= "where ";
             $sql .= "list.list_property_type_id = type.property_type_aid ";
             $sql .= "and list.list_property_status_id = status.property_status_aid ";
@@ -304,7 +304,7 @@ class PropertyList
         return $query;
     }
 
-    //  search for property type
+    //  search for property type modal
     public function searchPropertyType()
     {
         try {
@@ -324,7 +324,7 @@ class PropertyList
         return $query;
     }
 
-    //  search for property type
+    //  search for property type modal
     public function searchPropertyStatus()
     {
         try {
@@ -337,6 +337,462 @@ class PropertyList
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "property_status_name" => "%{$this->list_search}%",
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by property status
+    public function filterByPropertyStatus()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_status_id = list_property_status_id ";
+            $sql .= "and list_property_status_id = :list_property_status_id ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_status_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_property_status_id" => $this->list_property_status_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by location
+    public function filterByLocation()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_location = list_location ";
+            $sql .= "and list_location = :list_location ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_location asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_location" => $this->list_location,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by property type
+    public function filterByPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_type_id = list_property_type_id ";
+            $sql .= "and list_property_type_id = :list_property_type_id ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_type_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_property_type_id" => $this->list_property_type_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by property status and location
+    public function filterByPropertyStatusAndLocation()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_status_id = list_property_status_id ";
+            $sql .= "and list_location = list_location ";
+            $sql .= "and (list_property_status_id = :list_property_status_id ";
+            $sql .= "or list_location = :list_location) ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_status_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_property_status_id" => $this->list_property_status_id,
+                "list_location" => $this->list_location,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by property status and property type
+    public function filterByPropertyStatusAndPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_status_id = list_property_status_id ";
+            $sql .= "and list_property_type_id = list_property_type_id ";
+            $sql .= "and (list_property_status_id = :list_property_status_id ";
+            $sql .= "or list_property_type_id = :list_property_type_id) ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_status_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_property_status_id" => $this->list_property_status_id,
+                "list_property_type_id" => $this->list_property_type_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by location and property type
+    public function filterByLocationAndPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_location = list_location ";
+            $sql .= "and list_property_type_id = list_property_type_id ";
+            $sql .= "and (list_location = :list_location ";
+            $sql .= "or list_property_type_id = :list_property_type_id) ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_location asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_location" => $this->list_location,
+                "list_property_type_id" => $this->list_property_type_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by property status, location and property type
+    public function filterByPropertyStatusAndLocationAndPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_location = list_location ";
+            $sql .= "and list_property_type_id = list_property_type_id ";
+            $sql .= "and list_property_status_id = list_property_status_id ";
+            $sql .= "and (list_location = :list_location ";
+            $sql .= "or list_property_type_id = :list_property_type_id ";
+            $sql .= "or list_property_status_id = :list_property_status_id) ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_location asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_location" => $this->list_location,
+                "list_property_type_id" => $this->list_property_type_id,
+                "list_property_status_id" => $this->list_property_status_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by search and property status
+    public function searchAndPropertyStatus()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_status_id = :list_property_status_id ";
+            $sql .= "and (list_name like :list_name ";
+            $sql .= "or list_price like :list_price ";
+            $sql .= "or list_id like :list_id ";
+            $sql .= "or list_location like :list_location ";
+            $sql .= "or list_floor_area like :list_floor_area ";
+            $sql .= "or list_lot_area like :list_lot_area ";
+            $sql .= "or list_bedrooms like :list_bedrooms ";
+            $sql .= "or list_key_features like :list_key_features ";
+            $sql .= "or list_best_buy like :list_best_buy ";
+            $sql .= "or list_bathrooms like :list_bathrooms) ";
+            $sql .= "order by notification_log_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_status_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_name" => "%{$this->list_search}%",
+                "list_price" => "%{$this->list_search}%",
+                "list_id" => "%{$this->list_search}%",
+                "list_location" => "%{$this->list_search}%",
+                "list_floor_area" => "%{$this->list_search}%",
+                "list_lot_area" => "%{$this->list_search}%",
+                "list_bedrooms" => "%{$this->list_search}%",
+                "list_key_features" => "%{$this->list_search}%",
+                "list_best_buy" => "%{$this->list_search}%",
+                "list_bathrooms" => "%{$this->list_search}%",
+                "list_property_status_id" => $this->list_property_status_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by search and location
+    public function searchAndLocation()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_location = :list_location ";
+            $sql .= "and (list_name like :list_name ";
+            $sql .= "or list_price like :list_price ";
+            $sql .= "or list_id like :list_id ";
+            $sql .= "or list_floor_area like :list_floor_area ";
+            $sql .= "or list_lot_area like :list_lot_area ";
+            $sql .= "or list_bedrooms like :list_bedrooms ";
+            $sql .= "or list_key_features like :list_key_features ";
+            $sql .= "or list_best_buy like :list_best_buy ";
+            $sql .= "or list_bathrooms like :list_bathrooms) ";
+            $sql .= "order by notification_log_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_location asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_name" => "%{$this->list_search}%",
+                "list_price" => "%{$this->list_search}%",
+                "list_id" => "%{$this->list_search}%",
+                "list_floor_area" => "%{$this->list_search}%",
+                "list_lot_area" => "%{$this->list_search}%",
+                "list_bedrooms" => "%{$this->list_search}%",
+                "list_key_features" => "%{$this->list_search}%",
+                "list_best_buy" => "%{$this->list_search}%",
+                "list_bathrooms" => "%{$this->list_search}%",
+                "list_location" => $this->list_location,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by search and property type
+    public function searchAndPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_type_id = :list_property_type_id ";
+            $sql .= "and (list_name like :list_name ";
+            $sql .= "or list_price like :list_price ";
+            $sql .= "or list_id like :list_id ";
+            $sql .= "or list_location like :list_location ";
+            $sql .= "or list_floor_area like :list_floor_area ";
+            $sql .= "or list_lot_area like :list_lot_area ";
+            $sql .= "or list_bedrooms like :list_bedrooms ";
+            $sql .= "or list_key_features like :list_key_features ";
+            $sql .= "or list_best_buy like :list_best_buy ";
+            $sql .= "or list_bathrooms like :list_bathrooms) ";
+            $sql .= "order by notification_log_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_type_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_name" => "%{$this->list_search}%",
+                "list_price" => "%{$this->list_search}%",
+                "list_id" => "%{$this->list_search}%",
+                "list_location" => "%{$this->list_search}%",
+                "list_floor_area" => "%{$this->list_search}%",
+                "list_lot_area" => "%{$this->list_search}%",
+                "list_bedrooms" => "%{$this->list_search}%",
+                "list_key_features" => "%{$this->list_search}%",
+                "list_best_buy" => "%{$this->list_search}%",
+                "list_bathrooms" => "%{$this->list_search}%",
+                "list_property_type_id" => $this->list_property_type_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by search, property status and location
+    public function filterBySearchStatusAndLocation()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_status_id = :list_property_status_id ";
+            $sql .= "and list_location = :list_location ";
+            $sql .= "and (list_name like :list_name ";
+            $sql .= "or list_price like :list_price ";
+            $sql .= "or list_id like :list_id ";
+            $sql .= "or list_floor_area like :list_floor_area ";
+            $sql .= "or list_lot_area like :list_lot_area ";
+            $sql .= "or list_bedrooms like :list_bedrooms ";
+            $sql .= "or list_key_features like :list_key_features ";
+            $sql .= "or list_best_buy like :list_best_buy ";
+            $sql .= "or list_bathrooms like :list_bathrooms) ";
+            $sql .= "order by notification_log_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_status_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_name" => "%{$this->list_search}%",
+                "list_price" => "%{$this->list_search}%",
+                "list_id" => "%{$this->list_search}%",
+                "list_floor_area" => "%{$this->list_search}%",
+                "list_lot_area" => "%{$this->list_search}%",
+                "list_bedrooms" => "%{$this->list_search}%",
+                "list_key_features" => "%{$this->list_search}%",
+                "list_best_buy" => "%{$this->list_search}%",
+                "list_bathrooms" => "%{$this->list_search}%",
+                "list_property_status_id" => $this->list_property_status_id,
+                "list_location" => $this->list_location,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by search, property status and property type
+    public function filterBySearchStatusAndPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_property_status_id = :list_property_status_id ";
+            $sql .= "and list_property_type_id = :list_property_type_id ";
+            $sql .= "and (list_name like :list_name ";
+            $sql .= "or list_price like :list_price ";
+            $sql .= "or list_id like :list_id ";
+            $sql .= "or list_floor_area like :list_floor_area ";
+            $sql .= "or list_lot_area like :list_lot_area ";
+            $sql .= "or list_bedrooms like :list_bedrooms ";
+            $sql .= "or list_key_features like :list_key_features ";
+            $sql .= "or list_best_buy like :list_best_buy ";
+            $sql .= "or list_bathrooms like :list_bathrooms) ";
+            $sql .= "order by notification_log_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_property_status_id asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_name" => "%{$this->list_search}%",
+                "list_price" => "%{$this->list_search}%",
+                "list_id" => "%{$this->list_search}%",
+                "list_floor_area" => "%{$this->list_search}%",
+                "list_lot_area" => "%{$this->list_search}%",
+                "list_bedrooms" => "%{$this->list_search}%",
+                "list_key_features" => "%{$this->list_search}%",
+                "list_best_buy" => "%{$this->list_search}%",
+                "list_bathrooms" => "%{$this->list_search}%",
+                "list_property_status_id" => $this->list_property_status_id,
+                "list_property_type_id" => $this->list_property_type_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by search, location and property type
+    public function filterBySearchLocationAndPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_location = :list_location ";
+            $sql .= "and list_property_type_id = :list_property_type_id ";
+            $sql .= "and (list_name like :list_name ";
+            $sql .= "or list_price like :list_price ";
+            $sql .= "or list_id like :list_id ";
+            $sql .= "or list_floor_area like :list_floor_area ";
+            $sql .= "or list_lot_area like :list_lot_area ";
+            $sql .= "or list_bedrooms like :list_bedrooms ";
+            $sql .= "or list_key_features like :list_key_features ";
+            $sql .= "or list_best_buy like :list_best_buy ";
+            $sql .= "or list_bathrooms like :list_bathrooms) ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_location asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_name" => "%{$this->list_search}%",
+                "list_price" => "%{$this->list_search}%",
+                "list_id" => "%{$this->list_search}%",
+                "list_floor_area" => "%{$this->list_search}%",
+                "list_lot_area" => "%{$this->list_search}%",
+                "list_bedrooms" => "%{$this->list_search}%",
+                "list_key_features" => "%{$this->list_search}%",
+                "list_best_buy" => "%{$this->list_search}%",
+                "list_bathrooms" => "%{$this->list_search}%",
+                "list_location" => $this->list_location,
+                "list_property_type_id" => $this->list_property_type_id,
+            ]);
+        } catch (PDOException $ex) {
+            $query = false;
+        }
+        return $query;
+    }
+
+    // filter by search, property status, location and property type
+    public function filterBySearchStatusAndLocationAndPropertyType()
+    {
+        try {
+            $sql = "select * ";
+            $sql .= "from ";
+            $sql .= "{$this->tblPropertyList} ";
+            $sql .= "where list_location = :list_location ";
+            $sql .= "and list_property_type_id = :list_property_type_id ";
+            $sql .= "and list_property_status_id = :list_property_status_id ";
+            $sql .= "and (list_name like :list_name ";
+            $sql .= "or list_price like :list_price ";
+            $sql .= "or list_id like :list_id ";
+            $sql .= "or list_floor_area like :list_floor_area ";
+            $sql .= "or list_lot_area like :list_lot_area ";
+            $sql .= "or list_bedrooms like :list_bedrooms ";
+            $sql .= "or list_key_features like :list_key_features ";
+            $sql .= "or list_best_buy like :list_best_buy ";
+            $sql .= "or list_bathrooms like :list_bathrooms) ";
+            $sql .= "order by list_created desc, ";
+            $sql .= "list_name asc, ";
+            $sql .= "list_location asc ";
+            $query = $this->connection->prepare($sql);
+            $query->execute([
+                "list_name" => "%{$this->list_search}%",
+                "list_price" => "%{$this->list_search}%",
+                "list_id" => "%{$this->list_search}%",
+                "list_floor_area" => "%{$this->list_search}%",
+                "list_lot_area" => "%{$this->list_search}%",
+                "list_bedrooms" => "%{$this->list_search}%",
+                "list_key_features" => "%{$this->list_search}%",
+                "list_best_buy" => "%{$this->list_search}%",
+                "list_bathrooms" => "%{$this->list_search}%",
+                "list_location" => $this->list_location,
+                "list_property_type_id" => $this->list_property_type_id,
+                "list_property_status_id" => $this->list_property_status_id,
             ]);
         } catch (PDOException $ex) {
             $query = false;

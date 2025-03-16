@@ -4,34 +4,35 @@ import { FaArchive, FaEdit } from "react-icons/fa";
 import { MdDelete, MdRestore } from "react-icons/md";
 import { useInView } from "react-intersection-observer";
 
-import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
 import {
   setIsAdd,
   setIsArchive,
   setIsDelete,
   setIsRestore,
 } from "../../../../../store/StoreAction";
-import SearchBar from "../../../../partials/SearchBar";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
+import { StoreContext } from "../../../../../store/StoreContext";
+import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
 import {
   devApiVersion,
   getConvertStringToJSONparseData,
 } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../partials/LoadMore";
-import ModalDelete from "../../../../partials/modals/ModalDelete";
-import { StoreContext } from "../../../../../store/StoreContext";
+import SearchBar from "../../../../partials/SearchBar";
 import Status from "../../../../partials/Status";
 import ModalArchive from "../../../../partials/modals/ModalArchive";
+import ModalDelete from "../../../../partials/modals/ModalDelete";
 import ModalRestore from "../../../../partials/modals/ModalRestore";
+import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
+import NoData from "../../../../partials/spinners/NoData";
+import ServerError from "../../../../partials/spinners/ServerError";
+import TableLoading from "../../../../partials/spinners/TableLoading";
 
 const PropertyListTable = ({ setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
   const [isArchiving, setIsArchiving] = React.useState(false);
+  const [isFilter, setIsFilter] = React.useState(false);
 
   const [onSearch, setOnSearch] = React.useState(false);
   const [page, setPage] = React.useState(1);
@@ -47,13 +48,13 @@ const PropertyListTable = ({ setItemEdit }) => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["property-list", onSearch, store.isSearch],
+    queryKey: ["property-list", onSearch, store.isSearch, isFilter],
     queryFn: async ({ pageParam = 1 }) =>
       await queryDataInfinite(
         `/v1/property-list/search`, // search endpoint
         `/v1/property-list/page/${pageParam}`, // list endpoint
-        store.isSearch, // search boolean
-        { searchValue: search.current.value, id: "" } // search value
+        store.isSearch || isFilter, // search boolean
+        { searchValue: search.current.value, id: "", isFilter } // search value
       ),
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.total) {

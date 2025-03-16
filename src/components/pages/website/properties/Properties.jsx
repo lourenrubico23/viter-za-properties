@@ -12,13 +12,155 @@ import useQueryData from "../../../custom-hooks/useQueryData";
 import LoadImages from "../../../partials/LoadImages";
 import { CiImageOn } from "react-icons/ci";
 import ContactForm from "../../../partials/contact-form/ContactForm";
+import { StoreContext } from "../../../../store/StoreContext";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { queryDataInfinite } from "../../../custom-hooks/queryDataInfinite";
+import {
+  setError,
+  setIsSearch,
+  setMessage,
+} from "../../../../store/StoreAction";
 
 const Properties = () => {
+  const { store, dispatch } = React.useContext(StoreContext);
+  const [isFilter, setIsFilter] = React.useState(false);
+  const [propertyStatusData, setPropertyStatusData] = React.useState("all");
+  const [location, setLocation] = React.useState("all");
+  const [propertyType, setPropertyTypeData] = React.useState("all");
+
+  const [onSearch, setOnSearch] = React.useState(false);
+  const [page, setPage] = React.useState(1);
+  const search = React.useRef({ value: "" });
+
   const { data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
     "banner" // key
   );
+  const { data: aboutData } = useQueryData(
+    `${devApiVersion}/about`, // endpoint
+    "get", // method
+    "about" // key
+  );
+  const { data: propertyStatus } = useQueryData(
+    `${devApiVersion}/property-status`, // endpoint
+    "get", // method
+    "property-status" // key
+  );
+  const { data: propertyListData } = useQueryData(
+    `${devApiVersion}/property-list`, // endpoint
+    "get", // method
+    "property-list" // key
+  );
+
+  const { data: propertyTypeData } = useQueryData(
+    `${devApiVersion}/property-type`, // endpoint
+    "get", // method
+    "property-type" // key
+  );
+
+  const {
+    data: result,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: [
+      "property-list",
+      onSearch,
+      store.isSearch,
+      isFilter,
+      propertyStatusData,
+      location,
+      propertyType,
+    ],
+    queryFn: async ({ pageParam = 1 }) =>
+      await queryDataInfinite(
+        `${devApiVersion}/property-list/search`, // search endpoint
+        `${devApiVersion}/property-list/page/${pageParam}`, // list endpoint
+        store.isSearch || isFilter,
+        // search boolean
+        {
+          searchValue: search.current.value,
+          id: "",
+          isFilter,
+          list_property_status_id:
+            propertyStatusData === "all" ? "" : propertyStatusData,
+          list_location: location === "all" ? "" : location,
+          list_property_type_id: propertyType === "all" ? "" : propertyType,
+        }, // search value
+        "post"
+      ),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total) {
+        return lastPage.page + lastPage.count;
+      }
+      return;
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  const handleChange = (e) => {
+    console.log(e.value);
+    if (e.target.value === "") {
+      setOnSearch(!onSearch);
+      dispatch(setIsSearch(false));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let val = search.current.value;
+
+    if (val === " " || val === "") {
+      setOnSearch(!onSearch);
+      dispatch(setIsSearch(false));
+      dispatch(setError(true));
+      dispatch(setMessage("Search keyword cannot be space only or blank."));
+    } else {
+      setOnSearch(!onSearch);
+      dispatch(setIsSearch(true));
+    }
+  };
+
+  const handleChangePropertyStatus = (e) => {
+    setPropertyStatusData(e.target.value);
+    setIsFilter(false);
+    dispatch(setIsSearch(false));
+    search.current.value = "";
+    if (e.target.value !== "all") {
+      setIsFilter(true);
+    }
+    setPage(1);
+    console.log(propertyStatusData);
+  };
+
+  const handleChangePropertyLocation = (e) => {
+    setLocation(e.target.value);
+    setIsFilter(false);
+    dispatch(setIsSearch(false));
+    search.current.value = "";
+    if (e.target.value !== "all") {
+      setIsFilter(true);
+    }
+    setPage(1);
+    console.log(location);
+  };
+
+  const handleChangePropertyType = (e) => {
+    setPropertyTypeData(e.target.value);
+    setIsFilter(false);
+    dispatch(setIsSearch(false));
+    search.current.value = "";
+    if (e.target.value !== "all") {
+      setIsFilter(true);
+    }
+    setPage(1);
+    console.log(location);
+  };
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -65,53 +207,101 @@ const Properties = () => {
               }
             })}
 
-            <div className="lg:max-h-[143px] shadow-md bg-light w-[352px] md:w-[650px] lg:w-[1240px] place-self-center absolute top-[300px] lg:top-[350px] place-content-center place-items-center px-9  md:py-9 py-9">
+            <div className=" lg:max-h-[143px] shadow-md bg-light w-[352px] md:w-[650px] lg:w-[1240px] place-self-center absolute top-[300px] lg:top-[350px] place-content-center place-items-center px-9  md:py-9 py-9">
               <div className="flex flex-col lg:flex lg:flex-row gap-5 items-center ">
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Properties Status
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[180px]"
-                  />
+                  <select
+                    name="status"
+                    value={propertyStatusData}
+                    onChange={(e) => handleChangePropertyStatus(e)}
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[180px] "
+                    disabled={isFetching || status === "pending"}
+                  >
+                    <option value="all">Any</option>
+
+                    {propertyStatus?.data.map((item, key) => (
+                      <option key={key} value={item.property_status_aid}>
+                        {item.property_status_name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Location
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
+                  <select
+                    name="location"
+                    value={location}
+                    onChange={(e) => handleChangePropertyLocation(e)}
                     className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px] "
-                  />
+                    disabled={isFetching || status === "pending"}
+                  >
+                    <option value="all">Any</option>
+
+                    {propertyListData?.data.map((item, key) => (
+                      <option key={key} value={item.list_location}>
+                        {item.list_location}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Property Type
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[255px]"
-                  />
+                  <select
+                    name="type"
+                    value={propertyType}
+                    onChange={(e) => handleChangePropertyType(e)}
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[255px] "
+                    disabled={isFetching || status === "pending"}
+                  >
+                    <option value="all">Any</option>
+
+                    {propertyTypeData?.data.map((item, key) => (
+                      <option key={key} value={item.property_type_aid}>
+                        {item.property_type_name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
                     Keyword
                   </span>
-                  <input
-                    type="text"
-                    placeholder="Any"
-                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[196px] "
-                  />
+                  <form className="search-box">
+                    <div>
+                      <input
+                        type="search"
+                        placeholder="Search here..."
+                        ref={search}
+                        onChange={(e) => handleChange(e)}
+                        className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[196px] "
+                      />
+                    </div>
+                  </form>
                 </div>
-                <button className="btn mt-6">Search</button>
+                <button
+                  className="btn mt-6"
+                  onClick={(e) => {
+                    handleSubmit(e);
+                  }}
+                >
+                  Search
+                </button>
               </div>
             </div>
           </div>
-          <FeaturedProperties pageType="properties" />
+          <FeaturedProperties
+            pageType="properties"
+            result={result}
+            status={status}
+            error={error}
+          />
 
           <ContactForm pageType={"Properties"} />
           <Footer />

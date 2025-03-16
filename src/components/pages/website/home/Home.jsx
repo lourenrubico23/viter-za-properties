@@ -1,5 +1,13 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { CiImageOn } from "react-icons/ci";
+import {
+  setError,
+  setIsSearch,
+  setMessage,
+} from "../../../../store/StoreAction";
+import { StoreContext } from "../../../../store/StoreContext";
+import { queryDataInfinite } from "../../../custom-hooks/queryDataInfinite";
 import useQueryData from "../../../custom-hooks/useQueryData";
 import {
   devApiVersion,
@@ -8,6 +16,7 @@ import {
   googleHDViewLink,
 } from "../../../helpers/functions-general";
 import BlogList from "../../../partials/BlogList";
+import ContactForm from "../../../partials/contact-form/ContactForm";
 import FeaturedProperties from "../../../partials/FeaturedProperties";
 import Footer from "../../../partials/Footer";
 import LoadImages from "../../../partials/LoadImages";
@@ -15,15 +24,6 @@ import BuyAPropertySvg from "../../../partials/svg/BuyAPropertySvg";
 import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
 import Navigation from "../Navigation";
 import Testimonials from "./Testimonials";
-import ContactForm from "../../../partials/contact-form/ContactForm";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { queryDataInfinite } from "../../../custom-hooks/queryDataInfinite";
-import { useInView } from "react-intersection-observer";
-import { setIsSearch } from "../../../../store/StoreAction";
-import { StoreContext } from "../../../../store/StoreContext";
-import TableLoading from "../../../partials/spinners/TableLoading";
-import NoData from "../../../partials/spinners/NoData";
-import ServerError from "../../../partials/spinners/ServerError";
 
 const Home = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -35,7 +35,6 @@ const Home = () => {
   const [onSearch, setOnSearch] = React.useState(false);
   const [page, setPage] = React.useState(1);
   const search = React.useRef({ value: "" });
-  const { ref, inView } = useInView();
 
   const { data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
@@ -57,6 +56,7 @@ const Home = () => {
     "get", // method
     "property-list" // key
   );
+
   const { data: propertyTypeData } = useQueryData(
     `${devApiVersion}/property-type`, // endpoint
     "get", // method
@@ -91,10 +91,10 @@ const Home = () => {
           searchValue: search.current.value,
           id: "",
           isFilter,
-          property_status_name:
+          list_property_status_id:
             propertyStatusData === "all" ? "" : propertyStatusData,
           list_location: location === "all" ? "" : location,
-          property_type_name: propertyType === "all" ? "" : propertyType,
+          list_property_type_id: propertyType === "all" ? "" : propertyType,
         }, // search value
         "post"
       ),
@@ -248,7 +248,7 @@ const Home = () => {
                     <option value="all">Any</option>
 
                     {propertyListData?.data.map((item, key) => (
-                      <option key={key} value={item.list_aid}>
+                      <option key={key} value={item.list_location}>
                         {item.list_location}
                       </option>
                     ))}
@@ -292,7 +292,7 @@ const Home = () => {
                 </div>
                 <button
                   className="btn mt-6"
-                  onSubmit={(e) => {
+                  onClick={(e) => {
                     handleSubmit(e);
                   }}
                 >
@@ -301,8 +301,13 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
-          <FeaturedProperties pageType="home" />
+
+          <FeaturedProperties
+            pageType="home"
+            result={result}
+            status={status}
+            error={error}
+          />
 
           <div className="flex flex-wrap gap-6 place-content-center md:my-48 my-12">
             <div className="flex flex-col items-center gap-4  w-[362px] h-[362px] p-6 hover:outline-8 hover:shadow-xl group">
