@@ -18,7 +18,12 @@ import useQueryData from "../../../../custom-hooks/useQueryData";
 import { CiImageOn } from "react-icons/ci";
 import LoadImages from "../../../../partials/LoadImages";
 
-const BannerTable = ({ setItemEdit, handleAdd, bannerData, isFetching }) => {
+const PropertiesBannerTable = ({
+  setItemEdit,
+  handleAdd,
+  bannerData,
+  isFetching,
+}) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
@@ -44,7 +49,7 @@ const BannerTable = ({ setItemEdit, handleAdd, bannerData, isFetching }) => {
           <div className="wrapper h-[500px] ">
             <div className=" relative flex justify-center">
               {bannerData?.data.map((item, key) => {
-                if (item.banner_page === "Home") {
+                if (item.banner_page === "Properties") {
                   const bannerImage =
                     getConvertStringToJSONparseData(item.banner_image) || [];
 
@@ -147,4 +152,4 @@ const BannerTable = ({ setItemEdit, handleAdd, bannerData, isFetching }) => {
   );
 };
 
-export default BannerTable;
+export default PropertiesBannerTable;

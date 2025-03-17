@@ -44,7 +44,7 @@ const Footer = () => {
                       <LoadImages
                         url={`${googleHDViewLink}${image?.id}`}
                         alt="ZA Properties"
-                        className="mb-2"
+                        className="mb-2 h-16 md:h-[60px] object-cover"
                         key={index}
                       />
                     ))}

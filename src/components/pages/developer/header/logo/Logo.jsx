@@ -49,6 +49,7 @@ const Logo = () => {
                   setItemEdit={setItemEdit}
                   handleAdd={handleAdd}
                   logoData={logoData}
+                  isFetching={isFetching}
                 />
               </div>
             </div>

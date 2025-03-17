@@ -9,6 +9,7 @@ import ContactNo from "../components/pages/developer/header/contact-no/ContactNo
 import Links from "../components/pages/developer/header/links/Links";
 import Logo from "../components/pages/developer/header/logo/Logo";
 import Notification from "../components/pages/developer/notification/Notification.jsx";
+import PropertiesBanner from "../components/pages/developer/properties/banner/PropertiesBanner.jsx";
 import PropertyList from "../components/pages/developer/properties/property-list/PropertyList";
 import PropertyStatus from "../components/pages/developer/properties/property-status/PropertyStatus.jsx";
 import PropertyType from "../components/pages/developer/properties/property-type/PropertyType";
@@ -71,6 +72,14 @@ export const RoutesAdmin = [
     element: (
       <ProtectedRouteUser>
         <Banner />
+      </ProtectedRouteUser>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlAdmin}/property-banner`,
+    element: (
+      <ProtectedRouteUser>
+        <PropertiesBanner />
       </ProtectedRouteUser>
     ),
   },

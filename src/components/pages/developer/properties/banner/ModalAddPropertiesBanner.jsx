@@ -30,7 +30,7 @@ import ModalRemovedPhoto from "../../../../partials/modals/ModalRemovedPhoto";
 import { FaTrash } from "react-icons/fa";
 import LoadImages from "../../../../partials/LoadImages";
 
-const ModalAddBanner = ({ itemEdit, bannerData }) => {
+const ModalAddPropertiesBanner = ({ itemEdit, bannerData }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("translate-x-full");
   const [withFile, setWithFile] = React.useState(false);
@@ -93,7 +93,7 @@ const ModalAddBanner = ({ itemEdit, bannerData }) => {
     mutationFn: (values) =>
       queryData(
         bannerData?.data?.length
-          ? `${devApiVersion}/banner/${bannerData.data[0].banner_aid}` // update
+          ? `${devApiVersion}/banner/${bannerData.data[1].banner_aid}` // update
           : `${devApiVersion}/banner`, // create
         bannerData?.data?.length ? "put" : "post",
         values
@@ -119,7 +119,7 @@ const ModalAddBanner = ({ itemEdit, bannerData }) => {
     setAnimate("");
     if (bannerData) {
       const photos = getConvertStringToJSONparseData(
-        bannerData?.data?.[0]?.banner_image
+        bannerData?.data?.[1]?.banner_image
       );
       setPhotoArrayList(photos);
     }
@@ -128,11 +128,11 @@ const ModalAddBanner = ({ itemEdit, bannerData }) => {
   // Initial values for mutation Formik
   const initVal = {
     isUpdateBanner: itemEdit,
-    banner_image: bannerData?.data?.[0]?.banner_image ?? "",
-    banner_page: bannerData?.data?.[0]?.banner_page ?? "Home",
-    banner_title: bannerData?.data?.[0]?.banner_title ?? "",
+    banner_image: bannerData?.data?.[1]?.banner_image ?? "",
+    banner_page: bannerData?.data?.[1]?.banner_page ?? "Properties",
+    banner_title: bannerData?.data?.[1]?.banner_title ?? "",
 
-    banner_image_old: bannerData?.data?.[0]?.banner_image ?? "",
+    banner_image_old: bannerData?.data?.[1]?.banner_image ?? "",
     pendingDeleteFile: [],
   };
 
@@ -296,7 +296,8 @@ const ModalAddBanner = ({ itemEdit, bannerData }) => {
                         type="text"
                         name="banner_page"
                         disabled={
-                          mutation.isPending || initVal.banner_page === "Home"
+                          mutation.isPending ||
+                          initVal.banner_page === "Properties"
                         } // Disable if Home
                       >
                         <option value="" disabled>
@@ -366,4 +367,4 @@ const ModalAddBanner = ({ itemEdit, bannerData }) => {
   );
 };
 
-export default ModalAddBanner;
+export default ModalAddPropertiesBanner;

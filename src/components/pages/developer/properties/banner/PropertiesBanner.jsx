@@ -1,17 +1,16 @@
 import React from "react";
-import { FaPlus } from "react-icons/fa";
 import { setIsAdd } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import useQueryData from "../../../../custom-hooks/useQueryData";
+import { devApiVersion } from "../../../../helpers/functions-general";
 import DashboardNav from "../../../../partials/dashboard/DashboardNav";
 import Navigation from "../../../../partials/dashboard/Navigation";
 import ModalError from "../../../../partials/modals/ModalError";
 import ModalSuccess from "../../../../partials/modals/ModalSuccess";
-import BannerTable from "./BannerTable";
-import ModalAddBanner from "./ModalAddBanner";
-import { devApiVersion } from "../../../../helpers/functions-general";
-import useQueryData from "../../../../custom-hooks/useQueryData";
+import ModalAddPropertiesBanner from "./ModalAddPropertiesBanner";
+import PropertiesBannerTable from "./PropertiesBannerTable";
 
-const Banner = () => {
+const PropertiesBanner = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState("");
 
@@ -33,7 +32,7 @@ const Banner = () => {
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="home" submenu="banner" />
+        <Navigation menu="properties" submenu="property-banner" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -45,7 +44,7 @@ const Banner = () => {
                     <p>Banner</p>
                   </div>
                 </div>
-                <BannerTable
+                <PropertiesBannerTable
                   setItemEdit={setItemEdit}
                   handleAdd={handleAdd}
                   bannerData={bannerData}
@@ -58,7 +57,7 @@ const Banner = () => {
       </div>
 
       {store.isAdd && (
-        <ModalAddBanner itemEdit={itemEdit} bannerData={bannerData} />
+        <ModalAddPropertiesBanner itemEdit={itemEdit} bannerData={bannerData} />
       )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
@@ -66,4 +65,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default PropertiesBanner;

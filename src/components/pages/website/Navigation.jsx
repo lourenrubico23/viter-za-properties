@@ -18,6 +18,7 @@ import {
 } from "../../helpers/functions-general";
 import LoadImages from "../../partials/LoadImages";
 import { FaFacebookF, FaInstagram, FaRegEnvelope } from "react-icons/fa";
+import FetchingSpinner from "../../partials/spinners/FetchingSpinner";
 
 const Navigation = () => {
   const [active, setActive] = React.useState("");
@@ -35,7 +36,7 @@ const Navigation = () => {
     "contactno" // key
   );
 
-  const { data: logoData } = useQueryData(
+  const { isFetching, data: logoData } = useQueryData(
     `${devApiVersion}/logo`, // endpoint
     "get", // method
     "logo" // key
@@ -47,14 +48,24 @@ const Navigation = () => {
     "colors" // key
   );
 
-  const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/properties", label: "Properties" },
-    { path: "/buyers", label: "Buyers" },
-    { path: "/sellers", label: "Sellers" },
-    { path: "/blogs", label: "Blogs" },
-    { path: "/contact", label: "Contact" },
+  const defaultNavItems = [
+    { path: "/", label: "" },
+    { path: "/properties", label: "" },
+    { path: "/buyers", label: "" },
+    { path: "/sellers", label: "" },
+    { path: "/blogs", label: "" },
+    { path: "/contact", label: "" },
   ];
+
+  // Extract labels dynamically if available
+  const navItems = defaultNavItems.map((item, index) => {
+    const dynamicLabel =
+      logoData?.data?.[0]?.[`logo_nav_${String.fromCharCode(97 + index)}`]; // a, b, c, d...
+    return {
+      ...item,
+      label: dynamicLabel || item.label, // Use dynamic label if available, otherwise use default
+    };
+  });
 
   document
     .querySelector(":root")
@@ -96,6 +107,7 @@ const Navigation = () => {
   return (
     <>
       <div className="hidden lg:block bg-secondary h-[81px] place-content-center">
+        {isFetching && !isFetching && <FetchingSpinner />}
         <div className="customContainer text-light flex justify-between ">
           <ul className="flex items-center gap-8">
             {linksData?.data?.length > 0 &&
