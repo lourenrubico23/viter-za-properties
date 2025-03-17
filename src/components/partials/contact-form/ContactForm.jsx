@@ -1,3 +1,4 @@
+import { Form, Formik } from "formik";
 import {
   Facebook,
   Instagram,
@@ -6,22 +7,17 @@ import {
   Smartphone,
 } from "lucide-react";
 import React from "react";
-import useQueryData from "../../custom-hooks/useQueryData";
-import { devApiVersion, siteKey } from "../../helpers/functions-general";
-import { StoreContext } from "../../../store/StoreContext";
-import { setIsAdd, setMessage } from "../../../store/StoreAction";
-import { Form, Formik } from "formik";
-import {
-  InputText,
-  InputTextArea,
-  InputTextAreaContactForm,
-} from "../../helpers/FormInputs";
 import ReCAPTCHA from "react-google-recaptcha";
-import ButtonSpinner from "../spinners/ButtonSpinner";
-import ModalSendForm from "./ModalSendForm";
 import * as Yup from "yup";
+import { setMessage } from "../../../store/StoreAction";
+import { StoreContext } from "../../../store/StoreContext";
+import useQueryData from "../../custom-hooks/useQueryData";
+import { InputText, InputTextAreaContactForm } from "../../helpers/FormInputs";
+import { devApiVersion, siteKey } from "../../helpers/functions-general";
 import ModalSendingEmailStatus from "../../pages/developer/user/other-user/modal/ModalSendingEmailStatus";
 import ModalSentEmailSummary from "../../pages/developer/user/other-user/modal/ModalSentEmailSummary";
+import ButtonSpinner from "../spinners/ButtonSpinner";
+import ModalSendForm from "./ModalSendForm";
 
 const ContactForm = ({ pageType }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -65,8 +61,6 @@ const ContactForm = ({ pageType }) => {
 
   const handleSend = (values) => {
     const captchaValue = recaptchaRef.current?.getValue();
-
-    console.log("reCAPTCHA Value:", captchaValue);
 
     if (!captchaValue) {
       dispatch(setError(true));
@@ -551,42 +545,52 @@ const ContactForm = ({ pageType }) => {
                   return (
                     <Form>
                       <div>
-                        <div className="flex flex-col gap-7">
-                          <InputText
-                            type="text"
-                            placeholder="Full Name"
-                            className="rounded-none border-2 max-w-[494px] h-[50px]"
-                            name="client_name"
-                            disabled={isSendingLoading}
-                          />
-                          <InputText
-                            type="text"
-                            placeholder="Email Address"
-                            className="rounded-none border-2 max-w-[494px] h-[50px]"
-                            name="client_email"
-                            disabled={isSendingLoading}
-                          />
-                          <InputText
-                            type="text"
-                            placeholder="Mobile Number"
-                            className="rounded-none border-2 max-w-[494px] h-[50px]"
-                            name="client_phone"
-                            disabled={isSendingLoading}
-                          />
-                          <InputText
-                            type="text"
-                            placeholder="Best Time To Call"
-                            className="rounded-none border-2 max-w-[494px] h-[50px]"
-                            name="client_time_to_call"
-                            disabled={isSendingLoading}
-                          />
-                          <InputTextAreaContactForm
-                            type="text"
-                            placeholder="Message"
-                            className="rounded-none border-2 max-w-[494px]"
-                            name="client_message"
-                            disabled={isSendingLoading}
-                          />
+                        <div className="flex flex-col ">
+                          <div className="input-wrapper">
+                            <InputText
+                              type="text"
+                              placeholder="Full Name"
+                              className="rounded-none border-2 max-w-[494px] h-[50px]"
+                              name="client_name"
+                              disabled={isSendingLoading}
+                            />
+                          </div>
+                          <div className="input-wrapper">
+                            <InputText
+                              type="text"
+                              placeholder="Email Address"
+                              className="rounded-none border-2 max-w-[494px] h-[50px]"
+                              name="client_email"
+                              disabled={isSendingLoading}
+                            />
+                          </div>
+                          <div className="input-wrapper">
+                            <InputText
+                              type="text"
+                              placeholder="Mobile Number"
+                              className="rounded-none border-2 max-w-[494px] h-[50px]"
+                              name="client_phone"
+                              disabled={isSendingLoading}
+                            />
+                          </div>
+                          <div className="input-wrapper">
+                            <InputText
+                              type="text"
+                              placeholder="Best Time To Call"
+                              className="rounded-none border-2 max-w-[494px] h-[50px]"
+                              name="client_time_to_call"
+                              disabled={isSendingLoading}
+                            />
+                          </div>
+                          <div className="input-wrapper">
+                            <InputTextAreaContactForm
+                              type="text"
+                              placeholder="Message"
+                              className="rounded-none border-2 max-w-[494px]"
+                              name="client_message"
+                              disabled={isSendingLoading}
+                            />
+                          </div>
                           <div className="input-wrapper reCaptcha">
                             <ReCAPTCHA
                               ref={recaptchaRef}
@@ -595,17 +599,19 @@ const ContactForm = ({ pageType }) => {
                             />
                           </div>
                         </div>
-                        <button
-                          className="btn my-6 !place-self-start"
-                          type="submit"
-                          disabled={isSendingLoading || !dirty}
-                        >
-                          {isSendingLoading ? (
-                            <ButtonSpinner />
-                          ) : (
-                            "Send Message"
-                          )}
-                        </button>
+                        <div className=" flex justify-end !place-self-start">
+                          <button
+                            className="btn btn-modal-submit my-6 border-none "
+                            type="submit"
+                            disabled={isSendingLoading || !dirty}
+                          >
+                            {isSendingLoading ? (
+                              <ButtonSpinner />
+                            ) : (
+                              "Send Message"
+                            )}
+                          </button>
+                        </div>
                       </div>
 
                       {isSend && (

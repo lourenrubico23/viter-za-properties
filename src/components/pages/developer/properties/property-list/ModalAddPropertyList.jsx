@@ -324,7 +324,7 @@ const ModalAddPropertyList = ({ itemEdit }) => {
             <GrFormClose className="text-[25px]" />
           </button>
         </div>
-        <div className="modal-content">
+        <div className="modal-content mb-[50px]">
           <Formik
             initialValues={initVal}
             validationSchema={yupSchema}

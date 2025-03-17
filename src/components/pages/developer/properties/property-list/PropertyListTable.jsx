@@ -207,11 +207,11 @@ const PropertyListTable = ({ setItemEdit }) => {
                         {item.list_best_buy}
                       </td>
                       <td className="place-content-start ">
-                        <p className="line-clamp-5">
+                        <p className="line-clamp-5 ">
                           {propertyImages.map((img, index) => (
-                            <p key={index} className="text-[12px] ">
+                            <span key={index} className="text-[12px]">
                               {img.name}
-                            </p>
+                            </span>
                           ))}
                         </p>
                       </td>

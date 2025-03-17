@@ -22,7 +22,7 @@ const UserForgotPassword = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (values) =>
-      queryData(`/${devApiVersion}/user/reset`, "post", values),
+      queryData(`${devApiVersion}/user/reset`, "post", values),
     onSuccess: (data) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["system"] });
@@ -66,7 +66,7 @@ const UserForgotPassword = () => {
             <div className="login-message flex justify-center items-center flex-col text-center ">
               <BiMailSend className="text-[50px] text-green-700" />
               <p className="text-balance">
-                We have successfully send the instruction to your email.{" "}
+                We have successfully send the instruction to your email.
               </p>
 
               <a
@@ -80,7 +80,7 @@ const UserForgotPassword = () => {
             <div>
               <p className="mb-5">
                 Enter your registered email to receive instruction on how to
-                reset your password
+                reset your password.
               </p>
 
               <Formik
@@ -125,77 +125,6 @@ const UserForgotPassword = () => {
           )}
         </div>
       </div>
-
-      {/* <div className="h-screen w-full flex justify-center items-center ">
-        <div className="max-w-[340px] w-full   p-4 py-5 -translate-y-[100px]   shadow-md rounded-md">
-          <div className="flex justify-center items-center mb-5">
-            <Fbslogo />
-          </div>
-          <h2 className="text-base text-center mb-5">User - Forgot Password</h2>
-
-          {isSuccess ? (
-            <div className="login-message flex justify-center items-center flex-col text-center ">
-              <BiMailSend className="text-[50px] text-green-700" />
-              <p className="text-balance">
-                We have successfully send the instruction to your email.{" "}
-              </p>
-
-              <a
-                href={`${devNavUrl}/login`}
-                className="btn btn-accent text-center mt-5 center-all"
-              >
-                Back to Login
-              </a>
-            </div>
-          ) : (
-            <div>
-              <p className="mb-5">
-                Enter your registered email to receive instruction on how to
-                reset your password
-              </p>
-
-              <Formik
-                initialValues={initVal}
-                validationSchema={yupSchema}
-                onSubmit={async (values, { setSubmitting, resetForm }) => {
-                  mutation.mutate(values);
-                }}
-              >
-                {(props) => {
-                  return (
-                    <Form>
-                      <div className="input-wrapper">
-                        <InputText
-                          label="Email"
-                          type="email"
-                          name="email"
-                          className="text-xs"
-                          disabled={mutation.isPending}
-                        />
-                      </div>
-
-                      <button
-                        className="btn btn-accent w-full justify-center mt-5 "
-                        type="submit"
-                        disabled={mutation.isPending || !props.dirty}
-                      >
-                        {mutation.isPending && <ButtonSpinner />} Reset Password
-                      </button>
-
-                      <a
-                        href={`${devNavUrl}/login`}
-                        className="text-xs block text-center mt-5 hover:underline"
-                      >
-                        Back to Login
-                      </a>
-                    </Form>
-                  );
-                }}
-              </Formik>
-            </div>
-          )}
-        </div>
-      </div> */}
 
       {store.error && <ModalError />}
     </>

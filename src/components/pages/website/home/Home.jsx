@@ -247,9 +247,13 @@ const Home = () => {
                   >
                     <option value="all">Any</option>
 
-                    {propertyListData?.data.map((item, key) => (
-                      <option key={key} value={item.list_location}>
-                        {item.list_location}
+                    {[
+                      ...new Set(
+                        propertyListData?.data.map((item) => item.list_location) // to prevent the duplicate of location
+                      ),
+                    ].map((location, key) => (
+                      <option key={key} value={location}>
+                        {location}
                       </option>
                     ))}
                   </select>

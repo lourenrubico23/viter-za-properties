@@ -11,10 +11,9 @@ const ModalSendingEmailStatus = ({ queryCount, recipientList }) => {
     <ModalWrapperMenu className={"max-w-[20rem] h-fit p-5 place-self-center"}>
       <div className="">
         <div className="flex flex-col items-center gap-7 my-6">
-          <div className="flex items-center gap-5">
-            <h3 className="text-sm">Sending, please wait...</h3>
-            <ButtonSpinner color="text-black" />
-          </div>
+          <h3 className="text-sm">Sending, please wait...</h3>
+          <div className="loader"></div>
+
           {/* <span className="text-sm">
             {sucessCount} of {totalCount}
           </span> */}

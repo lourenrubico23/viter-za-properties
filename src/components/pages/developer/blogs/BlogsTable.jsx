@@ -188,11 +188,13 @@ const BlogsTable = ({ setItemEdit }) => {
                         {item.blogs_contents_c}
                       </td>
                       <td className="place-content-start">
-                        {blogsImages.map((img, index) => (
-                          <p key={index} className="text-[12px]">
-                            {img.name}
-                          </p>
-                        ))}
+                        <p className="line-clamp-5">
+                          {blogsImages.map((img, index) => (
+                            <span key={index} className="text-[12px]">
+                              {img.name}
+                            </span>
+                          ))}
+                        </p>
                       </td>
                       <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
                         {item.blogs_is_active ? (

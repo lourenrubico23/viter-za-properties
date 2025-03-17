@@ -126,9 +126,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
                 Load More Blogs
               </button>
             ) : (
-              <p className="text-gray-500 text-lg font-semibold">
-                No more properties to show
-              </p>
+              <p className="text-gray-400 text-base">No more blogs to show</p>
             )}
           </div>
         )}

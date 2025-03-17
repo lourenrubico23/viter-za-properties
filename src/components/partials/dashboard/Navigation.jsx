@@ -393,13 +393,10 @@ const Navigation = ({ menu, submenu }) => {
         </div>
         <div>
           <div
-            className={`py-[18px] relative ${isOpen && " border-black"}`}
+            className={`py-[18px] relative  ${isOpen && " border-accent"}`}
             onClick={handleOpen}
             ref={ref}
           >
-            {/* <span className="w-[40px] h-[40px]">
-                <img src={`${devBaseImgUrl}/user.webp`} alt="" />
-              </span> */}
             <div className="bg-primary rounded-full w-10 h-10 flex items-center justify-center text-white text-sm font-semibold cursor-pointer uppercase">
               {initials}
             </div>
@@ -413,14 +410,14 @@ const Navigation = ({ menu, submenu }) => {
                 </a>
                 <button
                   type="button"
-                  className="text-black text-xs text-left hover:text-accent"
+                  className="text-black text-xs text-left hover:text-secondary"
                   onClick={() => setIsChangePassword(true)}
                 >
                   Change Password
                 </button>
                 <button
                   type="button"
-                  className="text-black text-xs text-left hover:text-accent"
+                  className="text-black text-xs text-left hover:text-secondary"
                   onClick={() => handleLogout()}
                 >
                   Logout

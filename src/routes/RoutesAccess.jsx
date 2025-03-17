@@ -1,7 +1,7 @@
 import { devNavUrl } from "../components/helpers/functions-general";
-import OtherUserForgetPassword from "../components/pages/access/user-other/OtherUserForgetPassword";
 import OtherUserLogin from "../components/pages/access/user-other/OtherUserLogin";
 import UserCreatePassword from "../components/pages/access/user-other/UserCreatePassword";
+import UserForgotPassword from "../components/pages/access/user-other/UserForgotPassword";
 import UserVerifyEmail from "../components/pages/access/user-other/UserVerifyEmail";
 
 export const RoutesAccess = [
@@ -15,7 +15,7 @@ export const RoutesAccess = [
   },
   {
     path: `${devNavUrl}/forgot-password`,
-    element: <OtherUserForgetPassword />,
+    element: <UserForgotPassword />,
   },
   {
     path: `${devNavUrl}/verify-email`,

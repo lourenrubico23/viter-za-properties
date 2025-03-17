@@ -184,6 +184,7 @@ class PropertyList
             $sql .= "and (list.list_name like :list_name ";
             $sql .= "or list.list_price like :list_price ";
             $sql .= "or type.property_type_name like :property_type_name ";
+            $sql .= "or list.list_location like :list_location ";
             $sql .= "or status.property_status_name like :property_status_name) ";
             $sql .= "order by list.list_is_active desc, ";
             $sql .= "list.list_name asc ";
@@ -193,6 +194,7 @@ class PropertyList
                 "list_price" => "%{$this->list_search}%",
                 "property_type_name" => "%{$this->list_search}%",
                 "property_status_name" => "%{$this->list_search}%",
+                "list_location" => "%{$this->list_search}%",
             ]);
         } catch (PDOException $ex) {
             $query = false;
@@ -351,8 +353,7 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_property_status_id = list_property_status_id ";
-            $sql .= "and list_property_status_id = :list_property_status_id ";
+            $sql .= "where list_property_status_id = :list_property_status_id ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_status_id asc ";
@@ -373,8 +374,7 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = list_location ";
-            $sql .= "and list_location = :list_location ";
+            $sql .= "where list_location = :list_location ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_location asc ";
@@ -395,8 +395,7 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_property_type_id = list_property_type_id ";
-            $sql .= "and list_property_type_id = :list_property_type_id ";
+            $sql .= "where list_property_type_id = :list_property_type_id ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_type_id asc ";
@@ -417,10 +416,8 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_property_status_id = list_property_status_id ";
-            $sql .= "and list_location = list_location ";
-            $sql .= "and (list_property_status_id = :list_property_status_id ";
-            $sql .= "or list_location = :list_location) ";
+            $sql .= "where list_property_status_id = :list_property_status_id ";
+            $sql .= "and list_location = :list_location ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_status_id asc ";
@@ -442,10 +439,8 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_property_status_id = list_property_status_id ";
-            $sql .= "and list_property_type_id = list_property_type_id ";
-            $sql .= "and (list_property_status_id = :list_property_status_id ";
-            $sql .= "or list_property_type_id = :list_property_type_id) ";
+            $sql .= "where list_property_status_id = :list_property_status_id ";
+            $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_status_id asc ";
@@ -467,10 +462,8 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = list_location ";
-            $sql .= "and list_property_type_id = list_property_type_id ";
-            $sql .= "and (list_location = :list_location ";
-            $sql .= "or list_property_type_id = :list_property_type_id) ";
+            $sql .= "where list_location = :list_location ";
+            $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_location asc ";
@@ -492,12 +485,9 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = list_location ";
-            $sql .= "and list_property_type_id = list_property_type_id ";
-            $sql .= "and list_property_status_id = list_property_status_id ";
-            $sql .= "and (list_location = :list_location ";
-            $sql .= "or list_property_type_id = :list_property_type_id ";
-            $sql .= "or list_property_status_id = :list_property_status_id) ";
+            $sql .= "where list_location = :list_location ";
+            $sql .= "and list_property_type_id = :list_property_type_id ";
+            $sql .= "and list_property_status_id = :list_property_status_id ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_location asc ";
@@ -531,7 +521,7 @@ class PropertyList
             $sql .= "or list_key_features like :list_key_features ";
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
-            $sql .= "order by notification_log_created desc, ";
+            $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_status_id asc ";
             $query = $this->connection->prepare($sql);
@@ -571,7 +561,7 @@ class PropertyList
             $sql .= "or list_key_features like :list_key_features ";
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
-            $sql .= "order by notification_log_created desc, ";
+            $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_location asc ";
             $query = $this->connection->prepare($sql);
@@ -611,7 +601,7 @@ class PropertyList
             $sql .= "or list_key_features like :list_key_features ";
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
-            $sql .= "order by notification_log_created desc, ";
+            $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_type_id asc ";
             $query = $this->connection->prepare($sql);
@@ -652,7 +642,7 @@ class PropertyList
             $sql .= "or list_key_features like :list_key_features ";
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
-            $sql .= "order by notification_log_created desc, ";
+            $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_status_id asc ";
             $query = $this->connection->prepare($sql);
@@ -693,7 +683,7 @@ class PropertyList
             $sql .= "or list_key_features like :list_key_features ";
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
-            $sql .= "order by notification_log_created desc, ";
+            $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_status_id asc ";
             $query = $this->connection->prepare($sql);

@@ -147,7 +147,7 @@ const ModalAddAbout = ({ itemEdit }) => {
     <>
       <ModalAddWrapper
         handleClose={handleCloseModal}
-        className={`transition-all ease-linear transform duration-200 max-w-[1000px]  ${animate}`}
+        className={`transition-all ease-linear transform duration-200 max-w-[900px]  ${animate}`}
       >
         <div className="modal-title">
           <h2 className="text-sm">{itemEdit ? "Edit" : "Add"} About</h2>
