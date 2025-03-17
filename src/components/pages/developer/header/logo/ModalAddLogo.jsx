@@ -26,7 +26,7 @@ import ModalRemovedPhoto from "../../../../partials/modals/ModalRemovedPhoto";
 import { FaTrash } from "react-icons/fa";
 import LoadImages from "../../../../partials/LoadImages";
 
-const ModalAddLogo = ({ itemEdit }) => {
+const ModalAddLogo = ({ itemEdit, logoData }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("translate-x-full");
   const [withFile, setWithFile] = React.useState(false);

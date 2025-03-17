@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2025 at 05:08 AM
+-- Generation Time: Mar 17, 2025 at 08:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -191,9 +191,13 @@ INSERT INTO `zapv1_header_contact_no` (`contact_no_aid`, `contact_no_contact`, `
 
 CREATE TABLE `zapv1_header_links` (
   `links_aid` int(11) NOT NULL,
-  `links_icons` varchar(100) NOT NULL,
-  `links_title` varchar(100) NOT NULL,
-  `links_link` text NOT NULL,
+  `links_facebook_link` text NOT NULL,
+  `links_facebook_title` varchar(100) NOT NULL,
+  `links_instagram_link` text NOT NULL,
+  `links_instagram_title` varchar(100) NOT NULL,
+  `links_message_link` text NOT NULL,
+  `links_message_title` varchar(100) NOT NULL,
+  `links_contact` varchar(100) NOT NULL,
   `links_created` datetime NOT NULL,
   `links_datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -202,10 +206,8 @@ CREATE TABLE `zapv1_header_links` (
 -- Dumping data for table `zapv1_header_links`
 --
 
-INSERT INTO `zapv1_header_links` (`links_aid`, `links_icons`, `links_title`, `links_link`, `links_created`, `links_datetime`) VALUES
-(4, 'FaFacebookF', 'Like us on Facebook', 'https://www.facebook.com/ZacAlfantaJr/', '2025-03-03 10:20:27', '2025-03-03 10:20:27'),
-(5, 'FaInstagram', 'Follow us on Instagram', 'https://www.instagram.com/zapropertiesph/', '2025-03-03 10:21:09', '2025-03-03 10:21:09'),
-(8, 'FaRegEnvelope', 'Message Us', '', '2025-03-03 13:55:53', '2025-03-03 13:55:53');
+INSERT INTO `zapv1_header_links` (`links_aid`, `links_facebook_link`, `links_facebook_title`, `links_instagram_link`, `links_instagram_title`, `links_message_link`, `links_message_title`, `links_contact`, `links_created`, `links_datetime`) VALUES
+(9, 'https://www.facebook.com/ZacAlfantaJr/', 'Like us on Facebook', 'https://www.instagram.com/zapropertiesph/', 'Follow us on Instagram', '', 'Message Us', '+63 917 653 1919', '2025-03-17 15:04:45', '2025-03-17 15:27:05');
 
 -- --------------------------------------------------------
 
@@ -571,7 +573,7 @@ ALTER TABLE `zapv1_header_contact_no`
 -- AUTO_INCREMENT for table `zapv1_header_links`
 --
 ALTER TABLE `zapv1_header_links`
-  MODIFY `links_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `links_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `zapv1_header_logo`

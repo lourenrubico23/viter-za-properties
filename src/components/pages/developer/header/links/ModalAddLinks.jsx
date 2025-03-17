@@ -1,78 +1,24 @@
-import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Form, Formik } from "formik";
+import React from "react";
 import { GrFormClose } from "react-icons/gr";
-import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
-import * as TiIcons from "react-icons/ti";
-import * as LuIcons from "react-icons/lu";
-import * as PiIcons from "react-icons/pi";
-import { devApiVersion } from "../../../../helpers/functions-general";
-import { StoreContext } from "../../../../../store/StoreContext";
-import { queryData } from "../../../../custom-hooks/queryData";
 import {
   setError,
   setIsAdd,
   setMessage,
   setSuccess,
 } from "../../../../../store/StoreAction";
-import ModalAddWrapper from "../../../../partials/modals/ModalAddWrapper";
+import { StoreContext } from "../../../../../store/StoreContext";
+import { queryData } from "../../../../custom-hooks/queryData";
 import { InputText } from "../../../../helpers/FormInputs";
+import { devApiVersion } from "../../../../helpers/functions-general";
+import ModalAddWrapper from "../../../../partials/modals/ModalAddWrapper";
 import ButtonSpinner from "../../../../partials/spinners/ButtonSpinner";
 
-const icons = {
-  ...FaIcons,
-  ...AiIcons,
-  ...IoIcons,
-  ...TiIcons,
-  ...LuIcons,
-  ...PiIcons,
-};
-
-const ModalAddLinks = ({ itemEdit }) => {
+const ModalAddLinks = ({ itemEdit, linksData }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("translate-x-full");
-  const [searchTerm, setSearchTerm] = React.useState(
-    itemEdit ? itemEdit.links_icons : ""
-  );
-  const [onFocusSearch, setOnFocusSearch] = React.useState(false);
-  const [selectedIcon, setSelectedIcon] = React.useState(
-    itemEdit ? itemEdit.links_icons : ""
-  );
-  const [itemsLimit, setItemsLimit] = React.useState(20);
-
-  // sets the limit of icons being show
-  const handleShowMore = () => {
-    setItemsLimit(itemsLimit + 20);
-  };
-
-  const refSearch = React.useRef();
-
-  const clickOutsideRefSearch = (e) => {
-    if (refSearch.current && !refSearch.current.contains(e.target)) {
-      setOnFocusSearch(false);
-    }
-  };
-
-  React.useEffect(() => {
-    document.addEventListener("click", clickOutsideRefSearch);
-    return () => document.removeEventListener("click", clickOutsideRefSearch);
-  }, []);
-
-  const handleIconSelect = (iconKey) => {
-    setSelectedIcon(iconKey);
-    setSearchTerm(iconKey);
-    setOnFocusSearch(false);
-  };
-
-  const filteredIcons = Object.keys(icons).filter((iconKey) =>
-    iconKey.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Limit the number of icons displayed
-  const limitedIcons = filteredIcons.slice(0, itemsLimit);
 
   const handleCloseModal = () => {
     setAnimate("translate-x-full");
@@ -81,17 +27,15 @@ const ModalAddLinks = ({ itemEdit }) => {
     }, 200);
   };
 
-  const SelectedIcon = selectedIcon ? icons[selectedIcon] : null;
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (values) =>
       queryData(
-        itemEdit
-          ? `${devApiVersion}/links/${itemEdit.links_aid}` // update
+        linksData?.data?.length
+          ? `${devApiVersion}/links/${linksData.data[0].links_aid}` // update
           : `${devApiVersion}/links`, // create
-        itemEdit ? "put" : "post",
+        linksData?.data?.length ? "put" : "post",
         values
       ),
     onSuccess: (data) => {
@@ -114,10 +58,15 @@ const ModalAddLinks = ({ itemEdit }) => {
   }, []);
 
   const initVal = {
-    links_aid: itemEdit ? itemEdit.links_aid : "",
-    links_icons: itemEdit ? itemEdit.links_icons : "",
-    links_title: itemEdit ? itemEdit.links_title : "",
-    links_link: itemEdit ? itemEdit.links_link : "",
+    isUpdateLinks: itemEdit,
+    links_aid: linksData?.data?.[0]?.links_aid ?? "",
+    links_facebook_link: linksData?.data?.[0]?.links_facebook_link ?? "",
+    links_facebook_title: linksData?.data?.[0]?.links_facebook_title ?? "",
+    links_instagram_link: linksData?.data?.[0]?.links_instagram_link ?? "",
+    links_instagram_title: linksData?.data?.[0]?.links_instagram_title ?? "",
+    links_message_link: linksData?.data?.[0]?.links_message_link ?? "",
+    links_message_title: linksData?.data?.[0]?.links_message_title ?? "",
+    links_contact: linksData?.data?.[0]?.links_contact ?? "",
   };
 
   const yupSchema = Yup.object({});
@@ -128,7 +77,7 @@ const ModalAddLinks = ({ itemEdit }) => {
       handleClose={handleCloseModal}
     >
       <div className="modal-title">
-        <h2 className="text-sm">{itemEdit ? "Edit" : "Add"} Links</h2>
+        <h2 className="text-sm">{itemEdit ? "Edit" : "Add"} Header</h2>
         <button onClick={handleCloseModal}>
           <GrFormClose className="text-[25px]" />
         </button>
@@ -140,7 +89,6 @@ const ModalAddLinks = ({ itemEdit }) => {
           onSubmit={async (values) => {
             const data = {
               ...values,
-              links_icons: selectedIcon,
             };
             mutation.mutate(data);
           }}
@@ -149,75 +97,59 @@ const ModalAddLinks = ({ itemEdit }) => {
             return (
               <Form className="modal-form">
                 <div className="form-input">
-                  <div className="input-wrapper" ref={refSearch}>
-                    <InputText
-                      label="Search Icon"
-                      type="text"
-                      name="links_icons"
-                      placeholder="Type to search icons..."
-                      value={searchTerm}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setSearchTerm(value);
-                        props.setFieldValue("links_icons", value);
-                      }}
-                      onFocus={() => setOnFocusSearch(true)}
-                      className="border p-2 w-full"
-                    />
-                    {onFocusSearch && (
-                      <div className="w-full h-40 max-h-40 overflow-y-auto absolute top-[34px] bg-white shadow-md z-50 rounded-sm border border-gray-200 pt-1">
-                        {limitedIcons.map((iconKey) => {
-                          const IconComponent = icons[iconKey];
-                          return (
-                            <div
-                              key={iconKey}
-                              className="icon-item cursor-pointer flex items-center gap-2 px-2 py-1 hover:bg-gray-100"
-                              onClick={() => {
-                                handleIconSelect(iconKey);
-                                props.setFieldValue("links_icons", iconKey);
-                                setOnFocusSearch(false);
-                              }}
-                            >
-                              <IconComponent />
-                              <span>{iconKey}</span>
-                            </div>
-                          );
-                        })}
-                        {filteredIcons.length > itemsLimit && (
-                          <div className="load-more">
-                            <button
-                              type="button"
-                              onClick={handleShowMore}
-                              className="text-primary p-1 ml-1.5 rounded"
-                            >
-                              Show More Icons ...
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    {selectedIcon ? (
-                      <div className="flex items-center gap-4 ml-3 text-xs">
-                        Selected icon: <SelectedIcon />
-                      </div>
-                    ) : (
-                      <div className="text-xs ml-3">No icon selected</div>
-                    )}
-                  </div>
-
                   <div className="input-wrapper">
                     <InputText
-                      label="Title"
+                      label="Facebook"
                       type="text"
-                      name="links_title"
+                      name="links_facebook_title"
                       disabled={mutation.isPending}
                     />
                   </div>
                   <div className="input-wrapper">
                     <InputText
-                      label="Link"
+                      label="Facebook Link"
                       type="text"
-                      name="links_link"
+                      name="links_facebook_link"
+                      disabled={mutation.isPending}
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <InputText
+                      label="Instagram"
+                      type="text"
+                      name="links_instagram_title"
+                      disabled={mutation.isPending}
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <InputText
+                      label="Instagram Link"
+                      type="text"
+                      name="links_instagram_link"
+                      disabled={mutation.isPending}
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <InputText
+                      label="Message"
+                      type="text"
+                      name="links_message_title"
+                      disabled={mutation.isPending}
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <InputText
+                      label="Message Link"
+                      type="text"
+                      name="links_message_link"
+                      disabled={mutation.isPending}
+                    />
+                  </div>
+                  <div className="input-wrapper">
+                    <InputText
+                      label="Contact No."
+                      type="text"
+                      name="links_contact"
                       disabled={mutation.isPending}
                     />
                   </div>
@@ -227,11 +159,7 @@ const ModalAddLinks = ({ itemEdit }) => {
                     <button
                       className="btn-modal-submit"
                       type="submit"
-                      disabled={
-                        mutation.isPending ||
-                        !props.dirty ||
-                        !selectedIcon === ""
-                      }
+                      disabled={mutation.isPending || !props.dirty}
                     >
                       {mutation.isPending ? (
                         <>

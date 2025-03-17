@@ -132,6 +132,28 @@ const Navigation = ({ menu, submenu }) => {
           <nav>
             <ul className="flex-col [&>li]:text-left [&>li]:text-[16px] font-semibold  ">
               <>
+                <Link className="" to={`${devNavUrl}/${link}/header`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "header"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    Header
+                  </li>
+                </Link>
+                <Link className="" to={`${devNavUrl}/${link}/navigation`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "navigation"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    Navigation
+                  </li>
+                </Link>
                 <Link className="" to={`${devNavUrl}/${link}/about`}>
                   <li
                     className={`text-[14px] uppercase  p-1 ${
@@ -187,7 +209,7 @@ const Navigation = ({ menu, submenu }) => {
                     Notification
                   </li>
                 </Link>
-                <li
+                {/* <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "header"
                       ? "text-secondary underline underline-offset-4"
@@ -216,17 +238,6 @@ const Navigation = ({ menu, submenu }) => {
                     store.isOpenHeader ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
-                  <Link className="!p-0" to={`${devNavUrl}/${link}/links`}>
-                    <li
-                      className={`text-xs  border-transparent ${
-                        submenu === "links"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Links
-                    </li>
-                  </Link>
                   <Link className="!p-0" to={`${devNavUrl}/${link}/contact-no`}>
                     <li
                       className={`text-xs my-2 border-transparent ${
@@ -260,7 +271,7 @@ const Navigation = ({ menu, submenu }) => {
                       Banner
                     </li>
                   </Link>
-                </ul>
+                </ul> */}
 
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${

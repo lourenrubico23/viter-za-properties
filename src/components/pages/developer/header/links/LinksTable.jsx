@@ -1,111 +1,94 @@
 import React from "react";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { setIsAdd, setIsDelete } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
-import { devApiVersion } from "../../../../helpers/functions-general";
-import SearchBar from "../../../../partials/SearchBar";
+import useQueryData from "../../../../custom-hooks/useQueryData";
+import {
+  devApiVersion,
+  devNavUrl,
+} from "../../../../helpers/functions-general";
 import ModalDelete from "../../../../partials/modals/ModalDelete";
 import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import useQueryData from "../../../../custom-hooks/useQueryData";
+import { FaFacebookF, FaInstagram, FaRegEnvelope } from "react-icons/fa";
+import { HiPencil } from "react-icons/hi";
 
-const LinksTable = ({ setItemEdit }) => {
-  const { store, dispatch } = React.useContext(StoreContext);
-  const [id, setIsId] = React.useState("");
-  const [isData, setIsData] = React.useState("");
-
-  const {
-    isFetching,
-    error,
-    isLoading,
-    data: linksData,
-  } = useQueryData(
-    `${devApiVersion}/links`, // endpoint
-    "get", // method
-    "links" // key
-  );
-
-  let counter = 1;
-
-  const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
-    setItemEdit(item);
-  };
-
-  const handleDelete = (item) => {
-    dispatch(setIsDelete(true));
-    setIsData(item.links_title);
-    setIsId(item.links_aid);
-  };
-
+const LinksTable = ({ handleAdd, linksData }) => {
   return (
     <>
-      <div className=" shadow-md rounded-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
-        {isFetching && !isFetching && <FetchingSpinner />}
-        <table>
-          <thead>
-            <tr className="text-[black]">
-              <th className="pl-2 w-[1rem]">#</th>
-              <th>Icon Name</th>
-              <th>Title</th>
-              <th>Link</th>
-              <th className="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="relative">
-            {(isLoading || linksData?.data.length === 0) && (
-              <tr className="text-center">
-                <td colSpan="100%" className="p-10">
-                  {isLoading ? <TableLoading /> : <NoData />}
-                </td>
-              </tr>
-            )}
+      <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
+        <div className=" lg:block bg-secondary h-[81px] place-content-center">
+          <div className="customContainer text-light flex justify-between ">
+            <ul className="flex items-center gap-8">
+              {linksData?.data?.length > 0 &&
+                (() => {
+                  const item = linksData.data[0];
 
-            {error && (
-              <tr className="text-center ">
-                <td colSpan="100%" className="p-10">
-                  <ServerError />
-                </td>
-              </tr>
-            )}
-            {linksData?.data.map((item, key) => (
-              <tr key={key} className="text-[14px]">
-                <td className="pl-2 ">{counter++}.</td>
-                <td className="">{item.links_icons}</td>
-                <td className="">{item.links_title}</td>
-                <td className="">{item.links_link}</td>
-                <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
-                  <button
-                    className="tooltip-action-table"
-                    data-tooltip="Edit"
-                    onClick={() => handleEdit(item)}
-                  >
-                    <FaEdit className="text-gray-600 text-[16px]" />
-                  </button>
-                  <button
-                    className="tooltip-action-table"
-                    data-tooltip="Delete"
-                    onClick={() => handleDelete(item)}
-                  >
-                    <MdDelete className="text-gray-600 text-[18px]" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  return (
+                    <>
+                      {item.links_facebook_title && (
+                        <li>
+                          <a
+                            href={item.links_facebook_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-lg"
+                          >
+                            <FaFacebookF />
+                            <span className="text-xs">
+                              {item.links_facebook_title || "Facebook"}
+                            </span>
+                          </a>
+                        </li>
+                      )}
+                      {item.links_instagram_title && (
+                        <li>
+                          <a
+                            href={item.links_instagram_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-lg"
+                          >
+                            <FaInstagram />
+                            <span className="text-xs">
+                              {item.links_instagram_title || "Instagram"}
+                            </span>
+                          </a>
+                        </li>
+                      )}
+                      {item.links_message_title && (
+                        <li>
+                          <a
+                            href={item.links_message_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-lg"
+                          >
+                            <FaRegEnvelope />
+                            <span className="text-xs">
+                              {item.links_message_title || "Message"}
+                            </span>
+                          </a>
+                        </li>
+                      )}
+                    </>
+                  );
+                })()}
+            </ul>
+            {linksData?.data?.length > 0 &&
+              linksData?.data[0]?.links_contact && (
+                <h3 className="text-2xl">{linksData.data[0].links_contact}</h3>
+              )}
+
+            <a
+              className="absolute cursor-pointer tooltip-header-nav right-0 top-0"
+              data-tooltip="Edit contents"
+              onClick={handleAdd}
+            >
+              <HiPencil className=" bg-[#C7AC27] rounded-full  w-[25px] h-[25px] p-[5px] border-[1px]" />
+            </a>
+          </div>
+        </div>
       </div>
-
-      {store.isDelete && (
-        <ModalDelete
-          mysqlEndpoint={`${devApiVersion}/links/${id}`}
-          queryKey={"links"}
-          item={isData}
-        />
-      )}
     </>
   );
 };

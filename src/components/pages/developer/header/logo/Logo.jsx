@@ -8,19 +8,32 @@ import ModalError from "../../../../partials/modals/ModalError";
 import ModalSuccess from "../../../../partials/modals/ModalSuccess";
 import LogoTable from "./LogoTable";
 import ModalAddLogo from "./ModalAddLogo";
+import { devApiVersion } from "../../../../helpers/functions-general";
+import useQueryData from "../../../../custom-hooks/useQueryData";
 
 const Logo = () => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [itemEdit, setItemEdit] = React.useState(null);
+  const [itemEdit, setItemEdit] = React.useState("");
+
+  const {
+    isFetching,
+    error,
+    isLoading,
+    data: logoData,
+  } = useQueryData(
+    `${devApiVersion}/logo`, // endpoint
+    "get", // method
+    "logo" // key
+  );
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
-    setItemEdit(null);
+    setItemEdit("navigationUpdate");
   };
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="header" submenu="logo" />
+        <Navigation menu="navigation" submenu="" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -29,24 +42,21 @@ const Logo = () => {
               <div className="p-7">
                 <div className=" flex justify-between ">
                   <div className="text-sm text-[black] font-semibold">
-                    <p>Logo</p>
+                    <p>Navigation</p>
                   </div>
-                  <button
-                    className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm"
-                    onClick={handleAdd}
-                  >
-                    <FaPlus />
-                    Add
-                  </button>
                 </div>
-                <LogoTable setItemEdit={setItemEdit} />
+                <LogoTable
+                  setItemEdit={setItemEdit}
+                  handleAdd={handleAdd}
+                  logoData={logoData}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {store.isAdd && <ModalAddLogo itemEdit={itemEdit} />}
+      {store.isAdd && <ModalAddLogo itemEdit={itemEdit} logoData={logoData} />}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

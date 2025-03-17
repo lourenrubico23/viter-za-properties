@@ -17,15 +17,7 @@ import {
   hexToRgb,
 } from "../../helpers/functions-general";
 import LoadImages from "../../partials/LoadImages";
-
-const icons = {
-  ...FaIcons,
-  ...AiIcons,
-  ...IoIcons,
-  ...TiIcons,
-  ...LuIcons,
-  ...PiIcons,
-};
+import { FaFacebookF, FaInstagram, FaRegEnvelope } from "react-icons/fa";
 
 const Navigation = () => {
   const [active, setActive] = React.useState("");
@@ -68,31 +60,31 @@ const Navigation = () => {
     .querySelector(":root")
     .style.setProperty(
       "--primary-color",
-      hexToRgb(colorsData?.data[0]?.colors_primary || "#000000")
+      hexToRgb(colorsData?.data[0]?.colors_primary || "")
     );
   document
     .querySelector(":root")
     .style.setProperty(
       "--secondary-color",
-      hexToRgb(colorsData?.data[0]?.colors_secondary || "#000000")
+      hexToRgb(colorsData?.data[0]?.colors_secondary || "")
     );
   document
     .querySelector(":root")
     .style.setProperty(
       "--accent-color",
-      hexToRgb(colorsData?.data[0]?.colors_accent || "#000000")
+      hexToRgb(colorsData?.data[0]?.colors_accent || "")
     );
   document
     .querySelector(":root")
     .style.setProperty(
       "--light-color",
-      hexToRgb(colorsData?.data[0]?.colors_light || "#000000")
+      hexToRgb(colorsData?.data[0]?.colors_light || "")
     );
   document
     .querySelector(":root")
     .style.setProperty(
       "--dark-color",
-      hexToRgb(colorsData?.data[0]?.colors_dark || "#000000")
+      hexToRgb(colorsData?.data[0]?.colors_dark || "")
     );
 
   React.useEffect(() => {
@@ -105,32 +97,65 @@ const Navigation = () => {
     <>
       <div className="hidden lg:block bg-secondary h-[81px] place-content-center">
         <div className="customContainer text-light flex justify-between ">
-          <ul className="flex items-center gap-8 ">
-            {linksData?.data.map((item, key) => {
-              const SelectedIcon = item.links_icons
-                ? icons[item.links_icons]
-                : null;
-              return (
-                <Link
-                  key={key}
-                  to={`${devNavUrl}${item.links_link}`}
-                  target="_blank"
-                >
-                  <div className="flex gap-2">
-                    <span className="flex items-center gap-2 text-lg">
-                      {SelectedIcon ? <SelectedIcon /> : "No icon selected"}{" "}
-                    </span>
-                    <li>{item.links_title}</li>
-                  </div>
-                </Link>
-              );
-            })}
+          <ul className="flex items-center gap-8">
+            {linksData?.data?.length > 0 &&
+              (() => {
+                const item = linksData.data[0];
+
+                return (
+                  <>
+                    {item.links_facebook_title && (
+                      <li>
+                        <a
+                          href={item.links_facebook_link || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-lg"
+                        >
+                          <FaFacebookF />
+                          <span className="text-xs">
+                            {item.links_facebook_title || "Facebook"}
+                          </span>
+                        </a>
+                      </li>
+                    )}
+                    {item.links_instagram_title && (
+                      <li>
+                        <a
+                          href={item.links_instagram_link || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-lg"
+                        >
+                          <FaInstagram />
+                          <span className="text-xs">
+                            {item.links_instagram_title || "Instagram"}
+                          </span>
+                        </a>
+                      </li>
+                    )}
+                    {item.links_message_title && (
+                      <li>
+                        <a
+                          href={item.links_message_link || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-lg"
+                        >
+                          <FaRegEnvelope />
+                          <span className="text-xs">
+                            {item.links_message_title || "Message"}
+                          </span>
+                        </a>
+                      </li>
+                    )}
+                  </>
+                );
+              })()}
           </ul>
-          {contactNoData?.data.map((item, key) => (
-            <h3 className="text-2xl" key={key}>
-              {item.contact_no_contact}
-            </h3>
-          ))}
+          {linksData?.data?.length > 0 && linksData?.data[0]?.links_contact && (
+            <h3 className="text-2xl">{linksData.data[0].links_contact}</h3>
+          )}
         </div>
       </div>
       <div className="bg-primary h-[80px] place-content-center sticky top-0 z-50">

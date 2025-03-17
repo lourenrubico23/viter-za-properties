@@ -9,7 +9,7 @@ import {
 import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import * as Yup from "yup";
-import { setMessage } from "../../../store/StoreAction";
+import { setError, setMessage } from "../../../store/StoreAction";
 import { StoreContext } from "../../../store/StoreContext";
 import useQueryData from "../../custom-hooks/useQueryData";
 import { InputText, InputTextAreaContactForm } from "../../helpers/FormInputs";
@@ -18,6 +18,7 @@ import ModalSendingEmailStatus from "../../pages/developer/user/other-user/modal
 import ModalSentEmailSummary from "../../pages/developer/user/other-user/modal/ModalSentEmailSummary";
 import ButtonSpinner from "../spinners/ButtonSpinner";
 import ModalSendForm from "./ModalSendForm";
+import ModalError from "../modals/ModalError";
 
 const ContactForm = ({ pageType }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -591,13 +592,19 @@ const ContactForm = ({ pageType }) => {
                               disabled={isSendingLoading}
                             />
                           </div>
-                          <div className="input-wrapper reCaptcha">
-                            <ReCAPTCHA
-                              ref={recaptchaRef}
-                              sitekey={siteKey}
-                              onChange={(e) => handleChange(e)}
-                            />
-                          </div>
+                          {siteKey ? (
+                            <div className="input-wrapper reCaptcha">
+                              <ReCAPTCHA
+                                ref={recaptchaRef}
+                                sitekey={siteKey}
+                                onChange={(e) => handleChange(e)}
+                              />
+                            </div>
+                          ) : (
+                            <p className="pt-3 text-[red]">
+                              There's a problem loading recaptcha.
+                            </p>
+                          )}
                         </div>
                         <div className=" flex justify-end !place-self-start">
                           <button
@@ -656,6 +663,7 @@ const ContactForm = ({ pageType }) => {
           message={"The email has been sent successfully."}
         />
       )}
+      {store.error && <ModalError />}
     </>
   );
 };

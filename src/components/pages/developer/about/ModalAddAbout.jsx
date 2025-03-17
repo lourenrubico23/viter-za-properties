@@ -195,46 +195,8 @@ const ModalAddAbout = ({ itemEdit }) => {
                 <Form>
                   <div className="modal-form mb-[50px]">
                     <div className="modal_container h-[100dvh] flex gap-7">
-                      <div className="w-[50%] ">
-                        <div className="input-wrapper">
-                          <InputText
-                            label="Name"
-                            type="text"
-                            name="about_name"
-                            className="text-xs"
-                            disabled={mutation.isPending}
-                          />
-                        </div>
-                        <div className="input-wrapper">
-                          <InputTextArea
-                            label="First Paragraph"
-                            type="text"
-                            name="about_paragraph_a"
-                            className="text-xs h-[200px]"
-                            disabled={mutation.isPending}
-                          />
-                        </div>
-                        <div className="input-wrapper">
-                          <InputTextArea
-                            label="Second Paragraph"
-                            type="text"
-                            name="about_paragraph_b"
-                            className="text-xs h-[200px]"
-                            disabled={mutation.isPending}
-                          />
-                        </div>
-                        <div className="input-wrapper">
-                          <InputTextArea
-                            label="Third Paragraph"
-                            type="text"
-                            name="about_paragraph_c"
-                            className="text-xs h-[200px]"
-                            disabled={mutation.isPending}
-                          />
-                        </div>
-                      </div>
-                      <div className="flex gap-4 mt-5">
-                        <div className="">
+                      <div className=" flex gap-4">
+                        <div className="mt-5">
                           <span className="top-20 px-2 text-[12px]"></span>
                           <div
                             className={`relative mt-4 mb-4 border border-gray-300 rounded-md hover:border-primary hover:border-dashed w-[230px] text-xs ${
@@ -252,7 +214,7 @@ const ModalAddAbout = ({ itemEdit }) => {
                             </span>
 
                             <InputFileUpload
-                              label="Upload Image"
+                              label="Upload Profile Image"
                               name="File"
                               type="file"
                               id="myFile"
@@ -333,6 +295,46 @@ const ModalAddAbout = ({ itemEdit }) => {
                             </ol>
                           </div>
                         </div>
+                        <div className="w-[300px]">
+                          <div className="input-wrapper">
+                            <InputText
+                              label="Name"
+                              type="text"
+                              name="about_name"
+                              className="text-xs"
+                              disabled={mutation.isPending}
+                            />
+                          </div>
+                          <div className="input-wrapper">
+                            <InputTextArea
+                              label="First Paragraph"
+                              type="text"
+                              name="about_paragraph_a"
+                              className="text-xs h-[200px]"
+                              disabled={mutation.isPending}
+                            />
+                          </div>
+                          <div className="input-wrapper">
+                            <InputTextArea
+                              label="Second Paragraph"
+                              type="text"
+                              name="about_paragraph_b"
+                              className="text-xs h-[200px]"
+                              disabled={mutation.isPending}
+                            />
+                          </div>
+                          <div className="input-wrapper">
+                            <InputTextArea
+                              label="Third Paragraph"
+                              type="text"
+                              name="about_paragraph_c"
+                              className="text-xs h-[200px]"
+                              disabled={mutation.isPending}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex gap-4 mt-5">
                         <div className="">
                           <span className="top-20 px-2 text-[12px]"></span>
                           <div

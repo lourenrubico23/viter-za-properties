@@ -295,7 +295,7 @@
     @apply p-1 mr-1.5 bg-transparent leading-none;
   }
   .tooltip-header-nav::after {
-    @apply content-[attr(data-tooltip)] capitalize absolute -translate-x-2/4 bottom-full top-[9px] bg-black/80 text-white p-1 -ml-3 rounded-sm h-fit leading-none z-20 whitespace-nowrap text-center opacity-0 text-[10px] pointer-events-none transition ease-linear scale-0 duration-75 right-4;
+    @apply content-[attr(data-tooltip)] capitalize absolute -translate-x-2/4 bottom-full top-[9px] bg-black/80 text-white p-1 -ml-3 rounded-sm h-fit leading-none z-20 whitespace-nowrap text-center opacity-0 text-[10px] pointer-events-none transition ease-linear scale-0 duration-75 right-2;
   }
   .tooltip-header-nav:hover::after {
     @apply scale-100 opacity-100;

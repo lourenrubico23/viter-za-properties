@@ -43,7 +43,7 @@ export const RoutesAdmin = [
     ),
   },
   {
-    path: `${devNavUrl}/${urlAdmin}/links`,
+    path: `${devNavUrl}/${urlAdmin}/header`,
     element: (
       <ProtectedRouteUser>
         <Links />
@@ -59,7 +59,7 @@ export const RoutesAdmin = [
     ),
   },
   {
-    path: `${devNavUrl}/${urlAdmin}/logo`,
+    path: `${devNavUrl}/${urlAdmin}/navigation`,
     element: (
       <ProtectedRouteUser>
         <Logo />
