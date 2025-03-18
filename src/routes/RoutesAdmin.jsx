@@ -54,7 +54,7 @@ export const RoutesAdmin = [
     ),
   },
   {
-    path: `${devNavUrl}/${urlAdmin}/header`,
+    path: `${devNavUrl}/${urlAdmin}/home`,
     element: (
       <ProtectedRouteUser>
         <Links />

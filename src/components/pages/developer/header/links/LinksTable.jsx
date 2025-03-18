@@ -15,7 +15,7 @@ import { HiPencil } from "react-icons/hi";
 const LinksTable = ({ handleAdd, linksData }) => {
   return (
     <>
-      <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
+      <div className=" shadow-md overflow-y-auto mt-5 lg:mb-0  relative">
         <div className="px-8 lg:block bg-secondary h-[81px] place-content-center">
           <div className="customContainer text-light flex justify-between ">
             <ul className="flex items-center gap-8">

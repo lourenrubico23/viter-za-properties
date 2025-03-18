@@ -148,7 +148,7 @@ const Navigation = ({ menu, submenu }) => {
           <nav>
             <ul className="flex-col [&>li]:text-left [&>li]:text-[16px] font-semibold  ">
               <>
-                <Link className="" to={`${devNavUrl}/${link}/header`}>
+                {/* <Link className="" to={`${devNavUrl}/${link}/header`}>
                   <li
                     className={`text-[14px] uppercase  p-1 ${
                       menu === "header"
@@ -169,9 +169,8 @@ const Navigation = ({ menu, submenu }) => {
                   >
                     Navigation
                   </li>
-                </Link>
+                </Link> */}
 
-               
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "home"
@@ -181,13 +180,14 @@ const Navigation = ({ menu, submenu }) => {
                   onClick={() => handleHeaderOpen()}
                 >
                   <div className="nav flex items-center justify-between w-full">
-                    <span
+                    <Link
                       className={`text-[14px] uppercase ${
                         menu === "home" ? "text-secondary" : "text-dark"
                       }`}
+                      to={`${devNavUrl}/${link}/home`}
                     >
                       Home
-                    </span>
+                    </Link>
                     <IoChevronDownSharp
                       className={`${
                         store.isOpenHeader ? "text-dark" : " rotate-180"
@@ -201,7 +201,7 @@ const Navigation = ({ menu, submenu }) => {
                     store.isOpenHeader ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
-                  <Link
+                  {/* <Link
                     className="!p-0"
                     to={`${devNavUrl}/${link}/home-banner`}
                   >
@@ -214,8 +214,8 @@ const Navigation = ({ menu, submenu }) => {
                     >
                       Banner
                     </li>
-                  </Link>
-                  <Link className="!p-0" to={`${devNavUrl}/${link}/home-about`}>
+                  </Link> */}
+                  {/* <Link className="!p-0" to={`${devNavUrl}/${link}/home-about`}>
                     <li
                       className={`text-xs my-2 border-transparent ${
                         submenu === "home-about"
@@ -225,7 +225,7 @@ const Navigation = ({ menu, submenu }) => {
                     >
                       About
                     </li>
-                  </Link>
+                  </Link> */}
                   <Link
                     className="!p-0"
                     to={`${devNavUrl}/${link}/home-client-reviews`}
@@ -627,7 +627,7 @@ const Navigation = ({ menu, submenu }) => {
                     Notification
                   </li>
                 </Link>
-                
+
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "user"

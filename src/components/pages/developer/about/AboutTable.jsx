@@ -9,14 +9,14 @@ import { FaRegImages } from "react-icons/fa";
 
 const AboutTable = ({
   setItemEdit,
-  handleAdd,
+  handleAddAbout,
   isFetching,
   isLoading,
   aboutData,
 }) => {
   return (
     <>
-      <div className=" overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-110px)] mt-5 mb-10 lg:mb-0  relative">
+      <div className=" overflow-y-auto lg:mb-0  relative">
         {isFetching && !isLoading && <FetchingSpinner />}
         <div>
           {aboutData?.data.map((item, key) => {
@@ -43,7 +43,7 @@ const AboutTable = ({
                     <a
                       className="absolute cursor-pointer tooltip-header-nav z-[1] right-20"
                       data-tooltip="Upload Contents"
-                      onClick={handleAdd}
+                      onClick={handleAddAbout}
                     >
                       <FaRegImages className=" bg-[#C7AC27] rounded-full w-[25px] h-[25px] p-1 border-[1px]" />
                     </a>
