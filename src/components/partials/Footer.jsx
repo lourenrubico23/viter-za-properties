@@ -1,13 +1,12 @@
 import React from "react";
+import useQueryData from "../custom-hooks/useQueryData";
 import {
   copyrightYear,
   devApiVersion,
-  devBaseImgUrl,
   devNavUrl,
   getConvertStringToJSONparseData,
-  googleHDViewLink,
+  googleHDViewLink
 } from "../helpers/functions-general";
-import useQueryData from "../custom-hooks/useQueryData";
 import LoadImages from "./LoadImages";
 
 const Footer = () => {
@@ -62,6 +61,7 @@ const Footer = () => {
                         url={`${googleHDViewLink}${image?.id}`}
                         alt=""
                         key={index}
+                        className="h-[150px] object-cover"
                       />
                     ))}
                   </div>
@@ -114,9 +114,11 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <p className="font-poppins text-xs pt-8">
-            &#169;{copyrightYear()} ZA PROPERTIES. All rights reserved
-          </p>
+          {contactNoData?.data.map((item, key) => (
+            <p className="font-poppins text-xs pt-8" key={key}>
+              &#169;{copyrightYear()} {item.contact_no_copyright}
+            </p>
+          ))}
         </div>
       </div>
     </>

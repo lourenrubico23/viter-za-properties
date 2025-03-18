@@ -86,6 +86,34 @@ export const setIsOpenProperties = (val) => {
   };
 };
 
+export const setIsOpenBuyers = (val) => {
+  return {
+    type: "IS_OPEN_BUYERS",
+    payload: val,
+  };
+};
+
+export const setIsOpenSellers = (val) => {
+  return {
+    type: "IS_OPEN_SELLERS",
+    payload: val,
+  };
+};
+
+export const setIsOpenBlogs = (val) => {
+  return {
+    type: "IS_OPEN_BLOGS",
+    payload: val,
+  };
+};
+
+export const setIsOpenContact = (val) => {
+  return {
+    type: "IS_OPEN_CONTACT",
+    payload: val,
+  };
+};
+
 export const setCreatePassSuccess = (val) => {
   return {
     type: "IS_CREATE_PASS_SUCCCESS",

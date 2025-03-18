@@ -33,7 +33,7 @@ const Banner = () => {
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="home" submenu="banner" />
+        <Navigation menu="home" submenu="home-banner" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -50,6 +50,7 @@ const Banner = () => {
                   handleAdd={handleAdd}
                   bannerData={bannerData}
                   isFetching={isFetching}
+                  isLoading={isLoading}
                 />
               </div>
             </div>

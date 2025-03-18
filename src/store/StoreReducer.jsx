@@ -71,6 +71,27 @@ export const StoreReducer = (state, action) => {
         ...state,
         isOpenProperties: action.payload,
       };
+    case "IS_OPEN_BUYERS":
+      return {
+        ...state,
+        isOpenBuyers: action.payload,
+      };
+    case "IS_OPEN_SELLERS":
+      return {
+        ...state,
+        isOpenSellers: action.payload,
+      };
+    case "IS_OPEN_BLOGS":
+      return {
+        ...state,
+        isOpenBlogs: action.payload,
+      };
+    case "IS_OPEN_CONTACT":
+      return {
+        ...state,
+        isOpenContact: action.payload,
+      };
+
     case "IS_CREATE_PASS_SUCCCESS":
       return {
         ...state,

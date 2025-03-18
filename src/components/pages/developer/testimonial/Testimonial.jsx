@@ -20,7 +20,7 @@ const Testimonial = () => {
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="testimonials" submenu="" />
+        <Navigation menu="home" submenu="home-client-reviews" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -29,7 +29,7 @@ const Testimonial = () => {
               <div className="p-7">
                 <div className=" flex justify-between ">
                   <div className="text-sm text-[black] font-semibold">
-                    <p>Testimonials</p>
+                    <p>Client Reviews</p>
                   </div>
                   <button
                     className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm"

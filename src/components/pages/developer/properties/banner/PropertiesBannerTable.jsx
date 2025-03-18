@@ -1,53 +1,29 @@
 import React from "react";
-import { FaEdit, FaRegImages } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { setIsAdd, setIsDelete } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
-import {
-  devApiVersion,
-  getConvertStringToJSONparseData,
-  googleHDViewLink,
-} from "../../../../helpers/functions-general";
-import SearchBar from "../../../../partials/SearchBar";
-import ModalDelete from "../../../../partials/modals/ModalDelete";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import useQueryData from "../../../../custom-hooks/useQueryData";
 import { CiImageOn } from "react-icons/ci";
+import { FaRegImages } from "react-icons/fa";
+import {
+  getConvertStringToJSONparseData,
+  googleHDViewLink
+} from "../../../../helpers/functions-general";
 import LoadImages from "../../../../partials/LoadImages";
+import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
+import Loader from "../../../../partials/spinners/Loader";
 
 const PropertiesBannerTable = ({
   setItemEdit,
   handleAdd,
   bannerData,
   isFetching,
+  isLoading,
 }) => {
-  const { store, dispatch } = React.useContext(StoreContext);
-  const [id, setIsId] = React.useState("");
-  const [isData, setIsData] = React.useState("");
-
-  let counter = 1;
-
-  const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
-    setItemEdit(item);
-  };
-
-  const handleDelete = (item) => {
-    dispatch(setIsDelete(true));
-    setIsData(item.banner_title);
-    setIsId(item.banner_aid);
-  };
-
   return (
     <>
       <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-10px)] mt-5 mb-10 lg:mb-0  relative">
-        {isFetching && !isFetching && <FetchingSpinner />}
+        {isFetching && !isLoading && <FetchingSpinner />}
         <div className="outer-wrapper">
           <div className="wrapper h-[500px] ">
-            <div className=" relative flex justify-center">
+            <div className=" relative flex justify-center h-full w-full">
+              {isLoading && <Loader />}
               {bannerData?.data.map((item, key) => {
                 if (item.banner_page === "Properties") {
                   const bannerImage =
@@ -67,7 +43,8 @@ const PropertiesBannerTable = ({
                             <LoadImages
                               url={`${googleHDViewLink}${image?.id}`}
                               alt={`${item.banner_title}`}
-                              className="object-cover w-full h-full"
+                              className="object-cover w-full h-full z-10"
+                              isTableSpinner={true}
                             />
                           </div>
                         ))

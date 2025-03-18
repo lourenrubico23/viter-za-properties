@@ -1,124 +1,121 @@
 import React from "react";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { setIsAdd, setIsDelete } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
-import {
-  devApiVersion,
-  getConvertStringToJSONparseData,
-} from "../../../../helpers/functions-general";
-import SearchBar from "../../../../partials/SearchBar";
-import ModalDelete from "../../../../partials/modals/ModalDelete";
 import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import useQueryData from "../../../../custom-hooks/useQueryData";
+import {
+  copyrightYear,
+  devNavUrl,
+  getConvertStringToJSONparseData,
+  googleHDViewLink,
+} from "../../../../helpers/functions-general";
+import LoadImages from "../../../../partials/LoadImages";
+import { FaRegImages } from "react-icons/fa";
 
-const ContactNoTable = ({ setItemEdit }) => {
-  const { store, dispatch } = React.useContext(StoreContext);
-  const [id, setIsId] = React.useState("");
-  const [isData, setIsData] = React.useState("");
-
-  const {
-    isFetching,
-    error,
-    isLoading,
-    data: contactNoData,
-  } = useQueryData(
-    `${devApiVersion}/contactno`, // endpoint
-    "get", // method
-    "contactno" // key
-  );
-
-  let counter = 1;
-
-  const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
-    setItemEdit(item);
-  };
-
-  const handleDelete = (item) => {
-    dispatch(setIsDelete(true));
-    setIsData(item.contact_no_contact);
-    setIsId(item.contact_no_aid);
-  };
-
+const ContactNoTable = ({
+  setItemEdit,
+  handleAdd,
+  contactNoData,
+  isFetching,
+  isLoading,
+  logoData,
+  propertyTypeData,
+}) => {
   return (
     <>
-      <div className=" shadow-md rounded-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
-        {isFetching && !isFetching && <FetchingSpinner />}
-        <table>
-          <thead>
-            <tr className="text-[black]">
-              <th className="pl-2 w-[1rem]">#</th>
-              <th>Contact No.</th>
-              <th>Email</th>
-              <th>QR Code Image</th>
-              <th className="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="relative">
-            {(isLoading || contactNoData?.data.length === 0) && (
-              <tr className="text-center">
-                <td colSpan="100%" className="p-10">
-                  {isLoading ? <TableLoading /> : <NoData />}
-                </td>
-              </tr>
-            )}
+      <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
+        {isFetching && !isLoading && <FetchingSpinner />}
+        <div className="bg-primary py-12">
+          <div className="customContainer text-light">
+            <div className="flex flex-col md:flex md:flex-row gap-7 lg:gap-0 justify-between border-b-2 pb-7">
+              <div className="">
+                {logoData?.data.map((item, key) => {
+                  const logoImage =
+                    getConvertStringToJSONparseData(item.logo_image) || [];
 
-            {error && (
-              <tr className="text-center ">
-                <td colSpan="100%" className="p-10">
-                  <ServerError />
-                </td>
-              </tr>
-            )}
-            {contactNoData?.data.map((item, key) => {
-              const qrCodeImage =
-                getConvertStringToJSONparseData(item.contact_no_qr_code) || [];
-              return (
-                <tr key={key} className="text-[14px]">
-                  <td className="pl-2 ">{counter++}.</td>
-                  <td className="">{item.contact_no_contact}</td>
-                  <td className="">{item.contact_no_email}</td>
-                  <td className="">
-                    {qrCodeImage.map((img, index) => (
-                      <p key={index} className="text-xs">
-                        {img.name}
-                      </p>
+                  return (
+                    <div key={key}>
+                      {logoImage.map((image, index) => (
+                        <LoadImages
+                          url={`${googleHDViewLink}${image?.id}`}
+                          alt="ZA Properties"
+                          className="mb-2 h-16 md:h-[60px] object-cover"
+                          key={index}
+                        />
+                      ))}
+                    </div>
+                  );
+                })}
+                {contactNoData?.data.map((item, key) => {
+                  const qrCodeImage =
+                    getConvertStringToJSONparseData(item.contact_no_qr_code) ||
+                    [];
+                  return (
+                    <div key={key}>
+                      {qrCodeImage.map((image, index) => (
+                        <LoadImages
+                          url={`${googleHDViewLink}${image?.id}`}
+                          alt=""
+                          key={index}
+                          className="h-[150px] object-cover"
+                        />
+                      ))}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex gap-10 md:gap-24">
+                <div className="flex flex-col gap-4">
+                  <p className="text-lg font-poppins font-bold uppercase">
+                    Property List
+                  </p>
+                  <ul className="[&>li]:font-poppins [&>li]:text-xs flex flex-col gap-2">
+                    {propertyTypeData?.data.map((item, key) => (
+                      <li key={key}>{item.property_type_name}</li>
                     ))}
-                  </td>
-                  <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
-                    <button
-                      className="tooltip-action-table"
-                      data-tooltip="Edit"
-                      onClick={() => handleEdit(item)}
+                    {/* <li>Residential</li>
+                          <li>Building</li>
+                          <li>Condominium</li>
+                          <li>Foreclosed</li>
+                          <li>Industrial</li> */}
+                  </ul>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <p className="text-lg font-poppins font-bold uppercase">
+                    Contact
+                  </p>
+                  {contactNoData?.data.map((item, key) => (
+                    <ul
+                      className="[&>li]:font-poppins [&>li]:text-xs flex flex-col gap-2"
+                      key={key}
                     >
-                      <FaEdit className="text-gray-600 text-[16px]" />
-                    </button>
-                    <button
-                      className="tooltip-action-table"
-                      data-tooltip="Delete"
-                      onClick={() => handleDelete(item)}
-                    >
-                      <MdDelete className="text-gray-600 text-[18px]" />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                      <li>{item.contact_no_email}</li>
+                      <li>{item.contact_no_contact}</li>
+                    </ul>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col gap-4">
+                <a className="btn border-none hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80] md:w-[185px] ">
+                  View Listing
+                </a>
+                <a className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]">
+                  List my Home
+                </a>
+              </div>
+              <a
+                className="absolute cursor-pointer tooltip-header-nav z-[1] right-2 top-3 "
+                data-tooltip="Upload Contents"
+                onClick={handleAdd}
+              >
+                <FaRegImages className=" bg-[#C7AC27] rounded-full w-[25px] h-[25px] p-1 border-[1px]" />
+              </a>
+            </div>
+            {contactNoData?.data.map((item, key) => (
+              <p className="font-poppins text-xs pt-8" key={key}>
+                &#169;{copyrightYear()} {item.contact_no_copyright}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
-
-      {store.isDelete && (
-        <ModalDelete
-          mysqlEndpoint={`${devApiVersion}/contactno/${id}`}
-          queryKey={"contactno"}
-          item={isData}
-        />
-      )}
     </>
   );
 };

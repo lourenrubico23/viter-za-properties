@@ -2,8 +2,12 @@ import React from "react";
 import { IoChevronDownSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import {
+  setIsOpenBlogs,
+  setIsOpenBuyers,
+  setIsOpenContact,
   setIsOpenHeader,
   setIsOpenProperties,
+  setIsOpenSellers,
   setIsUserOpen,
 } from "../../../store/StoreAction";
 import { StoreContext } from "../../../store/StoreContext";
@@ -93,6 +97,18 @@ const Navigation = ({ menu, submenu }) => {
   const handlePropertiesOpen = () => {
     dispatch(setIsOpenProperties(!store.isOpenProperties));
   };
+  const handleBuyersOpen = () => {
+    dispatch(setIsOpenBuyers(!store.isOpenBuyers));
+  };
+  const handleSellersOpen = () => {
+    dispatch(setIsOpenSellers(!store.isOpenSellers));
+  };
+  const handleBlogsOpen = () => {
+    dispatch(setIsOpenBlogs(!store.isOpenBlogs));
+  };
+  const handleContactOpen = () => {
+    dispatch(setIsOpenContact(!store.isOpenContact));
+  };
 
   const clickOutsideRef = (e) => {
     if (!ref.current?.contains(e.target)) {
@@ -154,61 +170,8 @@ const Navigation = ({ menu, submenu }) => {
                     Navigation
                   </li>
                 </Link>
-                <Link className="" to={`${devNavUrl}/${link}/about`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "about"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    about
-                  </li>
-                </Link>
-                <Link className="" to={`${devNavUrl}/${link}/testimonials`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "testimonials"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    testimonials
-                  </li>
-                </Link>
-                <Link className="" to={`${devNavUrl}/${link}/blogs`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "blogs"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    Blogs
-                  </li>
-                </Link>
-                <Link className="" to={`${devNavUrl}/${link}/contact-form`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "contact-form"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    Contact Form
-                  </li>
-                </Link>
-                <Link className="" to={`${devNavUrl}/${link}/notification`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "notification"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    Notification
-                  </li>
-                </Link>
+
+               
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "home"
@@ -238,26 +201,57 @@ const Navigation = ({ menu, submenu }) => {
                     store.isOpenHeader ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
-                  {/* <Link className="!p-0" to={`${devNavUrl}/${link}/contact-no`}>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/home-banner`}
+                  >
                     <li
                       className={`text-xs my-2 border-transparent ${
-                        submenu === "contact-no"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Contact Info
-                    </li>
-                  </Link> */}
-                  <Link className="!p-0" to={`${devNavUrl}/${link}/banner`}>
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "banner"
+                        submenu === "home-banner"
                           ? "text-secondary font-bold"
                           : "border-none text-dark"
                       }`}
                     >
                       Banner
+                    </li>
+                  </Link>
+                  <Link className="!p-0" to={`${devNavUrl}/${link}/home-about`}>
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "home-about"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      About
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/home-client-reviews`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "home-client-reviews"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Client Reviews
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/home-contact-us`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "home-contact-us"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Contact Us
                     </li>
                   </Link>
                 </ul>
@@ -347,8 +341,293 @@ const Navigation = ({ menu, submenu }) => {
                       Property Status
                     </li>
                   </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/property-contact-us`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "property-contact-us"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Contact Us
+                    </li>
+                  </Link>
                 </ul>
 
+                <li
+                  className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
+                    menu === "buyers"
+                      ? "text-secondary underline underline-offset-4"
+                      : ""
+                  }`}
+                  onClick={() => handleBuyersOpen()}
+                >
+                  <div className="nav flex items-center justify-between w-full">
+                    <span
+                      className={`text-[14px] uppercase ${
+                        menu === "buyers" ? "text-secondary" : "text-dark"
+                      }`}
+                    >
+                      buyers
+                    </span>
+                    <IoChevronDownSharp
+                      className={`${
+                        store.isOpenBuyers ? "text-dark" : " rotate-180"
+                      }  transition-all`}
+                    />
+                  </div>
+                </li>
+
+                <ul
+                  className={`${
+                    store.isOpenBuyers ? "h-0 overflow-hidden" : "my-2"
+                  } submenu ml-5`}
+                >
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/buyers-banner`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "buyers-banner"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Banner
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/buyers-contact-us`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "buyers-contact-us"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Contact Us
+                    </li>
+                  </Link>
+                </ul>
+
+                <li
+                  className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
+                    menu === "sellers"
+                      ? "text-secondary underline underline-offset-4"
+                      : ""
+                  }`}
+                  onClick={() => handleSellersOpen()}
+                >
+                  <div className="nav flex items-center justify-between w-full">
+                    <span
+                      className={`text-[14px] uppercase ${
+                        menu === "sellers" ? "text-secondary" : "text-dark"
+                      }`}
+                    >
+                      sellers
+                    </span>
+                    <IoChevronDownSharp
+                      className={`${
+                        store.isOpenSellers ? "text-dark" : " rotate-180"
+                      }  transition-all`}
+                    />
+                  </div>
+                </li>
+
+                <ul
+                  className={`${
+                    store.isOpenSellers ? "h-0 overflow-hidden" : "my-2"
+                  } submenu ml-5`}
+                >
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/sellers-banner`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "sellers-banner"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Banner
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/sellers-contact-us`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "sellers-contact-us"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Contact Us
+                    </li>
+                  </Link>
+                </ul>
+
+                <li
+                  className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
+                    menu === "blogs"
+                      ? "text-secondary underline underline-offset-4"
+                      : ""
+                  }`}
+                  onClick={() => handleBlogsOpen()}
+                >
+                  <div className="nav flex items-center justify-between w-full">
+                    <span
+                      className={`text-[14px] uppercase ${
+                        menu === "blogs" ? "text-secondary" : "text-dark"
+                      }`}
+                    >
+                      blogs
+                    </span>
+                    <IoChevronDownSharp
+                      className={`${
+                        store.isOpenBlogs ? "text-dark" : " rotate-180"
+                      }  transition-all`}
+                    />
+                  </div>
+                </li>
+
+                <ul
+                  className={`${
+                    store.isOpenBlogs ? "h-0 overflow-hidden" : "my-2"
+                  } submenu ml-5`}
+                >
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/blogs-banner`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "blogs-banner"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Banner
+                    </li>
+                  </Link>
+                  <Link className="!p-0" to={`${devNavUrl}/${link}/blogs-list`}>
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "blogs-list"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Blog List
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/blogs-contact-us`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "blogs-contact-us"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Contact Us
+                    </li>
+                  </Link>
+                </ul>
+
+                <li
+                  className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
+                    menu === "contact"
+                      ? "text-secondary underline underline-offset-4"
+                      : ""
+                  }`}
+                  onClick={() => handleContactOpen()}
+                >
+                  <div className="nav flex items-center justify-between w-full">
+                    <span
+                      className={`text-[14px] uppercase ${
+                        menu === "contact" ? "text-secondary" : "text-dark"
+                      }`}
+                    >
+                      contact
+                    </span>
+                    <IoChevronDownSharp
+                      className={`${
+                        store.isOpenContact ? "text-dark" : " rotate-180"
+                      }  transition-all`}
+                    />
+                  </div>
+                </li>
+
+                <ul
+                  className={`${
+                    store.isOpenContact ? "h-0 overflow-hidden" : "my-2"
+                  } submenu ml-5`}
+                >
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/contact-banner`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "contact-banner"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Banner
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/contact-contact-us`}
+                  >
+                    <li
+                      className={`text-xs my-2 border-transparent ${
+                        submenu === "contact-contact-us"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Contact Us
+                    </li>
+                  </Link>
+                </ul>
+
+                <Link className="" to={`${devNavUrl}/${link}/footer`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "footer"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    Footer
+                  </li>
+                </Link>
+
+                <Link className="" to={`${devNavUrl}/${link}/notification`}>
+                  <li
+                    className={`text-[14px] uppercase  p-1 ${
+                      menu === "notification"
+                        ? "text-secondary underline underline-offset-4"
+                        : "border-none text-dark"
+                    }`}
+                  >
+                    Notification
+                  </li>
+                </Link>
+                
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "user"

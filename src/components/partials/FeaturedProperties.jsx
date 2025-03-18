@@ -29,7 +29,11 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
     setVisibleProperties((prev) => prev + 6);
   };
 
-  const { data: propertyListData } = useQueryData(
+  const {
+    isFetching,
+    isLoading,
+    data: propertyListData,
+  } = useQueryData(
     `${devApiVersion}/property-list`, // endpoint
     "get", // method
     "property-list" // key
@@ -72,6 +76,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
   return (
     <>
       <div className="bg-light mt-[450px] md:mt-[468px] lg:mt-[180px] customContainer lg:max-w-[1240px] ">
+      {isFetching && !isLoading && <FetchingSpinner />}
         <div className="title uppercase text-secondary text-[clamp(25px,3vw,34px)] font-hindBold text-center">
           Featured properties
         </div>
@@ -109,7 +114,8 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
                             <LoadImages
                               url={`${googleHDViewLink}${firstImage?.id}`}
                               alt="Property Image"
-                              className="w-full h-[200px] object-cover transition-transform duration-200 group-hover:scale-105"
+                              className="w-full h-[200px] object-cover transition-transform duration-200 group-hover:scale-105 z-10"
+                              isTableSpinner={true}
                             />
                           )}
                         </div>

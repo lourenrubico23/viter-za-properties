@@ -16,6 +16,7 @@ if (array_key_exists("contactnoid", $_GET)) {
   $contact_no->contact_no_contact = $data["contact_no_contact"];
   $contact_no->contact_no_email = $data["contact_no_email"];
   $contact_no->contact_no_qr_code = $data["contact_no_qr_code"];
+  $contact_no->contact_no_copyright = $data["contact_no_copyright"];
   $contact_no->contact_no_datetime = date("Y-m-d H:i:s");
   checkId($contact_no->contact_no_aid);
 

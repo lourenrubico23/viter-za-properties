@@ -20,6 +20,7 @@ import {
   setIsSearch,
   setMessage,
 } from "../../../../store/StoreAction";
+import Loader from "../../../partials/spinners/Loader";
 
 const Properties = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -32,7 +33,7 @@ const Properties = () => {
   const [page, setPage] = React.useState(1);
   const search = React.useRef({ value: "" });
 
-  const { data: bannerData } = useQueryData(
+  const { isLoadingBanner, data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
     "banner" // key
@@ -169,7 +170,8 @@ const Properties = () => {
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
-          <div className=" relative flex justify-center">
+          <div className=" relative flex justify-center lg:min-h-[420px] w-full">
+            {isLoadingBanner && <Loader />}
             {bannerData?.data.map((item, key) => {
               if (item.banner_page === "Properties") {
                 const bannerImage =
@@ -189,7 +191,8 @@ const Properties = () => {
                           <LoadImages
                             url={`${googleHDViewLink}${image?.id}`}
                             alt={`${item.banner_title}`}
-                            className="object-cover w-full h-full"
+                            className="object-cover w-full h-full z-10"
+                            isTableSpinner={true}
                           />
                         </div>
                       ))

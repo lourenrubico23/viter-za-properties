@@ -3,36 +3,24 @@ import { HiPencil } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import {
   getConvertStringToJSONparseData,
-  googleHDViewLink,
+  googleHDViewLink
 } from "../../../../helpers/functions-general";
 import LoadImages from "../../../../partials/LoadImages";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
 
-const LogoTable = ({ handleAdd, logoData, isFetching }) => {
-  const defaultNavItems = [
-    { path: "/", label: "" },
-    { path: "/properties", label: "" },
-    { path: "/buyers", label: "" },
-    { path: "/sellers", label: "" },
-    { path: "/blogs", label: "" },
-    { path: "/contact", label: "" },
+const LogoTable = ({ handleAdd, logoData }) => {
+  const navItems = [
+    { path: "/", label: "Home" },
+    { path: "/properties", label: "Properties" },
+    { path: "/buyers", label: "Buyers" },
+    { path: "/sellers", label: "Sellers" },
+    { path: "/blogs", label: "Blogs" },
+    { path: "/contact", label: "Contact" },
   ];
-
-  // Extract labels dynamically if available
-  const navItems = defaultNavItems.map((item, index) => {
-    const dynamicLabel =
-      logoData?.data?.[0]?.[`logo_nav_${String.fromCharCode(97 + index)}`]; // a, b, c, d...
-    return {
-      ...item,
-      label: dynamicLabel || item.label, // Use dynamic label if available, otherwise use default
-    };
-  });
 
   return (
     <>
       <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
-        {isFetching && !isFetching && <FetchingSpinner />}
-        <div className=" px-8 bg-primary h-[80px] place-content-center sticky top-0 z-50">
+        <div className="bg-primary h-[80px] place-content-center sticky top-0 z-50">
           <div className="customContainer text-light flex justify-between items-center">
             <div className="">
               {logoData?.data.map((item, key) => {

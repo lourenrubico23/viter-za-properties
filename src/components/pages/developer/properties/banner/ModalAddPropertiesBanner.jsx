@@ -249,6 +249,7 @@ const ModalAddPropertiesBanner = ({ itemEdit, bannerData }) => {
                                     <LoadImages
                                       url={fileLink}
                                       className={`relative z-20 w-full h-full object-cover object-center`}
+                                      isTableSpinner={true}
                                     />
                                     {(!mutation.isPending || !loading) && (
                                       <div className="hidden group-hover:inline-flex absolute top-0 z-30 w-full h-full bg-black/40 items-center justify-center text-white text-center ">

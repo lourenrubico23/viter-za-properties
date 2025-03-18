@@ -8,19 +8,44 @@ import ModalError from "../../../../partials/modals/ModalError";
 import ModalSuccess from "../../../../partials/modals/ModalSuccess";
 import ContactNoTable from "./ContactNoTable";
 import ModalAddContactNo from "./ModalAddContactNo";
+import useQueryData from "../../../../custom-hooks/useQueryData";
+import { devApiVersion } from "../../../../helpers/functions-general";
 
 const ContactNo = () => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [itemEdit, setItemEdit] = React.useState(null);
+  const [itemEdit, setItemEdit] = React.useState("");
+
+  const {
+    isFetching,
+    error,
+    isLoading,
+    data: contactNoData,
+  } = useQueryData(
+    `${devApiVersion}/contactno`, // endpoint
+    "get", // method
+    "contactno" // key
+  );
+
+  const { data: logoData } = useQueryData(
+    `${devApiVersion}/logo`, // endpoint
+    "get", // method
+    "logo" // key
+  );
+
+  const { data: propertyTypeData } = useQueryData(
+    `${devApiVersion}/property-type`, // endpoint
+    "get", // method
+    "property-type" // key
+  );
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
-    setItemEdit(null);
+    setItemEdit("footerUpdate");
   };
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="header" submenu="contact-no" />
+        <Navigation menu="footer" submenu="" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -29,24 +54,25 @@ const ContactNo = () => {
               <div className="p-7">
                 <div className=" flex justify-between ">
                   <div className="text-sm text-[black] font-semibold">
-                    <p>Contact Info</p>
+                    <p>Footer</p>
                   </div>
-                  <button
-                    className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm"
-                    onClick={handleAdd}
-                  >
-                    <FaPlus />
-                    Add
-                  </button>
                 </div>
-                <ContactNoTable setItemEdit={setItemEdit} />
+                <ContactNoTable
+                  setItemEdit={setItemEdit}
+                  handleAdd={handleAdd}
+                  contactNoData={contactNoData}
+                  isFetching={isFetching}
+                  isLoading={isLoading}
+                  logoData={logoData}
+                  propertyTypeData={propertyTypeData}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {store.isAdd && <ModalAddContactNo itemEdit={itemEdit} />}
+      {store.isAdd && <ModalAddContactNo itemEdit={itemEdit} contactNoData={contactNoData}/>}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

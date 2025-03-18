@@ -8,19 +8,32 @@ import ModalSuccess from "../../../partials/modals/ModalSuccess";
 import ModalError from "../../../partials/modals/ModalError";
 import AboutTable from "./AboutTable";
 import ModalAddAbout from "./ModalAddAbout";
+import useQueryData from "../../../custom-hooks/useQueryData";
+import { devApiVersion } from "../../../helpers/functions-general";
 
 const About = () => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [itemEdit, setItemEdit] = React.useState(null);
+  const [itemEdit, setItemEdit] = React.useState("");
+
+  const {
+    isFetching,
+    error,
+    isLoading,
+    data: aboutData,
+  } = useQueryData(
+    `${devApiVersion}/about`, // endpoint
+    "get", // method
+    "about" // key
+  );
 
   const handleAdd = () => {
     dispatch(setIsAdd(true));
-    setItemEdit(null);
+    setItemEdit("aboutUpdate");
   };
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
-        <Navigation menu="about" submenu="" />
+        <Navigation menu="home" submenu="home-about" />
         <div className="main ml-[220px] w-[calc(100%_-_230px)] z-10">
           <DashboardNav />
           <div className=" w-[calc(100%_-_10px)] pt-[65px] relative">
@@ -31,22 +44,23 @@ const About = () => {
                   <div className="text-sm text-[black] font-semibold">
                     <p>About</p>
                   </div>
-                  <button
-                    className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm"
-                    onClick={handleAdd}
-                  >
-                    <FaPlus />
-                    Add
-                  </button>
                 </div>
-                <AboutTable setItemEdit={setItemEdit} />
+                <AboutTable
+                  setItemEdit={setItemEdit}
+                  handleAdd={handleAdd}
+                  isFetching={isFetching}
+                  isLoading={isLoading}
+                  aboutData={aboutData}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {store.isAdd && <ModalAddAbout itemEdit={itemEdit} />}
+      {store.isAdd && (
+        <ModalAddAbout itemEdit={itemEdit} aboutData={aboutData} />
+      )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

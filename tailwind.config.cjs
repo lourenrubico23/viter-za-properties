@@ -21,6 +21,15 @@ export default {
         dashSecondary: "rgb(var(--dashSecondary-color) / <alpha-value>)",
         dashAccent: "rgb(var(--dashAccent-color) / <alpha-value>)",
       },
+      keyframes: {
+        loading: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        loading: "loading 1.5s ease-in  infinite",
+      },
     },
   },
   plugins: [],

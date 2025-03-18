@@ -219,6 +219,10 @@
   .input-wrapper {
     @apply mb-2 my-[20px] relative flex flex-col gap-2;
   }
+
+  .loading-bar::after {
+    @apply content-[''] absolute top-0 left-0 w-[180%] h-full  bg-gradient-to-r from-transparent via-[#eeeeee] to-transparent  animate-loading;
+  }
 }
 
 @layer utilities {

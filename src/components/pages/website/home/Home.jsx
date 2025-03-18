@@ -24,6 +24,7 @@ import BuyAPropertySvg from "../../../partials/svg/BuyAPropertySvg";
 import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
 import Navigation from "../Navigation";
 import Testimonials from "./Testimonials";
+import Loader from "../../../partials/spinners/Loader";
 
 const Home = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -36,7 +37,11 @@ const Home = () => {
   const [page, setPage] = React.useState(1);
   const search = React.useRef({ value: "" });
 
-  const { data: bannerData } = useQueryData(
+  const {
+    isFetchingBanner,
+    isLoadingBanner,
+    data: bannerData,
+  } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
     "banner" // key
@@ -172,9 +177,10 @@ const Home = () => {
   return (
     <>
       <div className="outer-wrapper">
-        <div className="wrapper">
+        <div className="wrapper ">
           <Navigation />
-          <div className=" relative flex justify-center">
+          <div className=" relative flex justify-center lg:min-h-[420px] w-full">
+            {isLoadingBanner && <Loader />}
             {bannerData?.data.map((item, key) => {
               if (item.banner_page === "Home") {
                 const bannerImage =
@@ -194,12 +200,13 @@ const Home = () => {
                           <LoadImages
                             url={`${googleHDViewLink}${image?.id}`}
                             alt={`${item.banner_title}`}
-                            className="object-cover w-full h-full"
+                            className="object-cover w-full h-full z-10"
+                            isTableSpinner={true}
                           />
                         </div>
                       ))
                     ) : (
-                      <div className="bg-gray-300 inset-0 w-full h-[420px] object-cover">
+                      <div className="bg-gray-300 inset-0 w-full min-h-[420px] object-cover">
                         <CiImageOn className="text-[10rem] place-self-center mt-20 text-gray-400" />
                       </div>
                     )}

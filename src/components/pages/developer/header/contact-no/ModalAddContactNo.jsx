@@ -26,7 +26,7 @@ import { FaTrash } from "react-icons/fa";
 import LoadImages from "../../../../partials/LoadImages";
 import ModalRemovedPhoto from "../../../../partials/modals/ModalRemovedPhoto";
 
-const ModalAddContactNo = ({ itemEdit }) => {
+const ModalAddContactNo = ({ itemEdit, contactNoData }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("translate-x-full");
   const [withFile, setWithFile] = React.useState(false);
@@ -81,10 +81,10 @@ const ModalAddContactNo = ({ itemEdit }) => {
   const mutation = useMutation({
     mutationFn: (values) =>
       queryData(
-        itemEdit
-          ? `${devApiVersion}/contactno/${itemEdit.contact_no_aid}` // Update
-          : `${devApiVersion}/contactno`, // Create
-        itemEdit ? "put" : "post",
+        contactNoData?.data?.length
+          ? `${devApiVersion}/contactno/${contactNoData.data[0].contact_no_aid}` // update
+          : `${devApiVersion}/contactno`, // create
+        contactNoData?.data?.length ? "put" : "post",
         values
       ),
     onSuccess: (data) => {
@@ -106,9 +106,9 @@ const ModalAddContactNo = ({ itemEdit }) => {
 
   React.useEffect(() => {
     setAnimate("");
-    if (itemEdit) {
+    if (contactNoData) {
       const photos = getConvertStringToJSONparseData(
-        itemEdit.contact_no_qr_code
+        contactNoData?.data?.[0]?.contact_no_qr_code
       );
       setPhotoArrayList(photos);
     }
@@ -116,11 +116,13 @@ const ModalAddContactNo = ({ itemEdit }) => {
 
   // Initial values for mutation Formik
   const initVal = {
-    contact_no_contact: itemEdit ? itemEdit.contact_no_contact : "",
-    contact_no_email: itemEdit ? itemEdit.contact_no_email : "",
-    contact_no_qr_code: itemEdit ? itemEdit.contact_no_qr_code : "",
+    isUpdateFooter: itemEdit,
+    contact_no_contact: contactNoData?.data?.[0]?.contact_no_contact ?? "",
+    contact_no_email: contactNoData?.data?.[0]?.contact_no_email ?? "",
+    contact_no_copyright: contactNoData?.data?.[0]?.contact_no_copyright ?? "",
+    contact_no_qr_code: contactNoData?.data?.[0]?.contact_no_qr_code ?? "",
 
-    contact_no_qr_code_old: itemEdit ? itemEdit.contact_no_qr_code : "",
+    contact_no_qr_code_old: contactNoData?.data?.[0]?.contact_no_qr_code ?? "",
     pendingDeleteFile: [],
   };
 
@@ -145,7 +147,7 @@ const ModalAddContactNo = ({ itemEdit }) => {
         className={`transition-all ease-linear transform duration-200 ${animate}`}
       >
         <div className="modal-title">
-          <h2 className="text-sm">{itemEdit ? "Edit" : "Add"} Contact No.</h2>
+          <h2 className="text-sm">{itemEdit ? "Edit" : "Add"} Footer</h2>
           <button onClick={handleCloseModal}>
             <GrFormClose className="text-[25px]" />
           </button>
@@ -290,6 +292,15 @@ const ModalAddContactNo = ({ itemEdit }) => {
                     </div>
                     <div className="input-wrapper">
                       <InputText
+                        label="Email"
+                        type="email"
+                        name="contact_no_email"
+                        className="text-xs"
+                        disabled={mutation.isPending}
+                      />
+                    </div>
+                    <div className="input-wrapper">
+                      <InputText
                         label="Contact No."
                         type="text"
                         name="contact_no_contact"
@@ -297,11 +308,12 @@ const ModalAddContactNo = ({ itemEdit }) => {
                         disabled={mutation.isPending}
                       />
                     </div>
+
                     <div className="input-wrapper">
                       <InputText
-                        label="Email"
-                        type="email"
-                        name="contact_no_email"
+                        label="Copyright"
+                        type="text"
+                        name="contact_no_copyright"
                         className="text-xs"
                         disabled={mutation.isPending}
                       />

@@ -49,6 +49,7 @@ const PropertiesBanner = () => {
                   handleAdd={handleAdd}
                   bannerData={bannerData}
                   isFetching={isFetching}
+                  isLoading={isLoading}
                 />
               </div>
             </div>

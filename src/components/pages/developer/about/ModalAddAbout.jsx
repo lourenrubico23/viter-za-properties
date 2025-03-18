@@ -29,7 +29,7 @@ import ButtonSpinner from "../../../partials/spinners/ButtonSpinner";
 import ModalRemovedPhoto from "../../../partials/modals/ModalRemovedPhoto";
 import ModalAddWrapper from "../../../partials/modals/ModalAddWrapper";
 
-const ModalAddAbout = ({ itemEdit }) => {
+const ModalAddAbout = ({ itemEdit, aboutData }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [animate, setAnimate] = React.useState("translate-x-full");
   const [withFile, setWithFile] = React.useState(false);
@@ -90,10 +90,10 @@ const ModalAddAbout = ({ itemEdit }) => {
   const mutation = useMutation({
     mutationFn: (values) =>
       queryData(
-        itemEdit
-          ? `${devApiVersion}/about/${itemEdit.about_aid}` // Update
-          : `${devApiVersion}/about`, // Create
-        itemEdit ? "put" : "post",
+        aboutData?.data?.length
+          ? `${devApiVersion}/about/${aboutData.data[0].about_aid}` // update
+          : `${devApiVersion}/about`, // create
+        aboutData?.data?.length ? "put" : "post",
         values
       ),
     onSuccess: (data) => {
@@ -115,13 +115,15 @@ const ModalAddAbout = ({ itemEdit }) => {
 
   React.useEffect(() => {
     setAnimate("");
-    if (itemEdit) {
-      const clientPhotos = getConvertStringToJSONparseData(itemEdit.about_img);
+    if (aboutData) {
+      const clientPhotos = getConvertStringToJSONparseData(
+        aboutData?.data?.[0]?.about_img
+      );
       setClientImages(clientPhotos);
     }
-    if (itemEdit) {
+    if (aboutData) {
       const logoPhotos = getConvertStringToJSONparseData(
-        itemEdit.about_logo_img
+        aboutData?.data?.[0]?.about_logo_img
       );
       setLogoImages(logoPhotos);
     }
@@ -129,15 +131,17 @@ const ModalAddAbout = ({ itemEdit }) => {
 
   // Initial values for mutation Formik
   const initVal = {
-    about_name: itemEdit ? itemEdit.about_name : "",
-    about_paragraph_a: itemEdit ? itemEdit.about_paragraph_a : "",
-    about_paragraph_b: itemEdit ? itemEdit.about_paragraph_b : "",
-    about_paragraph_c: itemEdit ? itemEdit.about_paragraph_c : "",
-    about_img: itemEdit ? itemEdit.about_img : "",
-    about_logo_img: itemEdit ? itemEdit.about_logo_img : "",
+    isUpdateAbout: itemEdit,
+    about_name: aboutData?.data?.[0]?.about_name ?? "",
+    about_paragraph_a: aboutData?.data?.[0]?.about_paragraph_a ?? "",
+    about_paragraph_b: aboutData?.data?.[0]?.about_paragraph_b ?? "",
+    about_paragraph_c: aboutData?.data?.[0]?.about_paragraph_c ?? "",
+    about_img: aboutData?.data?.[0]?.about_img ?? "",
+    about_logo_img: aboutData?.data?.[0]?.about_logo_img ?? "",
 
-    about_img_old: itemEdit ? itemEdit.about_img : "",
-    about_logo_img_old: itemEdit ? itemEdit.about_logo_img : "",
+    about_img_old: aboutData?.data?.[0]?.about_img ?? "",
+    about_logo_img_old: aboutData?.data?.[0]?.about_logo_img ?? "",
+
     pendingDeleteFile: [],
   };
 

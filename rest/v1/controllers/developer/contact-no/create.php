@@ -12,6 +12,7 @@ checkPayload($data);
 $contact_no->contact_no_contact = $data["contact_no_contact"];
 $contact_no->contact_no_email = $data["contact_no_email"];
 $contact_no->contact_no_qr_code = $data["contact_no_qr_code"];
+$contact_no->contact_no_copyright = $data["contact_no_copyright"];
 $contact_no->contact_no_created = date("Y-m-d H:i:s");
 $contact_no->contact_no_datetime = date("Y-m-d H:i:s");
 
