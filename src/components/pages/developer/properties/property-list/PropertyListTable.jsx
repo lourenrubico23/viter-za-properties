@@ -68,7 +68,7 @@ const PropertyListTable = ({ setItemEdit }) => {
   let counter = 1;
 
   const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "propertylist" }));
     setItemEdit(item);
   };
 

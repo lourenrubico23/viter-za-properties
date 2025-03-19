@@ -28,7 +28,7 @@ const OtherUser = () => {
   const [payloadData, setPayloadData] = React.useState(null); // Store form values
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "other-user" }));
     setItemEdit(null);
   };
   return (
@@ -103,7 +103,7 @@ const OtherUser = () => {
         />
       )}
 
-      {store.isAdd && (
+      {store.isAdd?.modal && store.isAdd?.modalCode === "other-user" && (
         <ModalAddOtherUser
           itemEdit={itemEdit}
           setIsSend={setIsSend}

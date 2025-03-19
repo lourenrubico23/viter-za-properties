@@ -25,6 +25,7 @@ import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
 import Navigation from "../Navigation";
 import Testimonials from "./Testimonials";
 import Loader from "../../../partials/spinners/Loader";
+import SellProperty from "./SellProperty";
 
 const Home = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -39,7 +40,7 @@ const Home = () => {
 
   const {
     isFetchingBanner,
-    isLoadingBanner,
+    isLoading: isLoadingBanner,
     data: bannerData,
   } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
@@ -320,40 +321,7 @@ const Home = () => {
             error={error}
           />
 
-          <div className="flex flex-wrap gap-6 place-content-center md:my-48 my-12">
-            <div className="flex flex-col items-center gap-4  w-[362px] h-[362px] p-6 hover:outline-8 hover:shadow-xl group">
-              <SellMyPropertySvg />
-              <p className="font-hindBold text-[clamp(16px,3vw,18px)] uppercase">
-                Sell my Property
-              </p>
-              <p className="font-hindRegular text-[clamp(12px,3vw,16px)] text-center min-h-[60px]">
-                Get the best value for your property with expert guidance. List
-                with confidence and sell faster!
-              </p>
-              <a
-                className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0"
-                href={`${devNavUrl}/sellers`}
-              >
-                List my Home
-              </a>
-            </div>
-            <div className="flex flex-col items-center gap-4  w-[362px] h-[362px] p-6 hover:outline-8 hover:shadow-xl group relative">
-              <BuyAPropertySvg />
-              <p className="font-hindBold text-[clamp(16px,3vw,18px)] uppercase">
-                Buy a Property
-              </p>
-              <p className="font-hindRegular text-[clamp(12px,3vw,16px)] text-center min-h-[60px]">
-                Find your dream home or investment with expert guidance. Explore
-                top listings today!
-              </p>
-              <a
-                className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0"
-                href={`${devNavUrl}/properties`}
-              >
-                See Listing
-              </a>
-            </div>
-          </div>
+          <SellProperty />
 
           <div>
             {aboutData?.data.map((item, key) => {

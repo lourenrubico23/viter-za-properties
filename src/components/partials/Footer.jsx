@@ -5,7 +5,7 @@ import {
   devApiVersion,
   devNavUrl,
   getConvertStringToJSONparseData,
-  googleHDViewLink
+  googleHDViewLink,
 } from "../helpers/functions-general";
 import LoadImages from "./LoadImages";
 
@@ -38,7 +38,7 @@ const Footer = () => {
                   getConvertStringToJSONparseData(item.logo_image) || [];
 
                 return (
-                  <div key={key}>
+                  <div key={key} className="relative">
                     {logoImage.map((image, index) => (
                       <LoadImages
                         url={`${googleHDViewLink}${image?.id}`}
@@ -55,7 +55,7 @@ const Footer = () => {
                   getConvertStringToJSONparseData(item.contact_no_qr_code) ||
                   [];
                 return (
-                  <div key={key}>
+                  <div key={key} className="relative">
                     {qrCodeImage.map((image, index) => (
                       <LoadImages
                         url={`${googleHDViewLink}${image?.id}`}

@@ -19,6 +19,7 @@ import {
 import LoadImages from "../../partials/LoadImages";
 import { FaFacebookF, FaInstagram, FaRegEnvelope } from "react-icons/fa";
 import FetchingSpinner from "../../partials/spinners/FetchingSpinner";
+import TableLoading from "../../partials/spinners/TableLoading";
 
 const Navigation = () => {
   const [active, setActive] = React.useState("");
@@ -36,7 +37,11 @@ const Navigation = () => {
     "contactno" // key
   );
 
-  const { isFetching, data: logoData } = useQueryData(
+  const {
+    isLoading,
+    isFetching,
+    data: logoData,
+  } = useQueryData(
     `${devApiVersion}/logo`, // endpoint
     "get", // method
     "logo" // key
@@ -107,7 +112,7 @@ const Navigation = () => {
   return (
     <>
       <div className="hidden lg:block bg-secondary h-[81px] place-content-center">
-        {isFetching && !isFetching && <FetchingSpinner />}
+        {/* {!isFetching && <FetchingSpinner />} */}
         <div className="customContainer text-light flex justify-between ">
           <ul className="flex items-center gap-8">
             {linksData?.data?.length > 0 &&
@@ -171,115 +176,145 @@ const Navigation = () => {
         </div>
       </div>
       <div className="bg-primary h-[80px] place-content-center sticky top-0 z-50">
-        <div className="customContainer text-light flex justify-between items-center">
-          <div className="">
-            {logoData?.data.map((item, key) => {
-              const logoImage =
-                getConvertStringToJSONparseData(item.logo_image) || [];
-              return (
-                <div key={key} className="flex gap-4 items-center">
-                  {logoImage.map((image, index) => (
-                    <LoadImages
-                      url={`${googleHDViewLink}${image?.id}`}
-                      alt="Logo"
-                      className="h-12 md:h-[60px] object-cover"
-                      key={index}
-                    />
-                  ))}
-                  <div>
-                    <p className="text-lg font-hindBold">{item.logo_name}</p>
-                    <p className="text-xs font-hindRegular">
-                      {item.logo_position}
-                    </p>
+        {/* {isLoading || isFetching ? (
+          <TableLoading cols={2} count={3} />
+        ) : ( */}
+        <>
+          <div className="customContainer text-light flex justify-between items-center">
+            <div className="">
+              {logoData?.data.map((item, key) => {
+                const logoImage =
+                  getConvertStringToJSONparseData(item.logo_image) || [];
+                return (
+                  <div key={key} className="flex gap-4 items-center relative">
+                    {logoImage.map((image, index) => (
+                      <LoadImages
+                        url={`${googleHDViewLink}${image?.id}`}
+                        alt="Logo"
+                        className="h-12 md:h-[60px] object-cover"
+                        key={index}
+                      />
+                    ))}
+                    <div>
+                      <p className="text-lg font-hindBold">{item.logo_name}</p>
+                      <p className="text-xs font-hindRegular">
+                        {item.logo_position}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
 
-          {/* Mobile Toggle Button */}
-          <button
-            className="lg:hidden text-light text-2xl focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <FaTimes /> : <FaBars />}
-          </button>
+            {/* Mobile Toggle Button */}
+            <button
+              className="lg:hidden text-light text-2xl focus:outline-none"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <FaTimes /> : <FaBars />}
+            </button>
 
-          {/* Backdrop */}
-          {isOpen && (
-            <div
-              className="fixed inset-0 bg-secondary/30 z-40"
-              onClick={() => setIsOpen(false)}
-            ></div>
-          )}
+            {/* Backdrop */}
+            {isOpen && (
+              <div
+                className="fixed inset-0 bg-secondary/30 z-40"
+                onClick={() => setIsOpen(false)}
+              ></div>
+            )}
 
-          {/* Navigation */}
-          <nav
-            className={`fixed top-0 right-0  h-full bg-primary text-[16px] font-hindRegular transform transition-transform duration-300 ease-in-out flex flex-col gap-12 z-50
+            {/* Navigation */}
+            <nav
+              className={`fixed top-0 right-0  h-full bg-primary text-[16px] font-hindRegular transform transition-transform duration-300 ease-in-out flex flex-col gap-12 z-50
             ${
               isOpen
                 ? "translate-x-0 max-w-[500px] min-w-[300px]"
                 : "translate-x-full "
             } lg:static lg:translate-x-0 lg:flex p-4 lg:p-0`}
-          >
-            <button
-              className="lg:hidden text-light text-2xl focus:outline-none place-items-end"
-              onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen && <FaTimes />}
-            </button>
-            <ul className="flex flex-col lg:flex-row lg:justify-center space-y-6 lg:space-y-0 lg:space-x-8 p-6 lg:p-0">
-              {navItems.map(({ path, label }, index) => (
-                <li key={index}>
-                  <Link
-                    to={`${devNavUrl}${path}`}
-                    onClick={() => {
-                      setActive(path);
-                      setIsOpen(false);
-                    }}
-                    className={`relative pb-1 transition duration-300 
+              <button
+                className="lg:hidden text-light text-2xl focus:outline-none place-items-end"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen && <FaTimes />}
+              </button>
+              <ul className="flex flex-col lg:flex-row lg:justify-center space-y-6 lg:space-y-0 lg:space-x-8 p-6 lg:p-0">
+                {navItems.map(({ path, label }, index) => (
+                  <li key={index}>
+                    <Link
+                      to={`${devNavUrl}${path}`}
+                      onClick={() => {
+                        setActive(path);
+                        setIsOpen(false);
+                      }}
+                      className={`relative pb-1 transition duration-300 
           before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 
           before:bg-secondary before:transition-transform before:duration-300 
           ${active === path ? "before:scale-x-100" : "before:scale-x-0"} 
           hover:before:scale-x-100`}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <div className="lg:hidden block text-xs justify-between bottom-0 my-28">
-              <ul className="flex flex-col items-center gap-4 ">
-                {linksData?.data.map((item, key) => {
-                  const SelectedIcon = item.links_icons
-                    ? icons[item.links_icons]
-                    : null;
-                  return (
-                    <Link
-                      key={key}
-                      to={`${devNavUrl}${item.links_link}`}
-                      target="_blank"
                     >
-                      <div className="flex gap-2">
-                        <span className="flex items-center gap-2 text-sm">
-                          {SelectedIcon ? <SelectedIcon /> : "No icon selected"}
-                        </span>
-                        <li>{item.links_title}</li>
-                      </div>
+                      {label}
                     </Link>
-                  );
-                })}
-
-                {contactNoData?.data.map((item, key) => (
-                  <h3 className="text-lg" key={key}>
-                    {item.contact_no_contact}
-                  </h3>
+                  </li>
                 ))}
               </ul>
-            </div>
-          </nav>
-        </div>
+
+              <div className="lg:hidden block text-xs justify-between bottom-0 my-28">
+                <ul className="flex flex-col items-center gap-4 ">
+                  {linksData?.data.map((item, key) => {
+                    return (
+                      <div
+                        key={key}
+                        className="flex flex-col items-center gap-4 "
+                      >
+                        <Link
+                          key={key}
+                          to={`${devNavUrl}${item.links_facebook_link}`}
+                          target="_blank"
+                        >
+                          <div className="flex gap-2">
+                            <span className="flex items-center gap-2 text-sm">
+                              <FaFacebookF />
+                            </span>
+                            <li>{item.links_facebook_title}</li>
+                          </div>
+                        </Link>
+                        <Link
+                          to={`${devNavUrl}${item.links_instagram_link}`}
+                          target="_blank"
+                        >
+                          <div className="flex gap-2">
+                            <span className="flex items-center gap-2 text-sm">
+                              <FaInstagram />
+                            </span>
+                            <li>{item.links_instagram_title}</li>
+                          </div>
+                        </Link>
+                        <Link
+                          to={`${devNavUrl}${item.links_message_link}`}
+                          target="_blank"
+                        >
+                          <div className="flex gap-2">
+                            <span className="flex items-center gap-2 text-sm">
+                              <FaRegEnvelope />
+                            </span>
+                            <li>{item.links_message_title}</li>
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })}
+
+                  {linksData?.data.map((item, key) => (
+                    <h3 className="text-lg" key={key}>
+                      {item.links_contact}
+                    </h3>
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </>
+        {/* )} */}
       </div>
     </>
   );

@@ -85,7 +85,7 @@ const OtherUserTable = ({
   let counter = 1;
 
   const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "other-user" }));
     setItemEdit(item);
   };
 

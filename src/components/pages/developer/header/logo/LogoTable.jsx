@@ -74,7 +74,7 @@ const LogoTable = ({ handleAddNav, logoData }) => {
             </nav>
           </div>
           <a
-            className="absolute cursor-pointer tooltip-header-nav right-0 top-0"
+            className="absolute cursor-pointer tooltip-header-nav right-1 top-2"
             data-tooltip="Edit contents"
             onClick={handleAddNav}
           >

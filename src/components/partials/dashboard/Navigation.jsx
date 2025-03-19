@@ -148,29 +148,6 @@ const Navigation = ({ menu, submenu }) => {
           <nav>
             <ul className="flex-col [&>li]:text-left [&>li]:text-[16px] font-semibold  ">
               <>
-                {/* <Link className="" to={`${devNavUrl}/${link}/header`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "header"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    Header
-                  </li>
-                </Link>
-                <Link className="" to={`${devNavUrl}/${link}/navigation`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "navigation"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    Navigation
-                  </li>
-                </Link> */}
-
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "home"
@@ -184,7 +161,7 @@ const Navigation = ({ menu, submenu }) => {
                       className={`text-[14px] uppercase ${
                         menu === "home" ? "text-secondary" : "text-dark"
                       }`}
-                      to={`${devNavUrl}/${link}/home`}
+                      to={`${devNavUrl}/${link}/`}
                     >
                       Home
                     </Link>
@@ -201,31 +178,6 @@ const Navigation = ({ menu, submenu }) => {
                     store.isOpenHeader ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
-                  {/* <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/home-banner`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "home-banner"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Banner
-                    </li>
-                  </Link> */}
-                  {/* <Link className="!p-0" to={`${devNavUrl}/${link}/home-about`}>
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "home-about"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      About
-                    </li>
-                  </Link> */}
                   <Link
                     className="!p-0"
                     to={`${devNavUrl}/${link}/home-client-reviews`}
@@ -240,20 +192,6 @@ const Navigation = ({ menu, submenu }) => {
                       Client Reviews
                     </li>
                   </Link>
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/home-contact-us`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "home-contact-us"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Contact Us
-                    </li>
-                  </Link>
                 </ul>
 
                 <li
@@ -265,13 +203,14 @@ const Navigation = ({ menu, submenu }) => {
                   onClick={() => handlePropertiesOpen()}
                 >
                   <div className="nav flex items-center justify-between w-full">
-                    <span
+                    <Link
                       className={`text-[14px] uppercase ${
                         menu === "properties" ? "text-secondary" : "text-dark"
                       }`}
+                      to={`${devNavUrl}/${link}/properties`}
                     >
                       Properties
-                    </span>
+                    </Link>
                     <IoChevronDownSharp
                       className={`${
                         store.isOpenProperties ? "text-dark" : "rotate-180"
@@ -285,20 +224,6 @@ const Navigation = ({ menu, submenu }) => {
                     store.isOpenProperties ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/property-banner`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "property-banner"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Banner
-                    </li>
-                  </Link>
                   <Link
                     className="!p-0"
                     to={`${devNavUrl}/${link}/property-list`}
@@ -341,20 +266,6 @@ const Navigation = ({ menu, submenu }) => {
                       Property Status
                     </li>
                   </Link>
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/property-contact-us`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "property-contact-us"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Contact Us
-                    </li>
-                  </Link>
                 </ul>
 
                 <li
@@ -366,55 +277,16 @@ const Navigation = ({ menu, submenu }) => {
                   onClick={() => handleBuyersOpen()}
                 >
                   <div className="nav flex items-center justify-between w-full">
-                    <span
+                    <Link
                       className={`text-[14px] uppercase ${
                         menu === "buyers" ? "text-secondary" : "text-dark"
                       }`}
+                      to={`${devNavUrl}/${link}/buyers`}
                     >
                       buyers
-                    </span>
-                    <IoChevronDownSharp
-                      className={`${
-                        store.isOpenBuyers ? "text-dark" : " rotate-180"
-                      }  transition-all`}
-                    />
+                    </Link>
                   </div>
                 </li>
-
-                <ul
-                  className={`${
-                    store.isOpenBuyers ? "h-0 overflow-hidden" : "my-2"
-                  } submenu ml-5`}
-                >
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/buyers-banner`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "buyers-banner"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Banner
-                    </li>
-                  </Link>
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/buyers-contact-us`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "buyers-contact-us"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Contact Us
-                    </li>
-                  </Link>
-                </ul>
 
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
@@ -425,55 +297,16 @@ const Navigation = ({ menu, submenu }) => {
                   onClick={() => handleSellersOpen()}
                 >
                   <div className="nav flex items-center justify-between w-full">
-                    <span
+                    <Link
                       className={`text-[14px] uppercase ${
                         menu === "sellers" ? "text-secondary" : "text-dark"
                       }`}
+                      to={`${devNavUrl}/${link}/sellers`}
                     >
                       sellers
-                    </span>
-                    <IoChevronDownSharp
-                      className={`${
-                        store.isOpenSellers ? "text-dark" : " rotate-180"
-                      }  transition-all`}
-                    />
+                    </Link>
                   </div>
                 </li>
-
-                <ul
-                  className={`${
-                    store.isOpenSellers ? "h-0 overflow-hidden" : "my-2"
-                  } submenu ml-5`}
-                >
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/sellers-banner`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "sellers-banner"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Banner
-                    </li>
-                  </Link>
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/sellers-contact-us`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "sellers-contact-us"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Contact Us
-                    </li>
-                  </Link>
-                </ul>
 
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
@@ -484,13 +317,14 @@ const Navigation = ({ menu, submenu }) => {
                   onClick={() => handleBlogsOpen()}
                 >
                   <div className="nav flex items-center justify-between w-full">
-                    <span
+                    <Link
                       className={`text-[14px] uppercase ${
                         menu === "blogs" ? "text-secondary" : "text-dark"
                       }`}
+                      to={`${devNavUrl}/${link}/blogs`}
                     >
                       blogs
-                    </span>
+                    </Link>
                     <IoChevronDownSharp
                       className={`${
                         store.isOpenBlogs ? "text-dark" : " rotate-180"
@@ -504,20 +338,6 @@ const Navigation = ({ menu, submenu }) => {
                     store.isOpenBlogs ? "h-0 overflow-hidden" : "my-2"
                   } submenu ml-5`}
                 >
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/blogs-banner`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "blogs-banner"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Banner
-                    </li>
-                  </Link>
                   <Link className="!p-0" to={`${devNavUrl}/${link}/blogs-list`}>
                     <li
                       className={`text-xs my-2 border-transparent ${
@@ -527,20 +347,6 @@ const Navigation = ({ menu, submenu }) => {
                       }`}
                     >
                       Blog List
-                    </li>
-                  </Link>
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/blogs-contact-us`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "blogs-contact-us"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Contact Us
                     </li>
                   </Link>
                 </ul>
@@ -554,67 +360,18 @@ const Navigation = ({ menu, submenu }) => {
                   onClick={() => handleContactOpen()}
                 >
                   <div className="nav flex items-center justify-between w-full">
-                    <span
+                    <Link
                       className={`text-[14px] uppercase ${
                         menu === "contact" ? "text-secondary" : "text-dark"
                       }`}
+                      to={`${devNavUrl}/${link}/contact`}
                     >
                       contact
-                    </span>
-                    <IoChevronDownSharp
-                      className={`${
-                        store.isOpenContact ? "text-dark" : " rotate-180"
-                      }  transition-all`}
-                    />
+                    </Link>
                   </div>
                 </li>
 
-                <ul
-                  className={`${
-                    store.isOpenContact ? "h-0 overflow-hidden" : "my-2"
-                  } submenu ml-5`}
-                >
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/contact-banner`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "contact-banner"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Banner
-                    </li>
-                  </Link>
-                  <Link
-                    className="!p-0"
-                    to={`${devNavUrl}/${link}/contact-contact-us`}
-                  >
-                    <li
-                      className={`text-xs my-2 border-transparent ${
-                        submenu === "contact-contact-us"
-                          ? "text-secondary font-bold"
-                          : "border-none text-dark"
-                      }`}
-                    >
-                      Contact Us
-                    </li>
-                  </Link>
-                </ul>
-
-                <Link className="" to={`${devNavUrl}/${link}/footer`}>
-                  <li
-                    className={`text-[14px] uppercase  p-1 ${
-                      menu === "footer"
-                        ? "text-secondary underline underline-offset-4"
-                        : "border-none text-dark"
-                    }`}
-                  >
-                    Footer
-                  </li>
-                </Link>
+              
 
                 <Link className="" to={`${devNavUrl}/${link}/notification`}>
                   <li

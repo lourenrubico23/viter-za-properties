@@ -14,7 +14,7 @@ const PropertyList = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "propertylist" }));
     setItemEdit(null);
   };
 
@@ -47,7 +47,9 @@ const PropertyList = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddPropertyList itemEdit={itemEdit} />}
+      {store.isAdd?.modal && store.isAdd?.modalCode === "propertylist" && (
+        <ModalAddPropertyList itemEdit={itemEdit} />
+      )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

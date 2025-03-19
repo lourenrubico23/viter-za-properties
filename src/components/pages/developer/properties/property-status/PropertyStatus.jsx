@@ -14,7 +14,7 @@ const PropertyStatus = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "propertystatus" }));
     setItemEdit(null);
   };
   return (
@@ -46,7 +46,9 @@ const PropertyStatus = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddPropertyStatus itemEdit={itemEdit} />}
+      {store.isAdd?.modal && store.isAdd?.modalCode === "propertystatus" && (
+        <ModalAddPropertyStatus itemEdit={itemEdit} />
+      )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

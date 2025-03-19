@@ -11,9 +11,10 @@ import Footer from "../../../partials/Footer";
 import Navigation from "../Navigation";
 import LoadImages from "../../../partials/LoadImages";
 import ContactForm from "../../../partials/contact-form/ContactForm";
+import Loader from "../../../partials/spinners/Loader";
 
 const Blogs = () => {
-  const { data: bannerData } = useQueryData(
+  const { isLoading: isLoadingBanner, data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
     "banner" // key
@@ -26,7 +27,8 @@ const Blogs = () => {
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
-          <div className=" relative md:flex justify-center">
+          <div className=" relative md:flex justify-center lg:min-h-[420px] w-full">
+            {isLoadingBanner && <Loader />}
             {bannerData?.data.map((item, key) => {
               if (item.banner_page === "Blogs") {
                 const bannerImage =

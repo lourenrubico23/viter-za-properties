@@ -14,7 +14,7 @@ const Role = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "role" }));
     setItemEdit(null);
   };
   return (
@@ -48,7 +48,9 @@ const Role = () => {
 
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
-      {store.isAdd && <ModalAddRole itemEdit={itemEdit} />}
+      {store.isAdd?.modal && store.isAdd?.modalCode === "role" && (
+        <ModalAddRole itemEdit={itemEdit} />
+      )}
     </>
   );
 };

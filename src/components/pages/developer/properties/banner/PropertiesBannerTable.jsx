@@ -3,7 +3,7 @@ import { CiImageOn } from "react-icons/ci";
 import { FaRegImages } from "react-icons/fa";
 import {
   getConvertStringToJSONparseData,
-  googleHDViewLink
+  googleHDViewLink,
 } from "../../../../helpers/functions-general";
 import LoadImages from "../../../../partials/LoadImages";
 import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
@@ -11,14 +11,14 @@ import Loader from "../../../../partials/spinners/Loader";
 
 const PropertiesBannerTable = ({
   setItemEdit,
-  handleAdd,
+  handleAddBanner,
   bannerData,
   isFetching,
   isLoading,
 }) => {
   return (
     <>
-      <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-10px)] mt-5 mb-10 lg:mb-0  relative">
+      <div className="  relative">
         {isFetching && !isLoading && <FetchingSpinner />}
         <div className="outer-wrapper">
           <div className="wrapper h-[500px] ">
@@ -58,7 +58,7 @@ const PropertiesBannerTable = ({
                         <a
                           className="absolute cursor-pointer tooltip-header-nav z-[1]  -right-9 -top-7"
                           data-tooltip="Upload Contents"
-                          onClick={handleAdd}
+                          onClick={handleAddBanner}
                         >
                           <FaRegImages className=" bg-[#C7AC27] rounded-full w-[25px] h-[25px] p-1 border-[1px]" />
                         </a>

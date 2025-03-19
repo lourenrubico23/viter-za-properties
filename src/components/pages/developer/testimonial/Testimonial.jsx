@@ -14,7 +14,7 @@ const Testimonial = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "clients-review" }));
     setItemEdit(null);
   };
   return (
@@ -46,7 +46,9 @@ const Testimonial = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddTestimonial itemEdit={itemEdit} />}
+      {store.isAdd?.modal && store.isAdd?.modalCode === "clients-review" && (
+        <ModalAddTestimonial itemEdit={itemEdit} />
+      )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

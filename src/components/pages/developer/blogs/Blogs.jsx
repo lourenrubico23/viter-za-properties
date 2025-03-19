@@ -14,7 +14,7 @@ const Blogs = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "blogslist" }));
     setItemEdit(null);
   };
   return (
@@ -46,7 +46,9 @@ const Blogs = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddBlogs itemEdit={itemEdit} />}
+      {store.isAdd?.modal && store.isAdd?.modalCode === "blogslist" && (
+        <ModalAddBlogs itemEdit={itemEdit} />
+      )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>

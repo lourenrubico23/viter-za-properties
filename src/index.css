@@ -210,6 +210,9 @@
   .modal-form {
     @apply flex flex-col justify-between h-full;
   }
+  .modal__action {
+    @apply z-10;
+  }
   .form-btn {
     @apply flex gap-2 pt-4;
   }

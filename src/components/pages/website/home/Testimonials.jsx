@@ -55,7 +55,7 @@ const Testimonials = () => {
       <div
         style={{
           width: "20px",
-          height: "20px",
+          height: "20px", 
           color: "blue",
           background: "gray",
           borderRadius: "50%",

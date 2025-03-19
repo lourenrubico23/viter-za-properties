@@ -18,7 +18,7 @@ import { siteKey } from "../../../../helpers/functions-general";
 import { HiPencil } from "react-icons/hi";
 
 const ContactContactUsTable = ({
-  handleAdd,
+  handleAddContactUs,
   contactFormData,
   isFetching,
   isLoading,
@@ -27,7 +27,7 @@ const ContactContactUsTable = ({
 }) => {
   return (
     <>
-      <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-10px)] mt-5 mb-10 lg:mb-0  relative">
+      <div className=" py-12 my-16 relative">
         {isFetching && !isLoading && <FetchingSpinner />}
         <div className="bg-light px-6">
           <div className="customContainer">
@@ -111,7 +111,7 @@ const ContactContactUsTable = ({
                           <a
                             className="absolute cursor-pointer tooltip-header-nav right-1 top-3"
                             data-tooltip="Edit contents"
-                            onClick={handleAdd}
+                            onClick={handleAddContactUs}
                           >
                             <HiPencil className=" bg-[#C7AC27] rounded-full  w-[25px] h-[25px] p-[5px] border-[1px]" />
                           </a>

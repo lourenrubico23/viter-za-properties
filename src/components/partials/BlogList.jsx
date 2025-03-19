@@ -83,7 +83,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
                 key={index}
                 className="group hover:border-secondary hover:scale-[1.01] hover:duration-200 max-w-[372px] min-h-[555px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
               >
-                <div className="overflow-hidden">
+                <div className="overflow-hidden relative">
                   {firstImage && (
                     <LoadImages
                       url={`${googleHDViewLink}${firstImage?.id}`}

@@ -43,7 +43,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
   const hasMoreProperties = visibleProperties < totalProperties;
 
   const handleOpenDescription = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "properties-description" }));
     setItemEdit(item);
     setSelectedPropertyId(item.list_aid);
 
@@ -52,6 +52,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
     setSearchParams({ property: formattedName });
 
     document.body.classList.toggle("overflow-hidden");
+    console.log("opendesc");
   };
 
   // Check URL on page load & open modal
@@ -68,7 +69,9 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
       if (selectedProperty) {
         setItemEdit(selectedProperty);
         setSelectedPropertyId(selectedProperty.list_aid);
-        dispatch(setIsAdd(true));
+        dispatch(
+          setIsAdd({ modal: true, modalCode: "properties-description" })
+        );
       }
     }
   }, [searchParams, propertyListData]); // Re-run when URL or property data changes
@@ -76,13 +79,17 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
   return (
     <>
       <div className="bg-light mt-[450px] md:mt-[468px] lg:mt-[180px] customContainer lg:max-w-[1240px] ">
-      {isFetching && !isLoading && <FetchingSpinner />}
+        {isFetching && !isLoading && <FetchingSpinner />}
         <div className="title uppercase text-secondary text-[clamp(25px,3vw,34px)] font-hindBold text-center">
           Featured properties
         </div>
         {(status === "pending" || result?.pages[0].data.length === 0) && (
           <div className="text-center my-8">
-            {status === "pending" ? <FetchingSpinner /> : <NoDataWebPage />}
+            {status === "pending" ? (
+              <TableLoading cols={3} count={30} />
+            ) : (
+              <NoDataWebPage />
+            )}
           </div>
         )}
 
@@ -109,7 +116,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
                       key={key}
                     >
                       <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform">
-                        <div className="overflow-hidden">
+                        <div className="overflow-hidden relative">
                           {firstImage && (
                             <LoadImages
                               url={`${googleHDViewLink}${firstImage?.id}`}
@@ -190,15 +197,16 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
         )}
       </div>
 
-      {store.isAdd && (
-        <PropertyDescriptionPage
-          setSelectedPropertyId={setSelectedPropertyId}
-          propertyListData={propertyListData}
-          selectedPropertyId={selectedPropertyId}
-          setSearchParams={setSearchParams}
-          searchParams={searchParams}
-        />
-      )}
+      {store.isAdd?.modal &&
+        store.isAdd?.modalCode === "properties-description" && (
+          <PropertyDescriptionPage
+            setSelectedPropertyId={setSelectedPropertyId}
+            propertyListData={propertyListData}
+            selectedPropertyId={selectedPropertyId}
+            setSearchParams={setSearchParams}
+            searchParams={searchParams}
+          />
+        )}
     </>
   );
 };

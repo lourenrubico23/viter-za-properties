@@ -11,9 +11,10 @@ import useQueryData from "../../../custom-hooks/useQueryData";
 import LoadImages from "../../../partials/LoadImages";
 import { CiImageOn } from "react-icons/ci";
 import ContactForm from "../../../partials/contact-form/ContactForm";
+import Loader from "../../../partials/spinners/Loader";
 
 const Sellers = () => {
-  const { data: bannerData } = useQueryData(
+  const { isLoading: isLoadingBanner, data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
     "banner" // key
@@ -26,7 +27,8 @@ const Sellers = () => {
       <div className="outer-wrapper">
         <div className="wrapper">
           <Navigation />
-          <div className=" relative md:flex justify-center">
+          <div className=" relative md:flex justify-center lg:min-h-[420px] w-full">
+          {isLoadingBanner && <Loader />}
             {bannerData?.data.map((item, key) => {
               if (item.banner_page === "Sellers") {
                 const bannerImage =

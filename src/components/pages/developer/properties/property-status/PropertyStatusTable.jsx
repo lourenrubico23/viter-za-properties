@@ -67,7 +67,7 @@ const PropertyStatusTable = ({ setItemEdit }) => {
   let counter = 1;
 
   const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "propertystatus" }));
     setItemEdit(item);
   };
 

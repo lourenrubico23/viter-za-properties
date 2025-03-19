@@ -2,22 +2,30 @@ import React from "react";
 import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
 import {
   copyrightYear,
+  devApiVersion,
   devNavUrl,
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../../../../helpers/functions-general";
 import LoadImages from "../../../../partials/LoadImages";
 import { FaRegImages } from "react-icons/fa";
+import useQueryData from "../../../../custom-hooks/useQueryData";
 
 const ContactNoTable = ({
   setItemEdit,
-  handleAdd,
+  handleAddFooter,
   contactNoData,
   isFetching,
   isLoading,
   logoData,
   propertyTypeData,
 }) => {
+  const { data: sellPropertyData } = useQueryData(
+    `${devApiVersion}/sell-property`, // endpoint
+    "get", // method
+    "sell-property" // key
+  );
+
   return (
     <>
       <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
@@ -103,9 +111,9 @@ const ContactNoTable = ({
               <a
                 className="absolute cursor-pointer tooltip-header-nav z-[1] right-2 top-3 "
                 data-tooltip="Upload Contents"
-                onClick={handleAdd}
+                onClick={handleAddFooter}
               >
-                <FaRegImages className=" bg-[#C7AC27] rounded-full w-[25px] h-[25px] p-1 border-[1px]" />
+                <FaRegImages className=" bg-[#C7AC27] rounded-full w-[25px] h-[25px] p-1 border-[1px] text-black" />
               </a>
             </div>
             {contactNoData?.data.map((item, key) => (

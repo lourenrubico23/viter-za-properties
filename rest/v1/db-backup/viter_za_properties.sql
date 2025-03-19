@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2025 at 09:00 AM
+-- Generation Time: Mar 19, 2025 at 08:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -129,8 +129,8 @@ CREATE TABLE `zapv1_contact_form` (
 --
 
 INSERT INTO `zapv1_contact_form` (`form_aid`, `form_page`, `form_label`, `form_title`, `form_facebook`, `form_instagram`, `form_linkedIn`, `form_address`, `form_description`, `form_contact_description`, `form_created`, `form_datetime`) VALUES
-(1, 'Home', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', '2025-03-12 08:53:46', '2025-03-18 09:54:00'),
-(3, 'Properties', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', '2025-03-12 09:00:25', '2025-03-18 10:04:41'),
+(1, 'Home', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', '2025-03-12 08:53:46', '2025-03-19 07:47:28'),
+(3, 'Properties', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', '2025-03-12 09:00:25', '2025-03-19 08:14:53'),
 (4, 'Buyers', 'Buyers', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', 'Finding the perfect property is more than just a transaction—it\'s about securing your future. Whether you\'re searching for your dream home, a smart investment, or a prime commercial space, I am committed to guiding you every step of the way. With expert market insights, personalized service, and a passion for real estate, I help buyers make confident, well-informed decisions. Let\'s turn your vision into reality—because the right property changes everything.', 'Your Ideal Property Awaits—Let’s Connect!', '2025-03-12 09:01:21', '2025-03-18 10:31:46'),
 (5, 'Sellers', 'Sellers', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', 'Selling your property is a major decision, and I\'m here to make the process smooth, strategic, and successful. With expert market analysis, targeted marketing, and a vast network of qualified buyers, I ensure your property gets the exposure and value it deserves. From pricing to closing, I handle every detail with professionalism and care. Let\'s maximize your propertys potential and achieve the best possible deal.', 'Let\'s Get Your Property Sold—Contact Me Now!', '2025-03-12 09:02:53', '2025-03-18 12:40:36'),
 (6, 'Blogs', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact us today for a complimentary, no-pressure \nhome appraisal!', '2025-03-12 09:04:33', '2025-03-18 13:36:13'),
@@ -160,7 +160,7 @@ INSERT INTO `zapv1_header_banner` (`banner_aid`, `banner_image`, `banner_page`, 
 (3, '[{\"name\":\"properties-banner.webp\",\"id\":\"1mZerYL7dfgmwu4aTkZucYQCX9ZxgX7PR\",\"datetime\":\"2025-03-03 14:01:43\"}]', 'Properties', 'Unlocking Property Potential. Creating Life-Long Partnerships.', '2025-03-03 14:01:36', '2025-03-18 08:07:58'),
 (4, '[{\"name\":\"buyers-banner.webp\",\"id\":\"13DCh34yAsDTDDd9mfOVbo5zHh1sHhJ95\",\"datetime\":\"2025-03-07 08:49:56\"}]', 'Buyers', 'Transforming Properties to Opportunities, Nurturing Life-Long Relationships.', '2025-03-03 14:03:49', '2025-03-18 10:38:01'),
 (5, '[{\"name\":\"sellers-banner.webp\",\"id\":\"1RqF4hu4lB0s-afF8DiCdAv1AoxmNaBMm\",\"datetime\":\"2025-03-03 14:08:04\"}]', 'Sellers', 'Maximizing Value in Every Property, Turning Sellers into Trusted Partners.', '2025-03-03 14:08:00', '2025-03-18 12:30:46'),
-(6, '[{\"name\":\"contact-banner.webp\",\"id\":\"1ACYP-gcDGf7AUin3HprgHjHNEG3TiREG\",\"datetime\":\"2025-03-03 14:11:08\"}]', 'Contact', 'Maximize your property\'s value with a trusted partner by your side. Contact us today to get started! ', '2025-03-03 14:11:04', '2025-03-18 13:46:08'),
+(6, '[{\"name\":\"contact-banner.webp\",\"id\":\"1_wIdrxwAVatWcFIR0crc4fFaonGVN8Jo\",\"datetime\":\"2025-03-19 09:33:04\"}]', 'Contact', 'Maximize your property\'s value with a trusted partner by your side. Contact us today to get started! ', '2025-03-03 14:11:04', '2025-03-19 09:33:00'),
 (7, '[{\"name\":\"blog-banner.png\",\"id\":\"1YOw7vJPUTC1Y1GnQYUe1u2VjCzaSVHL8\",\"datetime\":\"2025-03-07 09:07:36\"}]', 'Blogs', 'Blogs and Insights', '2025-03-07 09:07:32', '2025-03-18 13:31:24');
 
 -- --------------------------------------------------------
@@ -184,7 +184,7 @@ CREATE TABLE `zapv1_header_contact_no` (
 --
 
 INSERT INTO `zapv1_header_contact_no` (`contact_no_aid`, `contact_no_contact`, `contact_no_email`, `contact_no_qr_code`, `contact_no_copyright`, `contact_no_created`, `contact_no_datetime`) VALUES
-(4, '+63 917 653 1919', 'properties@zacalfanta.com', '[{\"name\":\"qr-code.png\",\"id\":\"1pgog20r5ntysykdOenzd47FUBLtzROxc\",\"datetime\":\"2025-03-18 14:36:11\"}]', 'ZA PROPERTIES. All rights reserved', '2025-03-11 14:51:44', '2025-03-18 14:36:54');
+(4, '+63 917 653 1919', 'properties@zacalfanta.com', '[{\"name\":\"qr-code.png\",\"id\":\"1pgog20r5ntysykdOenzd47FUBLtzROxc\",\"datetime\":\"2025-03-18 14:36:11\"}]', 'ZA PROPERTIES. All rights reserved', '2025-03-11 14:51:44', '2025-03-19 08:54:08');
 
 -- --------------------------------------------------------
 
@@ -210,7 +210,7 @@ CREATE TABLE `zapv1_header_links` (
 --
 
 INSERT INTO `zapv1_header_links` (`links_aid`, `links_facebook_link`, `links_facebook_title`, `links_instagram_link`, `links_instagram_title`, `links_message_link`, `links_message_title`, `links_contact`, `links_created`, `links_datetime`) VALUES
-(9, 'https://www.facebook.com/ZacAlfantaJr/', 'Like us on Facebook', 'https://www.instagram.com/zapropertiesph/', 'Follow us on Instagram', '', 'Message Us', '+63 917 653 1919', '2025-03-17 15:04:45', '2025-03-17 15:27:05');
+(9, 'https://www.facebook.com/ZacAlfantaJr/', 'Like us on Facebook', 'https://www.instagram.com/zapropertiesph/', 'Follow us on Instagram', '', 'Message Us', '+63 917 653 1919', '2025-03-17 15:04:45', '2025-03-19 08:18:27');
 
 -- --------------------------------------------------------
 
@@ -302,7 +302,9 @@ INSERT INTO `zapv1_property_list` (`list_aid`, `list_is_active`, `list_name`, `l
 (10, 1, 'Prime Mixed-Use Property', '203,200,000 (VAT Inclusive)', 'Dasmariñas Technopark, Dasmariñas City, Cavite', '3', 'Building', '4', 'Building for Sale', '', '', '3,000 sqm', '', '', '', 'Multi-Functional Space – Includes two warehouse buildings with a dock bay, office spaces, commercial areas, and residential options.\nFully Equipped – Comes with a generator set for a reliable power supply.\nModern Infrastructure – Designed for mixed-use purposes, ensuring versatility.\nAmple Parking – 26 dedicated parking slots for convenience.\nElevator Access – Enhancing accessibility across floors.', 'Prime Location – Situated in Dasmariñas Technopark, a premier business hub.\nGreat Investment Opportunity – Generates steady rental income from existing tenants.\nVersatile & High-Value – Ideal for businesses, warehouses, and commercial operations.\n Strategic Accessibility – Designed to accommodate diverse business needs efficiently.', '[{\"name\":\"Frontage.jpg\",\"id\":\"1_i7yLNeJU7YraWy8yTOjmL8rlGVph1pK\",\"datetime\":\"2025-03-13 14:34:44\"}]', '2025-03-13 14:34:33', '2025-03-13 14:34:33'),
 (11, 1, 'Prime Southwoods Commercial Lot', '80,000,000 (P100,000/sqm)', 'Binan City', '5', 'Lot', '17', 'Vacant Lot for Sale', '', '', '800 sqm', '', '', '', '', 'Strategic location in Southwoods, Binan City\nIdeal for commercial developments such as offices, retail spaces, or mixed-use projects\nHigh foot traffic area with strong business potential\nCompetitive price in a growing commercial hub\nOnly P100,000 to reserve', '[{\"name\":\"property-3.png\",\"id\":\"1eh0UCjmrvcES2GwOi7IWS1PlvbJq86uj\",\"datetime\":\"2025-03-13 14:38:39\"}]', '2025-03-13 14:38:32', '2025-03-13 14:38:32'),
 (12, 1, 'Premium Fully Furnished Office Floor in Ortigas Center', '165,000,000', 'Wack-Wack Greenhills, Metro Manila near MRT-3 Ortigas', '3', 'Building', '6', 'Commercial for Sale', '', '', '1,110.38 sqm', '', '', '', ' Workstations: Over 311\nReception Area: 1\nConference Rooms: 3\nPantry Areas: 2\nTraining Rooms: 2\nParking Slots: 6', 'Ready-to-use office space, ideal for immediate business operations\nExceptional value for investors seeking to own an entire floor in Ortigas Center\nFully furnished with modern infrastructure: biometric system, CCTV, fiber optic internet, air conditioning system, and power backup generators\nIncludes a boardroom for executive meetings\n24/7 operations allowed\nOpportunity to lease to one or multiple clients', '[{\"name\":\"property-4-a.png\",\"id\":\"19TDpRpXrS5qIrARm2tPH7DZUp6Xj_p67\",\"datetime\":\"2025-03-13 14:42:22\"},{\"name\":\"property-4-b.png\",\"id\":\"1zoKbrFCKM20MTcXbzmgoTc1hoG-WZFdz\",\"datetime\":\"2025-03-13 14:42:25\"},{\"name\":\"property-4-c.png\",\"id\":\"1_XKqgQItmCs09SM69dyw6fAGOIX5JAf8\",\"datetime\":\"2025-03-13 14:42:33\"},{\"name\":\"property-4-d.png\",\"id\":\"1pWcwwMH9oyirNqP012791HbxCcGW6aHf\",\"datetime\":\"2025-03-13 14:42:37\"},{\"name\":\"property-4-e.png\",\"id\":\"1hHOp_83dRdZlq3C05iiBKFyok4IuFRmc\",\"datetime\":\"2025-03-13 14:42:42\"},{\"name\":\"property-4-f.png\",\"id\":\"11ZENsxuOYaogBwVUxeTWt9p_n4MVLon7\",\"datetime\":\"2025-03-13 14:42:46\"},{\"name\":\"property-4.png\",\"id\":\"12kgfqjokMkl2ytTSZFF48uvolPA_EZGD\",\"datetime\":\"2025-03-13 14:42:52\"}]', '2025-03-13 14:42:16', '2025-03-13 14:42:16'),
-(13, 1, 'Prime Lot in Better Living, Parañaque', '22,230,000 (₱39,000/sqm)', 'Better Living Subdivision, Levitown Executive Village Near Eurocampus', '5', 'Lot', '2', 'Available', '', '', '570 sqm', '', '', '', '', 'Exclusive community with ample security\nWide roads for a spacious and convenient environment\nPeaceful and relaxing residential setting\nIdeal for building your dream home or investment property', '[{\"name\":\"property-5.png\",\"id\":\"1PwjppociKlNOhsLr5m1vaRFD_npKAn1M\",\"datetime\":\"2025-03-13 14:47:37\"},{\"name\":\"property-5-a.png\",\"id\":\"1oYgJDTEzILvwUTiz1-EGQAPFnNUrWhcl\",\"datetime\":\"2025-03-13 14:47:43\"},{\"name\":\"property-5-b.png\",\"id\":\"1CMI7ZH-6y7vDzsIstBh3HhclJm55O1Ad\",\"datetime\":\"2025-03-13 14:47:47\"}]', '2025-03-13 14:47:33', '2025-03-13 14:47:33');
+(13, 1, 'Prime Lot in Better Living, Parañaque', '22,230,000 (₱39,000/sqm)', 'Better Living Subdivision, Levitown Executive Village Near Eurocampus', '5', 'Lot', '2', 'Available', '', '', '570 sqm', '', '', '', '', 'Exclusive community with ample security\nWide roads for a spacious and convenient environment\nPeaceful and relaxing residential setting\nIdeal for building your dream home or investment property', '[{\"name\":\"property-5.png\",\"id\":\"1PwjppociKlNOhsLr5m1vaRFD_npKAn1M\",\"datetime\":\"2025-03-13 14:47:37\"},{\"name\":\"property-5-a.png\",\"id\":\"1oYgJDTEzILvwUTiz1-EGQAPFnNUrWhcl\",\"datetime\":\"2025-03-13 14:47:43\"},{\"name\":\"property-5-b.png\",\"id\":\"1CMI7ZH-6y7vDzsIstBh3HhclJm55O1Ad\",\"datetime\":\"2025-03-13 14:47:47\"}]', '2025-03-13 14:47:33', '2025-03-13 14:47:33'),
+(14, 1, 'Test Building', '900000', 'Dolores', '3', 'Building', '2', 'Available', '', '', '', '', '', '', '', '', '[{\"name\":\"20221125-DSC_5774.jpg\",\"id\":\"1cAWVj_-rHxdq_YmF004bXDWrFyHJ3ykm\",\"datetime\":\"2025-03-19 07:36:30\"}]', '2025-03-19 07:36:22', '2025-03-19 14:27:42'),
+(15, 1, 'Test House and Lot', '20,000,000', 'Dolores, Quezon', '1', 'House', '4', 'Building for Sale', '', '', '', '', '', '', '', '', '[{\"name\":\"20230107-DSC_7372.jpg\",\"id\":\"10HfxoeAM7KSukJMzbhWYMb_eGIUNEdX1\",\"datetime\":\"2025-03-19 07:38:18\"},{\"name\":\"20230107-DSC_7383-Edit.jpg\",\"id\":\"1O8vx4kSal_1aDuGauOvEWt-Yhiucatiz\",\"datetime\":\"2025-03-19 07:38:32\"}]', '2025-03-19 07:38:07', '2025-03-19 07:38:07');
 
 -- --------------------------------------------------------
 
@@ -368,6 +370,31 @@ INSERT INTO `zapv1_property_type` (`property_type_aid`, `property_type_is_active
 (2, 1, 'Luxurious House and Lot', 'Private Swimming Pool', '2025-03-04 13:07:10', '2025-03-04 13:07:10'),
 (3, 1, 'Building', '3 storey', '2025-03-05 07:22:57', '2025-03-05 07:22:57'),
 (5, 1, 'Lot', 'Lot', '2025-03-13 14:35:51', '2025-03-13 14:35:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `zapv1_sell`
+--
+
+CREATE TABLE `zapv1_sell` (
+  `sell_aid` int(11) NOT NULL,
+  `sell_title` varchar(100) NOT NULL,
+  `sell_description` text NOT NULL,
+  `sell_button` varchar(50) NOT NULL,
+  `sell_buy_title` varchar(100) NOT NULL,
+  `sell_buy_description` text NOT NULL,
+  `sell_buy_button` varchar(50) NOT NULL,
+  `sell_created` datetime NOT NULL,
+  `sell_datetime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `zapv1_sell`
+--
+
+INSERT INTO `zapv1_sell` (`sell_aid`, `sell_title`, `sell_description`, `sell_button`, `sell_buy_title`, `sell_buy_description`, `sell_buy_button`, `sell_created`, `sell_datetime`) VALUES
+(1, 'Sell my Property', 'Get the best value for your property with expert guidance. List with confidence and sell faster!', 'List my Home', 'Buy a Property', 'Find your dream home or investment with expert guidance. Explore top listings today!', 'See Listing', '2025-03-19 05:46:05', '2025-03-19 12:50:48');
 
 -- --------------------------------------------------------
 
@@ -521,6 +548,12 @@ ALTER TABLE `zapv1_property_type`
   ADD PRIMARY KEY (`property_type_aid`);
 
 --
+-- Indexes for table `zapv1_sell`
+--
+ALTER TABLE `zapv1_sell`
+  ADD PRIMARY KEY (`sell_aid`);
+
+--
 -- Indexes for table `zapv1_settings_role`
 --
 ALTER TABLE `zapv1_settings_role`
@@ -600,7 +633,7 @@ ALTER TABLE `zapv1_notification`
 -- AUTO_INCREMENT for table `zapv1_property_list`
 --
 ALTER TABLE `zapv1_property_list`
-  MODIFY `list_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `list_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `zapv1_property_status`
@@ -613,6 +646,12 @@ ALTER TABLE `zapv1_property_status`
 --
 ALTER TABLE `zapv1_property_type`
   MODIFY `property_type_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `zapv1_sell`
+--
+ALTER TABLE `zapv1_sell`
+  MODIFY `sell_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `zapv1_settings_role`
@@ -630,7 +669,7 @@ ALTER TABLE `zapv1_settings_users`
 -- AUTO_INCREMENT for table `zapv1_testimonial`
 --
 ALTER TABLE `zapv1_testimonial`
-  MODIFY `testimonial_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `testimonial_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -67,7 +67,7 @@ const BlogsTable = ({ setItemEdit }) => {
   let counter = 1;
 
   const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "blogslist" }));
     setItemEdit(item);
   };
 

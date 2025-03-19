@@ -104,7 +104,7 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
               </button>
             </div>
 
-            <div className="md:mx-[10%] lg:mx-[190px] py-[52px] flex flex-col gap-8 ">
+            <div className="md:mx-[10%] lg:mx-[190px] py-[52px] flex flex-col gap-8 relative ">
               {post.blogs_contents_a
                 .split("\n") // Split by new lines
                 .filter((content_a) => content_a.trim() !== "") // Remove empty lines
@@ -124,7 +124,7 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
                 .map((content_b, index) => (
                   <p key={index}>{content_b}</p>
                 ))}
-              <div className="flex flex-wrap gap-4 md:max-w-[850px] place-content-center">
+              <div className="flex flex-wrap gap-4 md:max-w-[850px] place-content-center relative">
                 {blogsImages.slice(1).map((image, index) => (
                   <LoadImages
                     url={`${googleHDViewLink}${image?.id}`}

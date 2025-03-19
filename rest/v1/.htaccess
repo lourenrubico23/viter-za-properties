@@ -77,6 +77,10 @@ RewriteRule ^blogs/search$ controllers/developer/blogs/search.php [L]
 RewriteRule ^contact-form$ controllers/developer/contact-form/contactForm.php [L]
 RewriteRule ^contact-form/([0-9]+)$ controllers/developer/contact-form/contactForm.php?contactformid=$1 [L]
 
+# SELL PROPERTY
+RewriteRule ^sell-property$ controllers/developer/sell-property/sellProperty.php [L]
+RewriteRule ^sell-property/([0-9]+)$ controllers/developer/sell-property/sellProperty.php?sellid=$1 [L]
+
 # NOTIFICATION
 RewriteRule ^receiver$ controllers/developer/notification/receiver/notification.php [L]
 RewriteRule ^receiver/([0-9]+)$ controllers/developer/notification/receiver/notification.php?notificationid=$1 [L]

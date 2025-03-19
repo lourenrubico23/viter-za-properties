@@ -14,7 +14,7 @@ const PropertyType = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "propertytype" }));
     setItemEdit(null);
   };
   return (
@@ -46,7 +46,7 @@ const PropertyType = () => {
         </div>
       </div>
 
-      {store.isAdd && (
+      {store.isAdd?.modal && store.isAdd?.modalCode === "propertytype" && (
         <ModalAddPropertyType itemEdit={itemEdit} />
       )}
       {store.success && <ModalSuccess />}

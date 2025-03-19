@@ -67,7 +67,7 @@ const PropertyTypeTable = ({ setItemEdit }) => {
   let counter = 1;
 
   const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "propertytype" }));
     setItemEdit(item);
   };
 

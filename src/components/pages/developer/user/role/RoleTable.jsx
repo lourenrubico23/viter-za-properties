@@ -69,7 +69,7 @@ const RoleTable = ({ setItemEdit }) => {
   let counter = 1;
 
   const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "role" }));
     setItemEdit(item);
   };
 

@@ -30,7 +30,7 @@ const TestimonialTable = ({ setItemEdit }) => {
   let counter = 1;
 
   const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "clients-review" }));
     setItemEdit(item);
   };
 

@@ -80,11 +80,11 @@ const LinksTable = ({ handleAdd, linksData }) => {
               )}
 
             <a
-              className="absolute cursor-pointer tooltip-header-nav right-0 top-0"
+              className="absolute cursor-pointer tooltip-header-nav right-1 top-2"
               data-tooltip="Edit contents"
               onClick={handleAdd}
             >
-              <HiPencil className=" bg-[#C7AC27] rounded-full  w-[25px] h-[25px] p-[5px] border-[1px]" />
+              <HiPencil className=" bg-[#C7AC27] rounded-full  w-[25px] h-[25px] p-[5px] border-[1px] text-black" />
             </a>
           </div>
         </div>

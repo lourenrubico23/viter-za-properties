@@ -14,7 +14,7 @@ const Notification = () => {
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const handleAdd = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsAdd({ modal: true, modalCode: "notification" }));
     setItemEdit(null);
   };
   return (
@@ -46,7 +46,9 @@ const Notification = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddNotification itemEdit={itemEdit} />}
+      {store.isAdd?.modal && store.isAdd?.modalCode === "notification" && (
+        <ModalAddNotification itemEdit={itemEdit} />
+      )}
       {store.success && <ModalSuccess />}
       {store.error && <ModalError />}
     </>
