@@ -30,7 +30,7 @@ const LogoTable = ({ handleAddNav, logoData }) => {
   return (
     <>
       <div className=" shadow-md overflow-y-auto lg:mb-0  relative">
-        <div className="bg-primary h-[80px] place-content-center sticky top-0 ">
+        <div className="px-8 bg-primary h-[80px] place-content-center sticky top-0 ">
           <div className="customContainer text-light flex justify-between items-center">
             <div className="">
               {logoData?.data.map((item, key) => {

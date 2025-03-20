@@ -102,13 +102,13 @@ const Footer = () => {
             <div className="flex flex-col gap-4">
               <a
                 className="btn border-none hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80] md:w-[185px] "
-                href={`${devNavUrl}/Properties`}
+                href={`${devNavUrl}/properties`}
               >
                 View Listing
               </a>
               <a
                 className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]"
-                href={`${devNavUrl}/Sellers`}
+                href={`${devNavUrl}/sellers`}
               >
                 List my Home
               </a>

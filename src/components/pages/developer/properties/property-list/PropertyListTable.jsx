@@ -200,11 +200,15 @@ const PropertyListTable = ({ setItemEdit }) => {
                       <td className="place-content-start">
                         {item.list_carport}
                       </td>
-                      <td className="place-content-start">
-                        {item.list_key_features}
+                      <td className="place-content-start ">
+                        <p className="line-clamp-5 text-xs">
+                          {item.list_key_features}
+                        </p>
                       </td>
                       <td className="place-content-start">
-                        {item.list_best_buy}
+                        <p className="line-clamp-5 text-xs">
+                          {item.list_best_buy}
+                        </p>
                       </td>
                       <td className="place-content-start ">
                         <p className="line-clamp-5 ">

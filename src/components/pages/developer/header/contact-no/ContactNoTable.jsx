@@ -30,7 +30,7 @@ const ContactNoTable = ({
     <>
       <div className=" shadow-md overflow-y-auto max-h-[calc(100dvh-250px)] md:max-h-[calc(100dvh-240px)] lg:max-h-[calc(100dvh-210px)] mt-5 mb-10 lg:mb-0  relative">
         {isFetching && !isLoading && <FetchingSpinner />}
-        <div className="bg-primary py-12">
+        <div className="px-8 bg-primary py-12">
           <div className="customContainer text-light">
             <div className="flex flex-col md:flex md:flex-row gap-7 lg:gap-0 justify-between border-b-2 pb-7">
               <div className="">

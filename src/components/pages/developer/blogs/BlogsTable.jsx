@@ -176,16 +176,24 @@ const BlogsTable = ({ setItemEdit }) => {
                         {`${formatDate(item.blogs_published_date)}`}
                       </td>
                       <td className="place-content-start">
-                        {item.blogs_brief_description}
+                        <p className="line-clamp-5 text-xs">
+                          {item.blogs_brief_description}
+                        </p>
                       </td>
                       <td className="place-content-start">
-                        {item.blogs_contents_a}
+                        <p className="line-clamp-5 text-xs">
+                          {item.blogs_contents_a}
+                        </p>
                       </td>
                       <td className="place-content-start">
-                        {item.blogs_contents_b}
+                        <p className="line-clamp-5 text-xs">
+                          {item.blogs_contents_b}
+                        </p>
                       </td>
                       <td className="place-content-start">
-                        {item.blogs_contents_c}
+                        <p className="line-clamp-5 text-xs">
+                          {item.blogs_contents_c}
+                        </p>
                       </td>
                       <td className="place-content-start">
                         <p className="line-clamp-5">
