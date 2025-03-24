@@ -33,7 +33,7 @@ const UserVerifyEmail = () => {
           <div className="max-w-[340px] w-full p-4 py-5 rounded-md">
             <div className="relative flex gap-2 justify-center mb-5">
               <img
-                src={`${devBaseImgUrl}/za-logo-black.png `}
+                src={`${devBaseImgUrl}/za-properties-logo.png `}
                 alt=""
                 className="w-[100px] h-[100px]"
               />

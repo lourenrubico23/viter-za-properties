@@ -1,0 +1,6 @@
+Upload JSX
+
+    Image:
+        -> upload public/img/za-properties-logo.png
+
+    

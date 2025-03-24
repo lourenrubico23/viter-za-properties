@@ -87,7 +87,7 @@ const OtherUserLogin = () => {
           <div className="w-96 p-6">
             <div className="relative flex gap-2 justify-center ">
               <img
-                src={`${devBaseImgUrl}/za-logo-black.png `}
+                src={`${devBaseImgUrl}/za-properties-logo.png `}
                 alt=""
                 className="w-[100px] h-[100px]"
               />
