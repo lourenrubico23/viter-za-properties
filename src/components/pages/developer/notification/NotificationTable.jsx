@@ -224,28 +224,28 @@ const NotificationTable = ({ setItemEdit }) => {
       {store.isDelete && (
         <ModalDelete
           setIsDelete={setIsDelete}
-          queryKey={"notification"}
-          mysqlEndpoint={`${devApiVersion}/notification/${id}`}
+          queryKey={"receiver"}
+          mysqlEndpoint={`${devApiVersion}/receiver/${id}`}
           item={isData}
         />
       )}
       {store.isArchive && (
         <ModalArchive
           setIsArchive={setIsArchive}
-          mysqlEndpoint={`${devApiVersion}/notification/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/receiver/active/${id}`}
           // msg={"Are you sure you want to archive this property type?"}
           successMsg={"Archived succesfully."}
-          queryKey={"notification"}
+          queryKey={"receiver"}
           item={isData}
         />
       )}
       {store.isRestore && (
         <ModalRestore
           setIsRestore={setIsRestore}
-          mysqlEndpoint={`${devApiVersion}/notification/active/${id}`}
+          mysqlEndpoint={`${devApiVersion}/receiver/active/${id}`}
           // msg={"Are you sure you want to restore this property type?"}
           successMsg={"Restored succesfully."}
-          queryKey={"notification"}
+          queryKey={"receiver"}
           item={isData}
         />
       )}
