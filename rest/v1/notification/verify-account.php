@@ -17,9 +17,9 @@ function sendEmail($password_link, $name, $email, $key)
 	try {
 		$mail = new PHPMailer(true);
 		$mail->isSMTP();
-		$mail->Host = 'mail.frontlinebusiness.com.ph'; // SiteGround
-		$mail->Port = 465;
-		$mail->SMTPSecure = "ssl";
+		$mail->Host = HOST; // SiteGround
+		$mail->Port = PORT;
+		$mail->SMTPSecure = SMTPSECURE;
 		$mail->SMTPAuth = true;
 		$mail->Username =  USERNAME; // if gmail use your gmail email
 		$mail->Password = PASSWORD; // if gmail use your email password

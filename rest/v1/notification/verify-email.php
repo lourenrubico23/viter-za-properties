@@ -17,9 +17,9 @@ function sendEmailVerify($link, $name, $email_old, $email, $key)
 	try {
 		$mail = new PHPMailer(true);
 		$mail->isSMTP();
-		$mail->Host = 'mail.frontlinebusiness.com.ph'; // if siteground
-		$mail->Port = 465;
-		$mail->SMTPSecure = "ssl";
+		$mail->Host = HOST; // if siteground
+		$mail->Port = PORT;
+		$mail->SMTPSecure = SMTPSECURE;
 		// $mail->Host = 'smtp.gmail.com'; // if gmail use smtp.gmail.com
 		// $mail->Port = 587;
 		// $mail->SMTPSecure = "tls";
