@@ -25,9 +25,9 @@ function sendEmail(
 		$mail = new PHPMailer(true);
 		$mail->CharSet = "UTF-8";
 		$mail->isSMTP();
-		$mail->Host = 'mail.frontlinebusiness.com.ph';
-		$mail->Port = 465;
-		$mail->SMTPSecure = "ssl";
+		$mail->Host = HOST;
+		$mail->Port = PORT;
+		$mail->SMTPSecure = SMTPSECURE;
 		// $mail->Host = 'smtp.gmail.com'; // if gmail use smtp.gmail.com
 		// $mail->Port = 587;
 		// $mail->SMTPSecure = "tls";
