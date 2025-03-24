@@ -31,7 +31,7 @@ export const googleHDViewLink = "https://lh3.googleusercontent.com/d/";
 export const googleViewLink = "https://drive.google.com/file/d/";
 
 // reCAPTCHA site key PRODUCTION
-export const siteKey = "";
+export const siteKey = "6LfBpvEqAAAAAJnYSgtF_Cy-uQNNw50qHmAaiALG";
 
 // get focus on a button
 export const GetFocus = (id) => {
