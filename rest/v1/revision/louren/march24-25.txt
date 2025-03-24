@@ -2,5 +2,6 @@ Upload JSX
 
     Image:
         -> upload public/img/za-properties-logo.png
+        -> upload public/img/za-properties-logo-email.png
 
     

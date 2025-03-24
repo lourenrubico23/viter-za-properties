@@ -5,7 +5,7 @@ import React from "react";
 // const urlZAPropertiesImg =
 //   "http://localhost/react-vite/viter-za-properties/public/img";
 
- //Online Demo url
+//Online Demo url
 export const urlZAProperties = "https://zacalfanta.com";
 export const urlZAPropertiesImg = "https://zacalfanta.com/img";
 
