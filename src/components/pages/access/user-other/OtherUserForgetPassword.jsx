@@ -48,7 +48,7 @@ const OtherUserForgetPassword = () => {
         <div className="w-96 p-6">
           <div className="flex justify-center gap-2">
             <img
-              src={`${devBaseImgUrl}/za-logo-black.png `}
+              src={`${devBaseImgUrl}/za-properties-logo.png `}
               alt=""
               className="w-[100px] h-[100px]"
             />

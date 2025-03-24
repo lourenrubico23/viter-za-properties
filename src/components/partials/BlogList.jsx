@@ -81,7 +81,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
             return (
               <div
                 key={index}
-                className="group hover:border-secondary hover:scale-[1.01] hover:duration-200 max-w-[372px] min-h-[555px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
+                className="group hover:border-secondary hover:scale-[1.01] hover:duration-200 md:max-w-[372px] md:min-w-[372px] md:min-h-[555px] max-w-[320px] min-w-[320px] min-h-[500px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
               >
                 <div className="overflow-hidden relative">
                   {firstImage && (
@@ -122,8 +122,11 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
         {pageType === "Blogs" && (
           <div className="place-self-center">
             {hasMoreProperties ? (
-              <button className="btn" onClick={handleLoadMore}>
-                Load More Blogs
+              <button
+                className="text-sm font-semibold"
+                onClick={handleLoadMore}
+              >
+                Load more blogs
               </button>
             ) : (
               <p className="text-gray-400 text-base">No more blogs to show</p>

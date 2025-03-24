@@ -185,8 +185,11 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
         {pageType === "properties" && (
           <div className="place-self-center my-7">
             {hasMoreProperties ? (
-              <button className="btn" onClick={handleLoadMore}>
-                Load More
+              <button
+                className="text-sm font-semibold"
+                onClick={handleLoadMore}
+              >
+                Load more
               </button>
             ) : (
               <p className="text-gray-400 text-base">
