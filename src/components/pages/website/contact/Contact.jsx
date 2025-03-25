@@ -58,7 +58,7 @@ const Contact = () => {
                       </div>
                     )}
 
-                    <h1 className="text-[clamp(20px,3vw,34px)] md:w-[850px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
+                    <h1 className="px-2 lg:px-0 text-[clamp(20px,3vw,34px)] md:w-[850px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[110px] lg:mt-[84px] ">
                       {item.banner_title}
                     </h1>
                   </div>

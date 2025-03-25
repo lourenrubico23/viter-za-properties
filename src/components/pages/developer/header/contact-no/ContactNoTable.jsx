@@ -101,7 +101,7 @@ const ContactNoTable = ({
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <a className="btn border-none hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80] md:w-[185px] ">
+                <a className="btn border-none hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80] md:w-[185px] place-self-center">
                   View Listing
                 </a>
                 <a className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]">
