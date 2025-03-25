@@ -28,7 +28,7 @@ const Buyers = () => {
         <div className="wrapper">
           <Navigation />
           <div className=" relative md:flex justify-center lg:min-h-[420px] w-full">
-          {isLoadingBanner && <Loader />}
+            {isLoadingBanner && <Loader />}
             {bannerData?.data.map((item, key) => {
               if (item.banner_page === "Buyers") {
                 const bannerImage =
@@ -58,7 +58,7 @@ const Buyers = () => {
                       </div>
                     )}
 
-                    <h1 className="text-[clamp(20px,3vw,34px)] md:w-[687px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[120px] lg:mt-[84px] ">
+                    <h1 className="px-2 lg:px-0 text-[clamp(20px,3vw,34px)] md:w-[687px] md:mx-[15%] text-center font-hindBold absolute top-0 md:mt-[10%] mt-[110px] lg:mt-[84px] ">
                       {item.banner_title}
                     </h1>
                   </div>

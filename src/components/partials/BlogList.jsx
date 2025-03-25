@@ -100,7 +100,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
                   <p className="text-[16px]">{item.blogs_brief_description}</p>
                 </div>
                 <Link
-                  className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0 mb-5"
+                  className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] mb-5"
                   to={`${devNavUrl}/blogs/${generateSlug(item.blogs_title)}`}
                 >
                   Read More
