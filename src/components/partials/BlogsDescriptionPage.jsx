@@ -104,7 +104,7 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
               </button>
             </div>
 
-            <div className="md:mx-[10%] lg:mx-[190px] py-[52px] flex flex-col gap-8 relative ">
+            <div className="md:mx-[10%] lg:mx-[190px] py-[52px] flex flex-col gap-8 relative text-justify ">
               {post.blogs_contents_a
                 .split("\n") // Split by new lines
                 .filter((content_a) => content_a.trim() !== "") // Remove empty lines
@@ -159,7 +159,7 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
               <BlogList pageType="blogSinglePage" currentBlogSlug={slug} />
             </div>
 
-            <ContactForm pageType={"Blogs"} />
+            {/* <ContactForm pageType={"Blogs"} /> */}
           </div>
           <Footer />
         </div>

@@ -7,7 +7,7 @@ import useQueryData from "../../../custom-hooks/useQueryData";
 import {
   devApiVersion,
   getConvertStringToJSONparseData,
-  googleHDViewLink
+  googleHDViewLink,
 } from "../../../helpers/functions-general";
 import LoadImages from "../../../partials/LoadImages";
 import PropertyDescriptionPage from "../../../partials/PropertyDescriptionPage";
@@ -82,7 +82,7 @@ const PropertiesList = ({ pageType }) => {
                   onClick={() => handleOpenDescription(item)}
                   key={key}
                 >
-                  <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform">
+                  <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform relative">
                     <div className="overflow-hidden">
                       {firstImage && (
                         <LoadImages
@@ -93,10 +93,12 @@ const PropertiesList = ({ pageType }) => {
                         />
                       )}
                     </div>
-
+                    <div className="bg-primary/90 text-white absolute top-2  p-1 px-2">
+                      <span>{item.list_property_status_name}</span>
+                    </div>
                     <div className="p-5 flex flex-col gap-5">
                       {item.list_price && (
-                        <p className="text-[clamp(20px,3vw,28px)] font-robotoBold">
+                        <p className="text-[clamp(20px,3vw,24px)] font-robotoBold">
                           <span className="text-lg">&#8369;</span>{" "}
                           {item.list_price}
                         </p>
@@ -161,8 +163,6 @@ const PropertiesList = ({ pageType }) => {
           </div>
         )}
       </div>
-
-      
 
       {store.isAdd?.modal && store.isAdd?.modalCode === "propertyDesc" && (
         <PropertyDescriptionPage

@@ -130,7 +130,7 @@ const PropertyContactUsTable = ({
                       <Form>
                         <div>
                           <div className="flex flex-col ">
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Full Name"
@@ -138,7 +138,7 @@ const PropertyContactUsTable = ({
                                 name="client_name"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Email Address"
@@ -146,7 +146,7 @@ const PropertyContactUsTable = ({
                                 name="client_email"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Mobile Number"
@@ -154,7 +154,7 @@ const PropertyContactUsTable = ({
                                 name="client_phone"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Best Time To Call"
@@ -162,7 +162,7 @@ const PropertyContactUsTable = ({
                                 name="client_time_to_call"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputTextAreaContactForm
                                 type="text"
                                 placeholder="Message"
@@ -171,7 +171,7 @@ const PropertyContactUsTable = ({
                               />
                             </div>
                             {siteKey ? (
-                              <div className="input-wrapper reCaptcha">
+                              <div className="input-wrapper !my-3 reCaptcha">
                                 <ReCAPTCHA
                                   sitekey={siteKey}
                                   onChange={(e) => handleChange(e)}

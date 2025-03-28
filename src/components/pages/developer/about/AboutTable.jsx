@@ -37,7 +37,7 @@ const AboutTable = ({
                     key={index}
                   />
                 ))}
-                <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4">
+                <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4 text-justify">
                   <h1 className="text-[clamp(30px,3vw,71px)] font-hindBold">
                     {item.about_name}
                     <a
@@ -57,7 +57,7 @@ const AboutTable = ({
                       <LoadImages
                         url={`${googleHDViewLink}${image?.id}`}
                         alt={`${item.about_name}`}
-                        className="w-[60px] md:w-[70px] md:h-[85px] object-cover"
+                        className="w-full md:w-full md:h-[85px] object-cover"
                         key={index}
                       />
                     ))}

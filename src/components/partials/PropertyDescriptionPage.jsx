@@ -41,10 +41,16 @@ const PropertyDescriptionPage = ({
   // State to store the currently selected preview image
   const [previewImg, setPreviewImg] = React.useState("");
 
-  const { data: contactNoData } = useQueryData(
-    `${devApiVersion}/contactno`, // endpoint
+  const { data: linksData } = useQueryData(
+    `${devApiVersion}/links`, // endpoint
     "get", // method
-    "contactno" // key
+    "links" // key
+  );
+
+  const { data: logoData } = useQueryData(
+    `${devApiVersion}/logo`, // endpoint
+    "get", // method
+    "logo" // key
   );
 
   const handleImageClick = (url) => {
@@ -113,6 +119,8 @@ const PropertyDescriptionPage = ({
             filteredProperties.map((item, key) => {
               const propertyImages =
                 getConvertStringToJSONparseData(item.list_img) || [];
+              const logoImage =
+                getConvertStringToJSONparseData(item.logo_image) || [];
 
               return (
                 <div className="p-4" key={key}>
@@ -122,7 +130,7 @@ const PropertyDescriptionPage = ({
 
                   <div className="flex flex-col md:flex md:flex-row gap-4">
                     {/* Preview Image */}
-                    <div className="h-[200px] min-w-[265px] md:h-[480px] md:min-w-[650px] md:max-w-[700px] lg:min-w-[956px] lg:h-[513px]">
+                    <div className="h-[200px] min-w-[265px] md:h-[480px] md:min-w-[650px] md:max-w-[700px] lg:min-w-[956px] lg:h-[513px] ">
                       {previewImg && (
                         <LoadImages
                           url={previewImg}
@@ -258,7 +266,7 @@ const PropertyDescriptionPage = ({
 
                   <div className="flex flex-col gap-6 md:flex md:flex-row md:gap-40 py-5">
                     {item.list_key_features && (
-                      <div className="flex flex-col gap-5 ">
+                      <div className="flex flex-col gap-5 md:w-[50%]">
                         <p className="title text-lg font-hindBold">
                           Key Features:
                         </p>
@@ -267,13 +275,15 @@ const PropertyDescriptionPage = ({
                             .split("\n") // Split by new lines
                             .filter((feature) => feature.trim() !== "") // Remove empty lines
                             .map((feature, index) => (
-                              <li key={index}>- {feature}</li>
+                              <li key={index} className="text-sm">
+                                - {feature}
+                              </li>
                             ))}
                         </ul>
                       </div>
                     )}
                     {item.list_best_buy && (
-                      <div className="flex flex-col gap-5">
+                      <div className="flex flex-col gap-5 md:w-[50%]">
                         <p className="title text-lg font-hindBold">
                           Why This Property is a Best Buy:
                         </p>
@@ -282,20 +292,23 @@ const PropertyDescriptionPage = ({
                             .split("\n") // Split by new lines
                             .filter((best) => best.trim() !== "") // Remove empty lines
                             .map((best, index) => (
-                              <li key={index} className="flex gap-1">
-                                <Check className="text-secondary h-5" /> {best}
+                              <li key={index} className="flex gap-1 ">
+                                <div>
+                                  <Check className="text-secondary h-5" />
+                                </div>{" "}
+                                <span className="text-sm">{best}</span>
                               </li>
                             ))}
                         </ul>
                         <p className="title text-lg font-hindBold">
                           Your next investment, contact us.
                         </p>
-                        {contactNoData?.data.map((item, key) => (
+                        {linksData?.data.map((item, key) => (
                           <p
                             className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
                             key={key}
                           >
-                            {item.contact_no_contact}
+                            {item.links_contact}
                           </p>
                         ))}
 

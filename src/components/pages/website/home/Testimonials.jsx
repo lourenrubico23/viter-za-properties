@@ -91,7 +91,7 @@ const Testimonials = () => {
         <div className="customContainer overflow-hidden py-16 md:py-24">
           <div className="flex flex-row justify-between items-center">
             <h2 className="text-[clamp(20px,3vw,34px)] text-beige font-hindBold md:flex gap-4">
-              Client Reviews
+              Clients Review
               <span className="text-yellow-400 flex gap-2">
                 <IoStarSharp />
                 <IoStarSharp />
@@ -105,7 +105,7 @@ const Testimonials = () => {
           <Slider {...settings}>
             {testimonialData?.data.map((item, key) => (
               <div className=" text-light mt-20 flex flex-col gap-5" key={key}>
-                <div className="flex flex-col gap-5 max-w-[527px] px-7 lg:px-4">
+                <div className="flex flex-col gap-5 max-w-[527px] px-7 lg:px-4 text-justify">
                   <p className="text-[clamp(16px,3vw,24px)] font-hindBold">
                     {item.testimonial_name}
                   </p>

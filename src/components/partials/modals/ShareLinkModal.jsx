@@ -65,7 +65,7 @@ const ShareLinkModal = ({
               <p>{propertyLink}</p>
             </div>
             <button
-              className="btn  !py-0 !text-sm !h-[35px] !px-[20px] "
+              className="btn  !py-0 !text-sm !h-[35px] !px-[20px] w-[150px] place-self-center "
               onClick={handleCopyLink}
             >
               {copied ? "Copied!" : "Copy Link"}

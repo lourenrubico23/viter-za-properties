@@ -74,7 +74,7 @@ const ContactNoTable = ({
                   <p className="text-lg font-poppins font-bold uppercase">
                     Property List
                   </p>
-                  <ul className="[&>li]:font-poppins [&>li]:text-xs flex flex-col gap-2">
+                  <ul className="[&>li]:font-poppins [&>li]:text-sm flex flex-col gap-2">
                     {propertyTypeData?.data.map((item, key) => (
                       <li key={key}>{item.property_type_name}</li>
                     ))}
@@ -91,7 +91,7 @@ const ContactNoTable = ({
                   </p>
                   {contactNoData?.data.map((item, key) => (
                     <ul
-                      className="[&>li]:font-poppins [&>li]:text-xs flex flex-col gap-2"
+                      className="[&>li]:font-poppins [&>li]:text-sm flex flex-col gap-2"
                       key={key}
                     >
                       <li>{item.contact_no_email}</li>
