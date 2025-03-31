@@ -11,11 +11,13 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Mail,
   MapPin,
   Smartphone,
 } from "lucide-react";
-import { siteKey } from "../../../../helpers/functions-general";
+import { devApiVersion, siteKey } from "../../../../helpers/functions-general";
 import { HiPencil } from "react-icons/hi";
+import useQueryData from "../../../../custom-hooks/useQueryData";
 
 const HomeContactUsTable = ({
   handleAddContactForm,
@@ -25,6 +27,12 @@ const HomeContactUsTable = ({
   linksData,
   pageType,
 }) => {
+  const { data: contactNoData } = useQueryData(
+    `${devApiVersion}/contactno`, // endpoint
+    "get", // method
+    "contactno" // key
+  );
+
   return (
     <>
       <div className=" py-12 mb-10 lg:mb-0  relative">
@@ -65,10 +73,15 @@ const HomeContactUsTable = ({
                             ))}
                           </li>
                           <li>
-                            <MapPin className="fill-beige" />
-                            <p className="text-[16px] font-hindRegular">
-                              {item.form_address}
-                            </p>
+                            <Mail className="fill-beige" />
+                            {contactNoData?.data.map((item, key) => (
+                              <p
+                                className="text-[16px] font-hindRegular"
+                                key={key}
+                              >
+                                {item.contact_no_email}
+                              </p>
+                            ))}
                           </li>
                           <li>
                             <Facebook className="fill-beige" />
@@ -176,6 +189,19 @@ const HomeContactUsTable = ({
                                 There's a problem loading recaptcha.
                               </p>
                             )}
+                            <p className="text-xs">Privacy Disclaimer:</p>
+                            {contactFormData?.data.map((item, key) => {
+                              if (
+                                item.form_page === "Home" &&
+                                pageType === "Home"
+                              ) {
+                                return (
+                                  <p className="text-xs" key={key}>
+                                    {item.form_contact_disclaimer}
+                                  </p>
+                                );
+                              }
+                            })}
                           </div>
                           <div className=" flex justify-end !place-self-start">
                             <button

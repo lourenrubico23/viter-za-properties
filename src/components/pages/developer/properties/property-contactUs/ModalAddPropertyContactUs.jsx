@@ -64,6 +64,8 @@ const ModalAddPropertyContactUs = ({ itemEdit, contactFormData }) => {
     form_description: contactFormData?.data?.[1]?.form_description ?? "",
     form_contact_description:
       contactFormData?.data?.[1]?.form_contact_description ?? "",
+    form_contact_disclaimer:
+      contactFormData?.data?.[1]?.form_contact_disclaimer ?? "",
   };
 
   const yupSchema = Yup.object({
@@ -112,7 +114,8 @@ const ModalAddPropertyContactUs = ({ itemEdit, contactFormData }) => {
                           type="text"
                           name="form_page"
                           disabled={
-                            mutation.isPending || initVal.form_page === "Properties"
+                            mutation.isPending ||
+                            initVal.form_page === "Properties"
                           }
                         >
                           <option value="" disabled>
@@ -171,15 +174,7 @@ const ModalAddPropertyContactUs = ({ itemEdit, contactFormData }) => {
                           disabled={mutation.isPending}
                         />
                       </div>
-                      <div className="input-wrapper">
-                        <InputTextArea
-                          label="Address"
-                          type="text"
-                          name="form_address"
-                          className="text-xs"
-                          disabled={mutation.isPending}
-                        />
-                      </div>
+
                       <div className="input-wrapper">
                         <InputTextArea
                           label="Description"
@@ -195,6 +190,15 @@ const ModalAddPropertyContactUs = ({ itemEdit, contactFormData }) => {
                           type="text"
                           name="form_contact_description"
                           className="text-xs"
+                          disabled={mutation.isPending}
+                        />
+                      </div>
+                      <div className="input-wrapper">
+                        <InputTextArea
+                          label="Disclaimer"
+                          type="text"
+                          name="form_contact_disclaimer"
+                          className="text-xs mb-16"
                           disabled={mutation.isPending}
                         />
                       </div>

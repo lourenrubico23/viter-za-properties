@@ -34,6 +34,7 @@ import useQueryData from "../../../../custom-hooks/useQueryData";
 import TableSpinner from "../../../../partials/spinners/TableSpinner";
 import ServerError from "../../../../partials/spinners/ServerError";
 import NoData from "../../../../partials/spinners/NoData";
+import axios from "axios";
 
 const ModalAddPropertyList = ({ itemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -65,6 +66,25 @@ const ModalAddPropertyList = ({ itemEdit }) => {
   const [propertyStatusId, setPropertyStatusId] = React.useState(
     itemEdit ? itemEdit.list_property_status_id : ""
   );
+
+  const [cities, setCities] = React.useState([]);
+  const [selectedCity, setSelectedCity] = React.useState("");
+
+  React.useEffect(() => {
+    //  URL API endpoint for Philippine cities
+    axios
+      .get("https://psgc.gitlab.io/api/cities/")
+      .then((response) => {
+        setCities(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching cities:", error);
+      });
+  }, []);
+
+  const handleCityChange = (e) => {
+    setSelectedCity(e.target.value);
+  };
 
   // multiple files
   const {
@@ -287,6 +307,7 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     list_name: itemEdit ? itemEdit.list_name : "",
     list_price: itemEdit ? itemEdit.list_price : "",
     list_location: itemEdit ? itemEdit.list_location : "",
+    list_city: itemEdit ? itemEdit.list_city : "",
     list_property_type_id: itemEdit ? itemEdit.list_property_type_id : "",
     list_property_type_name: itemEdit ? itemEdit.list_property_type_name : "",
     list_property_status_id: itemEdit ? itemEdit.list_property_status_id : "",
@@ -472,6 +493,27 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                             className="text-xs"
                             disabled={mutation.isPending}
                           />
+                        </div>
+                        <div className="input-wrapper">
+                          <InputSelect
+                            label="City"
+                            name="list_city"
+                            value={selectedCity}
+                            onChange={handleCityChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-primary focus:border-primary text-xs"
+                            disabled={mutation.isPending || cities.length === 0}
+                          >
+                            <option value="" disabled>
+                              {cities.length === 0
+                                ? "Loading cities..."
+                                : "Select a city"}
+                            </option>
+                            {cities.map((city) => (
+                              <option key={city.id} value={city.name}>
+                                {city.name}{" "}
+                              </option>
+                            ))}
+                          </InputSelect>
                         </div>
                         <div className="input-wrapper">
                           <InputText

@@ -175,13 +175,13 @@ const RoleTable = ({ setItemEdit }) => {
                           >
                             <FaEdit className="text-gray-600 text-[16px]" />
                           </button>
-                          <button
+                          {/* <button
                             className="tooltip-action-table"
                             data-tooltip="Archive"
                             onClick={() => handleArchive(item)}
                           >
                             <FaArchive className=" text-gray-600 text-[14px]" />
-                          </button>
+                          </button> */}
                         </>
                       ) : (
                         <>

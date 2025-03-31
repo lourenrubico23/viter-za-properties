@@ -631,14 +631,26 @@ const ContactForm = ({ pageType }) => {
                             </p>
                           )}
                           <p className="text-xs">Privacy Disclaimer:</p>
-                          <p className="text-xs">
-                            By submitting your information on zacalfanta.com,
-                            you agree to be contacted via SMS, call, or email
-                            regarding real estate inquires. Your personal
-                            information will be kept confidential and will not
-                            be sold, shared, or disclosed to any third party
-                            without your consent, except as required by law.
-                          </p>
+                          {contactFormData?.data.map((item, key) => {
+                            if (
+                              (item.form_page === "Home" &&
+                                pageType === "Home") ||
+                              (item.form_page === "Properties" &&
+                                pageType === "Properties") ||
+                              (item.form_page === "Buyers" &&
+                                pageType === "Buyers") ||
+                              (item.form_page === "Sellers" &&
+                                pageType === "Sellers") ||
+                              (item.form_page === "Contact" &&
+                                pageType === "Contact")
+                            ) {
+                              return (
+                                <p className="text-xs" key={key}>
+                                  {item.form_contact_disclaimer}
+                                </p>
+                              );
+                            }
+                          })}
                         </div>
                         <div className=" flex justify-end !place-self-start">
                           <button

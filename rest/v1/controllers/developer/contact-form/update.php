@@ -27,6 +27,7 @@ if (array_key_exists("contactformid", $_GET)) {
     $contact_form->form_address = $data["form_address"];
     $contact_form->form_description = $data["form_description"];
     $contact_form->form_contact_description = $data["form_contact_description"];
+    $contact_form->form_contact_disclaimer = $data["form_contact_disclaimer"];
     $contact_form->form_datetime = date("Y-m-d H:i:s");
     checkId($contact_form->form_aid);
 

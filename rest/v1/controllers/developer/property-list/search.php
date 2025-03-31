@@ -26,23 +26,23 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 
     if ($data["isFilter"]) {
         $list->list_property_status_id = $data["list_property_status_id"];
-        $list->list_location = $data["list_location"];
+        $list->list_city = $data["list_city"];
         $list->list_property_type_id = $data["list_property_type_id"];
 
         // filter by search, property status, location and property type
-        if ($list->list_property_type_id != "" && $list->list_location != "" && $list->list_property_status_id != "" && $list->list_search != "") {
+        if ($list->list_property_type_id != "" && $list->list_city != "" && $list->list_property_status_id != "" && $list->list_search != "") {
             $query = checkfilterBySearchStatusAndLocationAndPropertyType($list);
             http_response_code(200);
             getQueriedData($query);
         }
         // filter by property status, location and property type
-        if ($list->list_property_type_id != "" && $list->list_location != "" && $list->list_property_status_id != "") {
+        if ($list->list_property_type_id != "" && $list->list_city != "" && $list->list_property_status_id != "") {
             $query = checkFilterByPropertyStatusAndLocationAndPropertyType($list);
             http_response_code(200);
             getQueriedData($query);
         }
         // filter by search, location and property type
-        if ($list->list_property_type_id != "" && $list->list_location != "" && $list->list_search != "") {
+        if ($list->list_property_type_id != "" && $list->list_city != "" && $list->list_search != "") {
             $query = checkFilterBySearchLocationAndPropertyType($list);
             http_response_code(200);
             getQueriedData($query);
@@ -54,7 +54,7 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             getQueriedData($query);
         }
         // filter by search, property status and location
-        if ($list->list_search != "" && $list->list_property_status_id != "" && $list->list_location != "") {
+        if ($list->list_search != "" && $list->list_property_status_id != "" && $list->list_city != "") {
             $query = checkFilterBySearchStatusAndLocation($list);
             http_response_code(200);
             getQueriedData($query);
@@ -66,7 +66,7 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             getQueriedData($query);
         }
         // filter by search and location
-        if ($list->list_search != "" && $list->list_location != "") {
+        if ($list->list_search != "" && $list->list_city != "") {
             $query = checkSearchAndLocation($list);
             http_response_code(200);
             getQueriedData($query);
@@ -78,13 +78,13 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             getQueriedData($query);
         }
         // filter by property status and location
-        if ($list->list_property_status_id != "" && $list->list_location != "") {
+        if ($list->list_property_status_id != "" && $list->list_city != "") {
             $query = checkFilterByPropertyStatusAndLocation($list);
             http_response_code(200);
             getQueriedData($query);
         }
         // filter by location and property type
-        if ($list->list_property_type_id != "" && $list->list_location != "") {
+        if ($list->list_property_type_id != "" && $list->list_city != "") {
             $query = checkFilterByLocationAndPropertyType($list);
             http_response_code(200);
             getQueriedData($query);
@@ -102,7 +102,7 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             getQueriedData($query);
         }
         // filter by location
-        if ($list->list_location != "") {
+        if ($list->list_city != "") {
             $query = checkFilterByLocation($list);
             http_response_code(200);
             getQueriedData($query);

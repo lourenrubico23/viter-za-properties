@@ -99,7 +99,7 @@ const Home = () => {
           isFilter,
           list_property_status_id:
             propertyStatusData === "all" ? "" : propertyStatusData,
-          list_location: location === "all" ? "" : location,
+          list_city: location === "all" ? "" : location,
           list_property_type_id: propertyType === "all" ? "" : propertyType,
         }, // search value
         "post"
@@ -257,7 +257,7 @@ const Home = () => {
 
                     {[
                       ...new Set(
-                        propertyListData?.data.map((item) => item.list_location) // to prevent the duplicate of location
+                        propertyListData?.data.map((item) => item.list_city) // to prevent the duplicate of location
                       ),
                     ].map((location, key) => (
                       <option key={key} value={location}>

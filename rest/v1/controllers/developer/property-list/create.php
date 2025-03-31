@@ -15,6 +15,7 @@ $list->list_property_status_id = checkIndex($data, "list_property_status_id");
 $list->list_property_status_name = checkIndex($data, "list_property_status_name");
 $list->list_price = checkIndex($data, "list_price");
 $list->list_location = $data["list_location"];
+$list->list_city = $data["list_city"];
 $list->list_id = $data["list_id"];
 $list->list_floor_area = $data["list_floor_area"];
 $list->list_lot_area = $data["list_lot_area"];

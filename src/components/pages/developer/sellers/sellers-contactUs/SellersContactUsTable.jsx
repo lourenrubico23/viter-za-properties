@@ -11,6 +11,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Mail,
   MapPin,
   Smartphone,
 } from "lucide-react";
@@ -24,6 +25,7 @@ const SellersContactUsTable = ({
   isLoading,
   linksData,
   pageType,
+  contactNoData,
 }) => {
   return (
     <>
@@ -65,10 +67,15 @@ const SellersContactUsTable = ({
                             ))}
                           </li>
                           <li>
-                            <MapPin className="fill-beige" />
-                            <p className="text-[16px] font-hindRegular">
-                              {item.form_address}
-                            </p>
+                            <Mail className="fill-beige" />
+                            {contactNoData?.data.map((item, key) => (
+                              <p
+                                className="text-[16px] font-hindRegular"
+                                key={key}
+                              >
+                                {item.contact_no_email}
+                              </p>
+                            ))}
                           </li>
                           <li>
                             <Facebook className="fill-beige" />
@@ -179,6 +186,19 @@ const SellersContactUsTable = ({
                                 There's a problem loading recaptcha.
                               </p>
                             )}
+                            <p className="text-xs">Privacy Disclaimer:</p>
+                            {contactFormData?.data.map((item, key) => {
+                              if (
+                                item.form_page === "Sellers" &&
+                                pageType === "Sellers"
+                              ) {
+                                return (
+                                  <p className="text-xs" key={key}>
+                                    {item.form_contact_disclaimer}
+                                  </p>
+                                );
+                              }
+                            })}
                           </div>
                           <div className=" flex justify-end !place-self-start">
                             <button

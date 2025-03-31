@@ -10,6 +10,7 @@ class PropertyList
     public $list_name;
     public $list_price;
     public $list_location;
+    public $list_city;
     public $list_id;
     public $list_floor_area;
     public $list_lot_area;
@@ -52,6 +53,7 @@ class PropertyList
             $sql .= "list_property_status_name, ";
             $sql .= "list_price, ";
             $sql .= "list_location, ";
+            $sql .= "list_city, ";
             $sql .= "list_is_active, ";
             $sql .= "list_id, ";
             $sql .= "list_floor_area, ";
@@ -71,6 +73,7 @@ class PropertyList
             $sql .= ":list_property_status_name, ";
             $sql .= ":list_price, ";
             $sql .= ":list_location, ";
+            $sql .= ":list_city, ";
             $sql .= ":list_is_active, ";
             $sql .= ":list_id, ";
             $sql .= ":list_floor_area, ";
@@ -92,6 +95,7 @@ class PropertyList
                 "list_property_status_name" => $this->list_property_status_name,
                 "list_price" => $this->list_price,
                 "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
                 "list_is_active" => $this->list_is_active,
                 "list_id" => $this->list_id,
                 "list_floor_area" => $this->list_floor_area,
@@ -214,6 +218,7 @@ class PropertyList
             $sql .= "list_property_status_name = :list_property_status_name, ";
             $sql .= "list_price = :list_price, ";
             $sql .= "list_location = :list_location, ";
+            $sql .= "list_city = :list_city, ";
             $sql .= "list_id = :list_id, ";
             $sql .= "list_floor_area = :list_floor_area, ";
             $sql .= "list_lot_area = :list_lot_area, ";
@@ -234,6 +239,7 @@ class PropertyList
                 "list_property_status_name" => $this->list_property_status_name,
                 "list_price" => $this->list_price,
                 "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
                 "list_id" => $this->list_id,
                 "list_floor_area" => $this->list_floor_area,
                 "list_lot_area" => $this->list_lot_area,
@@ -374,13 +380,13 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = :list_location ";
+            $sql .= "where list_city = :list_city ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
-            $sql .= "list_location asc ";
+            $sql .= "list_city asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
             ]);
         } catch (PDOException $ex) {
             $query = false;
@@ -417,14 +423,14 @@ class PropertyList
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
             $sql .= "where list_property_status_id = :list_property_status_id ";
-            $sql .= "and list_location = :list_location ";
+            $sql .= "and list_city = :list_city ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
             $sql .= "list_property_status_id asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_property_status_id" => $this->list_property_status_id,
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
             ]);
         } catch (PDOException $ex) {
             $query = false;
@@ -462,14 +468,14 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = :list_location ";
+            $sql .= "where list_city = :list_city ";
             $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
-            $sql .= "list_location asc ";
+            $sql .= "list_city asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
                 "list_property_type_id" => $this->list_property_type_id,
             ]);
         } catch (PDOException $ex) {
@@ -485,15 +491,15 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = :list_location ";
+            $sql .= "where list_city = :list_city ";
             $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "and list_property_status_id = :list_property_status_id ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
-            $sql .= "list_location asc ";
+            $sql .= "list_city asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
                 "list_property_type_id" => $this->list_property_type_id,
                 "list_property_status_id" => $this->list_property_status_id,
             ]);
@@ -514,7 +520,7 @@ class PropertyList
             $sql .= "and (list_name like :list_name ";
             $sql .= "or list_price like :list_price ";
             $sql .= "or list_id like :list_id ";
-            $sql .= "or list_location like :list_location ";
+            $sql .= "or list_city like :list_city ";
             $sql .= "or list_floor_area like :list_floor_area ";
             $sql .= "or list_lot_area like :list_lot_area ";
             $sql .= "or list_bedrooms like :list_bedrooms ";
@@ -529,7 +535,7 @@ class PropertyList
                 "list_name" => "%{$this->list_search}%",
                 "list_price" => "%{$this->list_search}%",
                 "list_id" => "%{$this->list_search}%",
-                "list_location" => "%{$this->list_search}%",
+                "list_city" => "%{$this->list_search}%",
                 "list_floor_area" => "%{$this->list_search}%",
                 "list_lot_area" => "%{$this->list_search}%",
                 "list_bedrooms" => "%{$this->list_search}%",
@@ -551,7 +557,7 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = :list_location ";
+            $sql .= "where list_city = :list_city ";
             $sql .= "and (list_name like :list_name ";
             $sql .= "or list_price like :list_price ";
             $sql .= "or list_id like :list_id ";
@@ -563,7 +569,7 @@ class PropertyList
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
-            $sql .= "list_location asc ";
+            $sql .= "list_city asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -575,7 +581,7 @@ class PropertyList
                 "list_key_features" => "%{$this->list_search}%",
                 "list_best_buy" => "%{$this->list_search}%",
                 "list_bathrooms" => "%{$this->list_search}%",
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
             ]);
         } catch (PDOException $ex) {
             $query = false;
@@ -594,7 +600,7 @@ class PropertyList
             $sql .= "and (list_name like :list_name ";
             $sql .= "or list_price like :list_price ";
             $sql .= "or list_id like :list_id ";
-            $sql .= "or list_location like :list_location ";
+            $sql .= "or list_city like :list_city ";
             $sql .= "or list_floor_area like :list_floor_area ";
             $sql .= "or list_lot_area like :list_lot_area ";
             $sql .= "or list_bedrooms like :list_bedrooms ";
@@ -609,7 +615,7 @@ class PropertyList
                 "list_name" => "%{$this->list_search}%",
                 "list_price" => "%{$this->list_search}%",
                 "list_id" => "%{$this->list_search}%",
-                "list_location" => "%{$this->list_search}%",
+                "list_city" => "%{$this->list_search}%",
                 "list_floor_area" => "%{$this->list_search}%",
                 "list_lot_area" => "%{$this->list_search}%",
                 "list_bedrooms" => "%{$this->list_search}%",
@@ -632,7 +638,7 @@ class PropertyList
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
             $sql .= "where list_property_status_id = :list_property_status_id ";
-            $sql .= "and list_location = :list_location ";
+            $sql .= "and list_city = :list_city ";
             $sql .= "and (list_name like :list_name ";
             $sql .= "or list_price like :list_price ";
             $sql .= "or list_id like :list_id ";
@@ -657,7 +663,7 @@ class PropertyList
                 "list_best_buy" => "%{$this->list_search}%",
                 "list_bathrooms" => "%{$this->list_search}%",
                 "list_property_status_id" => $this->list_property_status_id,
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
             ]);
         } catch (PDOException $ex) {
             $query = false;
@@ -713,7 +719,7 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = :list_location ";
+            $sql .= "where list_city = :list_city ";
             $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "and (list_name like :list_name ";
             $sql .= "or list_price like :list_price ";
@@ -726,7 +732,7 @@ class PropertyList
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
-            $sql .= "list_location asc ";
+            $sql .= "list_city asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -738,7 +744,7 @@ class PropertyList
                 "list_key_features" => "%{$this->list_search}%",
                 "list_best_buy" => "%{$this->list_search}%",
                 "list_bathrooms" => "%{$this->list_search}%",
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
                 "list_property_type_id" => $this->list_property_type_id,
             ]);
         } catch (PDOException $ex) {
@@ -754,7 +760,7 @@ class PropertyList
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblPropertyList} ";
-            $sql .= "where list_location = :list_location ";
+            $sql .= "where list_city = :list_city ";
             $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "and list_property_status_id = :list_property_status_id ";
             $sql .= "and (list_name like :list_name ";
@@ -768,7 +774,7 @@ class PropertyList
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
             $sql .= "list_name asc, ";
-            $sql .= "list_location asc ";
+            $sql .= "list_city asc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -780,7 +786,7 @@ class PropertyList
                 "list_key_features" => "%{$this->list_search}%",
                 "list_best_buy" => "%{$this->list_search}%",
                 "list_bathrooms" => "%{$this->list_search}%",
-                "list_location" => $this->list_location,
+                "list_city" => $this->list_city,
                 "list_property_type_id" => $this->list_property_type_id,
                 "list_property_status_id" => $this->list_property_status_id,
             ]);
