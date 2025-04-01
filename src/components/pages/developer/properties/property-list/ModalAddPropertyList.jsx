@@ -34,7 +34,6 @@ import useQueryData from "../../../../custom-hooks/useQueryData";
 import TableSpinner from "../../../../partials/spinners/TableSpinner";
 import ServerError from "../../../../partials/spinners/ServerError";
 import NoData from "../../../../partials/spinners/NoData";
-import axios from "axios";
 
 const ModalAddPropertyList = ({ itemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -68,23 +67,24 @@ const ModalAddPropertyList = ({ itemEdit }) => {
   );
 
   const [cities, setCities] = React.useState([]);
-  const [selectedCity, setSelectedCity] = React.useState("");
+  const [selectedCity, setSelectedCity] = React.useState(
+    itemEdit ? itemEdit.list_city : ""
+  );
 
   React.useEffect(() => {
-    //  URL API endpoint for Philippine cities
-    axios
-      .get("https://psgc.gitlab.io/api/cities/")
-      .then((response) => {
-        setCities(response.data);
+    fetch("https://psgc.gitlab.io/api/cities/")
+      .then((response) => response.json())
+      .then((data) => {
+        setCities(data);
       })
-      .catch((error) => {
-        console.error("Error fetching cities:", error);
-      });
+      .catch((error) => console.error("Error fetching cities:", error));
   }, []);
 
   const handleCityChange = (e) => {
     setSelectedCity(e.target.value);
   };
+
+  console.log("Initial selectedCity:", selectedCity);
 
   // multiple files
   const {
@@ -508,9 +508,9 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                                 ? "Loading cities..."
                                 : "Select a city"}
                             </option>
-                            {cities.map((city) => (
-                              <option key={city.id} value={city.name}>
-                                {city.name}{" "}
+                            {cities.map((city, index) => (
+                              <option key={city.id || index} value={city.name}>
+                                {city.name}
                               </option>
                             ))}
                           </InputSelect>

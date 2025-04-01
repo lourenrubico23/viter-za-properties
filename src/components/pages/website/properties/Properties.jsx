@@ -28,6 +28,8 @@ const Properties = () => {
   const [propertyStatusData, setPropertyStatusData] = React.useState("all");
   const [location, setLocation] = React.useState("all");
   const [propertyType, setPropertyTypeData] = React.useState("all");
+  const [searchData, setSearchData] = React.useState("all");
+  const [cities, setCities] = React.useState([]);
 
   const [onSearch, setOnSearch] = React.useState(false);
   const [page, setPage] = React.useState(1);
@@ -72,6 +74,7 @@ const Properties = () => {
     queryKey: [
       "property-list",
       onSearch,
+      searchData,
       store.isSearch,
       isFilter,
       propertyStatusData,
@@ -90,8 +93,9 @@ const Properties = () => {
           isFilter,
           list_property_status_id:
             propertyStatusData === "all" ? "" : propertyStatusData,
-          list_location: location === "all" ? "" : location,
+          list_city: location === "all" ? "" : location,
           list_property_type_id: propertyType === "all" ? "" : propertyType,
+          search_data: searchData === "all" ? "" : searchData,
         }, // search value
         "post"
       ),
@@ -117,10 +121,10 @@ const Properties = () => {
     let val = search.current.value;
 
     if (val === " " || val === "") {
+      setSearchData("all");
       setOnSearch(!onSearch);
       dispatch(setIsSearch(false));
-      dispatch(setError(true));
-      dispatch(setMessage("Search keyword cannot be space only or blank."));
+      dispatch(setError(false));
     } else {
       setOnSearch(!onSearch);
       dispatch(setIsSearch(true));
@@ -162,6 +166,17 @@ const Properties = () => {
     setPage(1);
     console.log(location);
   };
+
+  // Fetch cities from the API
+  React.useEffect(() => {
+    fetch("https://psgc.gitlab.io/api/cities/")
+      .then((response) => response.json())
+      .then((data) => {
+        setCities(data); // Set cities data
+      })
+      .catch((error) => console.error("Error fetching cities:", error));
+  }, []);
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -233,21 +248,17 @@ const Properties = () => {
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span htmlFor="" className="text-xs font-hindRegular">
-                    Location
-                  </span>
+                  <span className="text-xs font-hindRegular">Location</span>
                   <select
                     name="location"
                     value={location}
-                    onChange={(e) => handleChangePropertyLocation(e)}
-                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px] "
-                    disabled={isFetching || status === "pending"}
+                    onChange={handleChangePropertyLocation}
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px]"
                   >
                     <option value="all">Any</option>
-
-                    {propertyListData?.data.map((item, key) => (
-                      <option key={key} value={item.list_location}>
-                        {item.list_location}
+                    {cities.map((city, index) => (
+                      <option key={city.id || index} value={city.name}>
+                        {city.name}
                       </option>
                     ))}
                   </select>
