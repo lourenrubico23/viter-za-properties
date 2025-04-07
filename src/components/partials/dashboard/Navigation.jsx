@@ -268,7 +268,7 @@ const Navigation = ({ menu, submenu }) => {
                   </Link>
                 </ul>
 
-                <li
+                {/* <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "buyers"
                       ? "text-secondary underline underline-offset-4"
@@ -286,9 +286,9 @@ const Navigation = ({ menu, submenu }) => {
                       buyers
                     </Link>
                   </div>
-                </li>
+                </li> */}
 
-                <li
+                {/* <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
                     menu === "sellers"
                       ? "text-secondary underline underline-offset-4"
@@ -306,7 +306,7 @@ const Navigation = ({ menu, submenu }) => {
                       sellers
                     </Link>
                   </div>
-                </li>
+                </li> */}
 
                 <li
                   className={`flex justify-between items-center p-1 cursor-pointer text-dark ${

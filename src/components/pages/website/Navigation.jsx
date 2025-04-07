@@ -56,19 +56,28 @@ const Navigation = () => {
   const defaultNavItems = [
     { path: "/", label: "" },
     { path: "/properties", label: "" },
-    { path: "/buyers", label: "" },
-    { path: "/sellers", label: "" },
+    // { path: "/buyers", label: "" },
+    // { path: "/sellers", label: "" },
     { path: "/blogs", label: "" },
     { path: "/contact", label: "" },
   ];
 
-  // Extract labels dynamically if available
+  // Predefined keys
+  const logoNavKeys = [
+    "logo_nav_a",
+    "logo_nav_b",
+    // "logo_nav_c",
+    // "logo_nav_d",
+    "logo_nav_e",
+    "logo_nav_f",
+  ];
+
   const navItems = defaultNavItems.map((item, index) => {
-    const dynamicLabel =
-      logoData?.data?.[0]?.[`logo_nav_${String.fromCharCode(97 + index)}`]; // a, b, c, d...
+    const key = logoNavKeys[index];
+    const dynamicLabel = logoData?.data?.[0]?.[key];
     return {
       ...item,
-      label: dynamicLabel || item.label, // Use dynamic label if available, otherwise use default
+      label: dynamicLabel || item.label,
     };
   });
 
