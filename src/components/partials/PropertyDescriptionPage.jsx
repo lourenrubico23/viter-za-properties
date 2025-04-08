@@ -317,7 +317,7 @@ const PropertyDescriptionPage = ({
                             Zac Alfanta
                           </p>
                           <p className="title text-xs font-hindBold">
-                            REALTOR ® | REMAX PREMIER
+                            REALTOR ® | RE/MAX PREMIER
                           </p>
                           <p className="title text-xs font-hindBold">
                             LICENSED REAL STATE BROKER 0033585
