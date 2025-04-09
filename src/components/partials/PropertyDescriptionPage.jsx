@@ -17,6 +17,7 @@ import { StoreContext } from "../../store/StoreContext";
 import useQueryData from "../custom-hooks/useQueryData";
 import {
   devApiVersion,
+  devBaseImgUrl,
   devNavUrl,
   getConvertStringToJSONparseData,
   googleHDViewLink,
@@ -132,11 +133,18 @@ const PropertyDescriptionPage = ({
                     {/* Preview Image */}
                     <div className="h-[200px] min-w-[265px] md:h-[480px] md:min-w-[650px] md:max-w-[700px] lg:min-w-[956px] lg:h-[513px] ">
                       {previewImg && (
-                        <LoadImages
-                          url={previewImg}
-                          alt="Preview"
-                          className=" object-cover w-full h-full"
-                        />
+                        <div className="relative w-full h-full">
+                          <LoadImages
+                            url={previewImg}
+                            alt="Preview"
+                            className="object-cover w-full h-full"
+                          />
+                          <img
+                            src={`${devBaseImgUrl}/za-properties-logo.png`}
+                            alt="Watermark"
+                            className="absolute top-1/2 left-1/2 w-24 md:w-40 opacity-40 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                          />
+                        </div>
                       )}
                     </div>
 
