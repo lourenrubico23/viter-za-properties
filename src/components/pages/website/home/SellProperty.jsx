@@ -20,7 +20,7 @@ const SellProperty = () => {
               <p className="font-hindBold text-[clamp(16px,3vw,18px)] uppercase">
                 {item.sell_title}
               </p>
-              <p className="font-hindRegular text-[clamp(12px,3vw,16px)] text-center min-h-[60px]">
+              <p className="font-hindRegular text-[clamp(14px,3vw,16px)] text-center min-h-[60px]">
                 {item.sell_description}
               </p>
               <a
@@ -39,7 +39,7 @@ const SellProperty = () => {
               <p className="font-hindBold text-[clamp(16px,3vw,18px)] uppercase">
                 {item.sell_buy_title}
               </p>
-              <p className="font-hindRegular text-[clamp(12px,3vw,16px)] text-center min-h-[60px]">
+              <p className="font-hindRegular text-[clamp(14px,3vw,16px)] text-center min-h-[60px]">
                 {item.sell_buy_description}
               </p>
               <a
