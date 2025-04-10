@@ -25,7 +25,7 @@ const SellProperty = () => {
               </p>
               <a
                 className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] absolute bottom-0"
-                href={`${devNavUrl}/sellers`}
+                href={`${devNavUrl}/properties`}
               >
                 {item.sell_button}
               </a>
