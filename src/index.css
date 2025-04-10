@@ -333,6 +333,10 @@
   .slick-slider {
     padding: 20px !important;
   }
+  .sticky {
+    position: sticky;
+    z-index: 10;
+  }
 }
 
 @media screen and (min-width: 370px) {

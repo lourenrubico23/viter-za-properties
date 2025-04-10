@@ -68,7 +68,7 @@ const Blogs = () => {
           </div>
           <BlogList pageType={"Blogs"} />
 
-          <ContactForm pageType="Blogs" />
+          {/* <ContactForm pageType="Blogs" /> */}
           <Footer />
         </div>
       </div>

@@ -130,6 +130,7 @@ const Properties = () => {
                   isLoading={isLoading}
                   linksData={linksData}
                   pageType={"Properties"}
+                  contactNoData={contactNoData}
                 />
                 <ContactNoTable
                   setItemEdit={setItemEdit}

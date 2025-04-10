@@ -1,11 +1,5 @@
 import { Form, Formik } from "formik";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  MapPin,
-  Smartphone,
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Smartphone } from "lucide-react";
 import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import * as Yup from "yup";
@@ -16,9 +10,9 @@ import { InputText, InputTextAreaContactForm } from "../../helpers/FormInputs";
 import { devApiVersion, siteKey } from "../../helpers/functions-general";
 import ModalSendingEmailStatus from "../../pages/developer/user/other-user/modal/ModalSendingEmailStatus";
 import ModalSentEmailSummary from "../../pages/developer/user/other-user/modal/ModalSentEmailSummary";
+import ModalError from "../modals/ModalError";
 import ButtonSpinner from "../spinners/ButtonSpinner";
 import ModalSendForm from "./ModalSendForm";
-import ModalError from "../modals/ModalError";
 
 const ContactForm = ({ pageType }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -145,11 +139,17 @@ const ContactForm = ({ pageType }) => {
                           ))}
                         </li>
                         <li>
-                          <MapPin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_address}
-                          </p>
+                          <Mail className="fill-beige" />
+                          {contactNoData?.data.map((item, key) => (
+                            <p
+                              className="text-[16px] font-hindRegular"
+                              key={key}
+                            >
+                              {item.contact_no_email}
+                            </p>
+                          ))}
                         </li>
+
                         <li>
                           <Facebook className="fill-beige" />
                           <p className="text-[16px] font-hindRegular">
@@ -206,10 +206,15 @@ const ContactForm = ({ pageType }) => {
                           ))}
                         </li>
                         <li>
-                          <MapPin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_address}
-                          </p>
+                          <Mail className="fill-beige" />
+                          {contactNoData?.data.map((item, key) => (
+                            <p
+                              className="text-[16px] font-hindRegular"
+                              key={key}
+                            >
+                              {item.contact_no_email}
+                            </p>
+                          ))}
                         </li>
                         <li>
                           <Facebook className="fill-beige" />
@@ -264,10 +269,15 @@ const ContactForm = ({ pageType }) => {
                           ))}
                         </li>
                         <li>
-                          <MapPin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_address}
-                          </p>
+                          <Mail className="fill-beige" />
+                          {contactNoData?.data.map((item, key) => (
+                            <p
+                              className="text-[16px] font-hindRegular"
+                              key={key}
+                            >
+                              {item.contact_no_email}
+                            </p>
+                          ))}
                         </li>
                         <li>
                           <Facebook className="fill-beige" />
@@ -322,10 +332,15 @@ const ContactForm = ({ pageType }) => {
                           ))}
                         </li>
                         <li>
-                          <MapPin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_address}
-                          </p>
+                          <Mail className="fill-beige" />
+                          {contactNoData?.data.map((item, key) => (
+                            <p
+                              className="text-[16px] font-hindRegular"
+                              key={key}
+                            >
+                              {item.contact_no_email}
+                            </p>
+                          ))}
                         </li>
                         <li>
                           <Facebook className="fill-beige" />
@@ -380,10 +395,15 @@ const ContactForm = ({ pageType }) => {
                           ))}
                         </li>
                         <li>
-                          <MapPin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_address}
-                          </p>
+                          <Mail className="fill-beige" />
+                          {contactNoData?.data.map((item, key) => (
+                            <p
+                              className="text-[16px] font-hindRegular"
+                              key={key}
+                            >
+                              {item.contact_no_email}
+                            </p>
+                          ))}
                         </li>
                         <li>
                           <Facebook className="fill-beige" />
@@ -438,10 +458,15 @@ const ContactForm = ({ pageType }) => {
                           ))}
                         </li>
                         <li>
-                          <MapPin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_address}
-                          </p>
+                          <Mail className="fill-beige" />
+                          {contactNoData?.data.map((item, key) => (
+                            <p
+                              className="text-[16px] font-hindRegular"
+                              key={key}
+                            >
+                              {item.contact_no_email}
+                            </p>
+                          ))}
                         </li>
                         <li>
                           <Facebook className="fill-beige" />
@@ -547,7 +572,7 @@ const ContactForm = ({ pageType }) => {
                     <Form>
                       <div>
                         <div className="flex flex-col ">
-                          <div className="input-wrapper">
+                          <div className="input-wrapper !my-3 ">
                             <InputText
                               type="text"
                               placeholder="Full Name"
@@ -556,7 +581,7 @@ const ContactForm = ({ pageType }) => {
                               disabled={isSendingLoading}
                             />
                           </div>
-                          <div className="input-wrapper">
+                          <div className="input-wrapper !my-3 ">
                             <InputText
                               type="text"
                               placeholder="Email Address"
@@ -565,7 +590,7 @@ const ContactForm = ({ pageType }) => {
                               disabled={isSendingLoading}
                             />
                           </div>
-                          <div className="input-wrapper">
+                          <div className="input-wrapper !my-3">
                             <InputText
                               type="text"
                               placeholder="Mobile Number"
@@ -574,7 +599,7 @@ const ContactForm = ({ pageType }) => {
                               disabled={isSendingLoading}
                             />
                           </div>
-                          <div className="input-wrapper">
+                          <div className="input-wrapper !my-3">
                             <InputText
                               type="text"
                               placeholder="Best Time To Call"
@@ -583,7 +608,7 @@ const ContactForm = ({ pageType }) => {
                               disabled={isSendingLoading}
                             />
                           </div>
-                          <div className="input-wrapper">
+                          <div className="input-wrapper !my-3">
                             <InputTextAreaContactForm
                               type="text"
                               placeholder="Message"
@@ -593,7 +618,7 @@ const ContactForm = ({ pageType }) => {
                             />
                           </div>
                           {siteKey ? (
-                            <div className="input-wrapper reCaptcha">
+                            <div className="input-wrapper !my-1 reCaptcha">
                               <ReCAPTCHA
                                 ref={recaptchaRef}
                                 sitekey={siteKey}
@@ -605,6 +630,27 @@ const ContactForm = ({ pageType }) => {
                               There's a problem loading recaptcha.
                             </p>
                           )}
+                          <p className="text-xs">Privacy Disclaimer:</p>
+                          {contactFormData?.data.map((item, key) => {
+                            if (
+                              (item.form_page === "Home" &&
+                                pageType === "Home") ||
+                              (item.form_page === "Properties" &&
+                                pageType === "Properties") ||
+                              (item.form_page === "Buyers" &&
+                                pageType === "Buyers") ||
+                              (item.form_page === "Sellers" &&
+                                pageType === "Sellers") ||
+                              (item.form_page === "Contact" &&
+                                pageType === "Contact")
+                            ) {
+                              return (
+                                <p className="text-xs" key={key}>
+                                  {item.form_contact_disclaimer}
+                                </p>
+                              );
+                            }
+                          })}
                         </div>
                         <div className=" flex justify-end !place-self-start">
                           <button

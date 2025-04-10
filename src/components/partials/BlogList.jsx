@@ -27,7 +27,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
   const [selectedPropertyId, setSelectedPropertyId] = React.useState(null);
 
   const initialVisibleProperties =
-    pageType === "home" ? 3 : pageType === "blogSinglePage" ? 3 : 6;
+    pageType === "home" ? 3 : pageType === "blogSinglePage" ? 3 : 9;
   const [visibleProperties, setVisibleProperties] = React.useState(
     initialVisibleProperties
   );
@@ -94,10 +94,10 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
                 </div>
 
                 <div className="p-6 flex flex-col gap-7 min-h-[240px]">
-                  <div className="text-lg font-hindBold text-center ">
-                    <p>{item.blogs_title}</p>
+                  <div className=" font-hindBold text-center ">
+                    <p className="text-lg">{item.blogs_title}</p>
                   </div>
-                  <p className="text-[16px]">{item.blogs_brief_description}</p>
+                  <p className="text-[16px] text-justify">{item.blogs_brief_description}</p>
                 </div>
                 <Link
                   className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] mb-5"

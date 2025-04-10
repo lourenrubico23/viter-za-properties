@@ -66,6 +66,26 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     itemEdit ? itemEdit.list_property_status_id : ""
   );
 
+  const [cities, setCities] = React.useState([]);
+  const [selectedCity, setSelectedCity] = React.useState(
+    itemEdit ? itemEdit.list_city : ""
+  );
+
+  React.useEffect(() => {
+    fetch("https://psgc.gitlab.io/api/cities/")
+      .then((response) => response.json())
+      .then((data) => {
+        setCities(data);
+      })
+      .catch((error) => console.error("Error fetching cities:", error));
+  }, []);
+
+  const handleCityChange = (e) => {
+    setSelectedCity(e.target.value);
+  };
+
+  console.log("Initial selectedCity:", selectedCity);
+
   // multiple files
   const {
     uploadMultiplePhoto,
@@ -287,6 +307,7 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     list_name: itemEdit ? itemEdit.list_name : "",
     list_price: itemEdit ? itemEdit.list_price : "",
     list_location: itemEdit ? itemEdit.list_location : "",
+    list_city: itemEdit ? itemEdit.list_city : "",
     list_property_type_id: itemEdit ? itemEdit.list_property_type_id : "",
     list_property_type_name: itemEdit ? itemEdit.list_property_type_name : "",
     list_property_status_id: itemEdit ? itemEdit.list_property_status_id : "",
@@ -472,6 +493,27 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                             className="text-xs"
                             disabled={mutation.isPending}
                           />
+                        </div>
+                        <div className="input-wrapper">
+                          <InputSelect
+                            label="City"
+                            name="list_city"
+                            value={selectedCity}
+                            onChange={handleCityChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-primary focus:border-primary text-xs"
+                            disabled={mutation.isPending || cities.length === 0}
+                          >
+                            <option value="" disabled>
+                              {cities.length === 0
+                                ? "Loading cities..."
+                                : "Select a city"}
+                            </option>
+                            {cities.map((city, index) => (
+                              <option key={city.id || index} value={city.name}>
+                                {city.name}
+                              </option>
+                            ))}
+                          </InputSelect>
                         </div>
                         <div className="input-wrapper">
                           <InputText

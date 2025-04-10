@@ -122,14 +122,14 @@ const BlogsPage = () => {
                   isLoading={isLoading}
                 />
                 <BlogList pageType="Blogs" />
-                <BlogsContactUsTable
+                {/* <BlogsContactUsTable
                   handleAddContactUs={handleAddContactUs}
                   contactFormData={contactFormData}
                   isFetching={isFetching}
                   isLoading={isLoading}
                   linksData={linksData}
                   pageType={"Blogs"}
-                />
+                /> */}
                 <ContactNoTable
                   setItemEdit={setItemEdit}
                   handleAddFooter={handleAddFooter}

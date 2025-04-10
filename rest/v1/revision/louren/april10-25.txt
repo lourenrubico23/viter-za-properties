@@ -1,0 +1,24 @@
+Upload JSX
+
+    CONTROLLERS:
+        -> rest/v1/controllers/developer/contact-form/create.php
+        -> rest/v1/controllers/developer/contact-form/update.php
+        -> rest/v1/controllers/developer/property-list/create.php
+        -> rest/v1/controllers/developer/property-list/update.php
+        -> rest/v1/controllers/developer/property-list/search.php
+
+    MODELS:
+        -> rest/v1/models/developer/contact-form/ContactForm.php
+        -> rest/v1/models/developer/property-list/PropertyList.php
+
+    HTACCESS: 
+        ->
+
+    DATABASE:
+        -> rest/v1/db-backup/zapv1_contact_form.sql
+        note: column is Added
+                `form_contact_disclaimer` text NOT NULL,
+        -> rest/v1/db-backup/zapv1_property_list.sql
+        note: column is Added
+                `list_city` text NOT NULL,
+    

@@ -327,7 +327,7 @@ const ModalAddLogo = ({ itemEdit, logoData }) => {
                           disabled={mutation.isPending}
                         />
                       </div>
-                      <div className="input-wrapper">
+                      {/* <div className="input-wrapper">
                         <InputText
                           label="Navigation 3"
                           type="text"
@@ -344,10 +344,10 @@ const ModalAddLogo = ({ itemEdit, logoData }) => {
                           className="text-xs"
                           disabled={mutation.isPending}
                         />
-                      </div>
+                      </div> */}
                       <div className="input-wrapper">
                         <InputText
-                          label="Navigation 5"
+                          label="Navigation 3"
                           type="text"
                           name="logo_nav_e"
                           className="text-xs"
@@ -356,7 +356,7 @@ const ModalAddLogo = ({ itemEdit, logoData }) => {
                       </div>
                       <div className="input-wrapper">
                         <InputText
-                          label="Navigation 6"
+                          label="Navigation 4"
                           type="text"
                           name="logo_nav_f"
                           className="text-xs"

@@ -11,6 +11,7 @@ class ContactForm
     public $form_address;
     public $form_description;
     public $form_contact_description;
+    public $form_contact_disclaimer;
     public $form_created;
     public $form_datetime;
 
@@ -38,6 +39,7 @@ class ContactForm
             $sql .= "form_page, ";
             $sql .= "form_description, ";
             $sql .= "form_contact_description, ";
+            $sql .= "form_contact_disclaimer, ";
             $sql .= "form_instagram, ";
             $sql .= "form_created, ";
             $sql .= "form_datetime ) values ( ";
@@ -49,6 +51,7 @@ class ContactForm
             $sql .= ":form_page, ";
             $sql .= ":form_description, ";
             $sql .= ":form_contact_description, ";
+            $sql .= ":form_contact_disclaimer, ";
             $sql .= ":form_instagram, ";
             $sql .= ":form_created, ";
             $sql .= ":form_datetime ) ";
@@ -62,6 +65,7 @@ class ContactForm
                 "form_page" => $this->form_page,
                 "form_description" => $this->form_description,
                 "form_contact_description" => $this->form_contact_description,
+                "form_contact_disclaimer" => $this->form_contact_disclaimer,
                 "form_instagram" => $this->form_instagram,
                 "form_created" => $this->form_created,
                 "form_datetime" => $this->form_datetime,
@@ -117,6 +121,7 @@ class ContactForm
             $sql .= "form_address = :form_address, ";
             $sql .= "form_description = :form_description, ";
             $sql .= "form_contact_description = :form_contact_description, ";
+            $sql .= "form_contact_disclaimer = :form_contact_disclaimer, ";
             $sql .= "form_instagram = :form_instagram, ";
             $sql .= "form_datetime = :form_datetime ";
             $sql .= "where form_aid  = :form_aid ";
@@ -129,6 +134,7 @@ class ContactForm
                 "form_address" => $this->form_address,
                 "form_description" => $this->form_description,
                 "form_contact_description" => $this->form_contact_description,
+                "form_contact_disclaimer" => $this->form_contact_disclaimer,
                 "form_instagram" => $this->form_instagram,
                 "form_datetime" => $this->form_datetime,
                 "form_aid" => $this->form_aid,

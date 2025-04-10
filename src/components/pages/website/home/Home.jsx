@@ -1,17 +1,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { CiImageOn } from "react-icons/ci";
-import {
-  setError,
-  setIsSearch,
-  setMessage,
-} from "../../../../store/StoreAction";
+import { setError, setIsSearch } from "../../../../store/StoreAction";
 import { StoreContext } from "../../../../store/StoreContext";
 import { queryDataInfinite } from "../../../custom-hooks/queryDataInfinite";
 import useQueryData from "../../../custom-hooks/useQueryData";
 import {
   devApiVersion,
-  devNavUrl,
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../../../helpers/functions-general";
@@ -20,12 +15,10 @@ import ContactForm from "../../../partials/contact-form/ContactForm";
 import FeaturedProperties from "../../../partials/FeaturedProperties";
 import Footer from "../../../partials/Footer";
 import LoadImages from "../../../partials/LoadImages";
-import BuyAPropertySvg from "../../../partials/svg/BuyAPropertySvg";
-import SellMyPropertySvg from "../../../partials/svg/SellMyPropertySvg";
-import Navigation from "../Navigation";
-import Testimonials from "./Testimonials";
 import Loader from "../../../partials/spinners/Loader";
+import Navigation from "../Navigation";
 import SellProperty from "./SellProperty";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -33,10 +26,12 @@ const Home = () => {
   const [propertyStatusData, setPropertyStatusData] = React.useState("all");
   const [location, setLocation] = React.useState("all");
   const [propertyType, setPropertyTypeData] = React.useState("all");
+  const [searchData, setSearchData] = React.useState("all");
+  const [cities, setCities] = React.useState([]);
 
   const [onSearch, setOnSearch] = React.useState(false);
   const [page, setPage] = React.useState(1);
-  const search = React.useRef({ value: "" });
+  const search = React.useRef(null);
 
   const {
     isFetchingBanner,
@@ -81,6 +76,7 @@ const Home = () => {
     queryKey: [
       "property-list",
       onSearch,
+      searchData,
       store.isSearch,
       isFilter,
       propertyStatusData,
@@ -94,13 +90,14 @@ const Home = () => {
         store.isSearch || isFilter,
         // search boolean
         {
-          searchValue: search.current.value,
+          searchValue: search.current.value.trim(),
           id: "",
           isFilter,
           list_property_status_id:
             propertyStatusData === "all" ? "" : propertyStatusData,
-          list_location: location === "all" ? "" : location,
+          list_city: location === "all" ? "" : location,
           list_property_type_id: propertyType === "all" ? "" : propertyType,
+          search_data: searchData === "all" ? "" : searchData,
         }, // search value
         "post"
       ),
@@ -123,14 +120,15 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let val = search.current.value;
+    let val = search.current.value.trim(); // Trim whitespace
 
-    if (val === " " || val === "") {
+    if (val === "") {
+      setSearchData("all");
       setOnSearch(!onSearch);
       dispatch(setIsSearch(false));
-      dispatch(setError(true));
-      dispatch(setMessage("Search keyword cannot be space only or blank."));
+      dispatch(setError(false));
     } else {
+      setSearchData(val);
       setOnSearch(!onSearch);
       dispatch(setIsSearch(true));
     }
@@ -171,6 +169,16 @@ const Home = () => {
     setPage(1);
     console.log(location);
   };
+
+  // Fetch cities from the API
+  React.useEffect(() => {
+    fetch("https://psgc.gitlab.io/api/cities/")
+      .then((response) => response.json())
+      .then((data) => {
+        setCities(data); // Set cities data
+      })
+      .catch((error) => console.error("Error fetching cities:", error));
+  }, []);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -243,25 +251,17 @@ const Home = () => {
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span htmlFor="" className="text-xs font-hindRegular">
-                    Location
-                  </span>
+                  <span className="text-xs font-hindRegular">Location</span>
                   <select
                     name="location"
                     value={location}
-                    onChange={(e) => handleChangePropertyLocation(e)}
-                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px] "
-                    disabled={isFetching || status === "pending"}
+                    onChange={handleChangePropertyLocation}
+                    className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[329px]"
                   >
                     <option value="all">Any</option>
-
-                    {[
-                      ...new Set(
-                        propertyListData?.data.map((item) => item.list_location) // to prevent the duplicate of location
-                      ),
-                    ].map((location, key) => (
-                      <option key={key} value={location}>
-                        {location}
+                    {cities.map((city, index) => (
+                      <option key={city.id || index} value={city.name}>
+                        {city.name}
                       </option>
                     ))}
                   </select>
@@ -296,7 +296,7 @@ const Home = () => {
                         type="search"
                         placeholder="Search here..."
                         ref={search}
-                        onChange={(e) => handleChange(e)}
+                        onChange={handleChange}
                         className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[196px] "
                       />
                     </div>
@@ -342,7 +342,7 @@ const Home = () => {
                       key={index}
                     />
                   ))}
-                  <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4">
+                  <div className="flex flex-col gap-6 max-w-[698px] lg:place-self-end py-12 px-4 text-justify">
                     <h1 className="text-[clamp(30px,3vw,71px)] font-hindBold">
                       {item.about_name}
                     </h1>
@@ -355,7 +355,7 @@ const Home = () => {
                         <LoadImages
                           url={`${googleHDViewLink}${image?.id}`}
                           alt={`${item.about_name}`}
-                          className="w-[60px] md:w-[70px] md:h-[85px] object-cover"
+                          className="w-full md:w-full md:h-[85px] object-cover"
                           key={index}
                         />
                       ))}

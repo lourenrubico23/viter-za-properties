@@ -127,6 +127,7 @@ const Buyers = () => {
                   isLoading={isLoading}
                   linksData={linksData}
                   pageType={"Buyers"}
+                  contactNoData={contactNoData}
                 />
                 <ContactNoTable
                   setItemEdit={setItemEdit}

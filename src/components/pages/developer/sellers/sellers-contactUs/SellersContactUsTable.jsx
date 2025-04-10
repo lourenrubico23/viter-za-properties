@@ -11,6 +11,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Mail,
   MapPin,
   Smartphone,
 } from "lucide-react";
@@ -24,6 +25,7 @@ const SellersContactUsTable = ({
   isLoading,
   linksData,
   pageType,
+  contactNoData,
 }) => {
   return (
     <>
@@ -65,10 +67,15 @@ const SellersContactUsTable = ({
                             ))}
                           </li>
                           <li>
-                            <MapPin className="fill-beige" />
-                            <p className="text-[16px] font-hindRegular">
-                              {item.form_address}
-                            </p>
+                            <Mail className="fill-beige" />
+                            {contactNoData?.data.map((item, key) => (
+                              <p
+                                className="text-[16px] font-hindRegular"
+                                key={key}
+                              >
+                                {item.contact_no_email}
+                              </p>
+                            ))}
                           </li>
                           <li>
                             <Facebook className="fill-beige" />
@@ -127,7 +134,7 @@ const SellersContactUsTable = ({
                       <Form>
                         <div>
                           <div className="flex flex-col ">
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Full Name"
@@ -135,7 +142,7 @@ const SellersContactUsTable = ({
                                 name="client_name"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Email Address"
@@ -143,7 +150,7 @@ const SellersContactUsTable = ({
                                 name="client_email"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Mobile Number"
@@ -151,7 +158,7 @@ const SellersContactUsTable = ({
                                 name="client_phone"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputText
                                 type="text"
                                 placeholder="Best Time To Call"
@@ -159,7 +166,7 @@ const SellersContactUsTable = ({
                                 name="client_time_to_call"
                               />
                             </div>
-                            <div className="input-wrapper">
+                            <div className="input-wrapper !my-3">
                               <InputTextAreaContactForm
                                 type="text"
                                 placeholder="Message"
@@ -168,7 +175,7 @@ const SellersContactUsTable = ({
                               />
                             </div>
                             {siteKey ? (
-                              <div className="input-wrapper reCaptcha">
+                              <div className="input-wrapper !my-3 reCaptcha">
                                 <ReCAPTCHA
                                   sitekey={siteKey}
                                   onChange={(e) => handleChange(e)}
@@ -179,6 +186,19 @@ const SellersContactUsTable = ({
                                 There's a problem loading recaptcha.
                               </p>
                             )}
+                            <p className="text-xs">Privacy Disclaimer:</p>
+                            {contactFormData?.data.map((item, key) => {
+                              if (
+                                item.form_page === "Sellers" &&
+                                pageType === "Sellers"
+                              ) {
+                                return (
+                                  <p className="text-xs" key={key}>
+                                    {item.form_contact_disclaimer}
+                                  </p>
+                                );
+                              }
+                            })}
                           </div>
                           <div className=" flex justify-end !place-self-start">
                             <button
