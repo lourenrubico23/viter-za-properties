@@ -16,14 +16,14 @@ export const RoutesDeveloper = [
     path: `${devNavUrl}/properties`,
     element: <Properties />,
   },
-  {
-    path: `${devNavUrl}/buyers`,
-    element: <Buyers />,
-  },
-  {
-    path: `${devNavUrl}/sellers`,
-    element: <Sellers />,
-  },
+  // {
+  //   path: `${devNavUrl}/buyers`,
+  //   element: <Buyers />,
+  // },
+  // {
+  //   path: `${devNavUrl}/sellers`,
+  //   element: <Sellers />,
+  // },
   {
     path: `${devNavUrl}/blogs`,
     element: <Blogs />,

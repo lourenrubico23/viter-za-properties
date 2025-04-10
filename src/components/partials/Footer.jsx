@@ -75,9 +75,7 @@ const Footer = () => {
                 </p>
                 <ul className="[&>li]:font-poppins [&>li]:text-sm flex flex-col gap-2">
                   {propertyTypeData?.data.map((item, key) => (
-                    <li key={key}>
-                      {item.property_type_name}
-                    </li>
+                    <li key={key}>{item.property_type_name}</li>
                   ))}
                   {/* <li>Residential</li>
                   <li>Building</li>
@@ -108,12 +106,12 @@ const Footer = () => {
               >
                 View Listing
               </a>
-              <a
+              {/* <a
                 className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]"
                 href={`${devNavUrl}/sellers`}
               >
                 List my Home
-              </a>
+              </a> */}
             </div>
           </div>
           {contactNoData?.data.map((item, key) => (

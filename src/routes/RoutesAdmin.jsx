@@ -109,7 +109,7 @@ export const RoutesAdmin = [
       </ProtectedRouteUser>
     ),
   },
- 
+
   {
     path: `${devNavUrl}/${urlAdmin}/blogs-list`,
     element: (
@@ -119,7 +119,6 @@ export const RoutesAdmin = [
     ),
   },
 
-  
   {
     path: `${devNavUrl}/${urlAdmin}/contact-form`,
     element: (
@@ -136,22 +135,22 @@ export const RoutesAdmin = [
       </ProtectedRouteUser>
     ),
   },
-  {
-    path: `${devNavUrl}/${urlAdmin}/buyers`,
-    element: (
-      <ProtectedRouteUser>
-        <Buyers />
-      </ProtectedRouteUser>
-    ),
-  },
-  {
-    path: `${devNavUrl}/${urlAdmin}/sellers`,
-    element: (
-      <ProtectedRouteUser>
-        <Sellers />
-      </ProtectedRouteUser>
-    ),
-  },
+  // {
+  //   path: `${devNavUrl}/${urlAdmin}/buyers`,
+  //   element: (
+  //     <ProtectedRouteUser>
+  //       <Buyers />
+  //     </ProtectedRouteUser>
+  //   ),
+  // },
+  // {
+  //   path: `${devNavUrl}/${urlAdmin}/sellers`,
+  //   element: (
+  //     <ProtectedRouteUser>
+  //       <Sellers />
+  //     </ProtectedRouteUser>
+  //   ),
+  // },
   {
     path: `${devNavUrl}/${urlAdmin}/blogs`,
     element: (

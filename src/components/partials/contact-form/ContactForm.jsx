@@ -630,7 +630,9 @@ const ContactForm = ({ pageType }) => {
                               There's a problem loading recaptcha.
                             </p>
                           )}
-                          <p className="text-xs">Privacy Disclaimer:</p>
+                          <p className="text-xs font-semibold mt-4">
+                            Privacy Disclaimer:
+                          </p>
                           {contactFormData?.data.map((item, key) => {
                             if (
                               (item.form_page === "Home" &&
