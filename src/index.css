@@ -177,6 +177,12 @@
   .btn-modal-submit:disabled {
     @apply opacity-50 hover:bg-primary hover:text-[white];
   }
+  .btn-modal-contact {
+    @apply flex items-center justify-center text-[white] gap-2 px-3 py-1.5 bg-primary rounded-md border-primary border hover:bg-secondary hover:text-[white] hover:border-[#d1d5db] duration-300 ease-in w-full text-[14px];
+  }
+  .btn-modal-contact:disabled {
+    @apply opacity-50 hover:bg-accent hover:text-[white];
+  }
   .btn-modal-cancel {
     @apply flex items-center justify-center text-[black] gap-2 px-3 py-1.5 bg-[white] rounded-md border-[#d1d5db] border w-full text-[14px];
   }

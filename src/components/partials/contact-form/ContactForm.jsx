@@ -655,17 +655,31 @@ const ContactForm = ({ pageType }) => {
                           })}
                         </div>
                         <div className=" flex justify-end !place-self-start">
-                          <button
-                            className="btn btn-modal-submit my-6 border-none "
-                            type="submit"
-                            disabled={isSendingLoading || !dirty}
-                          >
-                            {isSendingLoading ? (
-                              <ButtonSpinner />
-                            ) : (
-                              "Send Message"
-                            )}
-                          </button>
+                          {dirty ? (
+                            <button
+                              className="btn btn-modal-submit my-6 border-none "
+                              type="submit"
+                              disabled={isSendingLoading}
+                            >
+                              {isSendingLoading ? (
+                                <ButtonSpinner />
+                              ) : (
+                                "Send Message"
+                              )}
+                            </button>
+                          ) : (
+                            <button
+                              className="px-[20px] md:px-[40px] md:py-[10px] h-[46px] text-[16px] bg-accent rounded-none btn-modal-contact !hover:bg-accent my-6 border-none text-[white] gap-2 py-1.5 tracking-wider "
+                              type="submit"
+                              disabled={isSendingLoading || !dirty}
+                            >
+                              {isSendingLoading ? (
+                                <ButtonSpinner />
+                              ) : (
+                                "Send Message"
+                              )}
+                            </button>
+                          )}
                         </div>
                       </div>
 
