@@ -58,8 +58,11 @@ const ModalAddHomeContactUs = ({ itemEdit, contactFormData }) => {
     form_label: contactFormData?.data?.[2]?.form_label ?? "",
     form_title: contactFormData?.data?.[2]?.form_title ?? "",
     form_facebook: contactFormData?.data?.[2]?.form_facebook ?? "",
+    form_facebook_link: contactFormData?.data?.[2]?.form_facebook_link ?? "",
     form_instagram: contactFormData?.data?.[2]?.form_instagram ?? "",
+    form_instagram_link: contactFormData?.data?.[2]?.form_instagram_link ?? "",
     form_linkedIn: contactFormData?.data?.[2]?.form_linkedIn ?? "",
+    form_linkedIn_link: contactFormData?.data?.[2]?.form_linkedIn_link ?? "",
     form_address: contactFormData?.data?.[2]?.form_address ?? "",
     form_description: contactFormData?.data?.[2]?.form_description ?? "",
     form_contact_description:
@@ -157,6 +160,15 @@ const ModalAddHomeContactUs = ({ itemEdit, contactFormData }) => {
                       </div>
                       <div className="input-wrapper">
                         <InputText
+                          label="Facebook Link"
+                          type="text"
+                          name="form_facebook_link"
+                          className="text-xs"
+                          disabled={mutation.isPending}
+                        />
+                      </div>
+                      <div className="input-wrapper">
+                        <InputText
                           label="Instagram"
                           type="text"
                           name="form_instagram"
@@ -166,9 +178,27 @@ const ModalAddHomeContactUs = ({ itemEdit, contactFormData }) => {
                       </div>
                       <div className="input-wrapper">
                         <InputText
+                          label="Instagram Link"
+                          type="text"
+                          name="form_instagram_link"
+                          className="text-xs"
+                          disabled={mutation.isPending}
+                        />
+                      </div>
+                      <div className="input-wrapper">
+                        <InputText
                           label="LinkedIn"
                           type="text"
                           name="form_linkedIn"
+                          className="text-xs"
+                          disabled={mutation.isPending}
+                        />
+                      </div>
+                      <div className="input-wrapper">
+                        <InputText
+                          label="LinkedIn Link"
+                          type="text"
+                          name="form_linkedIn_link"
                           className="text-xs"
                           disabled={mutation.isPending}
                         />

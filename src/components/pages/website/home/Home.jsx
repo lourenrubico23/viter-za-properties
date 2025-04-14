@@ -175,7 +175,13 @@ const Home = () => {
     fetch("https://psgc.gitlab.io/api/cities/")
       .then((response) => response.json())
       .then((data) => {
-        setCities(data); // Set cities data
+        const cleanedData = data
+          .map((city) => ({
+            ...city,
+            name: city.name.replace(/^City of\s+/i, ""), // Remove "City of " at the beginning
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
+        setCities(cleanedData);
       })
       .catch((error) => console.error("Error fetching cities:", error));
   }, []);

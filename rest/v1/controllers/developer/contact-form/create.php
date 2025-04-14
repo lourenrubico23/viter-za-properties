@@ -18,8 +18,11 @@ if ($isUpdateContactUs == "ContactUsUpdate") {
     $contact_form->form_label = $data["form_label"];
     $contact_form->form_title = $data["form_title"];
     $contact_form->form_facebook = $data["form_facebook"];
+    $contact_form->form_facebook_link = $data["form_facebook_link"];
     $contact_form->form_instagram = $data["form_instagram"];
+    $contact_form->form_instagram_link = $data["form_instagram_link"];
     $contact_form->form_linkedIn = $data["form_linkedIn"];
+    $contact_form->form_linkedIn_link = $data["form_linkedIn_link"];
     $contact_form->form_address = $data["form_address"];
     $contact_form->form_description = $data["form_description"];
     $contact_form->form_contact_description = $data["form_contact_description"];

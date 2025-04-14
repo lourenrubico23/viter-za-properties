@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2025 at 03:36 AM
+-- Generation Time: Apr 14, 2025 at 06:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,14 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `zapv1_contact_form` (
   `form_aid` int(11) NOT NULL,
   `form_page` varchar(50) NOT NULL,
-  `form_label` varchar(200) NOT NULL,
-  `form_title` varchar(200) NOT NULL,
-  `form_facebook` varchar(200) NOT NULL,
-  `form_instagram` varchar(200) NOT NULL,
-  `form_linkedIn` varchar(200) NOT NULL,
-  `form_address` text NOT NULL,
+  `form_label` varchar(100) NOT NULL,
+  `form_title` varchar(100) NOT NULL,
+  `form_facebook` varchar(100) NOT NULL,
+  `form_facebook_link` varchar(200) NOT NULL,
+  `form_instagram` varchar(100) NOT NULL,
+  `form_instagram_link` varchar(200) NOT NULL,
+  `form_linkedIn` varchar(100) NOT NULL,
+  `form_linkedIn_link` varchar(200) NOT NULL,
+  `form_address` varchar(200) NOT NULL,
   `form_description` text NOT NULL,
-  `form_contact_description` text NOT NULL,
+  `form_contact_description` varchar(200) NOT NULL,
   `form_contact_disclaimer` text NOT NULL,
   `form_created` datetime NOT NULL,
   `form_datetime` datetime NOT NULL
@@ -47,13 +50,13 @@ CREATE TABLE `zapv1_contact_form` (
 -- Dumping data for table `zapv1_contact_form`
 --
 
-INSERT INTO `zapv1_contact_form` (`form_aid`, `form_page`, `form_label`, `form_title`, `form_facebook`, `form_instagram`, `form_linkedIn`, `form_address`, `form_description`, `form_contact_description`, `form_contact_disclaimer`, `form_created`, `form_datetime`) VALUES
-(1, 'Home', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 08:53:46', '2025-03-31 09:13:39'),
-(3, 'Properties', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:00:25', '2025-03-31 09:22:18'),
-(4, 'Buyers', 'Buyers', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', 'Finding the perfect property is more than just a transaction—it\'s about securing your future. Whether you\'re searching for your dream home, a smart investment, or a prime commercial space, I am committed to guiding you every step of the way. With expert market insights, personalized service, and a passion for real estate, I help buyers make confident, well-informed decisions. Let\'s turn your vision into reality—because the right property changes everything.', 'Your Ideal Property Awaits—Let’s Connect!', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:01:21', '2025-03-31 09:24:55'),
-(5, 'Sellers', 'Sellers', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', 'Selling your property is a major decision, and I\'m here to make the process smooth, strategic, and successful. With expert market analysis, targeted marketing, and a vast network of qualified buyers, I ensure your property gets the exposure and value it deserves. From pricing to closing, I handle every detail with professionalism and care. Let\'s maximize your propertys potential and achieve the best possible deal.', 'Let\'s Get Your Property Sold—Contact Me Now!', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:02:53', '2025-03-31 09:28:07'),
-(6, 'Blogs', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact us today for a complimentary, no-pressure \nhome appraisal!', '', '2025-03-12 09:04:33', '2025-03-18 13:36:13'),
-(7, 'Contact', '', 'ZA Properties', 'ZAPropertiesPh', 'ZAPropertiesPh', 'ZacAlfantaJr', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact us today for a complimentary, no-pressure home appraisal!', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:05:39', '2025-03-31 09:34:07');
+INSERT INTO `zapv1_contact_form` (`form_aid`, `form_page`, `form_label`, `form_title`, `form_facebook`, `form_facebook_link`, `form_instagram`, `form_instagram_link`, `form_linkedIn`, `form_linkedIn_link`, `form_address`, `form_description`, `form_contact_description`, `form_contact_disclaimer`, `form_created`, `form_datetime`) VALUES
+(1, 'Home', '', 'ZA Properties', 'ZAPropertiesPh', 'https://www.facebook.com/ZacAlfantaJr/', 'ZAPropertiesPh', 'https://www.instagram.com/zapropertiesph/', 'ZacAlfantaJr', 'https://www.linkedin.com/in/zacalfanta/', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 08:53:46', '2025-04-14 12:48:28'),
+(3, 'Properties', '', 'ZA Properties', 'ZAPropertiesPh', 'https://www.facebook.com/ZacAlfantaJr/', 'ZAPropertiesPh', 'https://www.instagram.com/zapropertiesph/', 'ZacAlfantaJr', 'https://www.linkedin.com/in/zacalfanta/', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:00:25', '2025-04-14 12:48:41'),
+(4, 'Buyers', 'Buyers', 'ZA Properties', 'ZAPropertiesPh', 'https://www.facebook.com/ZacAlfantaJr/', 'ZAPropertiesPh', 'https://www.instagram.com/zapropertiesph/', 'ZacAlfantaJr', '', '24th Floor PSE Tower 5th Avenue BGC Taguig', 'Finding the perfect property is more than just a transaction—it\'s about securing your future. Whether you\'re searching for your dream home, a smart investment, or a prime commercial space, I am committed to guiding you every step of the way. With expert market insights, personalized service, and a passion for real estate, I help buyers make confident, well-informed decisions. Let\'s turn your vision into reality—because the right property changes everything.', 'Your Ideal Property Awaits—Let’s Connect!', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:01:21', '2025-03-31 09:24:55'),
+(5, 'Sellers', 'Sellers', 'ZA Properties', 'ZAPropertiesPh', 'https://www.facebook.com/ZacAlfantaJr/', 'ZAPropertiesPh', 'https://www.instagram.com/zapropertiesph/', 'ZacAlfantaJr', '', '24th Floor PSE Tower 5th Avenue BGC Taguig', 'Selling your property is a major decision, and I\'m here to make the process smooth, strategic, and successful. With expert market analysis, targeted marketing, and a vast network of qualified buyers, I ensure your property gets the exposure and value it deserves. From pricing to closing, I handle every detail with professionalism and care. Let\'s maximize your propertys potential and achieve the best possible deal.', 'Let\'s Get Your Property Sold—Contact Me Now!', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:02:53', '2025-03-31 09:28:07'),
+(6, 'Blogs', '', 'ZA Properties', 'ZAPropertiesPh', 'https://www.facebook.com/ZacAlfantaJr/', 'ZAPropertiesPh', 'https://www.instagram.com/zapropertiesph/', 'ZacAlfantaJr', '', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact us today for a complimentary, no-pressure \nhome appraisal!', '', '2025-03-12 09:04:33', '2025-03-18 13:36:13'),
+(7, 'Contact', '', 'ZA Properties', 'ZAPropertiesPh', 'https://www.facebook.com/ZacAlfantaJr/', 'ZAPropertiesPh', 'https://www.instagram.com/zapropertiesph/', 'ZacAlfantaJr', 'https://www.linkedin.com/in/zacalfanta/', '24th Floor PSE Tower 5th Avenue BGC Taguig', '', 'Contact Us Today!', 'By submitting your information on zacalfanta.com, you agree to be contacted via SMS, call, or email regarding real estate inquires. Your personal information will be kept confidential and will not be sold, shared, or disclosed to any third party without your consent, except as required by law.', '2025-03-12 09:05:39', '2025-04-14 12:48:49');
 
 --
 -- Indexes for dumped tables

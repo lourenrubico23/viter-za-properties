@@ -106,12 +106,12 @@ const Footer = () => {
               >
                 View Listing
               </a>
-              {/* <a
+              <a
                 className="btn-transparent hover:shadow-[inset_420px_0_0_0_#007B80] md:hover:shadow-[inset_300px_0_0_0_#007B80]"
-                href={`${devNavUrl}/sellers`}
+                href={`${devNavUrl}/contact`}
               >
                 List my Home
-              </a> */}
+              </a>
             </div>
           </div>
           {contactNoData?.data.map((item, key) => (

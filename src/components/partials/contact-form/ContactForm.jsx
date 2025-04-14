@@ -127,46 +127,71 @@ const ContactForm = ({ pageType }) => {
                         {item.form_title}
                       </h1>
                       <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
-                        <li>
-                          <Smartphone className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
-                              key={key}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`tel:${item.contact_no_contact}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_contact}
-                            </p>
-                          ))}
-                        </li>
-                        <li>
-                          <Mail className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-[16px] font-hindRegular"
-                              key={key}
+                              <Smartphone className="fill-beige" />
+                              <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                                {item.contact_no_contact}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`mailto:${item.contact_no_email}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_email}
-                            </p>
-                          ))}
-                        </li>
+                              <Mail className="fill-beige" />
+                              <p className="text-[16px] font-hindRegular">
+                                {item.contact_no_email}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
 
                         <li>
-                          <Facebook className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_facebook}
-                          </p>
+                          <a
+                            href={item.form_facebook_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Facebook className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_facebook}
+                            </p>
+                          </a>
                         </li>
                         <li>
-                          <Instagram className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_instagram}
-                          </p>
+                          <a
+                            href={item.form_instagram_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Instagram className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_instagram}
+                            </p>
+                          </a>
                         </li>
                         <li>
-                          <Linkedin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_linkedIn}
-                          </p>
+                          <a
+                            href={item.form_linkedIn_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Linkedin className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_linkedIn}
+                            </p>
+                          </a>
                         </li>
                       </ul>
                     </div>
@@ -194,45 +219,70 @@ const ContactForm = ({ pageType }) => {
                         {item.form_title}
                       </h1>
                       <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
-                        <li>
-                          <Smartphone className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
-                              key={key}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`tel:${item.contact_no_contact}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_contact}
-                            </p>
-                          ))}
-                        </li>
-                        <li>
-                          <Mail className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-[16px] font-hindRegular"
-                              key={key}
+                              <Smartphone className="fill-beige" />
+                              <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                                {item.contact_no_contact}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`mailto:${item.contact_no_email}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_email}
+                              <Mail className="fill-beige" />
+                              <p className="text-[16px] font-hindRegular">
+                                {item.contact_no_email}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        <li>
+                          <a
+                            href={item.form_facebook_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Facebook className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_facebook}
                             </p>
-                          ))}
+                          </a>
                         </li>
                         <li>
-                          <Facebook className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_facebook}
-                          </p>
+                          <a
+                            href={item.form_instagram_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Instagram className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_instagram}
+                            </p>
+                          </a>
                         </li>
                         <li>
-                          <Instagram className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_instagram}
-                          </p>
-                        </li>
-                        <li>
-                          <Linkedin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_linkedIn}
-                          </p>
+                          <a
+                            href={item.form_linkedIn_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Linkedin className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_linkedIn}
+                            </p>
+                          </a>
                         </li>
                       </ul>
                     </div>
@@ -257,45 +307,70 @@ const ContactForm = ({ pageType }) => {
                         {item.form_title}
                       </h1>
                       <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
-                        <li>
-                          <Smartphone className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
-                              key={key}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`tel:${item.contact_no_contact}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_contact}
-                            </p>
-                          ))}
-                        </li>
-                        <li>
-                          <Mail className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-[16px] font-hindRegular"
-                              key={key}
+                              <Smartphone className="fill-beige" />
+                              <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                                {item.contact_no_contact}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`mailto:${item.contact_no_email}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_email}
+                              <Mail className="fill-beige" />
+                              <p className="text-[16px] font-hindRegular">
+                                {item.contact_no_email}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        <li>
+                          <a
+                            href={item.form_facebook_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Facebook className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_facebook}
                             </p>
-                          ))}
+                          </a>
                         </li>
                         <li>
-                          <Facebook className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_facebook}
-                          </p>
+                          <a
+                            href={item.form_instagram_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Instagram className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_instagram}
+                            </p>
+                          </a>
                         </li>
                         <li>
-                          <Instagram className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_instagram}
-                          </p>
-                        </li>
-                        <li>
-                          <Linkedin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_linkedIn}
-                          </p>
+                          <a
+                            href={item.form_linkedIn_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Linkedin className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_linkedIn}
+                            </p>
+                          </a>
                         </li>
                       </ul>
                     </div>
@@ -320,45 +395,70 @@ const ContactForm = ({ pageType }) => {
                         {item.form_title}
                       </h1>
                       <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
-                        <li>
-                          <Smartphone className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
-                              key={key}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`tel:${item.contact_no_contact}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_contact}
-                            </p>
-                          ))}
-                        </li>
-                        <li>
-                          <Mail className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-[16px] font-hindRegular"
-                              key={key}
+                              <Smartphone className="fill-beige" />
+                              <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                                {item.contact_no_contact}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`mailto:${item.contact_no_email}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_email}
+                              <Mail className="fill-beige" />
+                              <p className="text-[16px] font-hindRegular">
+                                {item.contact_no_email}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        <li>
+                          <a
+                            href={item.form_facebook_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Facebook className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_facebook}
                             </p>
-                          ))}
+                          </a>
                         </li>
                         <li>
-                          <Facebook className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_facebook}
-                          </p>
+                          <a
+                            href={item.form_instagram_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Instagram className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_instagram}
+                            </p>
+                          </a>
                         </li>
                         <li>
-                          <Instagram className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_instagram}
-                          </p>
-                        </li>
-                        <li>
-                          <Linkedin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_linkedIn}
-                          </p>
+                          <a
+                            href={item.form_linkedIn_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Linkedin className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_linkedIn}
+                            </p>
+                          </a>
                         </li>
                       </ul>
                     </div>
@@ -383,45 +483,70 @@ const ContactForm = ({ pageType }) => {
                         {item.form_title}
                       </h1>
                       <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
-                        <li>
-                          <Smartphone className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
-                              key={key}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`tel:${item.contact_no_contact}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_contact}
-                            </p>
-                          ))}
-                        </li>
-                        <li>
-                          <Mail className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-[16px] font-hindRegular"
-                              key={key}
+                              <Smartphone className="fill-beige" />
+                              <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                                {item.contact_no_contact}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`mailto:${item.contact_no_email}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_email}
+                              <Mail className="fill-beige" />
+                              <p className="text-[16px] font-hindRegular">
+                                {item.contact_no_email}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        <li>
+                          <a
+                            href={item.form_facebook_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Facebook className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_facebook}
                             </p>
-                          ))}
+                          </a>
                         </li>
                         <li>
-                          <Facebook className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_facebook}
-                          </p>
+                          <a
+                            href={item.form_instagram_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Instagram className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_instagram}
+                            </p>
+                          </a>
                         </li>
                         <li>
-                          <Instagram className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_instagram}
-                          </p>
-                        </li>
-                        <li>
-                          <Linkedin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_linkedIn}
-                          </p>
+                          <a
+                            href={item.form_linkedIn_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Linkedin className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_linkedIn}
+                            </p>
+                          </a>
                         </li>
                       </ul>
                     </div>
@@ -446,45 +571,70 @@ const ContactForm = ({ pageType }) => {
                         {item.form_title}
                       </h1>
                       <ul className="flex flex-col gap-6 [&>li]:flex [&>li]:items-center [&>li]:gap-4 mb-10 lg:mb-0">
-                        <li>
-                          <Smartphone className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
-                              key={key}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`tel:${item.contact_no_contact}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_contact}
-                            </p>
-                          ))}
-                        </li>
-                        <li>
-                          <Mail className="fill-beige" />
-                          {contactNoData?.data.map((item, key) => (
-                            <p
-                              className="text-[16px] font-hindRegular"
-                              key={key}
+                              <Smartphone className="fill-beige" />
+                              <p className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold">
+                                {item.contact_no_contact}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        {contactNoData?.data.map((item, key) => (
+                          <li key={key}>
+                            <a
+                              href={`mailto:${item.contact_no_email}`}
+                              className="flex items-center gap-4"
                             >
-                              {item.contact_no_email}
+                              <Mail className="fill-beige" />
+                              <p className="text-[16px] font-hindRegular">
+                                {item.contact_no_email}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
+                        <li>
+                          <a
+                            href={item.form_facebook_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Facebook className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_facebook}
                             </p>
-                          ))}
+                          </a>
                         </li>
                         <li>
-                          <Facebook className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_facebook}
-                          </p>
+                          <a
+                            href={item.form_instagram_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Instagram className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_instagram}
+                            </p>
+                          </a>
                         </li>
                         <li>
-                          <Instagram className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_instagram}
-                          </p>
-                        </li>
-                        <li>
-                          <Linkedin className="fill-beige" />
-                          <p className="text-[16px] font-hindRegular">
-                            {item.form_linkedIn}
-                          </p>
+                          <a
+                            href={item.form_linkedIn_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-4"
+                          >
+                            <Linkedin className="fill-beige" />
+                            <p className="text-[16px] font-hindRegular">
+                              {item.form_linkedIn}
+                            </p>
+                          </a>
                         </li>
                       </ul>
                     </div>
