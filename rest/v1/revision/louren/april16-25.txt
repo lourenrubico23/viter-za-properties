@@ -1,0 +1,19 @@
+Upload JSX
+
+    IMAGE: 
+        -> public/img/za-logo-black.png to upload
+        -> public/img/za-properties-logo.png to upload
+        -> public/img/za-properties-logo-email.png to upload
+
+    CONTROLLERS:
+        -> 
+
+    MODELS:
+        -> 
+
+    HTACCESS: 
+        ->
+
+    DATABASE:
+        -> 
+    

@@ -84,7 +84,7 @@ const BannerTable = ({
                   </div>
                   <div className="flex flex-col gap-2">
                     <span htmlFor="" className="text-xs font-hindRegular">
-                      Location
+                      City
                     </span>
                     <select
                       name="location"

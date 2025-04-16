@@ -254,7 +254,7 @@ const Properties = () => {
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span className="text-xs font-hindRegular">Location</span>
+                  <span className="text-xs font-hindRegular">City</span>
                   <select
                     name="location"
                     value={location}
