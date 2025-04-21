@@ -324,7 +324,10 @@ const Properties = () => {
           />
 
           <ContactForm pageType={"Properties"} />
-          <Footer />
+          <Footer
+            handleChangePropertyType={handleChangePropertyType}
+            propertyType={propertyType}
+          />
         </div>
       </div>
     </>

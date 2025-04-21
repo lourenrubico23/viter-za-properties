@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import useQueryData from "../custom-hooks/useQueryData";
 import {
   copyrightYear,
@@ -8,8 +8,15 @@ import {
   googleHDViewLink,
 } from "../helpers/functions-general";
 import LoadImages from "./LoadImages";
+import { queryDataInfinite } from "../custom-hooks/queryDataInfinite";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { StoreContext } from "../../store/StoreContext";
+import { setIsSearch } from "../../store/StoreAction";
 
-const Footer = () => {
+const Footer = ({ handleChangePropertyType, propertyType }) => {
+  // const topRef = useRef(null);
+  // topRef.current?.scrollIntoView({ behavior: "smooth" });
+
   const { data: logoData } = useQueryData(
     `${devApiVersion}/logo`, // endpoint
     "get", // method
@@ -27,6 +34,7 @@ const Footer = () => {
     "get", // method
     "property-type" // key
   );
+
   return (
     <>
       <div className="bg-primary py-12">
@@ -73,16 +81,36 @@ const Footer = () => {
                 <p className="text-lg font-poppins font-bold uppercase">
                   Property List
                 </p>
-                <ul className="[&>li]:font-poppins [&>li]:text-sm flex flex-col gap-2">
+                <ul
+                  className="[&>li]:font-poppins [&>li]:text-sm flex flex-col gap-2"
+                  value={propertyType}
+                >
                   {propertyTypeData?.data.map((item, key) => (
-                    <li key={key}>{item.property_type_name}</li>
+                    <li
+                      key={key}
+                      onClick={(e) => handleChangePropertyType(e)}
+                      value={item.property_type_aid}
+                      className="cursor-pointer"
+                    >
+                      {item.property_type_name}
+                    </li>
                   ))}
-                  {/* <li>Residential</li>
-                  <li>Building</li>
-                  <li>Condominium</li>
-                  <li>Foreclosed</li>
-                  <li>Industrial</li> */}
                 </ul>
+                {/* <select
+                  name="type"
+                  value={propertyType}
+                  onChange={(e) => handleChangePropertyType(e)}
+                  className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[255px] "
+                  disabled={isFetching || status === "pending"}
+                >
+                  <option value="all">Any</option>
+
+                  {propertyTypeData?.data.map((item, key) => (
+                    <option key={key} value={item.property_type_aid}>
+                      {item.property_type_name}
+                    </option>
+                  ))}
+                </select> */}
               </div>
               <div className="flex flex-col gap-4">
                 <p className="text-lg font-poppins font-bold uppercase">

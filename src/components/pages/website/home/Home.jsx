@@ -143,7 +143,6 @@ const Home = () => {
       setIsFilter(true);
     }
     setPage(1);
-    console.log(propertyStatusData);
   };
 
   const handleChangePropertyLocation = (e) => {
@@ -155,7 +154,6 @@ const Home = () => {
       setIsFilter(true);
     }
     setPage(1);
-    console.log(location);
   };
 
   const handleChangePropertyType = (e) => {
@@ -167,7 +165,6 @@ const Home = () => {
       setIsFilter(true);
     }
     setPage(1);
-    console.log(location);
   };
 
   // Fetch cities from the API
@@ -376,7 +373,7 @@ const Home = () => {
 
           <Testimonials />
           <ContactForm pageType="Home" />
-          <Footer />
+          <Footer handleChangePropertyType={handleChangePropertyType} propertyType={propertyType}/>
         </div>
       </div>
     </>
