@@ -13,10 +13,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { StoreContext } from "../../store/StoreContext";
 import { setIsSearch } from "../../store/StoreAction";
 
-const Footer = ({ handleChangePropertyType, propertyType }) => {
-  // const topRef = useRef(null);
-  // topRef.current?.scrollIntoView({ behavior: "smooth" });
-
+const Footer = ({ handleChangePropertyType, propertyType, featuredRef }) => {
   const { data: logoData } = useQueryData(
     `${devApiVersion}/logo`, // endpoint
     "get", // method
@@ -96,21 +93,6 @@ const Footer = ({ handleChangePropertyType, propertyType }) => {
                     </li>
                   ))}
                 </ul>
-                {/* <select
-                  name="type"
-                  value={propertyType}
-                  onChange={(e) => handleChangePropertyType(e)}
-                  className="rounded-none border-[2px] w-[250px] md:w-[280px] lg:!h-[46px] lg:max-w-[255px] "
-                  disabled={isFetching || status === "pending"}
-                >
-                  <option value="all">Any</option>
-
-                  {propertyTypeData?.data.map((item, key) => (
-                    <option key={key} value={item.property_type_aid}>
-                      {item.property_type_name}
-                    </option>
-                  ))}
-                </select> */}
               </div>
               <div className="flex flex-col gap-4">
                 <p className="text-lg font-poppins font-bold uppercase">

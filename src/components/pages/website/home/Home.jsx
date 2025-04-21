@@ -33,6 +33,8 @@ const Home = () => {
   const [page, setPage] = React.useState(1);
   const search = React.useRef(null);
 
+  const featuredRef = React.useRef(null);
+
   const {
     isFetchingBanner,
     isLoading: isLoadingBanner,
@@ -165,6 +167,7 @@ const Home = () => {
       setIsFilter(true);
     }
     setPage(1);
+    featuredRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Fetch cities from the API
@@ -317,12 +320,14 @@ const Home = () => {
             </div>
           </div>
 
-          <FeaturedProperties
-            pageType="home"
-            result={result}
-            status={status}
-            error={error}
-          />
+          <div ref={featuredRef}>
+            <FeaturedProperties
+              pageType="home"
+              result={result}
+              status={status}
+              error={error}
+            />
+          </div>
 
           <SellProperty />
 
@@ -373,7 +378,11 @@ const Home = () => {
 
           <Testimonials />
           <ContactForm pageType="Home" />
-          <Footer handleChangePropertyType={handleChangePropertyType} propertyType={propertyType}/>
+          <Footer
+            handleChangePropertyType={handleChangePropertyType}
+            propertyType={propertyType}
+            featuredRef={featuredRef}
+          />
         </div>
       </div>
     </>

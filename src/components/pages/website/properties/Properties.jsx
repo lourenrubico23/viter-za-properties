@@ -35,6 +35,8 @@ const Properties = () => {
   const [page, setPage] = React.useState(1);
   const search = React.useRef({ value: "" });
 
+  const featuredRef = React.useRef(null);
+
   const { isLoadingBanner, data: bannerData } = useQueryData(
     `${devApiVersion}/banner`, // endpoint
     "get", // method
@@ -140,7 +142,6 @@ const Properties = () => {
       setIsFilter(true);
     }
     setPage(1);
-    console.log(propertyStatusData);
   };
 
   const handleChangePropertyLocation = (e) => {
@@ -152,7 +153,6 @@ const Properties = () => {
       setIsFilter(true);
     }
     setPage(1);
-    console.log(location);
   };
 
   const handleChangePropertyType = (e) => {
@@ -164,7 +164,7 @@ const Properties = () => {
       setIsFilter(true);
     }
     setPage(1);
-    console.log(location);
+    featuredRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   // Fetch cities from the API
@@ -316,17 +316,20 @@ const Properties = () => {
               </div>
             </div>
           </div>
-          <FeaturedProperties
-            pageType="properties"
-            result={result}
-            status={status}
-            error={error}
-          />
+          <div ref={featuredRef}>
+            <FeaturedProperties
+              pageType="properties"
+              result={result}
+              status={status}
+              error={error}
+            />
+          </div>
 
           <ContactForm pageType={"Properties"} />
           <Footer
             handleChangePropertyType={handleChangePropertyType}
             propertyType={propertyType}
+            featuredRef={featuredRef}
           />
         </div>
       </div>

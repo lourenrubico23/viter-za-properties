@@ -290,55 +290,57 @@ const PropertyDescriptionPage = ({
                         </ul>
                       </div>
                     )}
-                    {item.list_best_buy && (
-                      <div className="flex flex-col gap-5 md:w-[50%]">
-                        <p className="title text-lg font-hindBold">
-                          Why This Property is a Best Buy:
-                        </p>
-                        <ul>
-                          {item.list_best_buy
-                            .split("\n") // Split by new lines
-                            .filter((best) => best.trim() !== "") // Remove empty lines
-                            .map((best, index) => (
-                              <li key={index} className="flex gap-1 ">
-                                <div>
-                                  <Check className="text-secondary h-5" />
-                                </div>{" "}
-                                <span className="text-sm">{best}</span>
-                              </li>
-                            ))}
-                        </ul>
-                        <p className="title text-lg font-hindBold">
-                          Your next investment, contact us.
-                        </p>
-                        {linksData?.data.map((item, key) => (
-                          <p
-                            className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
-                            key={key}
-                          >
-                            {item.links_contact}
-                          </p>
-                        ))}
-
-                        <div>
+                    <div className="flex flex-col gap-5 md:w-[50%]">
+                      {item.list_best_buy && (
+                        <>
                           <p className="title text-lg font-hindBold">
-                            Zac Alfanta
+                            Why This Property is a Best Buy:
                           </p>
-                          <p className="title text-xs font-hindBold">
-                            REALTOR ® | RE/MAX PREMIER
-                          </p>
-                          <p className="title text-xs font-hindBold">
-                            LICENSED REAL STATE BROKER 0033585
-                          </p>
-                        </div>
-                        <button
-                          className="btn !place-self-start"
-                          onClick={handleGoToPage}
+                          <ul>
+                            {item.list_best_buy
+                              .split("\n") // Split by new lines
+                              .filter((best) => best.trim() !== "") // Remove empty lines
+                              .map((best, index) => (
+                                <li key={index} className="flex gap-1 ">
+                                  <div>
+                                    <Check className="text-secondary h-5" />
+                                  </div>{" "}
+                                  <span className="text-sm">{best}</span>
+                                </li>
+                              ))}
+                          </ul>
+                        </>
+                      )}
+                      <p className="title text-lg font-hindBold">
+                        Your next investment, contact us.
+                      </p>
+                      {linksData?.data.map((item, key) => (
+                        <p
+                          className="text-secondary text-[clamp(20px,3vw,34px)] font-hindBold"
+                          key={key}
                         >
-                          Message Us
-                        </button>
+                          {item.links_contact}
+                        </p>
+                      ))}
+
+                      <div>
+                        <p className="title text-lg font-hindBold">
+                          Zac Alfanta
+                        </p>
+                        <p className="title text-xs font-hindBold">
+                          REALTOR ® | RE/MAX PREMIER
+                        </p>
+                        <p className="title text-xs font-hindBold">
+                          LICENSED REAL STATE BROKER 0033585
+                        </p>
                       </div>
-                    )}
+                      <button
+                        className="btn !place-self-start"
+                        onClick={handleGoToPage}
+                      >
+                        Message Us
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
