@@ -122,7 +122,7 @@ class PropertyList
         try {
             $sql = "select * from {$this->tblPropertyList} ";
             $sql .= "order by list_is_active desc, ";
-            $sql .= "list_name desc ";
+            $sql .= "list_aid desc ";
             $query = $this->connection->query($sql);
         } catch (PDOException $ex) {
             $query = false;
@@ -142,7 +142,7 @@ class PropertyList
             $sql .= "where list.list_property_type_id = type.property_type_aid ";
             $sql .= "and list.list_property_status_id = status.property_status_aid ";
             $sql .= "order by list.list_is_active desc, ";
-            $sql .= "list.list_name desc ";
+            $sql .= "list.list_aid desc ";
             $sql .= "limit :start, ";
             $sql .= ":total ";
             $query = $this->connection->prepare($sql);
@@ -162,7 +162,7 @@ class PropertyList
         try {
             $sql = "select * from {$this->tblPropertyList} ";
             $sql .= "where list_aid = :list_aid ";
-            $sql .= "order by list_name desc ";
+            $sql .= "order by list_aid desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_aid" => $this->list_aid,
@@ -191,7 +191,7 @@ class PropertyList
             $sql .= "or list.list_location like :list_location ";
             $sql .= "or status.property_status_name like :property_status_name) ";
             $sql .= "order by list.list_is_active desc, ";
-            $sql .= "list.list_name desc ";
+            $sql .= "list.list_aid desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
