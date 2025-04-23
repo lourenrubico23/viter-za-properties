@@ -123,9 +123,9 @@ const BlogsTable = ({ setItemEdit }) => {
             <tr className="text-[black]">
               <th className="pl-2 w-[1rem]">#</th>
               <th>Status</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Published Date</th>
+              <th className="min-w-[8rem]">Title</th>
+              <th className="min-w-[8rem]">Author</th>
+              <th className="min-w-[8rem]">Published Date</th>
               <th className="w-[10rem]">Brief Description</th>
               <th className="w-[10rem]">Body Section A</th>
               <th className="w-[10rem]">Body Section B</th>
@@ -196,13 +196,13 @@ const BlogsTable = ({ setItemEdit }) => {
                         </p>
                       </td>
                       <td className="place-content-start">
-                        <p className="line-clamp-5">
+                        <div className="line-clamp-3">
                           {blogsImages.map((img, index) => (
-                            <span key={index} className="text-[12px]">
+                            <p key={index} className="text-[12px]">
                               {img.name}
-                            </span>
+                            </p>
                           ))}
-                        </p>
+                        </div>
                       </td>
                       <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
                         {item.blogs_is_active ? (

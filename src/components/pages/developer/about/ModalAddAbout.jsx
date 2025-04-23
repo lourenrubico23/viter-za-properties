@@ -343,6 +343,10 @@ const ModalAddAbout = ({ itemEdit, aboutData }) => {
                                   );
                                 })}
                             </ol>
+                            <p className="pt-5 text-xs">
+                              Upload PhotoSuggested size is 570x688 pixels and
+                              maximum 50kb
+                            </p>
                           </div>
                         </div>
                         <div className="w-[300px]">
@@ -494,6 +498,10 @@ const ModalAddAbout = ({ itemEdit, aboutData }) => {
                                   );
                                 })}
                             </ol>
+                            <p className="pt-5 text-xs">
+                              Upload PhotoSuggested size is 140x140 pixels and
+                              maximum 20kb
+                            </p>
                           </div>
                         </div>
                       </div>

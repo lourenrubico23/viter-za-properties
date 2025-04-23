@@ -235,7 +235,7 @@ const Properties = () => {
               <div className="flex flex-col lg:flex lg:flex-row gap-5 items-center ">
                 <div className="flex flex-col gap-2">
                   <span htmlFor="" className="text-xs font-hindRegular">
-                    Properties Status
+                    Property
                   </span>
                   <select
                     name="status"

@@ -71,7 +71,6 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     itemEdit ? itemEdit.list_city : ""
   );
 
-
   React.useEffect(() => {
     fetch("https://psgc.gitlab.io/api/cities/")
       .then((response) => response.json())
@@ -596,7 +595,7 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                         </div>
                       </div>
                       <div className=" w-[50%] ">
-                        <span className="top-20 px-2 text-[12px]"></span>
+                        <span className=" px-2 text-[12px]"></span>
 
                         <div
                           className={`relative mt-7 mb-6 border border-gray-300 rounded-md hover:border-primary hover:border-dashed ${
@@ -706,6 +705,10 @@ const ModalAddPropertyList = ({ itemEdit }) => {
                               })}
                           </ol>
                         </div>
+                        <span className="">
+                          Upload PhotoSuggested size is 980x530 pixels and
+                          maximum 50kb
+                        </span>
                       </div>
                     </div>
                     <div

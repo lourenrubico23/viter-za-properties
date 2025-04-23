@@ -82,7 +82,7 @@ const PropertiesList = ({ pageType }) => {
                   onClick={() => handleOpenDescription(item)}
                   key={key}
                 >
-                  <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform relative">
+                  <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] max-h-[442px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform relative">
                     <div className="overflow-hidden">
                       {firstImage && (
                         <LoadImages
@@ -99,7 +99,7 @@ const PropertiesList = ({ pageType }) => {
                     <div className="p-5 flex flex-col gap-5">
                       {item.list_price && (
                         <p className="text-[clamp(20px,3vw,24px)] font-robotoBold">
-                          <span className="text-lg">&#8369;</span>{" "}
+                          <span className="text-[clamp(20px,3vw,24px)]">&#8369;</span>
                           {item.list_price}
                         </p>
                       )}
@@ -152,8 +152,14 @@ const PropertiesList = ({ pageType }) => {
         {pageType === "properties" && (
           <div className="place-self-center my-7">
             {hasMoreProperties ? (
-              <button className="btn" onClick={handleLoadMore}>
-                Load More
+              <button
+                className="text-sm font-semibold relative pb-1 transition duration-300 
+              before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 
+              before:bg-secondary before:transition-transform before:duration-300 before:scale-x-0 
+              hover:before:scale-x-100"
+                onClick={handleLoadMore}
+              >
+                Load more
               </button>
             ) : (
               <p className="text-gray-400 text-base">

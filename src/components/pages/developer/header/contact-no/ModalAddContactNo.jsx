@@ -288,6 +288,10 @@ const ModalAddContactNo = ({ itemEdit, contactNoData }) => {
                               );
                             })}
                         </ol>
+                        <p className="pt-5 text-xs">
+                          Upload PhotoSuggested size is 150x150 pixels and
+                          maximum 20kb
+                        </p>
                       </div>
                     </div>
                     <div className="input-wrapper">

@@ -290,6 +290,10 @@ const ModalAddPropertiesBanner = ({ itemEdit, bannerData }) => {
                             })}
                         </ol>
                       </div>
+                      <span className="">
+                        Upload PhotoSuggested size is 1660x420 pixels and
+                        maximum 80kb
+                      </span>
                     </div>
                     <div className="input-wrapper">
                       <InputSelect

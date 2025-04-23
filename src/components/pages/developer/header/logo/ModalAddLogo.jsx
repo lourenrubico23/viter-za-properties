@@ -290,6 +290,10 @@ const ModalAddLogo = ({ itemEdit, logoData }) => {
                               })}
                           </ol>
                         </div>
+                        <span className="">
+                          Upload PhotoSuggested size is 100x100 pixels and
+                          maximum 20kb
+                        </span>
                       </div>
                       <div className="input-wrapper">
                         <InputText

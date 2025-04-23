@@ -124,20 +124,20 @@ const PropertyListTable = ({ setItemEdit }) => {
             <tr className="text-[black]">
               <th className="pl-2 w-[1rem]">#</th>
               <th>Status</th>
-              <th className="w-[15rem]">Name</th>
+              <th className="min-w-[10rem]">Name</th>
               <th>Price</th>
-              <th className="w-[10rem]">Location</th>
-              <th className="w-[6rem]">Property Type</th>
-              <th className="w-[6rem]">Property Status</th>
-              <th className="w-[6rem]">Property ID</th>
-              <th className="w-[6rem]">Floor Area</th>
-              <th className="w-[6rem]">Lot Area</th>
+              <th className="min-w-[8rem]">Location</th>
+              <th className="min-w-[6rem]">Property Type</th>
+              <th className="min-w-[6rem]">Property Status</th>
+              <th className="min-w-[6rem]">Property ID</th>
+              <th className="min-w-[6rem]">Floor Area</th>
+              <th className="min-w-[6rem]">Lot Area</th>
               <th>Bedrooms</th>
               <th>Bathrooms</th>
               <th>Carport</th>
-              <th className="w-[10rem]">Key Features</th>
-              <th className="w-[15rem]">Why This Property is a Best Buy</th>
-              <th>Images</th>
+              <th className="min-w-[10rem]">Key Features</th>
+              <th className="min-w-[15rem]">Why This Property is a Best Buy</th>
+              <th className="min-w-[15rem]">Images</th>
               <th className="text-right">Actions</th>
             </tr>
           </thead>
@@ -211,13 +211,13 @@ const PropertyListTable = ({ setItemEdit }) => {
                         </p>
                       </td>
                       <td className="place-content-start ">
-                        <p className="line-clamp-5 ">
+                        <div className="line-clamp-3">
                           {propertyImages.map((img, index) => (
-                            <span key={index} className="text-[12px]">
+                            <p key={index} className="text-[12px]">
                               {img.name}
-                            </span>
+                            </p>
                           ))}
-                        </p>
+                        </div>
                       </td>
                       <td className="flex items-center gap-3 justify-end mt-2 lg:mt-0">
                         {item.list_is_active ? (
