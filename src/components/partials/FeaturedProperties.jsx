@@ -115,7 +115,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
                       onClick={() => handleOpenDescription(item)}
                       key={key}
                     >
-                      <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform relative">
+                      <div className="rounded-md group hover:scale-[1.01] hover:duration-200 md:min-w-[374px] md:max-w-[374px] max-h-[442px] min-h-[442px] hover:shadow-xl border overflow-hidden transition-transform relative">
                         <div className="overflow-hidden relative">
                           {firstImage && (
                             <LoadImages
@@ -132,7 +132,9 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
                         <div className="p-5 flex flex-col gap-5">
                           {item.list_price && (
                             <p className="text-[clamp(20px,3vw,24px)] font-robotoBold">
-                              <span className="text-lg">&#8369;</span>{" "}
+                              <span className="text-[clamp(20px,3vw,24px)]">
+                                &#8369;
+                              </span>
                               {item.list_price}
                             </p>
                           )}
@@ -149,7 +151,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
                             )}
                           </div>
                           {item.list_name && (
-                            <p className="text-[clamp(16px,3vw,18px)] font-hindBold leading-5">
+                            <p className="text-[clamp(16px,3vw,18px)] font-hindBold leading-5 line-clamp-2">
                               {item.list_name}
                             </p>
                           )}

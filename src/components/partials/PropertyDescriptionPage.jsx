@@ -254,8 +254,8 @@ const PropertyDescriptionPage = ({
                         <p>{item.list_location}</p>
                       </div>
                     )}
-                    <div className="flex gap-5 items-center">
-                      <span className="text-xl">&#8369;</span>
+                    <div className="flex gap-2 ">
+                      <span className="text-2xl font-robotoBold">&#8369;</span>
                       <p className="text-secondary text-2xl font-hindBold">
                         {item.list_price}
                       </p>

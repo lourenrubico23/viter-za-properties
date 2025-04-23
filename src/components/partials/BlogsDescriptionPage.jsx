@@ -104,25 +104,29 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
               </button>
             </div>
 
-            <div className="md:mx-[10%] lg:mx-[190px] py-[52px] flex flex-col gap-8 relative text-justify ">
+            <div className="md:mx-[10%] lg:mx-[190px] py-[52px] flex flex-col gap-6 relative text-justify ">
               {post.blogs_contents_a
                 .split("\n") // Split by new lines
                 .filter((content_a) => content_a.trim() !== "") // Remove empty lines
                 .map((content_a, index) => (
-                  <p key={index}>{content_a}</p>
+                  <p key={index} className="md:text-base">
+                    {content_a}
+                  </p>
                 ))}
               {firstImage && (
                 <LoadImages
                   url={`${googleHDViewLink}${firstImage?.id}`}
                   alt={`${post.blogs_title}`}
-                  className="my-10"
+                  className="mb-10 mt-5 max-h-[500px] object-cover"
                 />
               )}
               {post.blogs_contents_b
                 .split("\n") // Split by new lines
                 .filter((content_b) => content_b.trim() !== "") // Remove empty lines
                 .map((content_b, index) => (
-                  <p key={index}>{content_b}</p>
+                  <p key={index} className="md:text-base">
+                    {content_b}
+                  </p>
                 ))}
               <div className="flex flex-wrap gap-4 md:max-w-[850px] place-content-center relative">
                 {blogsImages.slice(1).map((image, index) => (
@@ -138,7 +142,9 @@ const BlogsDescriptionPage = ({ setSearchParams }) => {
                 .split("\n") // Split by new lines
                 .filter((content_c) => content_c.trim() !== "") // Remove empty lines
                 .map((content_c, index) => (
-                  <p key={index}>{content_c}</p>
+                  <p key={index} className="md:text-base">
+                    {content_c}
+                  </p>
                 ))}
               <div className="my-7 place-self-start">
                 <button

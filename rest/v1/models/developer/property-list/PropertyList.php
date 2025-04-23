@@ -122,7 +122,7 @@ class PropertyList
         try {
             $sql = "select * from {$this->tblPropertyList} ";
             $sql .= "order by list_is_active desc, ";
-            $sql .= "list_name asc ";
+            $sql .= "list_name desc ";
             $query = $this->connection->query($sql);
         } catch (PDOException $ex) {
             $query = false;
@@ -142,7 +142,7 @@ class PropertyList
             $sql .= "where list.list_property_type_id = type.property_type_aid ";
             $sql .= "and list.list_property_status_id = status.property_status_aid ";
             $sql .= "order by list.list_is_active desc, ";
-            $sql .= "list.list_name asc ";
+            $sql .= "list.list_name desc ";
             $sql .= "limit :start, ";
             $sql .= ":total ";
             $query = $this->connection->prepare($sql);
@@ -162,7 +162,7 @@ class PropertyList
         try {
             $sql = "select * from {$this->tblPropertyList} ";
             $sql .= "where list_aid = :list_aid ";
-            $sql .= "order by list_name asc ";
+            $sql .= "order by list_name desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_aid" => $this->list_aid,
@@ -191,7 +191,7 @@ class PropertyList
             $sql .= "or list.list_location like :list_location ";
             $sql .= "or status.property_status_name like :property_status_name) ";
             $sql .= "order by list.list_is_active desc, ";
-            $sql .= "list.list_name asc ";
+            $sql .= "list.list_name desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -321,7 +321,7 @@ class PropertyList
             $sql .= "where property_type_name like :property_type_name ";
             $sql .= "and property_type_is_active = 1 ";
             $sql .= "order by ";
-            $sql .= "property_type_name asc ";
+            $sql .= "property_type_name desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "property_type_name" => "%{$this->list_search}%",
@@ -341,7 +341,7 @@ class PropertyList
             $sql .= "where property_status_name like :property_status_name ";
             $sql .= "and property_status_is_active = 1 ";
             $sql .= "order by ";
-            $sql .= "property_status_name asc ";
+            $sql .= "property_status_name desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "property_status_name" => "%{$this->list_search}%",
@@ -361,8 +361,8 @@ class PropertyList
             $sql .= "{$this->tblPropertyList} ";
             $sql .= "where list_property_status_id = :list_property_status_id ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_status_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_status_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_property_status_id" => $this->list_property_status_id,
@@ -382,8 +382,8 @@ class PropertyList
             $sql .= "{$this->tblPropertyList} ";
             $sql .= "where list_city = :list_city ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_city asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_city desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_city" => $this->list_city,
@@ -403,8 +403,8 @@ class PropertyList
             $sql .= "{$this->tblPropertyList} ";
             $sql .= "where list_property_type_id = :list_property_type_id ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_type_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_type_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_property_type_id" => $this->list_property_type_id,
@@ -425,8 +425,8 @@ class PropertyList
             $sql .= "where list_property_status_id = :list_property_status_id ";
             $sql .= "and list_city = :list_city ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_status_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_status_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_property_status_id" => $this->list_property_status_id,
@@ -448,8 +448,8 @@ class PropertyList
             $sql .= "where list_property_status_id = :list_property_status_id ";
             $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_status_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_status_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_property_status_id" => $this->list_property_status_id,
@@ -471,8 +471,8 @@ class PropertyList
             $sql .= "where list_city = :list_city ";
             $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_city asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_city desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_city" => $this->list_city,
@@ -495,8 +495,8 @@ class PropertyList
             $sql .= "and list_property_type_id = :list_property_type_id ";
             $sql .= "and list_property_status_id = :list_property_status_id ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_city asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_city desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_city" => $this->list_city,
@@ -528,8 +528,8 @@ class PropertyList
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_status_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_status_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -568,8 +568,8 @@ class PropertyList
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_city asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_city desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -608,8 +608,8 @@ class PropertyList
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_type_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_type_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -649,8 +649,8 @@ class PropertyList
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_status_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_status_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -690,8 +690,8 @@ class PropertyList
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_property_status_id asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_property_status_id desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -731,8 +731,8 @@ class PropertyList
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_city asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_city desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
@@ -773,8 +773,8 @@ class PropertyList
             $sql .= "or list_best_buy like :list_best_buy ";
             $sql .= "or list_bathrooms like :list_bathrooms) ";
             $sql .= "order by list_created desc, ";
-            $sql .= "list_name asc, ";
-            $sql .= "list_city asc ";
+            $sql .= "list_name desc, ";
+            $sql .= "list_city desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "list_name" => "%{$this->list_search}%",
