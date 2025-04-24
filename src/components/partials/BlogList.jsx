@@ -83,12 +83,12 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
                 key={index}
                 className="group hover:border-secondary hover:scale-[1.01] hover:duration-200 md:max-w-[372px] md:min-w-[372px] md:min-h-[555px] max-w-[320px] min-w-[320px] min-h-[500px] hover:shadow-xl border overflow-hidden transition-transform place-items-center"
               >
-                <div className="overflow-hidden relative">
+                <div className="overflow-hidden relative h-[246px]">
                   {firstImage && (
                     <LoadImages
                       url={`${googleHDViewLink}${firstImage?.id}`}
                       alt="Property Image"
-                      className="w-full h-[246px] object-cover transition-transform duration-200 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
                     />
                   )}
                 </div>
@@ -97,7 +97,9 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
                   <div className=" font-hindBold text-center ">
                     <p className="text-lg">{item.blogs_title}</p>
                   </div>
-                  <p className="text-[16px] text-justify">{item.blogs_brief_description}</p>
+                  <p className="text-[16px] text-justify">
+                    {item.blogs_brief_description}
+                  </p>
                 </div>
                 <Link
                   className="btn group-hover:shadow-[inset_300px_0_0_0_#007B80] mb-5"

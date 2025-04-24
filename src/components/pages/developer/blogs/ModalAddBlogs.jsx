@@ -361,9 +361,9 @@ const ModalAddBlogs = ({ itemEdit }) => {
                           </ol>
                         </div>
                         <span className="">
-                          Upload PhotoSuggested size is 680x500 pixels and
+                          Upload PhotoSuggested size is 880x500 pixels and
                           maximum 50kb
-                        </span>
+                        </span> 
                       </div>
                     </div>
                     <div
