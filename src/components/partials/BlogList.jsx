@@ -95,7 +95,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
 
                 <div className="p-6 flex flex-col gap-7 min-h-[240px]">
                   <div className=" font-hindBold text-center ">
-                    <p className="text-lg">{item.blogs_title}</p>
+                    <p className="text-lg line-clamp-2">{item.blogs_title}</p>
                   </div>
                   <p className="text-[16px] text-justify">
                     {item.blogs_brief_description}
