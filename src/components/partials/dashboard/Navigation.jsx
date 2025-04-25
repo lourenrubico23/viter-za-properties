@@ -257,13 +257,27 @@ const Navigation = ({ menu, submenu }) => {
                     to={`${devNavUrl}/${link}/property-status`}
                   >
                     <li
-                      className={`text-xs  border-transparent ${
+                      className={`text-xs my-2 border-transparent ${
                         submenu === "property-status"
                           ? "text-secondary font-bold"
                           : "border-none text-dark"
                       }`}
                     >
                       Property Status
+                    </li>
+                  </Link>
+                  <Link
+                    className="!p-0"
+                    to={`${devNavUrl}/${link}/featured-properties`}
+                  >
+                    <li
+                      className={`text-xs  border-transparent ${
+                        submenu === "featured-properties"
+                          ? "text-secondary font-bold"
+                          : "border-none text-dark"
+                      }`}
+                    >
+                      Featured Properties
                     </li>
                   </Link>
                 </ul>

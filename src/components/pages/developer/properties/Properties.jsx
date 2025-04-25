@@ -64,6 +64,8 @@ const Properties = () => {
     "property-type" // key
   );
 
+
+
   const handleAdd = () => {
     dispatch(setIsAdd({ modal: true, modalCode: "links" }));
     setItemEdit("linksUpdate");
@@ -88,6 +90,8 @@ const Properties = () => {
     dispatch(setIsAdd({ modal: true, modalCode: "footer" }));
     setItemEdit("footerUpdate");
   };
+
+
 
   return (
     <>

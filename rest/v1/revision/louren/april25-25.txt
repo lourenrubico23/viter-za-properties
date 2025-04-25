@@ -1,0 +1,20 @@
+Upload JSX
+
+    IMAGE: 
+        -> 
+
+    CONTROLLERS:
+        -> rest/v1/controllers/developer/featured-properties
+
+    MODELS:
+        -> rest/v1/models/developer/property-list/PropertyList.php
+        -> rest/v1/models/developer/featured-properties
+
+    HTACCESS: 
+        -> # FEATURED PROPERTIES is added
+
+    DATABASE:
+        -> rest/v1/db-backup/zapv1_featured_properties.sql
+    
+
+    

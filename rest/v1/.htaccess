@@ -58,6 +58,14 @@ RewriteRule ^property-list/search$ controllers/developer/property-list/search.ph
 RewriteRule ^property-list/property-type-search$ controllers/developer/property-list/search-property-type.php [L]
 RewriteRule ^property-list/property-status-search$ controllers/developer/property-list/search-property-status.php [L]
 
+# FEATURED PROPERTIES
+RewriteRule ^featured-properties$ controllers/developer/featured-properties/featuredProperties.php [L]
+RewriteRule ^featured-properties/([0-9]+)$ controllers/developer/featured-properties/featuredProperties.php?featured_propertiesid=$1 [L]
+RewriteRule ^featured-properties/active/([0-9]+)$ controllers/developer/featured-properties/active.php?featured_propertiesid=$1 [L]
+RewriteRule ^featured-properties/page/([0-9]+)$ controllers/developer/featured-properties/page.php?start=$1 [L]
+RewriteRule ^featured-properties/search$ controllers/developer/featured-properties/search.php [L]
+RewriteRule ^featured-properties/property-list-search$ controllers/developer/featured-properties/search-property-list.php [L]
+
 # ABOUT
 RewriteRule ^about$ controllers/developer/about/about.php [L]
 RewriteRule ^about/([0-9]+)$ controllers/developer/about/about.php?aboutid=$1 [L]

@@ -1,11 +1,12 @@
 import { Captions, Grid2x2, LandPlot } from "lucide-react";
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { setIsAdd } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import useQueryData from "../custom-hooks/useQueryData";
 import {
   devApiVersion,
+  devNavUrl,
   getConvertStringToJSONparseData,
   googleHDViewLink,
 } from "../helpers/functions-general";
@@ -39,6 +40,12 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
     "property-list" // key
   );
 
+  const { data: featuredPropertiesData } = useQueryData(
+    `${devApiVersion}/featured-properties`, // endpoint
+    "get", // method
+    "featured-properties" // key
+  );
+
   const totalProperties = propertyListData?.data.length || 0;
   const hasMoreProperties = visibleProperties < totalProperties;
 
@@ -52,7 +59,6 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
     setSearchParams({ property: formattedName });
 
     document.body.classList.toggle("overflow-hidden");
-    console.log("opendesc");
   };
 
   // Check URL on page load & open modal
@@ -98,6 +104,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
             <ServerErrorWebPage />
           </div>
         )}
+
         {result?.pages.map((page, key) => (
           <React.Fragment key={key}>
             <div className="flex flex-wrap gap-8 my-20 place-content-center">
@@ -186,7 +193,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
           </React.Fragment>
         ))}
 
-        {pageType === "properties" && (
+        {pageType === "properties" ? (
           <div className="place-self-center my-7">
             {hasMoreProperties ? (
               <button
@@ -203,6 +210,18 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
                 No more properties to show
               </p>
             )}
+          </div>
+        ) : (
+          <div className="place-self-center my-7">
+            <Link
+              to={`${devNavUrl}/properties`}
+              className="text-sm font-semibold relative pb-1 transition duration-300 
+          before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 
+          before:bg-secondary before:transition-transform before:duration-300 before:scale-x-0 
+          hover:before:scale-x-100"
+            >
+              Load more
+            </Link>
           </div>
         )}
       </div>

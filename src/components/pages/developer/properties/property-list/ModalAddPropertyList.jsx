@@ -90,7 +90,6 @@ const ModalAddPropertyList = ({ itemEdit }) => {
     setSelectedCity(e.target.value);
   };
 
-  console.log("Initial selectedCity:", selectedCity);
 
   // multiple files
   const {
