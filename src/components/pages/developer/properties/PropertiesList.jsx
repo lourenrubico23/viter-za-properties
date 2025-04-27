@@ -52,8 +52,13 @@ const PropertiesList = ({ pageType }) => {
     document.body.classList.toggle("overflow-hidden");
   };
 
-  const totalProperties = featuredPropertiesData?.data.length || 0;
+  const totalProperties = propertyListData?.data.length || 0;
   const hasMoreProperties = visibleProperties < totalProperties;
+
+  console.log("visibleProperties:", visibleProperties);
+  console.log("totalProperties:", totalProperties);
+  console.log("hasMoreProperties:", hasMoreProperties);
+
   return (
     <>
       <div className="bg-light mt-[450px] md:mt-[468px] lg:mt-[90px] customContainer lg:max-w-[1240px] ">
@@ -75,7 +80,7 @@ const PropertiesList = ({ pageType }) => {
         )}
 
         <div className="flex flex-wrap gap-8 my-20 place-content-center">
-          {featuredPropertiesData?.data
+          {propertyListData?.data
             .slice(0, isHomePage ? 6 : visibleProperties)
             .map((item, key) => {
               const propertyImages =

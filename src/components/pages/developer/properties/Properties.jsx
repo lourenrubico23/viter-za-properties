@@ -7,7 +7,6 @@ import DashboardNav from "../../../partials/dashboard/DashboardNav";
 import PropertiesBannerTable from "./banner/PropertiesBannerTable";
 import ModalAddPropertiesBanner from "./banner/ModalAddPropertiesBanner";
 import { setIsAdd } from "../../../../store/StoreAction";
-import PropertiesList from "../home/PropertiesList";
 import PropertyContactUsTable from "./property-contactUs/PropertyContactUsTable";
 import ModalAddPropertyContactUs from "./property-contactUs/ModalAddPropertyContactUs";
 import LinksTable from "../header/links/LinksTable";
@@ -18,6 +17,7 @@ import ContactNoTable from "../header/contact-no/ContactNoTable";
 import ModalAddContactNo from "../header/contact-no/ModalAddContactNo";
 import ModalSuccess from "../../../partials/modals/ModalSuccess";
 import ModalError from "../../../partials/modals/ModalError";
+import PropertiesList from "./PropertiesList";
 
 const Properties = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -64,8 +64,6 @@ const Properties = () => {
     "property-type" // key
   );
 
-
-
   const handleAdd = () => {
     dispatch(setIsAdd({ modal: true, modalCode: "links" }));
     setItemEdit("linksUpdate");
@@ -90,8 +88,6 @@ const Properties = () => {
     dispatch(setIsAdd({ modal: true, modalCode: "footer" }));
     setItemEdit("footerUpdate");
   };
-
-
 
   return (
     <>

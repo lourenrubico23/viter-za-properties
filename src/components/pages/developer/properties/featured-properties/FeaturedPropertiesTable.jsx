@@ -1,68 +1,46 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
-import { FaArchive, FaEdit } from "react-icons/fa";
-import { MdDelete, MdRestore } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { useInView } from "react-intersection-observer";
 
-import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
 import {
   setIsAdd,
-  setIsArchive,
-  setIsDelete,
-  setIsRestore,
+  setIsDelete
 } from "../../../../../store/StoreAction";
-import SearchBar from "../../../../partials/SearchBar";
-import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
-import TableLoading from "../../../../partials/spinners/TableLoading";
-import NoData from "../../../../partials/spinners/NoData";
-import ServerError from "../../../../partials/spinners/ServerError";
+import { StoreContext } from "../../../../../store/StoreContext";
 import {
-  devApiVersion,
-  getConvertStringToJSONparseData,
+  devApiVersion
 } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../partials/LoadMore";
 import ModalDelete from "../../../../partials/modals/ModalDelete";
-import { StoreContext } from "../../../../../store/StoreContext";
-import ModalArchive from "../../../../partials/modals/ModalArchive";
-import ModalRestore from "../../../../partials/modals/ModalRestore";
+import SearchBar from "../../../../partials/SearchBar";
+import FetchingSpinner from "../../../../partials/spinners/FetchingSpinner";
+import NoData from "../../../../partials/spinners/NoData";
+import ServerError from "../../../../partials/spinners/ServerError";
+import TableLoading from "../../../../partials/spinners/TableLoading";
 import Status from "../../../../partials/Status";
 
-const FeaturedPropertiesTable = ({ setItemEdit }) => {
+const FeaturedPropertiesTable = ({
+  setItemEdit,
+  result,
+  fetchNextPage,
+  isFetchingNextPage,
+  status,
+  isFetching,
+  setOnSearch,
+  onSearch,
+  error,
+  hasNextPage,
+  search,
+}) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [id, setIsId] = React.useState("");
   const [isData, setIsData] = React.useState("");
   const [isArchiving, setIsArchiving] = React.useState(false);
 
-  const [onSearch, setOnSearch] = React.useState(false);
   const [page, setPage] = React.useState(1);
-  const search = React.useRef({ value: "" });
-  const { ref, inView } = useInView();
 
-  const {
-    data: result,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery({
-    queryKey: ["featured-properties", onSearch, store.isSearch],
-    queryFn: async ({ pageParam = 1 }) =>
-      await queryDataInfinite(
-        `${devApiVersion}/featured-properties/search`, // search endpoint
-        `${devApiVersion}/featured-properties/page/${pageParam}`, // list endpoint
-        store.isSearch, // search boolean
-        { searchValue: search.current.value, id: "" } // search value
-      ),
-    getNextPageParam: (lastPage) => {
-      if (lastPage.page < lastPage.total) {
-        return lastPage.page + lastPage.count;
-      }
-      return;
-    },
-    refetchOnWindowFocus: false,
-  });
+  const { ref, inView } = useInView();
 
   let counter = 1;
 
@@ -170,15 +148,21 @@ const FeaturedPropertiesTable = ({ setItemEdit }) => {
           </tbody>
         </table>
         <div className="place-self-center">
-          <LoadMore
-            fetchNextPage={fetchNextPage}
-            isFetchingNextPage={isFetchingNextPage}
-            hasNextPage={hasNextPage}
-            result={result?.pages[0]}
-            setPage={setPage}
-            page={page}
-            refView={ref}
-          />
+          {result?.pages[0]?.data.length >= 6 ? (
+            <div className="loadmore my-8 p-1.5 text-center text-xs">
+              You have reached the maximum of 6 items.
+            </div>
+          ) : (
+            <LoadMore
+              fetchNextPage={fetchNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+              hasNextPage={hasNextPage}
+              result={result?.pages[0]}
+              setPage={setPage}
+              page={page}
+              refView={ref}
+            />
+          )}
         </div>
       </div>
 

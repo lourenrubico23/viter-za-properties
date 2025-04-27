@@ -12,12 +12,18 @@ import {
 } from "../helpers/functions-general";
 import LoadImages from "./LoadImages";
 import PropertyDescriptionPage from "./PropertyDescriptionPage";
+import FetchingSpinner from "./spinners/FetchingSpinner";
 import NoDataWebPage from "./spinners/NoDataWebPage";
 import ServerErrorWebPage from "./spinners/ServerErrorWebPage";
 import TableLoading from "./spinners/TableLoading";
-import FetchingSpinner from "./spinners/FetchingSpinner";
 
-const FeaturedProperties = ({ pageType, result, status, error }) => {
+const FeaturedProperties = ({
+  pageType,
+  result,
+  status,
+  error,
+  isSearching,
+}) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
   const [selectedPropertyId, setSelectedPropertyId] = React.useState(null);
@@ -45,6 +51,18 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
     "get", // method
     "featured-properties" // key
   );
+
+  // Ensure featuredPropertiesData.data is always an array
+  const featuredDataToRender = Array.isArray(featuredPropertiesData?.data)
+    ? featuredPropertiesData.data
+    : [];
+
+  // Check if we are on the home page or properties page, and set the data accordingly
+  const dataToRender = isSearching
+    ? result?.pages?.flatMap((page) => page?.data || []) // Show search results when searching
+    : isHomePage
+    ? featuredDataToRender // Show featured properties on the home page
+    : result?.pages?.flatMap((page) => page?.data || []); // Show all properties on the properties page
 
   const totalProperties = propertyListData?.data.length || 0;
   const hasMoreProperties = visibleProperties < totalProperties;
@@ -108,7 +126,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
         {result?.pages.map((page, key) => (
           <React.Fragment key={key}>
             <div className="flex flex-wrap gap-8 my-20 place-content-center">
-              {page?.data
+              {dataToRender
                 .slice(0, isHomePage ? 6 : visibleProperties)
                 .map((item, key) => {
                   const propertyImages =
@@ -220,7 +238,7 @@ const FeaturedProperties = ({ pageType, result, status, error }) => {
           before:bg-secondary before:transition-transform before:duration-300 before:scale-x-0 
           hover:before:scale-x-100"
             >
-              Load more
+              View more properties
             </Link>
           </div>
         )}

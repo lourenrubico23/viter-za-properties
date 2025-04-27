@@ -112,6 +112,9 @@ const Home = () => {
     refetchOnWindowFocus: false,
   });
 
+  const isSearching =
+    store.isSearch || isFilter || search?.current?.value?.trim() !== "";
+
   const handleChange = (e) => {
     console.log(e.value);
     if (e.target.value === "") {
@@ -326,6 +329,7 @@ const Home = () => {
               result={result}
               status={status}
               error={error}
+              isSearching={isSearching}
             />
           </div>
 

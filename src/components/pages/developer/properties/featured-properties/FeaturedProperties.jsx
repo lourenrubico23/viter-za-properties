@@ -1,7 +1,10 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { setIsAdd } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import { queryDataInfinite } from "../../../../custom-hooks/queryDataInfinite";
+import { devApiVersion } from "../../../../helpers/functions-general";
 import DashboardNav from "../../../../partials/dashboard/DashboardNav";
 import Navigation from "../../../../partials/dashboard/Navigation";
 import ModalError from "../../../../partials/modals/ModalError";
@@ -12,11 +15,40 @@ import ModalAddFeaturedProperties from "./ModalAddFeaturedProperties";
 const FeaturedProperties = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
+  const [onSearch, setOnSearch] = React.useState(false);
+  const search = React.useRef({ value: "" });
+
+  const {
+    data: result,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ["featured-properties", onSearch, store.isSearch],
+    queryFn: async ({ pageParam = 1 }) =>
+      await queryDataInfinite(
+        `${devApiVersion}/featured-properties/search`, // search endpoint
+        `${devApiVersion}/featured-properties/page/${pageParam}`, // list endpoint
+        store.isSearch, // search boolean
+        { searchValue: search.current.value, id: "" } // search value
+      ),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total) {
+        return lastPage.page + lastPage.count;
+      }
+      return;
+    },
+    refetchOnWindowFocus: false,
+  });
 
   const handleAdd = () => {
     dispatch(setIsAdd({ modal: true, modalCode: "featuredproperties" }));
     setItemEdit(null);
   };
+
   return (
     <>
       <div className=" bg-[#f5f5f3] ">
@@ -32,14 +64,27 @@ const FeaturedProperties = () => {
                     <p>Featured Properties</p>
                   </div>
                   <button
-                    className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm"
+                    className="flex items-center gap-1 text-[white] hover:underline py-1 px-2 bg-primary rounded-lg text-sm disabled:bg-gray-400"
                     onClick={handleAdd}
+                    disabled={result?.pages[0]?.data.length >= 6}
                   >
                     <FaPlus />
                     Add
                   </button>
                 </div>
-                <FeaturedPropertiesTable setItemEdit={setItemEdit} />
+                <FeaturedPropertiesTable
+                  setItemEdit={setItemEdit}
+                  result={result}
+                  fetchNextPage={fetchNextPage}
+                  isFetchingNextPage={isFetchingNextPage}
+                  status={status}
+                  isFetching={isFetching}
+                  setOnSearch={setOnSearch}
+                  onSearch={onSearch}
+                  error={error}
+                  hasNextPage={hasNextPage}
+                  search={search}
+                />
               </div>
             </div>
           </div>

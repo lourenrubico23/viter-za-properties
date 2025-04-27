@@ -1,13 +1,13 @@
 import React from "react";
 
 // // Local
-// const urlZAProperties = "http://localhost/react-vite/viter-za-properties";
-// const urlZAPropertiesImg =
-//   "http://localhost/react-vite/viter-za-properties/public/img";
+const urlZAProperties = "http://localhost/react-vite/viter-za-properties";
+const urlZAPropertiesImg =
+  "http://localhost/react-vite/viter-za-properties/public/img";
 
 //Online Demo url
-export const urlZAProperties = "https://zacalfanta.com";
-export const urlZAPropertiesImg = "https://zacalfanta.com/img";
+// export const urlZAProperties = "https://zacalfanta.com";
+// export const urlZAPropertiesImg = "https://zacalfanta.com/img";
 
 // ONLINE DEV and LOCAL
 export const devApiUrl = `${urlZAProperties}/rest`;

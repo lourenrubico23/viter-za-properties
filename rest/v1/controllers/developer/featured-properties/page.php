@@ -18,7 +18,7 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
     if (array_key_exists("start", $_GET)) {
         // get data
         $featured_properties->featured_properties_start = $_GET['start'];
-        $featured_properties->featured_properties_total = 10;
+        $featured_properties->featured_properties_total = 6;
 
         checkLimitId($featured_properties->featured_properties_start, $featured_properties->featured_properties_total);
         $query = checkReadLimit($featured_properties);
