@@ -14,7 +14,7 @@ Upload JSX
         -> # FEATURED PROPERTIES is added
 
     DATABASE:
-        -> rest/v1/db-backup/zapv1_featured_properties.sql
+        -> rest/v1/db-backup/zapv1_featured_properties.sql 
     
 
     
