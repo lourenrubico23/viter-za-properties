@@ -21,6 +21,8 @@ Upload JSX
     DATABASE:
         -> rest/v1/db-backup/zapv1_featured_properties.sql 
         -> rest/v1/db-backup/zapv1_web_title_desc.sql
+
+Uploaded to prod May 6 2025 at 7:26am
     
 
     
