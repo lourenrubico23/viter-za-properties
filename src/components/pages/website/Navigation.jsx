@@ -53,6 +53,12 @@ const Navigation = () => {
     "colors" // key
   );
 
+  const { data: webData } = useQueryData(
+    `${devApiVersion}/web`, // endpoint
+    "get", // method
+    "web" // key
+  );
+
   const defaultNavItems = [
     { path: "/", label: "" },
     { path: "/properties", label: "" },
@@ -117,6 +123,24 @@ const Navigation = () => {
     const currentPath = window.location.pathname;
     setActive(currentPath);
   }, []); // Runs only once when the component mounts
+
+  
+  // website title and description
+  React.useEffect(() => {
+    if (webData?.data?.[0]) {
+      document.title = webData.data[0].web_title;
+
+      const metaDescription = document.querySelector(
+        'meta[name="description"]'
+      );
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          "content",
+          webData.data[0].web_description
+        );
+      }
+    }
+  }, [webData]);
 
   return (
     <>

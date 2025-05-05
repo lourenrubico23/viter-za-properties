@@ -1,0 +1,26 @@
+Upload JSX
+
+    IMAGE: 
+        -> 
+
+    CONTROLLERS:
+        -> rest/v1/controllers/developer/featured-properties
+        -> rest/v1/controllers/developer/settings/user/search.php
+        -> rest/v1/controllers/developer/web-title-desc
+
+    MODELS:
+        -> rest/v1/models/developer/property-list/PropertyList.php
+        -> rest/v1/models/developer/featured-properties
+        -> rest/v1/models/developer/web-title-desc
+
+    HTACCESS: 
+        -> # FEATURED PROPERTIES is added
+        -> # WEB TITLE AND DESCRIPTION is added
+
+
+    DATABASE:
+        -> rest/v1/db-backup/zapv1_featured_properties.sql 
+        -> rest/v1/db-backup/zapv1_web_title_desc.sql
+    
+
+    

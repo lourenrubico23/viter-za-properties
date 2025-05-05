@@ -19,25 +19,25 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
     checkApiKey();
 
     checkPayload($data);
+
+    // if ($data['filterData'] != '') {
+    //     $user->user_is_active = checkIndex($data, 'filterData');
+
+    //     if ($user->user_search != '') {
+    //         // Search filter
+    //         $query = checkFilterSearch($user);
+    //         http_response_code(200);
+    //         getQueriedData($query);
+    //     }
+
+    //     // Filter by active
+    //     $query = checkFilterIsActive($user);
+    //     http_response_code(200);
+    //     getQueriedData($query);
+    // }
+
+    checkPayload($data);
     $user->user_search = $data['searchValue'];
-
-    if ($data['filterData'] != '') {
-        $user->user_is_active = checkIndex($data, 'filterData');
-
-        if ($user->user_search != '') {
-            // Search filter
-            $query = checkFilterSearch($user);
-            http_response_code(200);
-            getQueriedData($query);
-        }
-
-        // Filter by active
-        $query = checkFilterIsActive($user);
-        http_response_code(200);
-        getQueriedData($query);
-    }
-
-    // Search only
     $query = checkSearch($user);
     http_response_code(200);
     getQueriedData($query);

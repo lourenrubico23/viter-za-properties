@@ -96,6 +96,10 @@ RewriteRule ^receiver/active/([0-9]+)$ controllers/developer/notification/receiv
 RewriteRule ^receiver/page/([0-9]+)$ controllers/developer/notification/receiver/page.php?start=$1 [L]
 RewriteRule ^receiver/search$ controllers/developer/notification/receiver/search.php [L]
 
+# WEB TITLE AND DESCRIPTION
+RewriteRule ^web$ controllers/developer/web-title-desc/web-title-desc.php [L]
+RewriteRule ^web/([0-9]+)$ controllers/developer/web-title-desc/web-title-desc.php?webid=$1 [L]
+
 ### Settings - Roles ###
 RewriteRule ^role$ controllers/developer/settings/role/role.php [L]
 RewriteRule ^role/([0-9]+)$ controllers/developer/settings/role/role.php?roleid=$1 [L]

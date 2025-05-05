@@ -52,6 +52,12 @@ const Navigation = ({ menu, submenu }) => {
     "colors" // key
   );
 
+  const { data: webData } = useQueryData(
+    `${devApiVersion}/web`, // endpoint
+    "get", // method
+    "web" // key
+  );
+
   document
     .querySelector(":root")
     .style.setProperty(
@@ -131,6 +137,25 @@ const Navigation = ({ menu, submenu }) => {
     document.addEventListener("click", clickOutsideRef);
     return () => document.addEventListener("click", clickOutsideRef);
   }, []);
+
+  // website title and description
+  React.useEffect(() => {
+    if (webData?.data?.[0]) {
+      document.title = webData.data[0].web_title;
+
+      const metaDescription = document.querySelector(
+        'meta[name="description"]'
+      );
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          "content",
+          webData.data[0].web_description
+        );
+      }
+    }
+  }, [webData]);
+
+  // console.log((document.title = webData?.data[0].web_title));
 
   return (
     <>
@@ -449,6 +474,25 @@ const Navigation = ({ menu, submenu }) => {
                     </li>
                   </Link>
                 </ul>
+
+                <li
+                  className={`flex justify-between items-center p-1 cursor-pointer text-dark ${
+                    menu === "settings"
+                      ? "text-secondary underline underline-offset-4"
+                      : ""
+                  }`}
+                >
+                  <div className="nav flex items-center justify-between w-full">
+                    <Link
+                      className={`text-[14px] uppercase ${
+                        menu === "settings" ? "text-secondary" : "text-dark"
+                      }`}
+                      to={`${devNavUrl}/${link}/settings`}
+                    >
+                      Settings
+                    </Link>
+                  </div>
+                </li>
               </>
             </ul>
           </nav>

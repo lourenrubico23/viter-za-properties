@@ -13,6 +13,7 @@ import Properties from "../components/pages/developer/properties/Properties.jsx"
 import PropertyList from "../components/pages/developer/properties/property-list/PropertyList";
 import PropertyStatus from "../components/pages/developer/properties/property-status/PropertyStatus.jsx";
 import PropertyType from "../components/pages/developer/properties/property-type/PropertyType";
+import Settings from "../components/pages/developer/settings/Settings.jsx";
 import Testimonial from "../components/pages/developer/testimonial/Testimonial.jsx";
 import OtherUser from "../components/pages/developer/user/other-user/OtherUser";
 import Role from "../components/pages/developer/user/role/Role";
@@ -165,6 +166,14 @@ export const RoutesAdmin = [
     element: (
       <ProtectedRouteUser>
         <Contact />
+      </ProtectedRouteUser>
+    ),
+  },
+  {
+    path: `${devNavUrl}/${urlAdmin}/settings`,
+    element: (
+      <ProtectedRouteUser>
+        <Settings />
       </ProtectedRouteUser>
     ),
   },
