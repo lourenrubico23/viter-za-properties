@@ -189,8 +189,8 @@ const Properties = () => {
 
   return (
     <>
-      <div className="outer-wrapper">
-        <div className="wrapper">
+      <div className="outer-wrapper min-h-screen flex flex-col">
+        <div className="wrapper flex flex-col flex-grow">
           <Navigation />
           <div className=" relative flex justify-center lg:min-h-[420px] w-full">
             {isLoadingBanner && <Loader />}
@@ -317,21 +317,26 @@ const Properties = () => {
               </div>
             </div>
           </div>
-          <div ref={featuredRef}>
-            <FeaturedProperties
-              pageType="properties"
-              result={result}
-              status={status}
-              error={error}
-              isFetchingNextPage={isFetchingNextPage}
-              fetchNextPage={fetchNextPage}
-              page={page}
-              hasNextPage={hasNextPage}
-              setPage={setPage}
-            />
+          <div className="flex-grow">
+            <div ref={featuredRef}>
+              <FeaturedProperties
+                pageType="properties"
+                result={result}
+                status={status}
+                error={error}
+                isFetchingNextPage={isFetchingNextPage}
+                fetchNextPage={fetchNextPage}
+                page={page}
+                hasNextPage={hasNextPage}
+                setPage={setPage}
+              />
+            </div>
           </div>
 
-          <ContactForm pageType={"Properties"} />
+          <div className="relative flex-row">
+            <ContactForm pageType={"Properties"} />
+          </div>
+
           <Footer
             handleChangePropertyType={handleChangePropertyType}
             propertyType={propertyType}

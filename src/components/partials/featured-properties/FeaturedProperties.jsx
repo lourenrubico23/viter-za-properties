@@ -76,9 +76,6 @@ const FeaturedProperties = ({
   const totalProperties = propertyListData?.data.length || 0;
   const hasMoreProperties = visibleProperties < totalProperties;
 
-  console.log("total:", totalProperties);
-  console.log("visible:", visibleProperties);
-
   const handleOpenDescription = (item) => {
     dispatch(setIsAdd({ modal: true, modalCode: "properties-description" }));
     setItemEdit(item);
@@ -204,7 +201,7 @@ const FeaturedProperties = ({
         )}
 
         {pageType === "properties" ? (
-          <div className="place-self-center my-7">
+          <div className="place-self-center my-20">
             <>
               <LoadMoreProperties
                 fetchNextPage={fetchNextPage}
@@ -218,7 +215,7 @@ const FeaturedProperties = ({
             </>
           </div>
         ) : (
-          <div className="place-self-center my-7">
+          <div className="place-self-center my-20">
             <Link
               to={`${devNavUrl}/properties`}
               className="text-sm font-semibold relative pb-1 transition duration-300 

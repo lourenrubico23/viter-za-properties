@@ -194,8 +194,8 @@ const Home = () => {
   }, []);
   return (
     <>
-      <div className="outer-wrapper">
-        <div className="wrapper">
+      <div className="outer-wrapper min-h-screen flex flex-col">
+        <div className="wrapper flex flex-col flex-grow">
           <Navigation />
           <div className=" relative flex justify-center lg:min-h-[420px] w-full">
             {isLoadingBanner && <Loader />}
@@ -381,7 +381,10 @@ const Home = () => {
           <BlogList pageType="home" />
 
           <Testimonials />
-          <ContactForm pageType="Home" />
+          <div className="relative flex-grow">
+            <ContactForm pageType="Home" />
+          </div>
+
           <Footer
             handleChangePropertyType={handleChangePropertyType}
             propertyType={propertyType}

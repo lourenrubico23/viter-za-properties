@@ -24,8 +24,8 @@ const Contact = () => {
   }, []);
   return (
     <>
-      <div className="outer-wrapper">
-        <div className="wrapper">
+      <div className="outer-wrapper min-h-screen flex flex-col">
+        <div className="wrapper flex flex-col flex-grow">
           <Navigation />
           <div className=" relative md:flex justify-center lg:min-h-[420px] w-full">
             {isLoadingBanner && <Loader />}
@@ -67,7 +67,10 @@ const Contact = () => {
             })}
           </div>
 
-          <ContactForm pageType="Contact" />
+          <div className="relative flex-grow">
+            <ContactForm pageType="Contact" />
+          </div>
+
           <Footer />
         </div>
       </div>
