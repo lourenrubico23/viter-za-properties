@@ -43,7 +43,7 @@ class FeaturedProperties
             $sql .= ":featured_properties_created, ";
             $sql .= ":featured_properties_datetime ";
             $sql .= "FROM DUAL "; //DUAL is used to perform the INSERT without querying any real table, allowing the SELECT statement to insert values
-            $sql .= "WHERE (SELECT COUNT(*) FROM {$this->tblFeaturedProperties}) < 6"; // it checks if the total number of records in the featured_properties table is less than 6
+            $sql .= "WHERE (SELECT COUNT(*) FROM {$this->tblFeaturedProperties}) < 7"; // it checks if the total number of records in the featured_properties table is less than 7
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "featured_properties_property_id" => $this->featured_properties_property_id,

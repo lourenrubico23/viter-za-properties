@@ -1,0 +1,22 @@
+Upload JSX
+
+    IMAGE: 
+        -> 
+
+    CONTROLLERS:
+        -> rest/v1/controllers/developer/property-list/page.php
+
+    MODELS:
+        -> rest/v1/models/developer/featured-properties/FeaturedProperties.php
+
+    HTACCESS: 
+        -> 
+
+
+    DATABASE:
+        -> 
+
+
+    
+
+    
