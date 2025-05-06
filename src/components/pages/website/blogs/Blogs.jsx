@@ -8,10 +8,9 @@ import {
 } from "../../../helpers/functions-general";
 import BlogList from "../../../partials/BlogList";
 import Footer from "../../../partials/Footer";
-import Navigation from "../Navigation";
 import LoadImages from "../../../partials/LoadImages";
-import ContactForm from "../../../partials/contact-form/ContactForm";
 import Loader from "../../../partials/spinners/Loader";
+import Navigation from "../Navigation";
 
 const Blogs = () => {
   const { isLoading: isLoadingBanner, data: bannerData } = useQueryData(
@@ -22,10 +21,11 @@ const Blogs = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
-      <div className="outer-wrapper">
-        <div className="wrapper">
+      <div className="outer-wrapper min-h-screen flex flex-col">
+        <div className="wrapper flex flex-col flex-grow">
           <Navigation />
           <div className=" relative md:flex justify-center lg:min-h-[420px] w-full">
             {isLoadingBanner && <Loader />}
@@ -66,7 +66,10 @@ const Blogs = () => {
               }
             })}
           </div>
-          <BlogList pageType={"Blogs"} />
+
+          <div className="relative flex-grow">
+            <BlogList pageType={"Blogs"} />
+          </div>
 
           {/* <ContactForm pageType="Blogs" /> */}
           <Footer />

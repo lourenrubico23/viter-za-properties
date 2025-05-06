@@ -81,8 +81,8 @@ class Blogs
     {
         try {
             $sql = "select * from {$this->tblBlogs} ";
-            $sql .= "order by blogs_is_active desc, ";
-            $sql .= "blogs_published_date desc ";
+            $sql .= "order by blogs_published_date desc, ";
+            $sql .= "blogs_aid desc ";
             $query = $this->connection->query($sql);
         } catch (PDOException $ex) {
             $query = false;
@@ -97,8 +97,8 @@ class Blogs
             $sql = "select * ";
             $sql .= "from ";
             $sql .= "{$this->tblBlogs} ";
-            $sql .= "order by blogs_is_active desc, ";
-            $sql .= "blogs_published_date desc ";
+            $sql .= "order by blogs_published_date desc, ";
+            $sql .= "blogs_aid desc ";
             $sql .= "limit :start, ";
             $sql .= ":total ";
             $query = $this->connection->prepare($sql);
@@ -118,7 +118,8 @@ class Blogs
         try {
             $sql = "select * from {$this->tblBlogs} ";
             $sql .= "where blogs_aid = :blogs_aid ";
-            $sql .= "order by blogs_published_date desc ";
+            $sql .= "order by blogs_published_date desc, ";
+            $sql .= "blogs_aid desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 "blogs_aid" => $this->blogs_aid,
@@ -135,12 +136,11 @@ class Blogs
             $sql = "select ";
             $sql .= "* ";
             $sql .= "from {$this->tblBlogs} ";
-            $sql .= "where ";
+            $sql .= "where ( ";
             $sql .= "blogs_title like :blogs_title ";
-            $sql .= "and blogs_author like :blogs_author ";
-            $sql .= "order by ";
-            $sql .= "blogs_is_active desc, ";
-            $sql .= "blogs_published_date desc ";
+            $sql .= "or blogs_author like :blogs_author) ";
+            $sql .= "order by blogs_published_date desc, ";
+            $sql .= "blogs_aid desc ";
             $query = $this->connection->prepare($sql);
             $query->execute([
                 'blogs_title' => "%{$this->blogs_search}%",

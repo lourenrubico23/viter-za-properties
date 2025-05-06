@@ -8,6 +8,7 @@ Upload JSX
 
     MODELS:
         -> rest/v1/models/developer/featured-properties/FeaturedProperties.php
+        -> rest/v1/models/developer/blogs/Blogs.php
 
     HTACCESS: 
         -> 

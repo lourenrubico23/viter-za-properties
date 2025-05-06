@@ -65,7 +65,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
 
   return (
     <>
-      <div className="bg-light mt-20  customContainer lg:max-w-[1240px] mb-32">
+      <div className="bg-light mt-20  customContainer lg:max-w-[1240px] mb-32 ">
         {pageType === "home" && (
           <div className="title uppercase text-secondary text-[clamp(25px,3vw,34px)] font-hindBold text-center md:mt-[168px]">
             Blog
@@ -97,7 +97,7 @@ const BlogList = ({ pageType, currentBlogSlug }) => {
                   <div className=" font-hindBold text-center ">
                     <p className="text-lg line-clamp-2">{item.blogs_title}</p>
                   </div>
-                  <p className="text-[16px] text-justify">
+                  <p className="text-[16px] text-justify line-clamp-6">
                     {item.blogs_brief_description}
                   </p>
                 </div>
