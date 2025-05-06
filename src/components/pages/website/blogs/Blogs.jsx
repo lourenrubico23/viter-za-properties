@@ -24,8 +24,8 @@ const Blogs = () => {
   }, []);
   return (
     <>
-      <div className="outer-wrapper">
-        <div className="wrapper">
+      <div className="outer-wrapper ">
+        <div className="wrapper ">
           <Navigation />
           <div className=" relative md:flex justify-center lg:min-h-[420px] w-full">
             {isLoadingBanner && <Loader />}
@@ -66,10 +66,12 @@ const Blogs = () => {
               }
             })}
           </div>
-          <BlogList pageType={"Blogs"} />
+          <div className="relative 2xl:h-screen ">
+            <BlogList pageType={"Blogs"} />
 
-          {/* <ContactForm pageType="Blogs" /> */}
-          <Footer />
+            {/* <ContactForm pageType="Blogs" /> */}
+            <Footer />
+          </div>
         </div>
       </div>
     </>

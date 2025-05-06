@@ -18,7 +18,7 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
     if (array_key_exists("start", $_GET)) {
         // get data
         $list->list_start = $_GET['start'];
-        $list->list_total = 15;
+        $list->list_total = 6;
 
         checkLimitId($list->list_start, $list->list_total);
         $query = checkReadLimit($list);

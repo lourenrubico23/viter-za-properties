@@ -12,13 +12,13 @@ import {
 } from "../../../helpers/functions-general";
 import BlogList from "../../../partials/BlogList";
 import ContactForm from "../../../partials/contact-form/ContactForm";
-import FeaturedProperties from "../../../partials/FeaturedProperties";
 import Footer from "../../../partials/Footer";
 import LoadImages from "../../../partials/LoadImages";
 import Loader from "../../../partials/spinners/Loader";
 import Navigation from "../Navigation";
 import SellProperty from "./SellProperty";
 import Testimonials from "./Testimonials";
+import FeaturedProperties from "../../../partials/featured-properties/FeaturedProperties";
 
 const Home = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -195,7 +195,7 @@ const Home = () => {
   return (
     <>
       <div className="outer-wrapper">
-        <div className="wrapper ">
+        <div className="wrapper">
           <Navigation />
           <div className=" relative flex justify-center lg:min-h-[420px] w-full">
             {isLoadingBanner && <Loader />}

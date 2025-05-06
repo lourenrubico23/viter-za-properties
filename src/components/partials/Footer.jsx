@@ -34,7 +34,7 @@ const Footer = ({ handleChangePropertyType, propertyType, featuredRef }) => {
 
   return (
     <>
-      <div className="bg-primary py-12">
+      <div className="bg-primary py-12 w-full 2xl:absolute bottom-0 ">
         <div className="customContainer text-light">
           <div className="flex flex-col md:flex md:flex-row gap-7 lg:gap-0 justify-between border-b-2 pb-7">
             <div className="">

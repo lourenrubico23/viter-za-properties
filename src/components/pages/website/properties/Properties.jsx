@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "../../../partials/Footer";
-import FeaturedProperties from "../../../partials/FeaturedProperties";
 import {
   devApiVersion,
   devBaseImgUrl,
@@ -21,6 +20,7 @@ import {
   setMessage,
 } from "../../../../store/StoreAction";
 import Loader from "../../../partials/spinners/Loader";
+import FeaturedProperties from "../../../partials/featured-properties/FeaturedProperties";
 
 const Properties = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -186,6 +186,7 @@ const Properties = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
       <div className="outer-wrapper">
@@ -322,6 +323,11 @@ const Properties = () => {
               result={result}
               status={status}
               error={error}
+              isFetchingNextPage={isFetchingNextPage}
+              fetchNextPage={fetchNextPage}
+              page={page}
+              hasNextPage={hasNextPage}
+              setPage={setPage}
             />
           </div>
 
